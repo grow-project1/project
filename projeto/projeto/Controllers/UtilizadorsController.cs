@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using projeto.Data;
 using projeto.Models;
 
@@ -19,66 +21,70 @@ namespace projeto.Controllers
             _context = context;
         }
 
+        // Método Register (GET)
         public IActionResult Register()
         {
-            return View(); // Renderiza a mesma view de Create
+            return View();
         }
 
+        // Método Register (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Nome, Email,Password")] Utilizador utilizador)
+        public async Task<IActionResult> Register([Bind("Nome,Email,Password")] Utilizador utilizador)
         {
-            // Verifica se o e-mail e a senha estão preenchidos
+            // Validações adicionais
+            if (string.IsNullOrEmpty(utilizador.Nome))
+            {
+                ModelState.AddModelError("Nome", "O nome é obrigatório.");
+            }
+
             if (string.IsNullOrEmpty(utilizador.Email))
             {
                 ModelState.AddModelError("Email", "O e-mail é obrigatório.");
             }
 
-
             if (string.IsNullOrEmpty(utilizador.Password))
             {
                 ModelState.AddModelError("Password", "A senha é obrigatória.");
             }
-            else if (utilizador.Password.Length < 6) // Exemplo de uma regra de validação para senha
+            else if (utilizador.Password.Length < 6)
             {
                 ModelState.AddModelError("Password", "A senha deve ter pelo menos 6 caracteres.");
             }
 
-            // Se o ModelState não for válido, retorna à view com as mensagens de erro
             if (!ModelState.IsValid)
             {
                 return View(utilizador);
             }
 
-            // Verifica se o e-mail já está em uso
+            // Verifica se o e-mail já existe no banco
             var userExists = await _context.Utilizador.AnyAsync(u => u.Email == utilizador.Email);
             if (userExists)
             {
-                ModelState.AddModelError("Email", "O e-mail já está em uso.");
+                ModelState.AddModelError("Email", "Este e-mail já está cadastrado.");
                 return View(utilizador);
             }
 
-            // Adiciona o novo utilizador ao banco de dados
+            // Hash da senha
+            utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
+
+            // Adiciona o utilizador ao banco
             _context.Add(utilizador);
             await _context.SaveChangesAsync();
 
             // Mensagem de sucesso
-            TempData["Success"] = "Conta criada com sucesso! Faça login.";
+            TempData["Success"] = "Conta criada com sucesso! Faça login para acessar sua conta.";
 
-            // Redireciona para a página de Login
-            return RedirectToAction("Login", "Utilizadors");
+            return RedirectToAction("Login");
         }
 
-
-
-
-        // GET: Login
+        // Método Login (GET)
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: Login
+        // Método Login (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel loginModel)
@@ -86,35 +92,52 @@ namespace projeto.Controllers
             if (ModelState.IsValid)
             {
                 var utilizador = await _context.Utilizador
-                    .FirstOrDefaultAsync(u => u.Email == loginModel.Email && u.Password == loginModel.Password);
+                    .FirstOrDefaultAsync(u => u.Email == loginModel.Email);
 
-                if (utilizador != null)
+                if (utilizador != null && BCrypt.Net.BCrypt.Verify(loginModel.Password, utilizador.Password))
                 {
-                    // Armazena o e-mail do usuário na sessão
                     HttpContext.Session.SetString("UserEmail", utilizador.Email);
-
                     HttpContext.Session.SetString("UserNome", utilizador.Nome);
 
                     TempData["Success"] = "Login realizado com sucesso!";
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid crentials");
+                ModelState.AddModelError(string.Empty, "Invalid credentials");
             }
             return View(loginModel);
         }
 
-
+        // Método Logout
         public IActionResult Logout()
         {
-            // Remove os dados da sessão
             HttpContext.Session.Clear();
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
             TempData["Success"] = "Logout realizado com sucesso!";
             return RedirectToAction("Login");
         }
 
+        // Método Profile
+        public IActionResult Profile()
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+         
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return RedirectToAction("Login");
+            }
 
+            var utilizador = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
 
+            if (utilizador == null)
+            {
+                return NotFound();
+            }
+
+            return View(utilizador); // Passa o utilizador para a view
+        }
 
         // GET: Utilizadors
         public async Task<IActionResult> Index()
@@ -167,12 +190,9 @@ namespace projeto.Controllers
         {
             if (id == null)
             {
-                Console.WriteLine("erro");
                 return NotFound();
             }
 
-
-            Console.WriteLine("no edit");
             var utilizador = await _context.Utilizador.FindAsync(id);
             if (utilizador == null)
             {
@@ -182,39 +202,32 @@ namespace projeto.Controllers
         }
 
         // POST: Utilizadors/Edit/5
-        // POST: Utilizadors/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Nome")] Utilizador utilizador)
+        public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Email, Nome, Password")] Utilizador utilizador)
         {
+            
             if (id != utilizador.UtilizadorId)
             {
-
-                Console.WriteLine("2");
                 return NotFound();
             }
-
-            Console.WriteLine("1");
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // A busca do utilizador é necessária para garantir que o email não seja alterado
-                    var existingUtilizador = await _context.Utilizador.FindAsync(id);
-                    if (existingUtilizador != null)
-                    {
 
-                        Console.WriteLine("existeeee");
-                        // Atualiza apenas o Nome
-                        existingUtilizador.Nome = utilizador.Nome;
 
-                        _context.Update(existingUtilizador);
-                        await _context.SaveChangesAsync();
-                    }
+
+                    _context.Update(utilizador);
+                    await _context.SaveChangesAsync();
+
+
+                    TempData["Message"] = "Alterações realizadas com sucesso!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    TempData["Message"] = "Alterações realizadas com su!";
                     if (!UtilizadorExists(utilizador.UtilizadorId))
                     {
                         return NotFound();
@@ -226,11 +239,12 @@ namespace projeto.Controllers
                 }
 
                 // Redireciona para o perfil após a edição
-                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+                return RedirectToAction(nameof(Index));
             }
 
             return View(utilizador);
         }
+
 
 
 
@@ -272,24 +286,6 @@ namespace projeto.Controllers
             return _context.Utilizador.Any(e => e.UtilizadorId == id);
         }
 
-        // GET: Profile
-        public IActionResult Profile()
-        {
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-
-            if (string.IsNullOrEmpty(userEmail))
-            {
-                return RedirectToAction("Login", "Utilizadors");
-            }
-
-            var utilizador = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
-
-            if (utilizador == null)
-            {
-                return NotFound();
-            }
-
-            return View(utilizador); // Passa o utilizador para a view
-        }
+        
     }
 }

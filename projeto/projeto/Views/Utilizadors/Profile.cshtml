@@ -10,7 +10,7 @@
             <div class="card shadow-lg border-0 rounded">
                 <div class="card-header bg-success text-white text-center">
                     
-                    <h3>Welcome, @Model.Nome</h3>
+                    <h3><b>Welcome,</b> @Model.Nome</h3>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -25,7 +25,7 @@
                         <p><strong>Nome:</strong> @Model.Nome</p>
                     </div>
 
-                    <div class="btn-group w-100" role="group">
+                    </><div class="btn-group w-100" role="group">
                         <a href="@Url.Action("MyAuctions", "Auctions", new { userId = Model.UtilizadorId })" class="btn-profile">
                             My Auctions
                         </a>

@@ -75,6 +75,16 @@ input {
     outline: none;
 }
 
+.form-control {
+    font-size: 0.8rem; /* Tamanho menor */
+}
+
+.text-danger {
+    margin-top:-20px;
+    font-size: 0.8rem; /* Tamanho menor para o texto de erro */
+}
+
+
     input::placeholder {
         font-size: 14px; /* Tamanho menor do placeholder */
         color: #bbb; /* Cor do placeholder */
@@ -116,7 +126,7 @@ input {
     }
 
 .alert {
-    margin-top: 20px;
+    margin-top: 0px;
     padding: 15px;
     font-size: 1rem;
     border-radius: 5px;

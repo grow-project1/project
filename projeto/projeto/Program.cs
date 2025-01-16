@@ -29,6 +29,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage(); // Para ambientes de desenvolvimento
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

@@ -2,7 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\projeto",
-    "\\projeto\\projeto"
+    "\\projeto\\projeto",
+    "\\projeto\\projeto\\Migrations"
   ],
+  "SelectedNode": "\\projeto\\projeto\\Migrations\\20250116111605_InitialMigration.cs",
   "PreviewInSolutionExplorer": false
 }
