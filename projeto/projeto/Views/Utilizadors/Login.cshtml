@@ -1,0 +1,40 @@
+﻿@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container login-page">
+    <div class="login-container">
+        <h2>Login</h2>
+
+        <form asp-action="Login" method="post">
+            <div class="form-group">
+                <input asp-for="Email" class="form-control form-control-lg" placeholder="Enter your email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="Enter your password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn login-btn btn-block">Login</button>
+        </form>
+
+        <div class="mt-3">
+            <a href="#" class="forgot-password-link">Forgot your password?</a>
+        </div>
+        <div class="mt-3">
+            <a href="@Url.Action("Register", "Utilizadors")" class="forgot-password-link">Create account ></a>
+        </div>
+
+
+        @if (!string.IsNullOrEmpty(ViewData.ModelState[string.Empty]?.Errors.FirstOrDefault()?.ErrorMessage))
+        {
+            <div class="alert alert-danger mt-3">
+                @ViewData.ModelState[string.Empty]?.Errors.FirstOrDefault()?.ErrorMessage
+            </div>
+        }
+    </div>
+</div>
+

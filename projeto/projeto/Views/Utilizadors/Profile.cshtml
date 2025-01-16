@@ -1,0 +1,43 @@
+﻿@model projeto.Models.Utilizador
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-success text-white text-center">
+                    
+                    <h3>Welcome, @Model.Nome</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="card-title">Profile Information</h5>
+                        <a href="@Url.Action("Edit", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-dark btn-sm">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                    </div>
+
+                    <div class="mb-4">
+                        <p><strong>Email:</strong> @Model.Email</p>
+                        <p><strong>Nome:</strong> @Model.Nome</p>
+                    </div>
+
+                    <div class="btn-group w-100" role="group">
+                        <a href="@Url.Action("MyAuctions", "Auctions", new { userId = Model.UtilizadorId })" class="btn-profile">
+                            My Auctions
+                        </a>
+                        <a href="@Url.Action("ChangePassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile">
+                            Change Password
+                        </a>
+                        <a href="@Url.Action("CancelAccount", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile cancel-btn"> 
+                            Cancel Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
