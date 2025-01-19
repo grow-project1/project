@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\projeto",
-    "\\projeto\\projeto",
-    "\\projeto\\projeto\\Migrations"
+    ""
   ],
-  "SelectedNode": "\\projeto\\projeto\\Migrations\\20250116133040_ini.cs",
+  "SelectedNode": "\\projeto.sln",
   "PreviewInSolutionExplorer": false
 }

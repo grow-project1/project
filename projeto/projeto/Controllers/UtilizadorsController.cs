@@ -68,9 +68,10 @@ namespace projeto.Controllers
             // Hash da senha
             utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
 
-            // Adiciona o utilizador ao banco
             _context.Add(utilizador);
             await _context.SaveChangesAsync();
+
+            await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
 
             // Mensagem de sucesso
             TempData["Success"] = "Conta criada com sucesso! Faça login para acessar sua conta.";
@@ -91,30 +92,100 @@ namespace projeto.Controllers
         {
             if (ModelState.IsValid)
             {
-                var utilizador = await _context.Utilizador
-                    .FirstOrDefaultAsync(u => u.Email == loginModel.Email);
+                var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == loginModel.Email);
 
-                if (utilizador != null && BCrypt.Net.BCrypt.Verify(loginModel.Password, utilizador.Password))
+                if (utilizador != null)
                 {
-                    HttpContext.Session.SetString("UserEmail", utilizador.Email);
-                    HttpContext.Session.SetString("UserNome", utilizador.Nome);
+                    // Verifica se a conta está bloqueada
+                    if (utilizador.EstadoConta == EstadoConta.Bloqueada)
+                    {
+                        // Verifica se já passaram 20 segundos desde o bloqueio
+                        var logBloqueio = await _context.LogUtilizadores
+                            .Where(log => log.Utilizador.UtilizadorId == utilizador.UtilizadorId &&
+                                          log.LogMessage.Contains("foi bloqueada"))
+                            .OrderByDescending(log => log.LogDataLogin)
+                            .FirstOrDefaultAsync();
 
-                    TempData["Success"] = "Login realizado com sucesso!";
-                    return RedirectToAction("Index", "Home");
+                        if (logBloqueio != null && logBloqueio.LogDataLogin.AddSeconds(20) <= DateTime.Now)
+                        {
+                            utilizador.EstadoConta = EstadoConta.Ativa;
+                            _context.Update(utilizador);
+                            await _context.SaveChangesAsync();
+
+                            TempData["Info"] = "Sua conta foi desbloqueada automaticamente. Tente novamente.";
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "A sua conta está bloqueada. Tente novamente mais tarde.");
+                            return View(loginModel);
+                        }
+                    }
+
+                    // Verifica a senha
+                    if (BCrypt.Net.BCrypt.Verify(loginModel.Password, utilizador.Password))
+                    {
+                        // Registra um log de sucesso
+                        await RegisterLog("Login bem-sucedido.", utilizador.UtilizadorId, true);
+
+                        HttpContext.Session.SetString("UserEmail", utilizador.Email);
+                        HttpContext.Session.SetString("UserNome", utilizador.Nome);
+
+                        TempData["Success"] = "Login realizado com sucesso!";
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        // Registra um log de falha
+                        await RegisterLog("Tentativa de login falhada.", utilizador.UtilizadorId, false);
+
+                        var vinteSegundosAtras = DateTime.Now.AddSeconds(-20);
+
+                        var falhasRecentes = await _context.LogUtilizadores
+                            .Where(log => log.Utilizador.UtilizadorId == utilizador.UtilizadorId &&
+                                          !log.IsLoginSuccess &&
+                                          log.LogDataLogin >= vinteSegundosAtras)
+                            .CountAsync();
+
+                        if (falhasRecentes >= 3)
+                        {
+                            utilizador.EstadoConta = EstadoConta.Bloqueada;
+                            _context.Update(utilizador);
+                            await _context.SaveChangesAsync();
+
+                            await RegisterLog("A conta foi bloqueada devido a múltiplas tentativas falhadas.", utilizador.UtilizadorId, false);
+
+                            ModelState.AddModelError(string.Empty, "A sua conta foi bloqueada devido a várias tentativas falhadas. Tente novamente mais tarde.");
+                            return View(loginModel);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, $"Credenciais inválidas. Tentativas restantes antes de bloqueio: {3 - falhasRecentes}");
+                        }
+                    }
                 }
-
-                ModelState.AddModelError(string.Empty, "Invalid credentials");
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "E-mail ou senha incorretos.");
+                }
             }
             return View(loginModel);
         }
 
         // Método Logout
-        public IActionResult Logout()
+        public async Task<IActionResult> LogoutAsync()
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var utilizador = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
+
+            if (utilizador != null)
+            {
+                await RegisterLog("Utilizador efetuou logout.", utilizador.UtilizadorId, true);
+            }
+
             HttpContext.Session.Clear();
             Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
             Response.Headers["Pragma"] = "no-cache";
-            Response.Headers["Expires"] = "0";
+            Response.Headers["Expires"] = "0"; 
             TempData["Success"] = "Logout realizado com sucesso!";
             return RedirectToAction("Login");
         }
@@ -222,6 +293,7 @@ namespace projeto.Controllers
                     _context.Update(utilizador);
                     await _context.SaveChangesAsync();
 
+                    await RegisterLog("Utilizador atualizou o perfil.", utilizador.UtilizadorId, true);
 
                     TempData["Message"] = "Alterações realizadas com sucesso!";
                 }
@@ -386,17 +458,38 @@ namespace projeto.Controllers
                 _context.Update(utilizador);
                 await _context.SaveChangesAsync();
 
+                await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
+
                 TempData["Success"] = "Senha redefinida com sucesso!";
                 return RedirectToAction("Login");
             }
 
-            TempData["Error"] = "Usuário não encontrado.";
+            TempData["Error"] = "Utilizador não encontrado.";
             return View();
         }
 
 
 
 
+        private async Task RegisterLog(string logMessage, int utilizadorId, bool isLoginSuccess)
+        {
+            var utilizador = await _context.Utilizador.FindAsync(utilizadorId);
+
+            if (utilizador != null)
+            {
+                var log = new LogUtilizador
+                {
+                    Utilizador = utilizador,
+                    LogMessage = logMessage,
+                    LogDataLogin = DateTime.Now,
+                    LogUtilizadorEmail = utilizador.Email,
+                    IsLoginSuccess = isLoginSuccess
+                };
+
+                _context.LogUtilizadores.Add(log);
+                await _context.SaveChangesAsync();
+            }
+        }
 
     }
 }

@@ -22,6 +22,38 @@ namespace projeto.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("projeto.Models.LogUtilizador", b =>
+                {
+                    b.Property<int>("LogUtilizadorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogUtilizadorId"));
+
+                    b.Property<bool>("IsLoginSuccess")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LogDataLogin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LogMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogUtilizadorEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UtilizadorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LogUtilizadorId");
+
+                    b.HasIndex("UtilizadorId");
+
+                    b.ToTable("LogUtilizadores");
+                });
+
             modelBuilder.Entity("projeto.Models.LoginModel", b =>
                 {
                     b.Property<int>("LoginModelId")
@@ -58,6 +90,9 @@ namespace projeto.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EstadoConta")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -71,6 +106,17 @@ namespace projeto.Migrations
                     b.HasKey("UtilizadorId");
 
                     b.ToTable("Utilizador");
+                });
+
+            modelBuilder.Entity("projeto.Models.LogUtilizador", b =>
+                {
+                    b.HasOne("projeto.Models.Utilizador", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Utilizador");
                 });
 #pragma warning restore 612, 618
         }
