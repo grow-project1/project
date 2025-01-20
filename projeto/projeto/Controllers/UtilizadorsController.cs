@@ -277,33 +277,23 @@ namespace projeto.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Nome")] Utilizador utilizador)
         {
-            Console.WriteLine("POST Edit called");
+
             if (id != utilizador.UtilizadorId)
             {
-                Console.WriteLine("ID mismatch");
+
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    Console.WriteLine("ModelState is valid");
-                    _context.Update(utilizador);
-                    await _context.SaveChangesAsync();
-                    TempData["Message"] = "Alterações salvas com sucesso!";
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message}");
-                    TempData["Message"] = "Erro ao salvar as alterações.";
-                }
 
-                return RedirectToAction(nameof(Profile));
-            }
+            var utilizadorExistente = await _context.Utilizador.FindAsync(id);
 
-            Console.WriteLine("ModelState is invalid");
-            return View(utilizador);
+            utilizadorExistente.Nome = utilizador.Nome;
+
+            _context.Update(utilizadorExistente);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Profile));
+
         }
 
 
