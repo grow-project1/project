@@ -14,6 +14,6 @@ namespace projeto.Data
         public DbSet<projeto.Models.LoginModel> LoginModel { get; set; } = default!;
         public DbSet<projeto.Models.Utilizador> Utilizador { get; set; } = default!;
         public DbSet<projeto.Models.LogUtilizador> LogUtilizadores { get; set; } = default!;
-
+        public DbSet<projeto.Models.VerificationModel> VerificationModel { get; set; } = default!;
     }
 }

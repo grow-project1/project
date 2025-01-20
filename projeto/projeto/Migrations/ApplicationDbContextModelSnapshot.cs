@@ -108,6 +108,25 @@ namespace projeto.Migrations
                     b.ToTable("Utilizador");
                 });
 
+            modelBuilder.Entity("projeto.Models.VerificationModel", b =>
+                {
+                    b.Property<int>("VerificationModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VerificationModelId"));
+
+                    b.Property<DateTime>("RequestTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VerificationCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("VerificationModelId");
+
+                    b.ToTable("VerificationModel");
+                });
+
             modelBuilder.Entity("projeto.Models.LogUtilizador", b =>
                 {
                     b.HasOne("projeto.Models.Utilizador", "Utilizador")

@@ -185,7 +185,7 @@ namespace projeto.Controllers
             HttpContext.Session.Clear();
             Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
             Response.Headers["Pragma"] = "no-cache";
-            Response.Headers["Expires"] = "0"; 
+            Response.Headers["Expires"] = "0";
             TempData["Success"] = "Logout realizado com sucesso!";
             return RedirectToAction("Login");
         }
@@ -194,7 +194,7 @@ namespace projeto.Controllers
         public IActionResult Profile()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
-         
+
             if (string.IsNullOrEmpty(userEmail))
             {
                 return RedirectToAction("Login");
@@ -277,7 +277,7 @@ namespace projeto.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Email, Nome, Password")] Utilizador utilizador)
         {
-            
+
             if (id != utilizador.UtilizadorId)
             {
                 return NotFound();
@@ -358,16 +358,82 @@ namespace projeto.Controllers
             return _context.Utilizador.Any(e => e.UtilizadorId == id);
         }
 
-
-
-
-
+        // Método para "Esqueci Minha Senha" - POST
+        // Método ForgotPassword (GET)
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
+        // Método ForgotPassword (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                ModelState.AddModelError("Email", "O e-mail é obrigatório.");
+                return View();
+            }
 
+            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
+            if (utilizador == null)
+            {
+                ModelState.AddModelError("Email", "E-mail não encontrado.");
+                return View();
+            }
+
+            var random = new Random();
+            int verificationCode = random.Next(100000, 999999);
+
+            var verificationModel = new VerificationModel
+            {
+                VerificationCode = verificationCode
+            };
+
+            _context.VerificationModel.Add(verificationModel);
+            await _context.SaveChangesAsync();
+
+            await RegisterLog("O código de verificação é " + verificationCode + ".", utilizador.UtilizadorId, true);
+            TempData["Info"] = $"O código de verificação é {verificationCode}.";
+
+            // Armazena o e-mail na sessão para validação posterior
+            HttpContext.Session.SetString("ResetEmail", email);
+
+            return RedirectToAction("VerificationCode");
+        }
+
+        // Método VerificationCode (GET)
+        public IActionResult VerificationCode()
+        {
+            return View();
+        }
+
+        // Método VerificationCode (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerificationCode(int verificationCode)
+        {
+            var email = HttpContext.Session.GetString("ResetEmail");
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Error"] = "Sessão expirada. Tente novamente.";
+                return RedirectToAction("ForgotPassword");
+            }
+
+            var verification = await _context.VerificationModel
+                .OrderByDescending(v => v.RequestTime)
+                .FirstOrDefaultAsync(v => v.VerificationCode == verificationCode);
+
+            if (verification == null)
+            {
+                TempData["Error"] = "Código de verificação inválido.";
+                return View();
+            }
+
+            // Código válido, redireciona para a redefinição de senha
+            return RedirectToAction("ResetPassword");
+        }
 
         // Método para "Redefinir Senha" - GET
         public IActionResult ResetPassword()
@@ -382,53 +448,17 @@ namespace projeto.Controllers
             return View();
         }
 
-        // Método para "Esqueci Minha Senha" - POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(string email, string code)
-        {
-            // Verifica se o código informado é o "0000"
-            if (code != "0000")
-            {
-                TempData["Error"] = "Código de redefinição inválido.";
-                return View();
-            }
-
-            // Valida o e-mail
-            if (string.IsNullOrEmpty(email))
-            {
-                ModelState.AddModelError("Email", "O e-mail é obrigatório.");
-            }
-            else
-            {
-                var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
-                if (utilizador == null)
-                {
-                    ModelState.AddModelError("Email", "E-mail não encontrado.");
-                }
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            // Armazena o e-mail na sessão para ser usado na redefinição de senha
-            HttpContext.Session.SetString("ResetEmail", email);
-
-            // Redireciona para a página de redefinição de senha
-            return RedirectToAction("ResetPassword");
-        }
-
-        // Método para "Redefinir Senha" - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(string newPassword)
         {
+            // Obtém o e-mail armazenado na sessão
             var email = HttpContext.Session.GetString("ResetEmail");
 
+            // Verifica se o e-mail está disponível
             if (string.IsNullOrEmpty(email))
             {
+                TempData["Error"] = "Sessão expirada. Tente novamente.";
                 return RedirectToAction("ForgotPassword");
             }
 
@@ -442,34 +472,36 @@ namespace projeto.Controllers
                 ModelState.AddModelError("newPassword", "A nova senha deve ter pelo menos 6 caracteres.");
             }
 
+            // Caso existam erros de validação
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            // Procura o usuário no banco de dados pelo e-mail
+            // Busca o utilizador pelo e-mail
             var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
 
             if (utilizador != null)
             {
-                // Hash da nova senha
+                // Atualiza a senha com o hash
                 utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
 
-                _context.Update(utilizador);
+                // Atualiza o utilizador no banco de dados
+                _context.Utilizador.Update(utilizador);
                 await _context.SaveChangesAsync();
 
+                // Registra o log
                 await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
 
-                TempData["Success"] = "Senha redefinida com sucesso!";
+                // Exibe a mensagem de sucesso e redireciona para a página de Login
+                TempData["Success"] = "Senha redefinida com sucesso! Faça login com a nova senha.";
                 return RedirectToAction("Login");
             }
 
+            // Caso o utilizador não seja encontrado
             TempData["Error"] = "Utilizador não encontrado.";
             return View();
         }
-
-
-
 
         private async Task RegisterLog(string logMessage, int utilizadorId, bool isLoginSuccess)
         {

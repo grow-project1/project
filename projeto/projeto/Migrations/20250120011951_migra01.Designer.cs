@@ -12,8 +12,8 @@ using projeto.Data;
 namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250119142410_migration08")]
-    partial class migration08
+    [Migration("20250120011951_migra01")]
+    partial class migra01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,25 @@ namespace projeto.Migrations
                     b.HasKey("UtilizadorId");
 
                     b.ToTable("Utilizador");
+                });
+
+            modelBuilder.Entity("projeto.Models.VerificationModel", b =>
+                {
+                    b.Property<int>("VerificationModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VerificationModelId"));
+
+                    b.Property<DateTime>("RequestTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VerificationCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("VerificationModelId");
+
+                    b.ToTable("VerificationModel");
                 });
 
             modelBuilder.Entity("projeto.Models.LogUtilizador", b =>

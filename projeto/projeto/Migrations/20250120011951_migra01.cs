@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class migration08 : Migration
+    public partial class migra01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,6 +40,20 @@ namespace projeto.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Utilizador", x => x.UtilizadorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VerificationModel",
+                columns: table => new
+                {
+                    VerificationModelId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RequestTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VerificationCode = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VerificationModel", x => x.VerificationModelId);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +93,9 @@ namespace projeto.Migrations
 
             migrationBuilder.DropTable(
                 name: "LogUtilizadores");
+
+            migrationBuilder.DropTable(
+                name: "VerificationModel");
 
             migrationBuilder.DropTable(
                 name: "Utilizador");
