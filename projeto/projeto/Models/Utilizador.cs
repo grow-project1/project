@@ -18,7 +18,10 @@ namespace projeto.Models
         [Required(ErrorMessage = "The Password field is required")]
         [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters")]
         public string Password { get; set; }
-            
+
+        [StringLength(255)]
+        public string ImagePath { get; set; } = "~/images/avatar_default.png";
+
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public EstadoConta EstadoConta { get; set; } = EstadoConta.Ativa;

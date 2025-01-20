@@ -287,9 +287,6 @@ namespace projeto.Controllers
             {
                 try
                 {
-
-
-
                     _context.Update(utilizador);
                     await _context.SaveChangesAsync();
 
@@ -299,7 +296,8 @@ namespace projeto.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    TempData["Message"] = "Alterações realizadas com su!";
+                    TempData["Message"] = "Alterações realizadas com sucesso!";
+                    await RegisterLog("Utilizador não conseguiu atualizar o perfil.", utilizador.UtilizadorId, true);
                     if (!UtilizadorExists(utilizador.UtilizadorId))
                     {
                         return NotFound();
@@ -309,16 +307,11 @@ namespace projeto.Controllers
                         throw;
                     }
                 }
-
-                // Redireciona para o perfil após a edição
+                
                 return RedirectToAction(nameof(Index));
             }
-
             return View(utilizador);
         }
-
-
-
 
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -438,7 +431,6 @@ namespace projeto.Controllers
         // Método para "Redefinir Senha" - GET
         public IActionResult ResetPassword()
         {
-            // Verifica se o usuário está tentando redefinir a senha
             var email = HttpContext.Session.GetString("ResetEmail");
             if (string.IsNullOrEmpty(email))
             {
@@ -452,17 +444,14 @@ namespace projeto.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(string newPassword)
         {
-            // Obtém o e-mail armazenado na sessão
             var email = HttpContext.Session.GetString("ResetEmail");
 
-            // Verifica se o e-mail está disponível
             if (string.IsNullOrEmpty(email))
             {
                 TempData["Error"] = "Sessão expirada. Tente novamente.";
                 return RedirectToAction("ForgotPassword");
             }
 
-            // Valida a nova senha
             if (string.IsNullOrEmpty(newPassword))
             {
                 ModelState.AddModelError("newPassword", "A nova senha é obrigatória.");
@@ -472,35 +461,109 @@ namespace projeto.Controllers
                 ModelState.AddModelError("newPassword", "A nova senha deve ter pelo menos 6 caracteres.");
             }
 
-            // Caso existam erros de validação
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            // Busca o utilizador pelo e-mail
             var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
 
             if (utilizador != null)
             {
-                // Atualiza a senha com o hash
                 utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
 
-                // Atualiza o utilizador no banco de dados
                 _context.Utilizador.Update(utilizador);
                 await _context.SaveChangesAsync();
 
-                // Registra o log
                 await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
 
-                // Exibe a mensagem de sucesso e redireciona para a página de Login
                 TempData["Success"] = "Senha redefinida com sucesso! Faça login com a nova senha.";
                 return RedirectToAction("Login");
             }
 
-            // Caso o utilizador não seja encontrado
             TempData["Error"] = "Utilizador não encontrado.";
             return View();
+        }
+
+        public IActionResult ConfirmPassword(int id)
+        {
+            var utilizador = _context.Utilizador.Find(id);
+            if (utilizador == null)
+            {
+                return NotFound();
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmPassword(int id, string currentPassword)
+        {
+            var utilizador = await _context.Utilizador.FindAsync(id);
+            if (utilizador == null)
+            {
+                ModelState.AddModelError("confirmPassword", "Utilizador não encontrado.");
+                return View();
+            }
+
+            // Verificar se a senha atual está correta
+            if (!BCrypt.Net.BCrypt.Verify(currentPassword, utilizador.Password))
+            {
+                ModelState.AddModelError("confirmPassword", "A senha atual está incorreta.");
+                return View();
+            }
+
+            // Redireciona para a página de atualização da nova senha
+            return RedirectToAction("UpdatePassword", new { id = utilizador.UtilizadorId });
+        }
+
+        public IActionResult UpdatePassword(int id)
+        {
+            var utilizador = _context.Utilizador.Find(id);
+            if (utilizador == null)
+            {
+                return NotFound();
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdatePassword(int id, string newPassword, string confirmPassword)
+        {
+            // Verifica se a nova senha tem pelo menos 6 caracteres
+            if (string.IsNullOrEmpty(newPassword) || newPassword.Length < 6)
+            {
+                ModelState.AddModelError("newPassword", "A nova senha deve ter pelo menos 6 caracteres.");
+            }
+
+            // Verifica se a confirmação da senha coincide com a nova senha
+            if (newPassword != confirmPassword)
+            {
+                ModelState.AddModelError("confirmPassword", "As senhas não coincidem.");
+            }
+
+            // Se o ModelState não for válido, retorna a view com os erros
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var utilizador = await _context.Utilizador.FindAsync(id);
+            if (utilizador == null)
+            {
+                ModelState.AddModelError(string.Empty, "Utilizador não encontrado.");
+                return View();
+            }
+
+            // Atualiza a senha com o hash
+            utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            await _context.SaveChangesAsync();
+
+            TempData["Message"] = "Senha atualizada com sucesso!";
+            return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
         }
 
         private async Task RegisterLog(string logMessage, int utilizadorId, bool isLoginSuccess)

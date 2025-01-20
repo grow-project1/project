@@ -12,7 +12,7 @@ using projeto.Data;
 namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250120011951_migra01")]
+    [Migration("20250120153604_migra01")]
     partial class migra01
     {
         /// <inheritdoc />
@@ -95,6 +95,11 @@ namespace projeto.Migrations
 
                     b.Property<int>("EstadoConta")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

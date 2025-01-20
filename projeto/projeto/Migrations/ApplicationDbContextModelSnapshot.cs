@@ -93,6 +93,11 @@ namespace projeto.Migrations
                     b.Property<int>("EstadoConta")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
