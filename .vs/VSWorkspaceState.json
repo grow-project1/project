@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\projeto",
+    "\\projeto\\projeto",
+    "\\projeto\\projeto\\Views",
+    "\\projeto\\projeto\\Views\\Utilizadors"
   ],
-  "SelectedNode": "\\projeto.sln",
+  "SelectedNode": "\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
   "PreviewInSolutionExplorer": false
 }

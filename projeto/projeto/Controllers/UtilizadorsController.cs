@@ -35,21 +35,21 @@ namespace projeto.Controllers
             // Validações adicionais
             if (string.IsNullOrEmpty(utilizador.Nome))
             {
-                ModelState.AddModelError("Nome", "O nome é obrigatório.");
+                ModelState.AddModelError("Nome", "Name is required");
             }
 
             if (string.IsNullOrEmpty(utilizador.Email))
             {
-                ModelState.AddModelError("Email", "O e-mail é obrigatório.");
+                ModelState.AddModelError("Email", "Email is required");
             }
 
             if (string.IsNullOrEmpty(utilizador.Password))
             {
-                ModelState.AddModelError("Password", "A senha é obrigatória.");
+                ModelState.AddModelError("Password", "Password is required");
             }
             else if (utilizador.Password.Length < 6)
             {
-                ModelState.AddModelError("Password", "A senha deve ter pelo menos 6 caracteres.");
+                ModelState.AddModelError("Password", "Password must be at least 6 characters");
             }
 
             if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace projeto.Controllers
             var userExists = await _context.Utilizador.AnyAsync(u => u.Email == utilizador.Email);
             if (userExists)
             {
-                ModelState.AddModelError("Email", "Este e-mail já está cadastrado.");
+                ModelState.AddModelError("Email", "This email is alredy registered");
                 return View(utilizador);
             }
 
@@ -74,7 +74,7 @@ namespace projeto.Controllers
             await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
 
             // Mensagem de sucesso
-            TempData["Success"] = "Conta criada com sucesso! Faça login para acessar sua conta.";
+            //TempData["Success"] = "Account successfully created! Please log in to access your account";
 
             return RedirectToAction("Login");
         }
@@ -112,11 +112,11 @@ namespace projeto.Controllers
                             _context.Update(utilizador);
                             await _context.SaveChangesAsync();
 
-                            TempData["Info"] = "Sua conta foi desbloqueada automaticamente. Tente novamente.";
+                            TempData["Info"] = "Your account was automatically unlocked. Try again.";
                         }
                         else
                         {
-                            ModelState.AddModelError(string.Empty, "A sua conta está bloqueada. Tente novamente mais tarde.");
+                            ModelState.AddModelError(string.Empty, "Your account is locked. Try again later.");
                             return View(loginModel);
                         }
                     }
@@ -130,7 +130,7 @@ namespace projeto.Controllers
                         HttpContext.Session.SetString("UserEmail", utilizador.Email);
                         HttpContext.Session.SetString("UserNome", utilizador.Nome);
 
-                        TempData["Success"] = "Login realizado com sucesso!";
+                        //TempData["Success"] = "Login successful";
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -154,18 +154,18 @@ namespace projeto.Controllers
 
                             await RegisterLog("A conta foi bloqueada devido a múltiplas tentativas falhadas.", utilizador.UtilizadorId, false);
 
-                            ModelState.AddModelError(string.Empty, "A sua conta foi bloqueada devido a várias tentativas falhadas. Tente novamente mais tarde.");
+                            ModelState.AddModelError(string.Empty, "Your account was locked due to multiple failed attempts. Try again later");
                             return View(loginModel);
                         }
                         else
                         {
-                            ModelState.AddModelError(string.Empty, $"Credenciais inválidas. Tentativas restantes antes de bloqueio: {3 - falhasRecentes}");
+                            ModelState.AddModelError(string.Empty, $"Invalid credentials. Remaining attempts before lock: {3 - falhasRecentes}");
                         }
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "E-mail ou senha incorretos.");
+                    ModelState.AddModelError(string.Empty, "E-mail or senha incorrect");
                 }
             }
             return View(loginModel);
@@ -186,7 +186,7 @@ namespace projeto.Controllers
             Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
             Response.Headers["Pragma"] = "no-cache";
             Response.Headers["Expires"] = "0";
-            TempData["Success"] = "Logout realizado com sucesso!";
+            TempData["Success"] = "Logout successuful!";
             return RedirectToAction("Login");
         }
 
@@ -275,11 +275,12 @@ namespace projeto.Controllers
         // POST: Utilizadors/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Email, Nome, Password")] Utilizador utilizador)
+        public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Nome")] Utilizador utilizador)
         {
-
+            Console.WriteLine("POST Edit called");
             if (id != utilizador.UtilizadorId)
             {
+                Console.WriteLine("ID mismatch");
                 return NotFound();
             }
 
@@ -287,31 +288,27 @@ namespace projeto.Controllers
             {
                 try
                 {
+                    Console.WriteLine("ModelState is valid");
                     _context.Update(utilizador);
                     await _context.SaveChangesAsync();
-
-                    await RegisterLog("Utilizador atualizou o perfil.", utilizador.UtilizadorId, true);
-
-                    TempData["Message"] = "Alterações realizadas com sucesso!";
+                    TempData["Message"] = "Alterações salvas com sucesso!";
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    TempData["Message"] = "Alterações realizadas com sucesso!";
-                    await RegisterLog("Utilizador não conseguiu atualizar o perfil.", utilizador.UtilizadorId, true);
-                    if (!UtilizadorExists(utilizador.UtilizadorId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    Console.WriteLine($"Error: {ex.Message}");
+                    TempData["Message"] = "Erro ao salvar as alterações.";
                 }
-                
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction(nameof(Profile));
             }
+
+            Console.WriteLine("ModelState is invalid");
             return View(utilizador);
         }
+
+
+
+
 
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -365,14 +362,14 @@ namespace projeto.Controllers
         {
             if (string.IsNullOrEmpty(email))
             {
-                ModelState.AddModelError("Email", "O e-mail é obrigatório.");
+                ModelState.AddModelError("Email", "Email is required.");
                 return View();
             }
 
             var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
             if (utilizador == null)
             {
-                ModelState.AddModelError("Email", "E-mail não encontrado.");
+                ModelState.AddModelError("Email", "Email not found.");
                 return View();
             }
 
@@ -410,7 +407,7 @@ namespace projeto.Controllers
             var email = HttpContext.Session.GetString("ResetEmail");
             if (string.IsNullOrEmpty(email))
             {
-                TempData["Error"] = "Sessão expirada. Tente novamente.";
+                TempData["Error"] = "Session expired. Please try again.";
                 return RedirectToAction("ForgotPassword");
             }
 
@@ -420,7 +417,7 @@ namespace projeto.Controllers
 
             if (verification == null)
             {
-                TempData["Error"] = "Código de verificação inválido.";
+                TempData["Error"] = "Invalid code";
                 return View();
             }
 
@@ -448,17 +445,17 @@ namespace projeto.Controllers
 
             if (string.IsNullOrEmpty(email))
             {
-                TempData["Error"] = "Sessão expirada. Tente novamente.";
+                TempData["Error"] = "Session expired. Please try again.";
                 return RedirectToAction("ForgotPassword");
             }
 
             if (string.IsNullOrEmpty(newPassword))
             {
-                ModelState.AddModelError("newPassword", "A nova senha é obrigatória.");
+                ModelState.AddModelError("newPassword", "New password is required");
             }
             else if (newPassword.Length < 6)
             {
-                ModelState.AddModelError("newPassword", "A nova senha deve ter pelo menos 6 caracteres.");
+                ModelState.AddModelError("newPassword", "Password must have atleast 6 characters");
             }
 
             if (!ModelState.IsValid)
@@ -477,11 +474,11 @@ namespace projeto.Controllers
 
                 await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
 
-                TempData["Success"] = "Senha redefinida com sucesso! Faça login com a nova senha.";
+                TempData["Success"] = "Password successfully reset! Please log in with the new password.";
                 return RedirectToAction("Login");
             }
 
-            TempData["Error"] = "Utilizador não encontrado.";
+            TempData["Error"] = "User not found";
             return View();
         }
 
@@ -503,14 +500,14 @@ namespace projeto.Controllers
             var utilizador = await _context.Utilizador.FindAsync(id);
             if (utilizador == null)
             {
-                ModelState.AddModelError("confirmPassword", "Utilizador não encontrado.");
+                ModelState.AddModelError("confirmPassword", "User not found");
                 return View();
             }
 
             // Verificar se a senha atual está correta
             if (!BCrypt.Net.BCrypt.Verify(currentPassword, utilizador.Password))
             {
-                ModelState.AddModelError("confirmPassword", "A senha atual está incorreta.");
+                ModelState.AddModelError("confirmPassword", "Invalid password");
                 return View();
             }
 
@@ -536,13 +533,13 @@ namespace projeto.Controllers
             // Verifica se a nova senha tem pelo menos 6 caracteres
             if (string.IsNullOrEmpty(newPassword) || newPassword.Length < 6)
             {
-                ModelState.AddModelError("newPassword", "A nova senha deve ter pelo menos 6 caracteres.");
+                ModelState.AddModelError("newPassword", "New passwrod must have atleast 6 characters");
             }
 
             // Verifica se a confirmação da senha coincide com a nova senha
             if (newPassword != confirmPassword)
             {
-                ModelState.AddModelError("confirmPassword", "As senhas não coincidem.");
+                ModelState.AddModelError("confirmPassword", "The passwords do not match");
             }
 
             // Se o ModelState não for válido, retorna a view com os erros
@@ -554,7 +551,7 @@ namespace projeto.Controllers
             var utilizador = await _context.Utilizador.FindAsync(id);
             if (utilizador == null)
             {
-                ModelState.AddModelError(string.Empty, "Utilizador não encontrado.");
+                ModelState.AddModelError(string.Empty, "User not found");
                 return View();
             }
 
@@ -562,7 +559,7 @@ namespace projeto.Controllers
             utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
             await _context.SaveChangesAsync();
 
-            TempData["Message"] = "Senha atualizada com sucesso!";
+            TempData["Message"] = "Password successfully reset!";
             return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
         }
 
