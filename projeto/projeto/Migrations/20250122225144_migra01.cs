@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class init2 : Migration
+    public partial class migra01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

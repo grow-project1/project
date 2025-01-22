@@ -12,8 +12,8 @@ using projeto.Data;
 namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250122203501_init2")]
-    partial class init2
+    [Migration("20250122225144_migra01")]
+    partial class migra01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
