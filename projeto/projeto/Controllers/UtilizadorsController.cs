@@ -275,30 +275,43 @@ namespace projeto.Controllers
         // POST: Utilizadors/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Nome")] Utilizador utilizador)
+        public async Task<IActionResult> Edit(int id, [Bind("UtilizadorId,Nome,Morada,CodigoPostal,Pais,Telemovel")] Utilizador utilizador)
         {
-
             if (id != utilizador.UtilizadorId)
             {
-
                 return NotFound();
             }
 
-
             var utilizadorExistente = await _context.Utilizador.FindAsync(id);
+            if (utilizadorExistente == null)
+            {
+                return NotFound();
+            }
 
             utilizadorExistente.Nome = utilizador.Nome;
+            utilizadorExistente.Morada = utilizador.Morada;
+            utilizadorExistente.CodigoPostal = utilizador.CodigoPostal;
+            utilizadorExistente.Pais = utilizador.Pais;
+            utilizadorExistente.Telemovel = utilizador.Telemovel;
 
-            _context.Update(utilizadorExistente);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Profile));
-
+            try
+            {
+                _context.Update(utilizadorExistente);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Profile));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UtilizadorExists(utilizador.UtilizadorId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
-
-
-
-
 
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)

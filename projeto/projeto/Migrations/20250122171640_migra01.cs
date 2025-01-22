@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class ini : Migration
+    public partial class migra01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,6 +34,10 @@ namespace projeto.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Morada = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Telemovel = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Pais = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EstadoConta = table.Column<int>(type: "int", nullable: false)

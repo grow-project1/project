@@ -23,8 +23,15 @@
                         <div class="col-md-9">
                             <p><strong>Email:</strong> @Model.Email</p>
                             <p><strong>Nome:</strong> @Model.Nome</p>
+                            <p><strong>Morada:</strong> @Model.Morada</p>
+                            <p><strong>Código Postal:</strong> @Model.CodigoPostal</p>
+                            <p><strong>Telemóvel:</strong> @Model.Telemovel</p>
+                            <p><strong>País:</strong> @Model.Pais</p>
+                            <p><strong>Tipo de utilizador:</strong> @Model.EstadoConta</p>
                         </div>
-                       
+                        <div class="col-md-3">
+                            <img src="@Url.Content(Model.ImagePath)" class="img-fluid rounded-circle" alt="Profile Image" width="150" height="150" />
+                        </div>
                     </div>
 
                     <div class="btn-group w-100" role="group">
