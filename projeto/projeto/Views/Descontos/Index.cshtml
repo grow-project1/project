@@ -1,0 +1,44 @@
+﻿@model IEnumerable<projeto.Models.Desconto>
+
+@{
+    ViewData["Title"] = "Descontos";
+}
+
+<h1>Descontos Disponíveis</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Pontos Necessários</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(d => d.IsLoja)) 
+        {
+            <tr>
+                <td>@item.Descricao</td>
+                <td>@item.Valor%</td>
+                <td>@item.PontosNecessarios</td>
+                <td>
+                    <a asp-action="RedeemDesconto" asp-route-id="@item.DescontoId" class="btn btn-primary">Resgatar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

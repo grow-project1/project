@@ -39,6 +39,8 @@ namespace projeto.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public EstadoConta EstadoConta { get; set; } = EstadoConta.Ativa;
+
+        public int Pontos { get; set; } = 20;
     }
 
     public enum EstadoConta

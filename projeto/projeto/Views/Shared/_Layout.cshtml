@@ -40,6 +40,15 @@
                         else
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="MeusDescontos">Os meus descontos</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link text-dark">Pontos: @ViewData["UserPoints"]</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="Index">Descontos</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Profile">Profile</a>
                             </li>
                             <li class="nav-item">

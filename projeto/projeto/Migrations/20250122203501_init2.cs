@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class migra01 : Migration
+    public partial class init2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,7 +42,8 @@ namespace projeto.Migrations
                     Pais = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EstadoConta = table.Column<int>(type: "int", nullable: false)
+                    EstadoConta = table.Column<int>(type: "int", nullable: false),
+                    Pontos = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,6 +62,30 @@ namespace projeto.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VerificationModel", x => x.VerificationModelId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Desconto",
+                columns: table => new
+                {
+                    DescontoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Valor = table.Column<double>(type: "float", nullable: false),
+                    PontosNecessarios = table.Column<int>(type: "int", nullable: false),
+                    DataObtencao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DataFim = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: true),
+                    IsLoja = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Desconto", x => x.DescontoId);
+                    table.ForeignKey(
+                        name: "FK_Desconto_Utilizador_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "Utilizador",
+                        principalColumn: "UtilizadorId");
                 });
 
             migrationBuilder.CreateTable(
@@ -84,6 +111,58 @@ namespace projeto.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DescontoResgatado",
+                columns: table => new
+                {
+                    DescontoResgatadoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DescontoId = table.Column<int>(type: "int", nullable: false),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false),
+                    DataResgate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataValidade = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DescontoResgatado", x => x.DescontoResgatadoId);
+                    table.ForeignKey(
+                        name: "FK_DescontoResgatado_Desconto_DescontoId",
+                        column: x => x.DescontoId,
+                        principalTable: "Desconto",
+                        principalColumn: "DescontoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DescontoResgatado_Utilizador_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "Utilizador",
+                        principalColumn: "UtilizadorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Desconto",
+                columns: new[] { "DescontoId", "DataFim", "DataObtencao", "Descricao", "IsLoja", "PontosNecessarios", "UtilizadorId", "Valor" },
+                values: new object[,]
+                {
+                    { 1, null, null, "10% desconto", true, 10, null, 10.0 },
+                    { 2, null, null, "20% desconto", true, 20, null, 20.0 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Desconto_UtilizadorId",
+                table: "Desconto",
+                column: "UtilizadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DescontoResgatado_DescontoId",
+                table: "DescontoResgatado",
+                column: "DescontoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DescontoResgatado_UtilizadorId",
+                table: "DescontoResgatado",
+                column: "UtilizadorId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_LogUtilizadores_UtilizadorId",
                 table: "LogUtilizadores",
@@ -94,6 +173,9 @@ namespace projeto.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DescontoResgatado");
+
+            migrationBuilder.DropTable(
                 name: "LoginModel");
 
             migrationBuilder.DropTable(
@@ -101,6 +183,9 @@ namespace projeto.Migrations
 
             migrationBuilder.DropTable(
                 name: "VerificationModel");
+
+            migrationBuilder.DropTable(
+                name: "Desconto");
 
             migrationBuilder.DropTable(
                 name: "Utilizador");

@@ -4,9 +4,9 @@
     "\\projeto",
     "\\projeto\\projeto",
     "\\projeto\\projeto\\Controllers",
-    "\\projeto\\projeto\\Views",
-    "\\projeto\\projeto\\Views\\Utilizadors"
+    "\\projeto\\projeto\\Models",
+    "\\projeto\\projeto\\Views"
   ],
-  "SelectedNode": "\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+  "SelectedNode": "\\projeto\\projeto.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -22,6 +22,90 @@ namespace projeto.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("projeto.Models.Desconto", b =>
+                {
+                    b.Property<int>("DescontoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DescontoId"));
+
+                    b.Property<DateTime?>("DataFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataObtencao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsLoja")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PontosNecessarios")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UtilizadorId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Valor")
+                        .HasColumnType("float");
+
+                    b.HasKey("DescontoId");
+
+                    b.HasIndex("UtilizadorId");
+
+                    b.ToTable("Desconto");
+
+                    b.HasData(
+                        new
+                        {
+                            DescontoId = 1,
+                            Descricao = "10% desconto",
+                            IsLoja = true,
+                            PontosNecessarios = 10,
+                            Valor = 10.0
+                        },
+                        new
+                        {
+                            DescontoId = 2,
+                            Descricao = "20% desconto",
+                            IsLoja = true,
+                            PontosNecessarios = 20,
+                            Valor = 20.0
+                        });
+                });
+
+            modelBuilder.Entity("projeto.Models.DescontoResgatado", b =>
+                {
+                    b.Property<int>("DescontoResgatadoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DescontoResgatadoId"));
+
+                    b.Property<DateTime>("DataResgate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataValidade")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DescontoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UtilizadorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DescontoResgatadoId");
+
+                    b.HasIndex("DescontoId");
+
+                    b.HasIndex("UtilizadorId");
+
+                    b.ToTable("DescontoResgatado");
+                });
+
             modelBuilder.Entity("projeto.Models.LogUtilizador", b =>
                 {
                     b.Property<int>("LogUtilizadorId")
@@ -120,6 +204,9 @@ namespace projeto.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("Pontos")
+                        .HasColumnType("int");
+
                     b.Property<string>("Telemovel")
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
@@ -146,6 +233,34 @@ namespace projeto.Migrations
                     b.HasKey("VerificationModelId");
 
                     b.ToTable("VerificationModel");
+                });
+
+            modelBuilder.Entity("projeto.Models.Desconto", b =>
+                {
+                    b.HasOne("projeto.Models.Utilizador", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorId");
+
+                    b.Navigation("Utilizador");
+                });
+
+            modelBuilder.Entity("projeto.Models.DescontoResgatado", b =>
+                {
+                    b.HasOne("projeto.Models.Desconto", "Desconto")
+                        .WithMany()
+                        .HasForeignKey("DescontoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("projeto.Models.Utilizador", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Desconto");
+
+                    b.Navigation("Utilizador");
                 });
 
             modelBuilder.Entity("projeto.Models.LogUtilizador", b =>

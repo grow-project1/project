@@ -191,23 +191,25 @@ namespace projeto.Controllers
         }
 
         // Método Profile
-        public IActionResult Profile()
+        public async Task<IActionResult> ProfileAsync()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
+
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (string.IsNullOrEmpty(userEmail))
             {
                 return RedirectToAction("Login");
             }
 
-            var utilizador = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
-
-            if (utilizador == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(utilizador); // Passa o utilizador para a view
+            return View(user); // Passa o utilizador para a view
         }
 
         // GET: Utilizadors
@@ -298,7 +300,7 @@ namespace projeto.Controllers
             {
                 _context.Update(utilizadorExistente);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Profile));
+                return RedirectToAction(nameof(ProfileAsync));
             }
             catch (DbUpdateConcurrencyException)
             {
