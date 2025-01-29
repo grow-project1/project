@@ -29,9 +29,32 @@ namespace projeto.Data
                 .WithOne() // Relacionamento 1:1
                 .HasForeignKey<Leilao>(l => l.ItemId) // A chave estrangeira está em Leilao
                 .OnDelete(DeleteBehavior.Cascade); // Exclui o item quando o leilão é excluído
+
+
+            modelBuilder.Entity<Desconto>().HasData(
+                new Desconto
+                {
+                    DescontoId = 1,
+                    Descricao = "Desconto de 10% na Loja",
+                    Valor = 10.0,
+                    PontosNecessarios = 10,
+                    UtilizadorId = null, // Pode ser associado depois
+                    IsLoja = true
+                },
+                new Desconto
+                {
+                    DescontoId = 2,
+                    Descricao = "Desconto de 25% desconto",
+                    Valor = 25.0,
+                    PontosNecessarios = 20,
+                    UtilizadorId = null,
+                    IsLoja = true
+                }
+            ); 
+    }
         }
 
 
     }
 
-}
+

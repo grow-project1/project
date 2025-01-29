@@ -5,6 +5,9 @@
     justify-content: space-between !important; /* Para garantir que o logo fique à esquerda e os links à direita */
     align-items: center !important; /* Garante que todos os itens da navbar fiquem verticalmente alinhados */
     z-index: 101;
+    position: fixed;
+    top:0;
+    width: 100%;
 }
 
 /* Ajusta o alinhamento do ul que contém Login e Register */
@@ -319,4 +322,171 @@ h2 {
     margin-top: 15px;
 }
 
+
+
+
+/* PARTE DOS LEILOES */
+.checkbox-container {
+    display: flex;
+    justify-content: flex-end; /* Alinha o conteúdo à direita */
+    align-items: center; /* Alinha verticalmente */
+    margin: 10px 0;
+}
+
+    .checkbox-container span {
+        margin-right: 10px; /* Espaçamento entre o texto e o checkbox */
+    }
+
+/* Barra lateral *//* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px; /* Largura fixa da sidebar */
+    height: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Garante que os itens comecem de cima */
+    align-items: stretch; /* Garante que os itens se estendam para toda a largura */
+}
+
+.sidebar h3 {
+    font-size: 1.5em; /* Aumentei o tamanho do título para maior destaque */
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left; /* Garantir que o título da sidebar esteja alinhado à esquerda */
+}
+
+.filters, .price-range {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os itens da sidebar à esquerda */
+}
+
+.price-range input {
+    width: 100%; /* Garante que o input ocupe toda a largura disponível */
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.btn-apply, .btn-clear, .btn-create {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-clear {
+    background-color: #dc3545;
+}
+
+.btn-create {
+    background-color: #007bff;
+}
+
+.btn-apply:hover, .btn-clear:hover, .btn-create:hover {
+    background-color: #2d9c49;
+}
+
+.sidebar .btn-apply, .sidebar .btn-clear, .sidebar .btn-create {
+    width: 100%; /* Faz os botões ocuparem toda a largura disponível */
+}
+
+/* Leilões Grid */
+.grid-leiloes {
+    margin-left: 280px; /* Garante que o grid de leilões tenha espaço para a sidebar */
+    margin-top: 75px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.leilao-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: .4s;
+}
+
+.leilao-card:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.img-leilao {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    border-bottom: 1px solid black;
+}
+
+.leilao-details h5 {
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.btn-view, .btn-delete {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-view:hover, .btn-delete:hover {
+    background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .grid-leiloes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-leiloes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-leiloes {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: absolute; /* Torna a sidebar fixa apenas no topo */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto; /* Torna a sidebar com altura automática */
+        padding: 10px;
+        border-right: none;
+    }
+
+    .grid-leiloes {
+        margin-left: 0;
+    }
+}
 

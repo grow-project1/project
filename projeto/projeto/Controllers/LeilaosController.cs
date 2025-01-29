@@ -29,6 +29,8 @@ namespace projeto.Controllers
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
             ViewData["UserPoints"] = user?.Pontos;
+            ViewData["Logged"] = user != null;
+            ViewData["UserId"] = user?.UtilizadorId;
 
             var applicationDbContext = _context.Leiloes.Include(l => l.Item);
             return View(await applicationDbContext.ToListAsync());
@@ -104,6 +106,21 @@ namespace projeto.Controllers
                 // Caminho final do arquivo no servidor
                 string filePath = Path.Combine(serverFolder, fileName);
 
+                // Verifica o tamanho máximo do arquivo (exemplo: 5 MB)
+                if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)  // 5MB
+                {
+                    ModelState.AddModelError("Item.fotoo", "O arquivo de imagem é muito grande. O tamanho máximo permitido é 5MB.");
+                    return View(leilao);  // Retorna à página de criação com o erro
+                }
+
+                // Verifica o tipo de arquivo (apenas imagens)
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                if (!allowedExtensions.Contains(Path.GetExtension(leilao.Item.fotoo.FileName).ToLower()))
+                {
+                    ModelState.AddModelError("Item.fotoo", "Apenas arquivos de imagem (.jpg, .jpeg, .png, .gif) são permitidos.");
+                    return View(leilao);  // Retorna à página de criação com o erro
+                }
+
                 // Salva o arquivo no servidor
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
@@ -120,6 +137,7 @@ namespace projeto.Controllers
 
             return RedirectToAction(nameof(Index));  // Redireciona para a lista de leilões
         }
+
 
 
 

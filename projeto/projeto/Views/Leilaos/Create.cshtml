@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="Item.fotoo">Carregar Foto</label>
 
-                <input asp-for="Item.fotoo" class="custom-file-input" id="customFile"/>
+                <input asp-for="Item.fotoo" class="custom-file-input" id="customFile" />
                 <label class="custom-file-input" for="customFile">Choose file</label>
             </div>
 
@@ -56,6 +56,9 @@
                 <input asp-for="Item.Sustentavel" type="checkbox" />
                 <span asp-validation-for="Item.Sustentavel" class="text-danger"></span>
             </div>
+
+            <!-- Campo oculto para o ID do usuário logado -->
+            <input type="hidden" asp-for="UtilizadorId" value="@ViewData["UserId"]" />
 
             <div class="form-group mt-3">
                 <input type="submit" value="Criar" class="btn btn-primary" />
