@@ -12,8 +12,8 @@ using projeto.Data;
 namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250122225144_migra01")]
-    partial class migra01
+    [Migration("20250129142855_ins")]
+    partial class ins
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,24 +60,6 @@ namespace projeto.Migrations
                     b.HasIndex("UtilizadorId");
 
                     b.ToTable("Desconto");
-
-                    b.HasData(
-                        new
-                        {
-                            DescontoId = 1,
-                            Descricao = "10% desconto",
-                            IsLoja = true,
-                            PontosNecessarios = 10,
-                            Valor = 10.0
-                        },
-                        new
-                        {
-                            DescontoId = 2,
-                            Descricao = "20% desconto",
-                            IsLoja = true,
-                            PontosNecessarios = 20,
-                            Valor = 20.0
-                        });
                 });
 
             modelBuilder.Entity("projeto.Models.DescontoResgatado", b =>
@@ -107,6 +89,97 @@ namespace projeto.Migrations
                     b.HasIndex("UtilizadorId");
 
                     b.ToTable("DescontoResgatado");
+                });
+
+            modelBuilder.Entity("projeto.Models.Item", b =>
+                {
+                    b.Property<int>("ItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemId"));
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FotoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PrecoInicial")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("Sustentavel")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ItemId");
+
+                    b.ToTable("Itens");
+                });
+
+            modelBuilder.Entity("projeto.Models.Leilao", b =>
+                {
+                    b.Property<int>("LeilaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LeilaoId"));
+
+                    b.Property<DateTime>("DataFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UtilizadorId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ValorIncrementoMinimo")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Vencedor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LeilaoId");
+
+                    b.HasIndex("ItemId")
+                        .IsUnique();
+
+                    b.ToTable("Leiloes");
+                });
+
+            modelBuilder.Entity("projeto.Models.Licitacao", b =>
+                {
+                    b.Property<int>("LicitacaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LicitacaoId"));
+
+                    b.Property<DateTime>("DataLicitacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("LeilaoId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ValorLicitacao")
+                        .HasColumnType("float");
+
+                    b.HasKey("LicitacaoId");
+
+                    b.HasIndex("LeilaoId");
+
+                    b.ToTable("Licitacoes");
                 });
 
             modelBuilder.Entity("projeto.Models.LogUtilizador", b =>
@@ -266,6 +339,24 @@ namespace projeto.Migrations
                     b.Navigation("Utilizador");
                 });
 
+            modelBuilder.Entity("projeto.Models.Leilao", b =>
+                {
+                    b.HasOne("projeto.Models.Item", "Item")
+                        .WithOne()
+                        .HasForeignKey("projeto.Models.Leilao", "ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("projeto.Models.Licitacao", b =>
+                {
+                    b.HasOne("projeto.Models.Leilao", null)
+                        .WithMany("Licitacoes")
+                        .HasForeignKey("LeilaoId");
+                });
+
             modelBuilder.Entity("projeto.Models.LogUtilizador", b =>
                 {
                     b.HasOne("projeto.Models.Utilizador", "Utilizador")
@@ -275,6 +366,11 @@ namespace projeto.Migrations
                         .IsRequired();
 
                     b.Navigation("Utilizador");
+                });
+
+            modelBuilder.Entity("projeto.Models.Leilao", b =>
+                {
+                    b.Navigation("Licitacoes");
                 });
 #pragma warning restore 612, 618
         }

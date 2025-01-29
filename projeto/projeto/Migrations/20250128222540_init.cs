@@ -8,11 +8,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class migra01 : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Itens",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PrecoInicial = table.Column<double>(type: "float", nullable: false),
+                    FotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Categoria = table.Column<int>(type: "int", nullable: false),
+                    Sustentavel = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Itens", x => x.ItemId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "LoginModel",
                 columns: table => new
@@ -65,6 +83,29 @@ namespace projeto.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Leiloes",
+                columns: table => new
+                {
+                    LeilaoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValorIncrementoMinimo = table.Column<double>(type: "float", nullable: false),
+                    Vencedor = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Leiloes", x => x.LeilaoId);
+                    table.ForeignKey(
+                        name: "FK_Leiloes_Itens_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Itens",
+                        principalColumn: "ItemId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Desconto",
                 columns: table => new
                 {
@@ -112,6 +153,26 @@ namespace projeto.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Licitacoes",
+                columns: table => new
+                {
+                    LicitacaoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DataLicitacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValorLicitacao = table.Column<double>(type: "float", nullable: false),
+                    LeilaoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Licitacoes", x => x.LicitacaoId);
+                    table.ForeignKey(
+                        name: "FK_Licitacoes_Leiloes_LeilaoId",
+                        column: x => x.LeilaoId,
+                        principalTable: "Leiloes",
+                        principalColumn: "LeilaoId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DescontoResgatado",
                 columns: table => new
                 {
@@ -148,6 +209,24 @@ namespace projeto.Migrations
                     { 2, null, null, "20% desconto", true, 20, null, 20.0 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Itens",
+                columns: new[] { "ItemId", "Categoria", "Descricao", "FotoUrl", "PrecoInicial", "Sustentavel", "Titulo" },
+                values: new object[,]
+                {
+                    { 1, 2, "Relógio luxuoso em ouro 18k.", "/images/relogio.jpg", 500.0, false, "Relógio de Ouro" },
+                    { 2, 4, "Bicicleta clássica para colecionadores.", "/images/bicicleta.jpg", 200.0, true, "Bicicleta Vintage" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Leiloes",
+                columns: new[] { "LeilaoId", "DataFim", "DataInicio", "ItemId", "ValorIncrementoMinimo", "Vencedor" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 1, 28, 22, 35, 39, 4, DateTimeKind.Local).AddTicks(3776), new DateTime(2025, 1, 28, 22, 25, 39, 1, DateTimeKind.Local).AddTicks(6354), 1, 5.0, null },
+                    { 2, new DateTime(2025, 1, 28, 22, 40, 39, 4, DateTimeKind.Local).AddTicks(4270), new DateTime(2025, 1, 28, 22, 25, 39, 4, DateTimeKind.Local).AddTicks(4263), 2, 10.0, null }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Desconto_UtilizadorId",
                 table: "Desconto",
@@ -164,6 +243,16 @@ namespace projeto.Migrations
                 column: "UtilizadorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Leiloes_ItemId",
+                table: "Leiloes",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Licitacoes_LeilaoId",
+                table: "Licitacoes",
+                column: "LeilaoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LogUtilizadores_UtilizadorId",
                 table: "LogUtilizadores",
                 column: "UtilizadorId");
@@ -174,6 +263,9 @@ namespace projeto.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DescontoResgatado");
+
+            migrationBuilder.DropTable(
+                name: "Licitacoes");
 
             migrationBuilder.DropTable(
                 name: "LoginModel");
@@ -188,7 +280,13 @@ namespace projeto.Migrations
                 name: "Desconto");
 
             migrationBuilder.DropTable(
+                name: "Leiloes");
+
+            migrationBuilder.DropTable(
                 name: "Utilizador");
+
+            migrationBuilder.DropTable(
+                name: "Itens");
         }
     }
 }

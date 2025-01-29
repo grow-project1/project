@@ -16,6 +16,9 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true; // Necessário para GDPR em alguns cenários
 });
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 // Adicionar os outros serviços
 builder.Services.AddControllersWithViews();
 
@@ -50,6 +53,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Leilaos}/{action=Index}/{id?}");
 
 app.Run();

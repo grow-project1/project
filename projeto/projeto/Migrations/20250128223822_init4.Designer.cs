@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projeto.Data;
 
@@ -11,9 +12,11 @@ using projeto.Data;
 namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250128223822_init4")]
+    partial class init4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +60,24 @@ namespace projeto.Migrations
                     b.HasIndex("UtilizadorId");
 
                     b.ToTable("Desconto");
+
+                    b.HasData(
+                        new
+                        {
+                            DescontoId = 1,
+                            Descricao = "10% desconto",
+                            IsLoja = true,
+                            PontosNecessarios = 10,
+                            Valor = 10.0
+                        },
+                        new
+                        {
+                            DescontoId = 2,
+                            Descricao = "20% desconto",
+                            IsLoja = true,
+                            PontosNecessarios = 20,
+                            Valor = 20.0
+                        });
                 });
 
             modelBuilder.Entity("projeto.Models.DescontoResgatado", b =>
@@ -104,6 +125,7 @@ namespace projeto.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FotoUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PrecoInicial")
@@ -119,6 +141,28 @@ namespace projeto.Migrations
                     b.HasKey("ItemId");
 
                     b.ToTable("Itens");
+
+                    b.HasData(
+                        new
+                        {
+                            ItemId = 1,
+                            Categoria = 2,
+                            Descricao = "Relógio luxuoso em ouro 18k.",
+                            FotoUrl = "/images/relogio.jpg",
+                            PrecoInicial = 500.0,
+                            Sustentavel = false,
+                            Titulo = "Relógio de Ouro"
+                        },
+                        new
+                        {
+                            ItemId = 2,
+                            Categoria = 4,
+                            Descricao = "Bicicleta clássica para colecionadores.",
+                            FotoUrl = "/images/bicicleta.jpg",
+                            PrecoInicial = 200.0,
+                            Sustentavel = true,
+                            Titulo = "Bicicleta Vintage"
+                        });
                 });
 
             modelBuilder.Entity("projeto.Models.Leilao", b =>
@@ -138,9 +182,6 @@ namespace projeto.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UtilizadorId")
-                        .HasColumnType("int");
-
                     b.Property<double>("ValorIncrementoMinimo")
                         .HasColumnType("float");
 
@@ -149,10 +190,27 @@ namespace projeto.Migrations
 
                     b.HasKey("LeilaoId");
 
-                    b.HasIndex("ItemId")
-                        .IsUnique();
+                    b.HasIndex("ItemId");
 
                     b.ToTable("Leiloes");
+
+                    b.HasData(
+                        new
+                        {
+                            LeilaoId = 1,
+                            DataFim = new DateTime(2025, 1, 28, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            DataInicio = new DateTime(2025, 1, 28, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 1,
+                            ValorIncrementoMinimo = 5.0
+                        },
+                        new
+                        {
+                            LeilaoId = 2,
+                            DataFim = new DateTime(2025, 1, 28, 22, 45, 0, 0, DateTimeKind.Unspecified),
+                            DataInicio = new DateTime(2025, 1, 28, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 2,
+                            ValorIncrementoMinimo = 10.0
+                        });
                 });
 
             modelBuilder.Entity("projeto.Models.Licitacao", b =>
@@ -339,8 +397,8 @@ namespace projeto.Migrations
             modelBuilder.Entity("projeto.Models.Leilao", b =>
                 {
                     b.HasOne("projeto.Models.Item", "Item")
-                        .WithOne()
-                        .HasForeignKey("projeto.Models.Leilao", "ItemId")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

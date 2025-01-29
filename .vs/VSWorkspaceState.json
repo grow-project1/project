@@ -5,8 +5,10 @@
     "\\projeto\\projeto",
     "\\projeto\\projeto\\Controllers",
     "\\projeto\\projeto\\Models",
-    "\\projeto\\projeto\\Views"
+    "\\projeto\\projeto\\Views",
+    "\\projeto\\projeto\\Views\\Leilaos",
+    "\\projeto\\projeto\\Views\\Utilizadors"
   ],
-  "SelectedNode": "\\projeto\\projeto.sln",
+  "SelectedNode": "\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }

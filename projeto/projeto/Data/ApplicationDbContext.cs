@@ -11,39 +11,27 @@ namespace projeto.Data
         {
         }
 
-        public DbSet<projeto.Models.LoginModel> LoginModel { get; set; } = default!;
-        public DbSet<projeto.Models.Desconto> Desconto { get; set; } = default!;
-        public DbSet<projeto.Models.Utilizador> Utilizador { get; set; } = default!;
-        public DbSet<projeto.Models.LogUtilizador> LogUtilizadores { get; set; } = default!;
-        public DbSet<projeto.Models.VerificationModel> VerificationModel { get; set; } = default!;
-        public DbSet<projeto.Models.DescontoResgatado> DescontoResgatado { get; set; } = default!;
+        public DbSet<LoginModel> LoginModel { get; set; } = default!;
+        public DbSet<Desconto> Desconto { get; set; } = default!;
+        public DbSet<Utilizador> Utilizador { get; set; } = default!;
+        public DbSet<LogUtilizador> LogUtilizadores { get; set; } = default!;
+        public DbSet<VerificationModel> VerificationModel { get; set; } = default!;
+        public DbSet<DescontoResgatado> DescontoResgatado { get; set; } = default!;
+        public DbSet<Item> Itens { get; set; } = default!;
+        public DbSet<Leilao> Leiloes { get; set; } = default!;
+        public DbSet<Licitacao> Licitacoes { get; set; } = default!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Desconto>().HasData(
-                new Desconto
-                {
-                    DescontoId = 1,
-                    Descricao = "10% desconto",
-                    Valor = 10.0, // 10% de desconto
-                    PontosNecessarios = 10,
-                    IsLoja = true // Indica que pertence à loja
-                },
-                new Desconto
-                {
-                    DescontoId = 2,
-                    Descricao = "20% desconto",
-                    Valor = 20.0, // 20% de desconto
-                    PontosNecessarios = 20,
-                    IsLoja = true // Indica que pertence à loja
-                }
-            );
+            modelBuilder.Entity<Leilao>()
+                .HasOne(l => l.Item)
+                .WithOne() // Relacionamento 1:1
+                .HasForeignKey<Leilao>(l => l.ItemId) // A chave estrangeira está em Leilao
+                .OnDelete(DeleteBehavior.Cascade); // Exclui o item quando o leilão é excluído
         }
 
 
-
     }
+
 }

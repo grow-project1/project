@@ -1,0 +1,60 @@
+﻿@model IEnumerable<projeto.Models.Leilao>
+
+@{
+    ViewData["Title"] = "Leilões";
+}
+
+<head>
+    <link href="~/css/Leiloes.css" rel="stylesheet" type="text/css" />
+</head>
+
+<div class="container">
+    <!-- Barra lateral fixa à esquerda -->
+    <aside class="sidebar">
+        <h3>Categorias</h3>
+        <div class="categorias">
+            <label> Home & Living<input type="checkbox"></label>
+            <label>Clothing <input type="checkbox"> </label>
+        </div>
+  
+
+        <h3>Filtros</h3>
+        <label>Time left</label>
+        <div class="filters">
+            <label><input type="checkbox"> < 1d</label><br>
+            <label><input type="checkbox"> < 5d</label><br>
+            <label><input type="checkbox"> < 10d</label>
+        </div>
+
+        <label>Price Range</label>
+        <div class="price-range">
+            <input type="number" placeholder="Min"> to
+            <input type="number" placeholder="Max">
+        </div>
+
+        <button class="btn-apply">Apply</button>
+        <button class="btn-clear">Clear</button>
+
+        <div>
+            <a asp-action="Create" class="btn-create">+</a>
+        </div>
+    </aside>
+
+    <!-- Lista de Leilões -->
+    <div class="grid-leiloes">
+        @foreach (var leilao in Model)
+        {
+            <div class="leilao-card">
+                <img src="@leilao.Item.FotoUrl" alt="@leilao.Item.Titulo" class="img-leilao" />
+                <div class="leilao-details">
+                    <h5>@leilao.Item.Titulo</h5>
+                    <p><strong>Current Bid:</strong> €@leilao.Item.PrecoInicial</p>
+                    <p>Ends in: @((leilao.DataFim - DateTime.Now).Days) days</p>
+                    <a href="@Url.Action("Details", "Leilaos", new { id = leilao.LeilaoId })" class="btn-view">Ver mais</a>
+
+                    <a href="@Url.Action("Delete", "Leilaos", new { id = leilao.LeilaoId })" class="btn-view">del</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

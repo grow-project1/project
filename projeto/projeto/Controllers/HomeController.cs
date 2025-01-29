@@ -30,6 +30,14 @@ namespace projeto.Controllers
                 }
             }
 
+            var leiloes = _context.Leiloes
+                .Include(l => l.Item) // Inclui os itens relacionados
+                .Where(l => l.DataFim > DateTime.Now) // Apenas leilões ativos
+                .ToList();
+
+            ViewData["Leiloes"] = leiloes;
+
+
             return View();
         }
 

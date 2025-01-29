@@ -4,6 +4,7 @@
     display: flex !important;
     justify-content: space-between !important; /* Para garantir que o logo fique à esquerda e os links à direita */
     align-items: center !important; /* Garante que todos os itens da navbar fiquem verticalmente alinhados */
+    z-index: 101;
 }
 
 /* Ajusta o alinhamento do ul que contém Login e Register */
