@@ -490,3 +490,47 @@ h2 {
     }
 }
 
+.btn-delete {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .btn-delete:hover {
+        transform: scale(1.1);
+        background: none;
+    }
+
+.btn-create {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px; /* Definir uma largura fixa */
+    height: 60px; /* Definir uma altura fixa para mantê-lo redondo */
+    border-radius: 100%; /* Deixa o botão completamente redondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2c6e49; /* Cor azul padrão */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para dar destaque */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+    .btn-create:hover {
+        background-color: #1c6e49; /* Azul mais escuro no hover */
+        transform: scale(1.1); /* Efeito de crescimento ao passar o mouse */
+        color:white;
+    }
+
+    .btn-create:active {
+        transform: scale(0.9); /* Efeito de clique */
+    }
+

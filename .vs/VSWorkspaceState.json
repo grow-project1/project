@@ -7,8 +7,10 @@
     "\\projeto\\projeto\\Models",
     "\\projeto\\projeto\\Views",
     "\\projeto\\projeto\\Views\\Leilaos",
-    "\\projeto\\projeto\\Views\\Utilizadors"
+    "\\projeto\\projeto\\Views\\Utilizadors",
+    "\\projeto\\projeto\\wwwroot",
+    "\\projeto\\projeto\\wwwroot\\css"
   ],
-  "SelectedNode": "\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+  "SelectedNode": "\\projeto\\projeto\\wwwroot\\css\\site.css",
   "PreviewInSolutionExplorer": false
 }

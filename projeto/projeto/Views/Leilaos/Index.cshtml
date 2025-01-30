@@ -1,21 +1,31 @@
 ﻿@model IEnumerable<projeto.Models.Leilao>
-
+@using projeto.Models
 @{
     ViewData["Title"] = "Leilões";
-    var loggedUserId = ViewData["UserId"] as int?; // Obtém o ID do usuário logado
+    var loggedUserId = ViewData["UserId"] as int?;
+    var categorias = ViewData["Categorias"] as List<Categoria>;
 }
 
 <head>
-    <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 
+
 <div class="container">
-    <!-- Barra lateral fixa à esquerda -->
     <aside class="sidebar">
         <h3>Categorias</h3>
         <div class="categorias">
-            <label class="checkbox-container"><span>Home & Living</span><input type="checkbox"></label>
-            <label class="checkbox-container"><span>Clothing</span><input type="checkbox"></label>
+            @if (categorias != null)
+            {
+                @foreach (var categoria in categorias)
+                {
+                    <label class="checkbox-container">
+                        <span>@categoria</span>
+                        <input type="checkbox" name="categorias" value="@categoria">
+                    </label>
+                }
+            }
         </div>
 
         <h3>Filtros</h3>
@@ -35,10 +45,10 @@
         <button class="btn-apply">Apply</button>
         <button class="btn-clear">Clear</button>
 
-        <a asp-action="Create" class="btn-create">+</a>
     </aside>
 
-    <!-- Lista de Leilões -->
+    <a asp-action="Create" class="btn-create">+</a>
+
     <div class="grid-leiloes">
         @foreach (var leilao in Model)
         {
@@ -48,6 +58,15 @@
                     <h5>@leilao.Item.Titulo</h5>
                     <p class="price"><strong>Current Bid:</strong> €@leilao.Item.PrecoInicial</p>
                     <p class="end-time">Ends in: @((leilao.DataFim - DateTime.Now).Days) days</p>
+
+                    @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
+                    {
+                        <form asp-action="Delete" asp-route-id="@leilao.LeilaoId" method="post" class="delete-form">
+                            <button type="submit" class="btn-delete" title="Delete">
+                                <i class="fas fa-trash-alt"></i> 
+                            </button>
+                        </form>
+                    }
                 </div>
             </div>
         }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class migration1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,9 +22,9 @@ namespace projeto.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrecoInicial = table.Column<double>(type: "float", nullable: false),
-                    FotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Categoria = table.Column<int>(type: "int", nullable: false),
-                    Sustentavel = table.Column<bool>(type: "bit", nullable: false)
+                    Sustentavel = table.Column<bool>(type: "bit", nullable: false),
+                    FotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,7 +92,8 @@ namespace projeto.Migrations
                     DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ValorIncrementoMinimo = table.Column<double>(type: "float", nullable: false),
-                    Vencedor = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Vencedor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,26 +206,8 @@ namespace projeto.Migrations
                 columns: new[] { "DescontoId", "DataFim", "DataObtencao", "Descricao", "IsLoja", "PontosNecessarios", "UtilizadorId", "Valor" },
                 values: new object[,]
                 {
-                    { 1, null, null, "10% desconto", true, 10, null, 10.0 },
-                    { 2, null, null, "20% desconto", true, 20, null, 20.0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Itens",
-                columns: new[] { "ItemId", "Categoria", "Descricao", "FotoUrl", "PrecoInicial", "Sustentavel", "Titulo" },
-                values: new object[,]
-                {
-                    { 1, 2, "Relógio luxuoso em ouro 18k.", "/images/relogio.jpg", 500.0, false, "Relógio de Ouro" },
-                    { 2, 4, "Bicicleta clássica para colecionadores.", "/images/bicicleta.jpg", 200.0, true, "Bicicleta Vintage" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Leiloes",
-                columns: new[] { "LeilaoId", "DataFim", "DataInicio", "ItemId", "ValorIncrementoMinimo", "Vencedor" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2025, 1, 28, 22, 35, 39, 4, DateTimeKind.Local).AddTicks(3776), new DateTime(2025, 1, 28, 22, 25, 39, 1, DateTimeKind.Local).AddTicks(6354), 1, 5.0, null },
-                    { 2, new DateTime(2025, 1, 28, 22, 40, 39, 4, DateTimeKind.Local).AddTicks(4270), new DateTime(2025, 1, 28, 22, 25, 39, 4, DateTimeKind.Local).AddTicks(4263), 2, 10.0, null }
+                    { 1, null, null, "Desconto de 10% na Loja", true, 10, null, 10.0 },
+                    { 2, null, null, "Desconto de 25% desconto", true, 20, null, 25.0 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -245,7 +228,8 @@ namespace projeto.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Leiloes_ItemId",
                 table: "Leiloes",
-                column: "ItemId");
+                column: "ItemId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Licitacoes_LeilaoId",

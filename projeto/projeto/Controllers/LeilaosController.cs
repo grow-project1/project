@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -28,9 +29,15 @@ namespace projeto.Controllers
 
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            
+
+
             ViewData["UserPoints"] = user?.Pontos;
             ViewData["Logged"] = user != null;
             ViewData["UserId"] = user?.UtilizadorId;
+
+            var categorias = Enum.GetValues(typeof(Categoria)).Cast<Categoria>().ToList();
+            ViewData["Categorias"] = categorias;
 
             var applicationDbContext = _context.Leiloes.Include(l => l.Item);
             return View(await applicationDbContext.ToListAsync());
@@ -58,6 +65,14 @@ namespace projeto.Controllers
         // GET: Leilaos/Create
         public async Task<IActionResult> Create()
         {
+            ViewData["Categorias"] = Enum.GetValues(typeof(Categoria))
+                                 .Cast<Categoria>()
+                                 .Select(c => new SelectListItem
+                                 {
+                                     Value = c.ToString(),
+                                     Text = c.ToString()
+                                 }).ToList();
+
             var userEmail = HttpContext.Session.GetString("UserEmail");
 
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
@@ -241,5 +256,7 @@ namespace projeto.Controllers
         {
             return _context.Leiloes.Any(e => e.LeilaoId == id);
         }
+
+
     }
 }

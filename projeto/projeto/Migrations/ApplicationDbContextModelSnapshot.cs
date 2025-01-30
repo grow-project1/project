@@ -57,6 +57,24 @@ namespace projeto.Migrations
                     b.HasIndex("UtilizadorId");
 
                     b.ToTable("Desconto");
+
+                    b.HasData(
+                        new
+                        {
+                            DescontoId = 1,
+                            Descricao = "Desconto de 10% na Loja",
+                            IsLoja = true,
+                            PontosNecessarios = 10,
+                            Valor = 10.0
+                        },
+                        new
+                        {
+                            DescontoId = 2,
+                            Descricao = "Desconto de 25% desconto",
+                            IsLoja = true,
+                            PontosNecessarios = 20,
+                            Valor = 25.0
+                        });
                 });
 
             modelBuilder.Entity("projeto.Models.DescontoResgatado", b =>
