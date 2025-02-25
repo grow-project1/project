@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Projeto</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Edit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/projeto.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-6">
+            <img src="~/css/images/logo.png" alt="Logo" />
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Itens sempre visíveis -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Leilaos" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+
+                    <!-- Itens de Login e Register alinhados à direita -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Aqui está o ajuste para alinhá-los à direita -->
+                        @if (Context.Session.GetString("UserEmail") == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="Index">Descontos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="MeusDescontos">Os meus descontos</a>
+                            </li>
+                            <li class="nav-item position-relative">
+                                <a class="nav-link text-dark position-relative" asp-area="" asp-controller="Utilizadors" asp-action="Profile">
+                                    <i class="fas fa-user fa-lg"></i> <!-- Ícone de perfil -->
+                                    <!-- Círculo branco com os pontos -->
+                                    <span class="badge rounded-circle position-absolute top-0 start-100 translate-middle bg-white border border-dark text-dark d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; font-size: 14px;">
+                                        @ViewData["UserPoints"]
+                                    </span>
+                                </a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

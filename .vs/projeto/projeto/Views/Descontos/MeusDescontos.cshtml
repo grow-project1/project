@@ -1,0 +1,29 @@
+﻿@model IEnumerable<projeto.Models.DescontoResgatado>
+
+@{
+    ViewData["Title"] = "Os meus descontos";
+}
+
+<h1>Os meus descontos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data de Resgate</th>
+            <th>Expira em:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Desconto.Descricao</td>
+                <td>@item.Desconto.Valor</td>
+                <td>@item.DataResgate.ToString("dd/MM/yyyy")</td>
+                <td>@item.DataValidade.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

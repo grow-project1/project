@@ -1,0 +1,86 @@
+﻿@model IEnumerable<projeto.Models.Desconto>
+
+@{
+    ViewData["Title"] = "Descontos";
+}
+
+<h1>Descontos Disponíveis</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Pontos Necessários</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(d => d.IsLoja))
+        {
+            <tr>
+                <td>@item.Descricao</td>
+                <td>@item.Valor%</td>
+                <td>@item.PontosNecessarios</td>
+                <td>
+                    <!-- Botão de resgatar que chama o modal -->
+                    <a href="#" class="btn btn-primary" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })')">Resgatar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal de Confirmação -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar Resgatar Desconto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Você tem certeza que deseja resgatar o desconto?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirmResgate">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Inclui Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let urlResgate = '';
+
+        // Função para abrir o modal e armazenar o URL do resgate
+        function abrirModal(url) {
+            urlResgate = url; // Armazena o URL para redirecionar posteriormente
+            var myModal = new bootstrap.Modal(document.getElementById('confirmModal'), {
+                keyboard: false
+            });
+            myModal.show(); // Exibe o modal
+        }
+
+        // Função para confirmar e redirecionar
+        document.getElementById('confirmResgate').addEventListener('click', function() {
+            window.location.href = urlResgate; // Redireciona para o URL do resgate
+        });
+    </script>
+}

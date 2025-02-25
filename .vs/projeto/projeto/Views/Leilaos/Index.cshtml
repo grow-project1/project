@@ -1,0 +1,74 @@
+﻿@model IEnumerable<projeto.Models.Leilao>
+@using projeto.Models
+@{
+    ViewData["Title"] = "Leilões";
+    var loggedUserId = ViewData["UserId"] as int?;
+    var categorias = ViewData["Categorias"] as List<Categoria>;
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+
+
+<div class="container">
+    <aside class="sidebar">
+        <h3>Categorias</h3>
+        <div class="categorias">
+            @if (categorias != null)
+            {
+                @foreach (var categoria in categorias)
+                {
+                    <label class="checkbox-container">
+                        <span>@categoria</span>
+                        <input type="checkbox" name="categorias" value="@categoria">
+                    </label>
+                }
+            }
+        </div>
+
+        <h3>Filtros</h3>
+        <label>Time Left</label>
+        <div class="filters">
+            <label class="checkbox-container"><span>&lt; 1d</span><input type="checkbox"></label>
+            <label class="checkbox-container"><span>&lt; 5d</span><input type="checkbox"></label>
+            <label class="checkbox-container"><span>&lt; 10d</span><input type="checkbox"></label>
+        </div>
+
+        <label>Price Range</label>
+        <div class="price-range">
+            <input type="number" placeholder="Min"> to
+            <input type="number" placeholder="Max">
+        </div>
+
+        <button class="btn-apply">Apply</button>
+        <button class="btn-clear">Clear</button>
+
+    </aside>
+
+    <a asp-action="Create" class="btn-create">+</a>
+
+    <div class="grid-leiloes">
+        @foreach (var leilao in Model)
+        {
+            <div class="leilao-card" onclick="window.location.href='@Url.Action("Details", "Leilaos", new { id = leilao.LeilaoId })'">
+                <img src="@leilao.Item.FotoUrl" alt="@leilao.Item.Titulo" class="img-leilao" />
+                <div class="leilao-details">
+                    <h5>@leilao.Item.Titulo</h5>
+                    <p class="price"><strong>Current Bid:</strong> €@leilao.Item.PrecoInicial</p>
+                    <p class="end-time">Ends in: @((leilao.DataFim - DateTime.Now).Days) days</p>
+
+                    @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
+                    {
+                        <form asp-action="Delete" asp-route-id="@leilao.LeilaoId" method="post" class="delete-form">
+                            <button type="submit" class="btn-delete" title="Delete">
+                                <i class="fas fa-trash-alt"></i> 
+                            </button>
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
