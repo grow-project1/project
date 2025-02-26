@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Scripting;
@@ -15,10 +16,12 @@ namespace projeto.Controllers
     public class UtilizadorsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public UtilizadorsController(ApplicationDbContext context)
+        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // Método Register (GET)
@@ -315,6 +318,8 @@ namespace projeto.Controllers
             }
         }
 
+
+
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -587,6 +592,45 @@ namespace projeto.Controllers
                 await _context.SaveChangesAsync();
             }
         }
+
+
+        public IActionResult EditAvatar(int id)
+        {
+            var utilizador = _context.Utilizador.Find(id);
+            if (utilizador == null)
+            {
+                return NotFound();
+            }
+
+            // Diretório onde os avatares estão armazenados
+            string avatarDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+            var avatars = Directory.GetFiles(avatarDirectory, "avatar*.png") // Filtra arquivos que começam com "avatar"
+                                   .Select(Path.GetFileName)
+                                   .ToList();
+
+            ViewBag.AvatarList = avatars;
+            return View(utilizador);
+        }
+
+        [HttpPost]
+        public IActionResult EditAvatar(int id, string selectedAvatar)
+        {
+            var utilizador = _context.Utilizador.Find(id);
+            if (utilizador == null)
+            {
+                return NotFound();
+            }
+
+            if (!string.IsNullOrEmpty(selectedAvatar))
+            {
+                utilizador.ImagePath = "~/images/" + selectedAvatar;
+                _context.Update(utilizador);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Profile");
+        }
+
 
     }
 }
