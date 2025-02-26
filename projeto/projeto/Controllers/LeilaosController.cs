@@ -29,9 +29,6 @@ namespace projeto.Controllers
 
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
-            
-
-
             ViewData["UserPoints"] = user?.Pontos;
             ViewData["Logged"] = user != null;
             ViewData["UserId"] = user?.UtilizadorId;
@@ -39,9 +36,27 @@ namespace projeto.Controllers
             var categorias = Enum.GetValues(typeof(Categoria)).Cast<Categoria>().ToList();
             ViewData["Categorias"] = categorias;
 
-            var applicationDbContext = _context.Leiloes.Include(l => l.Item);
-            return View(await applicationDbContext.ToListAsync());
+            // Obter todos os leilões com os itens associados
+            var leiloes = await _context.Leiloes
+                .Include(l => l.Item)  // Inclui o item associado ao leilão
+                .ToListAsync();
+
+            // Para cada leilão, calculamos o maior lance
+            foreach (var leilao in leiloes)
+            {
+                // Obtém o maior valor de licitação para o leilão
+                var maiorLance = await _context.Licitacoes
+                    .Where(l => l.LeilaoId == leilao.LeilaoId)
+                    .MaxAsync(l => (double?)l.ValorLicitacao);
+
+                // Se houver licitações, o maior lance será o maior valor de licitação,
+                // caso contrário, usamos o preço inicial do item
+                leilao.ValorAtualLance = maiorLance ?? leilao.Item.PrecoInicial;
+            }
+
+            return View(leiloes);  // Passamos os leilões para a View
         }
+
 
         // GET: Leilaos/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -257,6 +272,57 @@ namespace projeto.Controllers
             return _context.Leiloes.Any(e => e.LeilaoId == id);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> FazerLicitacao(int leilaoId, double valorLicitacao)
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors"); // Redireciona para login se não estiver logado
+            }
+
+            var leilao = await _context.Leiloes
+                .Include(l => l.Licitacoes)
+                .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
+
+            if (leilao == null || DateTime.Now > leilao.DataFim)
+            {
+                return NotFound(); // Retorna erro se o leilão não existir ou já tiver terminado
+            }
+
+          
+            var precoInicial = _context.Itens
+                .Where(i => i.ItemId == leilao.ItemId)
+                .Select(i => i.PrecoInicial)
+                .FirstOrDefault();
+
+            double lanceMinimo = leilao.Licitacoes != null && leilao.Licitacoes.Any()
+                ? leilao.Licitacoes.Max(l => l.ValorLicitacao)
+                : precoInicial;
+
+
+            if (valorLicitacao < lanceMinimo + leilao.ValorIncrementoMinimo)
+            {
+                TempData["Error"] = "O valor do lance deve ser maior que o último lance + incremento mínimo.";
+                return RedirectToAction("Index");
+            }
+
+            var licitacao = new Licitacao
+            {
+                LeilaoId = leilaoId,
+                UtilizadorId = user.UtilizadorId,
+                ValorLicitacao = valorLicitacao
+            };
+
+            _context.Licitacoes.Add(licitacao);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Lance realizado com sucesso!";
+            return RedirectToAction("Details", new { id = leilaoId });
+        }
 
     }
 }
