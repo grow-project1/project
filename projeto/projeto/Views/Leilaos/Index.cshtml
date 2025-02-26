@@ -56,7 +56,12 @@
                 <img src="@leilao.Item.FotoUrl" alt="@leilao.Item.Titulo" class="img-leilao" />
                 <div class="leilao-details">
                     <h5>@leilao.Item.Titulo</h5>
-                    <p class="price"><strong>Current Bid:</strong> €@leilao.Item.PrecoInicial</p>
+                    <p class="price">
+                        <strong>Current Bid:</strong> €@leilao.ValorAtualLance
+                    </p>
+
+
+
                     <p class="end-time">Ends in: @((leilao.DataFim - DateTime.Now).Days) days</p>
 
                     @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
@@ -68,7 +73,14 @@
                         </form>
                     }
                 </div>
+                  
             </div>
+            <form asp-action="FazerLicitacao" asp-controller="Leilaos" method="post" class="licitacao-form">
+                <input type="hidden" name="leilaoId" value="@leilao.LeilaoId" />
+                <input type="number" name="valorLicitacao" step="0.01" placeholder="Valor do lance" required />
+                <button type="submit" class="btn-lance">Fazer Licitação</button>
+            </form>
+
         }
     </div>
 </div>
