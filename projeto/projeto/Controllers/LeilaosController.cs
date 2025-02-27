@@ -67,14 +67,28 @@ namespace projeto.Controllers
 
                     if (licitacaoVencedora != null)
                     {
-                        leilao.Vencedor = licitacaoVencedora.Utilizador.Nome;
+                        var vencedor = await _context.Utilizador.FindAsync(licitacaoVencedora.UtilizadorId);
+
+                        if (vencedor != null)
+                        {
+                            // Verifica se o item do leilão é sustentável
+                            bool isSustentavel = leilao.Item.Sustentavel;
+
+                            // Dá os pontos ao vencedor
+                            vencedor.Pontos += isSustentavel ? 50 : 20;
+                            _context.Update(vencedor);
+
+                            // Define o vencedor no leilão
+                            leilao.Vencedor = vencedor.Nome;
+                        }
                     }
+
 
                     _context.Update(leilao);
                 }
             }
             await _context.SaveChangesAsync();
-            return View(leiloes);  // Passamos os leilões para a View
+            return View(leiloes);
         }
 
 
@@ -352,7 +366,13 @@ namespace projeto.Controllers
             };
 
             _context.Licitacoes.Add(licitacao);
+            user.Pontos += 1;
+            _context.Update(user);
+
             await _context.SaveChangesAsync();
+
+         
+
 
             TempData["Success"] = "Lance realizado com sucesso!";
             return RedirectToAction("Details", new { id = leilaoId });
