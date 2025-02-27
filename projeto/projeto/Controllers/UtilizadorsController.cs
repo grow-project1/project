@@ -303,7 +303,8 @@ namespace projeto.Controllers
             {
                 _context.Update(utilizadorExistente);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ProfileAsync));
+                return RedirectToAction("Profile", new { id = utilizadorExistente.UtilizadorId });
+
             }
             catch (DbUpdateConcurrencyException)
             {
