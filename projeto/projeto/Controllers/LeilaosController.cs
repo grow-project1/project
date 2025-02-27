@@ -54,28 +54,57 @@ namespace projeto.Controllers
                 leilao.ValorAtualLance = maiorLance ?? leilao.Item.PrecoInicial;
             }
 
+            foreach (var leilao in leiloes)
+            {
+                if (DateTime.Now > leilao.DataFim && leilao.EstadoLeilao != EstadoLeilao.Encerrado)
+                {
+                    leilao.EstadoLeilao = EstadoLeilao.Encerrado;
+
+                    var licitacaoVencedora = await _context.Licitacoes
+                        .Where(l => l.LeilaoId == leilao.LeilaoId)  // Filtra pela ID do leilão
+                        .OrderByDescending(l => l.ValorLicitacao)  // Ordena pelo valor da licitação
+                        .FirstOrDefaultAsync();  // Pega a licitação com o maior valor
+
+                    if (licitacaoVencedora != null)
+                    {
+                        leilao.Vencedor = licitacaoVencedora.Utilizador.Nome;
+                    }
+
+                    _context.Update(leilao);
+                }
+            }
+            await _context.SaveChangesAsync();
             return View(leiloes);  // Passamos os leilões para a View
         }
 
 
         // GET: Leilaos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
-                .FirstOrDefaultAsync(m => m.LeilaoId == id);
+                .FirstOrDefaultAsync(l => l.LeilaoId == id);
+
             if (leilao == null)
             {
                 return NotFound();
             }
 
-            return View(leilao);
+            // Verifica se o leilão está encerrado
+            if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
+            {
+                // Busca as licitações para o leilão se ele estiver encerrado
+                leilao.Licitacoes = await _context.Licitacoes
+                    .Where(l => l.LeilaoId == id)
+                    .OrderByDescending(l => l.ValorLicitacao)  // Ordena por valor de licitação
+                    .ToListAsync();
+            }
+
+            return View(leilao);  // Passa o leilão com as licitações (se encerrado) para a view
         }
+
+
+
 
         // GET: Leilaos/Create
         public async Task<IActionResult> Create()
@@ -281,19 +310,25 @@ namespace projeto.Controllers
 
             if (user == null)
             {
-                return RedirectToAction("Login", "Utilizadors"); // Redireciona para login se não estiver logado
+                return RedirectToAction("Login", "Utilizadors");
             }
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
                 .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
 
-            if (leilao == null || DateTime.Now > leilao.DataFim)
+            if (leilao == null)
             {
-                return NotFound(); // Retorna erro se o leilão não existir ou já tiver terminado
+                return NotFound();
             }
 
-          
+            // Verificar se o leilão já foi encerrado
+            if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
+            {
+                TempData["Error"] = "Este leilão já foi finalizado e não aceita mais licitações.";
+                return RedirectToAction("Details", new { id = leilaoId });
+            }
+
             var precoInicial = _context.Itens
                 .Where(i => i.ItemId == leilao.ItemId)
                 .Select(i => i.PrecoInicial)
@@ -303,11 +338,10 @@ namespace projeto.Controllers
                 ? leilao.Licitacoes.Max(l => l.ValorLicitacao)
                 : precoInicial;
 
-
             if (valorLicitacao < lanceMinimo + leilao.ValorIncrementoMinimo)
             {
                 TempData["Error"] = "O valor do lance deve ser maior que o último lance + incremento mínimo.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = leilaoId });
             }
 
             var licitacao = new Licitacao
@@ -322,6 +356,40 @@ namespace projeto.Controllers
 
             TempData["Success"] = "Lance realizado com sucesso!";
             return RedirectToAction("Details", new { id = leilaoId });
+        }
+
+
+
+        public async Task<IActionResult> AtualizarEstadoLeiloes()
+        {
+            // Buscar todos os leilões
+            var leiloes = await _context.Leiloes.ToListAsync();
+
+            foreach (var leilao in leiloes)
+            {
+                if (DateTime.Now > leilao.DataFim)
+                {
+                    // Se o leilão terminou, atualiza o estado para "Encerrado"
+                    if (leilao.EstadoLeilao == EstadoLeilao.Disponivel)
+                    {
+                        leilao.EstadoLeilao = EstadoLeilao.Encerrado;
+
+                        // Se o leilão tiver licitações, podemos determinar o vencedor
+                        var vencedor = leilao.Licitacoes.OrderByDescending(l => l.ValorLicitacao).FirstOrDefault();
+                        if (vencedor != null)
+                        {
+                            // Aqui você pode, por exemplo, atualizar o campo VencedorId ou fazer outra lógica
+                            // Para o momento, vamos manter a informação apenas no leilão.
+                        }
+                    }
+                }
+
+                // Salvar a atualização do leilão
+                _context.Update(leilao);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index"); // Redireciona para a página inicial após a atualização
         }
 
     }
