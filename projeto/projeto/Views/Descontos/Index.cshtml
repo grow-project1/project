@@ -22,10 +22,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Pontos Necessários</th>
-            <th>Ações</th>
+            <th>Description</th>
+            <th>Value</th>
+            <th>Required Points</th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +35,7 @@
                 <td>@item.Valor%</td>
                 <td>@item.PontosNecessarios</td>
                 <td>
-                    <!-- Botão de resgatar que chama o modal -->
+ 
                     <a href="#" class="btn btn-primary" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })')">Resgatar</a>
                 </td>
             </tr>

@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using projeto.Data; // Certifique-se de incluir o namespace do contexto
+using projeto.Data;
 using projeto.Models;
 
 namespace projeto.Controllers
@@ -14,7 +14,7 @@ namespace projeto.Controllers
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
-            _context = context; // Injeta o contexto do banco de dados
+            _context = context;
         }
 
         public IActionResult Index()
@@ -22,17 +22,16 @@ namespace projeto.Controllers
             var userEmail = HttpContext.Session.GetString("UserEmail");
             if (!string.IsNullOrEmpty(userEmail))
             {
-                // Obter o utilizador a partir do e-mail
                 var user = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
                 if (user != null)
                 {
-                    ViewData["UserPoints"] = user.Pontos; // Define os pontos no ViewData
+                    ViewData["UserPoints"] = user.Pontos; 
                 }
             }
 
             var leiloes = _context.Leiloes
-                .Include(l => l.Item) // Inclui os itens relacionados
-                .Where(l => l.DataFim > DateTime.Now) // Apenas leilões ativos
+                .Include(l => l.Item) 
+                .Where(l => l.DataFim > DateTime.Now) 
                 .ToList();
 
             ViewData["Leiloes"] = leiloes;

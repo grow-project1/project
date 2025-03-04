@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using projeto.Data;
 using projeto.Models;
 
@@ -60,7 +53,6 @@ namespace projeto.Controllers
                 return View(utilizador);
             }
 
-            // Verifica se o e-mail já existe no banco
             var userExists = await _context.Utilizador.AnyAsync(u => u.Email == utilizador.Email);
             if (userExists)
             {
@@ -68,7 +60,6 @@ namespace projeto.Controllers
                 return View(utilizador);
             }
 
-            // Hash da senha
             utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
 
             _context.Add(utilizador);
@@ -76,8 +67,7 @@ namespace projeto.Controllers
 
             await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
 
-            // Mensagem de sucesso
-            //TempData["Success"] = "Account successfully created! Please log in to access your account";
+            TempData["Success"] = "Account successfully created! Please log in to access your account";
 
             return RedirectToAction("Login");
         }
@@ -99,7 +89,6 @@ namespace projeto.Controllers
 
                 if (utilizador != null)
                 {
-                    // Verifica se a conta está bloqueada
                     if (utilizador.EstadoConta == EstadoConta.Bloqueada)
                     {
                         // Verifica se já passaram 20 segundos desde o bloqueio
@@ -124,21 +113,18 @@ namespace projeto.Controllers
                         }
                     }
 
-                    // Verifica a senha
                     if (BCrypt.Net.BCrypt.Verify(loginModel.Password, utilizador.Password))
                     {
-                        // Registra um log de sucesso
                         await RegisterLog("Login bem-sucedido.", utilizador.UtilizadorId, true);
 
                         HttpContext.Session.SetString("UserEmail", utilizador.Email);
                         HttpContext.Session.SetString("UserNome", utilizador.Nome);
 
-                        //TempData["Success"] = "Login successful";
+                        TempData["Success"] = "Login successful";
                         return RedirectToAction("Index", "Leilaos");
                     }
                     else
                     {
-                        // Registra um log de falha
                         await RegisterLog("Tentativa de login falhada.", utilizador.UtilizadorId, false);
 
                         var vinteSegundosAtras = DateTime.Now.AddSeconds(-20);
@@ -168,7 +154,7 @@ namespace projeto.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "E-mail or senha incorrect");
+                    ModelState.AddModelError(string.Empty, "Email or password is incorrect");
                 }
             }
             return View(loginModel);
@@ -193,7 +179,6 @@ namespace projeto.Controllers
             return RedirectToAction("Login");
         }
 
-        // Método Profile
         public async Task<IActionResult> ProfileAsync()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
@@ -212,7 +197,7 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            return View(user); // Passa o utilizador para a view
+            return View(user); 
         }
 
         // GET: Utilizadors
@@ -319,8 +304,6 @@ namespace projeto.Controllers
             }
         }
 
-
-
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -396,9 +379,7 @@ namespace projeto.Controllers
             await _context.SaveChangesAsync();
 
             await RegisterLog("O código de verificação é " + verificationCode + ".", utilizador.UtilizadorId, true);
-            TempData["Info"] = $"O código de verificação é {verificationCode}.";
 
-            // Armazena o e-mail na sessão para validação posterior
             HttpContext.Session.SetString("ResetEmail", email);
 
             return RedirectToAction("VerificationCode");
@@ -553,7 +534,6 @@ namespace projeto.Controllers
                 ModelState.AddModelError("confirmPassword", "The passwords do not match");
             }
 
-            // Se o ModelState não for válido, retorna a view com os erros
             if (!ModelState.IsValid)
             {
                 return View();
@@ -594,7 +574,6 @@ namespace projeto.Controllers
             }
         }
 
-
         public IActionResult EditAvatar(int id)
         {
             var utilizador = _context.Utilizador.Find(id);
@@ -631,7 +610,5 @@ namespace projeto.Controllers
 
             return RedirectToAction("Profile");
         }
-
-
     }
 }

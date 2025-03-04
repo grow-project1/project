@@ -11,9 +11,9 @@ namespace projeto.Data
         {
         }
 
+        public DbSet<Utilizador> Utilizador { get; set; } = default!;
         public DbSet<LoginModel> LoginModel { get; set; } = default!;
         public DbSet<Desconto> Desconto { get; set; } = default!;
-        public DbSet<Utilizador> Utilizador { get; set; } = default!;
         public DbSet<LogUtilizador> LogUtilizadores { get; set; } = default!;
         public DbSet<VerificationModel> VerificationModel { get; set; } = default!;
         public DbSet<DescontoResgatado> DescontoResgatado { get; set; } = default!;
@@ -26,25 +26,25 @@ namespace projeto.Data
         {
             modelBuilder.Entity<Leilao>()
                 .HasOne(l => l.Item)
-                .WithOne() // Relacionamento 1:1
-                .HasForeignKey<Leilao>(l => l.ItemId) // A chave estrangeira está em Leilao
-                .OnDelete(DeleteBehavior.Cascade); // Exclui o item quando o leilão é excluído
+                .WithOne() 
+                .HasForeignKey<Leilao>(l => l.ItemId) 
+                .OnDelete(DeleteBehavior.Cascade); 
 
 
             modelBuilder.Entity<Desconto>().HasData(
                 new Desconto
                 {
                     DescontoId = 1,
-                    Descricao = "Desconto de 10% na Loja",
+                    Descricao = "10% discount",
                     Valor = 10.0,
                     PontosNecessarios = 10,
-                    UtilizadorId = null, // Pode ser associado depois
+                    UtilizadorId = null, 
                     IsLoja = true
                 },
                 new Desconto
                 {
                     DescontoId = 2,
-                    Descricao = "Desconto de 25% desconto",
+                    Descricao = "25% discount",
                     Valor = 25.0,
                     PontosNecessarios = 20,
                     UtilizadorId = null,

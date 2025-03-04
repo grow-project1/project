@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class migration1 : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -93,7 +93,9 @@ namespace projeto.Migrations
                     DataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ValorIncrementoMinimo = table.Column<double>(type: "float", nullable: false),
                     Vencedor = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UtilizadorId = table.Column<int>(type: "int", nullable: false)
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false),
+                    ValorAtualLance = table.Column<double>(type: "float", nullable: false),
+                    EstadoLeilao = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -161,7 +163,8 @@ namespace projeto.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataLicitacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ValorLicitacao = table.Column<double>(type: "float", nullable: false),
-                    LeilaoId = table.Column<int>(type: "int", nullable: true)
+                    LeilaoId = table.Column<int>(type: "int", nullable: false),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -170,7 +173,14 @@ namespace projeto.Migrations
                         name: "FK_Licitacoes_Leiloes_LeilaoId",
                         column: x => x.LeilaoId,
                         principalTable: "Leiloes",
-                        principalColumn: "LeilaoId");
+                        principalColumn: "LeilaoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Licitacoes_Utilizador_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "Utilizador",
+                        principalColumn: "UtilizadorId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,6 +245,11 @@ namespace projeto.Migrations
                 name: "IX_Licitacoes_LeilaoId",
                 table: "Licitacoes",
                 column: "LeilaoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Licitacoes_UtilizadorId",
+                table: "Licitacoes",
+                column: "UtilizadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LogUtilizadores_UtilizadorId",

@@ -36,21 +36,16 @@ namespace projeto.Controllers
             var categorias = Enum.GetValues(typeof(Categoria)).Cast<Categoria>().ToList();
             ViewData["Categorias"] = categorias;
 
-            // Obter todos os leilões com os itens associados
             var leiloes = await _context.Leiloes
-                .Include(l => l.Item)  // Inclui o item associado ao leilão
+                .Include(l => l.Item)  
                 .ToListAsync();
 
-            // Para cada leilão, calculamos o maior lance
             foreach (var leilao in leiloes)
             {
-                // Obtém o maior valor de licitação para o leilão
                 var maiorLance = await _context.Licitacoes
                     .Where(l => l.LeilaoId == leilao.LeilaoId)
                     .MaxAsync(l => (double?)l.ValorLicitacao);
 
-                // Se houver licitações, o maior lance será o maior valor de licitação,
-                // caso contrário, usamos o preço inicial do item
                 leilao.ValorAtualLance = maiorLance ?? leilao.Item.PrecoInicial;
             }
 
@@ -61,9 +56,9 @@ namespace projeto.Controllers
                     leilao.EstadoLeilao = EstadoLeilao.Encerrado;
 
                     var licitacaoVencedora = await _context.Licitacoes
-                        .Where(l => l.LeilaoId == leilao.LeilaoId)  // Filtra pela ID do leilão
-                        .OrderByDescending(l => l.ValorLicitacao)  // Ordena pelo valor da licitação
-                        .FirstOrDefaultAsync();  // Pega a licitação com o maior valor
+                        .Where(l => l.LeilaoId == leilao.LeilaoId) 
+                        .OrderByDescending(l => l.ValorLicitacao) 
+                        .FirstOrDefaultAsync();
 
                     if (licitacaoVencedora != null)
                     {
@@ -71,18 +66,14 @@ namespace projeto.Controllers
 
                         if (vencedor != null)
                         {
-                            // Verifica se o item do leilão é sustentável
                             bool isSustentavel = leilao.Item.Sustentavel;
 
-                            // Dá os pontos ao vencedor
                             vencedor.Pontos += isSustentavel ? 50 : 20;
                             _context.Update(vencedor);
 
-                            // Define o vencedor no leilão
                             leilao.Vencedor = vencedor.Nome;
                         }
                     }
-
 
                     _context.Update(leilao);
                 }
@@ -104,21 +95,16 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            // Verifica se o leilão está encerrado
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
             {
-                // Busca as licitações para o leilão se ele estiver encerrado
                 leilao.Licitacoes = await _context.Licitacoes
                     .Where(l => l.LeilaoId == id)
-                    .OrderByDescending(l => l.ValorLicitacao)  // Ordena por valor de licitação
+                    .OrderByDescending(l => l.ValorLicitacao) 
                     .ToListAsync();
             }
 
-            return View(leilao);  // Passa o leilão com as licitações (se encerrado) para a view
+            return View(leilao);  
         }
-
-
-
 
         // GET: Leilaos/Create
         public async Task<IActionResult> Create()
@@ -138,7 +124,7 @@ namespace projeto.Controllers
             ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null) {
-                return RedirectToAction("Login", "Utilizadors");  // Altere "Account" para o nome do controlador de login
+                return RedirectToAction("Login", "Utilizadors"); 
 
             }
 
@@ -153,67 +139,52 @@ namespace projeto.Controllers
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
-            // Verifica se o usuário está logado
             if (user == null)
             {
-                return RedirectToAction("Login", "Utilizadors");  // Redireciona para a página de login
+                return RedirectToAction("Login", "Utilizadors"); 
             }
 
-            // Associa o leilão ao usuário logado
             leilao.UtilizadorId = user.UtilizadorId;
 
-            // Verifica se o arquivo FotoFile foi enviado
             if (leilao.Item.fotoo != null && leilao.Item.fotoo.Length > 0)
             {
-                // Define o diretório para salvar a imagem
                 string folder = "leilao/fotos/";
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName);  // Gera um nome único com a extensão do arquivo
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName);  
                 string serverFolder = Path.Combine(_env.WebRootPath, folder);
 
-                // Cria o diretório de uploads se não existir
                 if (!Directory.Exists(serverFolder))
                 {
                     Directory.CreateDirectory(serverFolder);
                 }
 
-                // Caminho final do arquivo no servidor
                 string filePath = Path.Combine(serverFolder, fileName);
 
-                // Verifica o tamanho máximo do arquivo (exemplo: 5 MB)
-                if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)  // 5MB
+                if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)  
                 {
-                    ModelState.AddModelError("Item.fotoo", "O arquivo de imagem é muito grande. O tamanho máximo permitido é 5MB.");
-                    return View(leilao);  // Retorna à página de criação com o erro
+                    ModelState.AddModelError("Item.fotoo", "Size is to big");
+                    return View(leilao); 
                 }
 
-                // Verifica o tipo de arquivo (apenas imagens)
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
                 if (!allowedExtensions.Contains(Path.GetExtension(leilao.Item.fotoo.FileName).ToLower()))
                 {
-                    ModelState.AddModelError("Item.fotoo", "Apenas arquivos de imagem (.jpg, .jpeg, .png, .gif) são permitidos.");
-                    return View(leilao);  // Retorna à página de criação com o erro
+                    ModelState.AddModelError("Item.fotoo", "Only extensions (.jpg, .jpeg, .png, .gif) allowed.");
+                    return View(leilao); 
                 }
 
-                // Salva o arquivo no servidor
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await leilao.Item.fotoo.CopyToAsync(stream);
                 }
 
-                // Atribui o caminho da imagem ao campo FotoUrl
                 leilao.Item.FotoUrl = "/" + folder + fileName;
             }
 
-            // Adiciona o leilão no contexto
             _context.Add(leilao);
-            await _context.SaveChangesAsync();  // Salva no banco de dados
+            await _context.SaveChangesAsync(); 
 
-            return RedirectToAction(nameof(Index));  // Redireciona para a lista de leilões
+            return RedirectToAction(nameof(Index));  
         }
-
-
-
-
 
         // GET: Leilaos/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -293,14 +264,14 @@ namespace projeto.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var leilao = await _context.Leiloes
-                .Include(l => l.Item) // Inclui o item associado
+                .Include(l => l.Item) 
                 .FirstOrDefaultAsync(l => l.LeilaoId == id);
 
             if (leilao != null)
             {
                 if (leilao.Item != null)
                 {
-                    _context.Itens.Remove(leilao.Item); // Remove o item antes do leilão
+                    _context.Itens.Remove(leilao.Item);
                 }
                 _context.Leiloes.Remove(leilao);
                 await _context.SaveChangesAsync();
@@ -330,7 +301,7 @@ namespace projeto.Controllers
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
-                .Include(l => l.Item) // Para obter o preço inicial
+                .Include(l => l.Item) 
                 .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
 
             if (leilao == null)
@@ -338,28 +309,24 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            // Verificar se o leilão já foi encerrado
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
             {
-                TempData["Error"] = "Este leilão já foi finalizado e não aceita mais licitações.";
-                return RedirectToAction("Index", "Leilaos"); // Volta para a Home
+                TempData["Error"] = "This auction has already ended and no longer accepts bids..";
+                return RedirectToAction("Index", "Leilaos"); 
             }
 
-            // Determinar o valor mínimo para a nova licitação
             double lanceMinimo = leilao.Licitacoes.Any()
                 ? leilao.Licitacoes.Max(l => l.ValorLicitacao)
                 : leilao.Item.PrecoInicial;
 
             double valorNecessario = lanceMinimo + leilao.ValorIncrementoMinimo;
 
-            // Se a licitação for menor que o valor necessário, exibe erro
             if (valorLicitacao < valorNecessario)
             {
-                TempData["Error"] = $"O lance deve ser maior ou igual a {valorNecessario:C2}.";
-                return RedirectToAction("Index", "Leilaos"); // Volta para a Home Page
+                TempData["Error"] = $"The bid must be higher than {valorNecessario:C2}.";
+                return RedirectToAction("Index", "Leilaos"); 
             }
 
-            // Criar e salvar a nova licitação
             var licitacao = new Licitacao
             {
                 LeilaoId = leilaoId,
@@ -374,27 +341,22 @@ namespace projeto.Controllers
 
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Lance realizado com sucesso!";
-            return RedirectToAction("Index", "Leilaos"); // Volta para a Home Page
+            TempData["Success"] = "Sucessfull bid!";
+            return RedirectToAction("Index", "Leilaos"); 
         }
-
-
 
         public async Task<IActionResult> AtualizarEstadoLeiloes()
         {
-            // Buscar todos os leilões
             var leiloes = await _context.Leiloes.ToListAsync();
 
             foreach (var leilao in leiloes)
             {
                 if (DateTime.Now > leilao.DataFim)
                 {
-                    // Se o leilão terminou, atualiza o estado para "Encerrado"
                     if (leilao.EstadoLeilao == EstadoLeilao.Disponivel)
                     {
                         leilao.EstadoLeilao = EstadoLeilao.Encerrado;
 
-                        // Se o leilão tiver licitações, podemos determinar o vencedor
                         var vencedor = leilao.Licitacoes.OrderByDescending(l => l.ValorLicitacao).FirstOrDefault();
                         if (vencedor != null)
                         {
@@ -404,13 +366,11 @@ namespace projeto.Controllers
                     }
                 }
 
-                // Salvar a atualização do leilão
                 _context.Update(leilao);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index"); // Redireciona para a página inicial após a atualização
+            return RedirectToAction("Index");
         }
-
     }
 }

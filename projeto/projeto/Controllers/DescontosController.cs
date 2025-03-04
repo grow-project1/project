@@ -37,8 +37,7 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            var desconto = await _context.Desconto
-                .FirstOrDefaultAsync(m => m.DescontoId == id);
+            var desconto = await _context.Desconto.FirstOrDefaultAsync(m => m.DescontoId == id);
             if (desconto == null)
             {
                 return NotFound();
@@ -128,8 +127,7 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            var desconto = await _context.Desconto
-                .FirstOrDefaultAsync(m => m.DescontoId == id);
+            var desconto = await _context.Desconto.FirstOrDefaultAsync(m => m.DescontoId == id);
             if (desconto == null)
             {
                 return NotFound();
@@ -158,64 +156,51 @@ namespace projeto.Controllers
             return _context.Desconto.Any(e => e.DescontoId == id);
         }
 
-
-
-
-
         public async Task<IActionResult> RedeemDesconto(int id)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             if (string.IsNullOrEmpty(userEmail))
             {
-                TempData["ErrorMessage"] = "Você precisa estar logado para resgatar um desconto.";
+                TempData["ErrorMessage"] = "You need to be logged to reddem a discount.";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Obter o utilizador
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
             if (user == null)
             {
-                TempData["ErrorMessage"] = "Usuário não encontrado.";
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Obter o desconto da loja
             var desconto = await _context.Desconto.FirstOrDefaultAsync(d => d.DescontoId == id);
             if (desconto == null || desconto.IsLoja == false)
             {
-                TempData["ErrorMessage"] = "Desconto não encontrado ou não disponível para resgate.";
+                TempData["ErrorMessage"] = "Not able for reddem";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Verificar se o utilizador tem pontos suficientes
             if (user.Pontos < desconto.PontosNecessarios)
             {
-                TempData["ErrorMessage"] = "Você não tem pontos suficientes para resgatar este desconto.";
+                TempData["ErrorMessage"] = "You don't have enough points to redeem the discount.";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Deduzir pontos e criar instância do desconto resgatado
             user.Pontos -= desconto.PontosNecessarios;
 
-            // Criar registro de desconto resgatado
             var descontoResgatado = new DescontoResgatado
             {
                 DescontoId = desconto.DescontoId,
                 UtilizadorId = user.UtilizadorId,
                 DataResgate = DateTime.Now,
-                DataValidade = DateTime.Now.AddMonths(1) // Exemplo: validade de 1 mês
+                DataValidade = DateTime.Now.AddMonths(1) 
             };
 
             _context.DescontoResgatado.Add(descontoResgatado);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Desconto resgatado com sucesso!";
+            TempData["SuccessMessage"] = "Discount redeemed!";
             return RedirectToAction(nameof(Index));
         }
-
-
-
-
 
         public async Task<IActionResult> MeusDescontos()
         {
@@ -227,8 +212,7 @@ namespace projeto.Controllers
 
             if (string.IsNullOrEmpty(userEmail))
             {
-                // Redireciona para login se o usuário não estiver logado
-                return RedirectToAction("Login", "Utilizadors");
+                 return RedirectToAction("Login", "Utilizadors");
             }
 
             if (user == null)
@@ -236,15 +220,12 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            // Buscar os descontos resgatados pelo usuário
             var descontosResgatados = await _context.DescontoResgatado
                 .Where(dr => dr.UtilizadorId == user.UtilizadorId)
-                .Include(dr => dr.Desconto) // Incluir o desconto associado
+                .Include(dr => dr.Desconto) 
                 .ToListAsync();
 
             return View(descontosResgatados);
         }
-
-
     }
 }
