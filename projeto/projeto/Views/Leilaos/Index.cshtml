@@ -13,6 +13,8 @@
 
 
 <div class="container">
+    
+
     <aside class="sidebar">
         <h3>Categorias</h3>
         <div class="categorias">
@@ -49,7 +51,24 @@
 
     <a asp-action="Create" class="btn-create">+</a>
 
+
+    <!-- MENSAGENS DE SUCESSO OU ERRO -->
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
     <div class="grid-leiloes">
+
         @foreach (var leilao in Model)
         {
             <div class="leilao-card" onclick="window.location.href='@Url.Action("Details", "Leilaos", new { id = leilao.LeilaoId })'">
@@ -59,14 +78,19 @@
                     <p class="price">
                         <strong>Current Bid:</strong> €@leilao.ValorAtualLance
                     </p>
-
+                    <p class="price">
+                        <strong>Incremento minimo:</strong> €@leilao.ValorIncrementoMinimo
+                    </p>
 
                     @if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
                     {
                         <strong>Leilao Encerrado</strong>
                         <p><strong>Vencedor:</strong> @leilao.Vencedor</p>
                     }else{
-                        <p class="end-time">Ends in: @((leilao.DataFim - DateTime.Now).Days) days</p>
+                        <p class="end-time" data-endtime="@leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
+                            <strong>Ends in:</strong> <span class="countdown"></span>
+                        </p>
+
                     }
                     @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
                     {
@@ -92,3 +116,30 @@
         }
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function updateCountdowns() {
+            document.querySelectorAll(".end-time").forEach(function (element) {
+                let endTime = new Date(element.getAttribute("data-endtime")).getTime();
+                let now = new Date().getTime();
+                let timeLeft = endTime - now;
+
+                if (timeLeft > 0) {
+                    let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    element.querySelector(".countdown").textContent =
+                        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    element.querySelector(".countdown").textContent = "Leilão Encerrado";
+                }
+            });
+        }
+
+        updateCountdowns(); // Atualiza imediatamente ao carregar a página
+        setInterval(updateCountdowns, 1000); // Atualiza a cada segundo
+    });
+</script>

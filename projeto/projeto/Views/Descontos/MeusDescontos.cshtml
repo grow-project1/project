@@ -22,7 +22,17 @@
                 <td>@item.Desconto.Descricao</td>
                 <td>@item.Desconto.Valor</td>
                 <td>@item.DataResgate.ToString("dd/MM/yyyy")</td>
-                <td>@item.DataValidade.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @if (item.DataValidade < DateTime.Now)
+                    {
+                        <span class="text-danger">Expirado</span>
+                    }
+                    else
+                    {
+                        @item.DataValidade.ToString("dd/MM/yyyy")
+                    }
+                </td>
+
             </tr>
         }
     </tbody>

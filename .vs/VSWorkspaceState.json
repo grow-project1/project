@@ -3,14 +3,14 @@
     "",
     "\\projeto",
     "\\projeto\\projeto",
-    "\\projeto\\projeto\\Controllers",
     "\\projeto\\projeto\\Models",
     "\\projeto\\projeto\\Views",
     "\\projeto\\projeto\\Views\\Leilaos",
+    "\\projeto\\projeto\\Views\\Shared",
     "\\projeto\\projeto\\Views\\Utilizadors",
     "\\projeto\\projeto\\wwwroot",
     "\\projeto\\projeto\\wwwroot\\css"
   ],
-  "SelectedNode": "\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+  "SelectedNode": "\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }

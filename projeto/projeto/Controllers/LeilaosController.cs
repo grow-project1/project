@@ -315,6 +315,7 @@ namespace projeto.Controllers
             return _context.Leiloes.Any(e => e.LeilaoId == id);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> FazerLicitacao(int leilaoId, double valorLicitacao)
@@ -329,6 +330,7 @@ namespace projeto.Controllers
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
+                .Include(l => l.Item) // Para obter o preço inicial
                 .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
 
             if (leilao == null)
@@ -340,29 +342,30 @@ namespace projeto.Controllers
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
             {
                 TempData["Error"] = "Este leilão já foi finalizado e não aceita mais licitações.";
-                return RedirectToAction("Details", new { id = leilaoId });
+                return RedirectToAction("Index", "Leilaos"); // Volta para a Home
             }
 
-            var precoInicial = _context.Itens
-                .Where(i => i.ItemId == leilao.ItemId)
-                .Select(i => i.PrecoInicial)
-                .FirstOrDefault();
-
-            double lanceMinimo = leilao.Licitacoes != null && leilao.Licitacoes.Any()
+            // Determinar o valor mínimo para a nova licitação
+            double lanceMinimo = leilao.Licitacoes.Any()
                 ? leilao.Licitacoes.Max(l => l.ValorLicitacao)
-                : precoInicial;
+                : leilao.Item.PrecoInicial;
 
-            if (valorLicitacao < lanceMinimo + leilao.ValorIncrementoMinimo)
+            double valorNecessario = lanceMinimo + leilao.ValorIncrementoMinimo;
+
+            // Se a licitação for menor que o valor necessário, exibe erro
+            if (valorLicitacao < valorNecessario)
             {
-                TempData["Error"] = "O valor do lance deve ser maior que o último lance + incremento mínimo.";
-                return RedirectToAction("Details", new { id = leilaoId });
+                TempData["Error"] = $"O lance deve ser maior ou igual a {valorNecessario:C2}.";
+                return RedirectToAction("Index", "Leilaos"); // Volta para a Home Page
             }
 
+            // Criar e salvar a nova licitação
             var licitacao = new Licitacao
             {
                 LeilaoId = leilaoId,
                 UtilizadorId = user.UtilizadorId,
-                ValorLicitacao = valorLicitacao
+                ValorLicitacao = valorLicitacao,
+                DataLicitacao = DateTime.Now
             };
 
             _context.Licitacoes.Add(licitacao);
@@ -371,11 +374,8 @@ namespace projeto.Controllers
 
             await _context.SaveChangesAsync();
 
-         
-
-
             TempData["Success"] = "Lance realizado com sucesso!";
-            return RedirectToAction("Details", new { id = leilaoId });
+            return RedirectToAction("Index", "Leilaos"); // Volta para a Home Page
         }
 
 
