@@ -12,8 +12,8 @@ using projeto.Data;
 namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250304191710_init")]
-    partial class init
+    [Migration("20250305092856_migra01")]
+    partial class migra01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,7 +65,7 @@ namespace projeto.Migrations
                         new
                         {
                             DescontoId = 1,
-                            Descricao = "Desconto de 10% na Loja",
+                            Descricao = "10% discount",
                             IsLoja = true,
                             PontosNecessarios = 10,
                             Valor = 10.0
@@ -73,7 +73,7 @@ namespace projeto.Migrations
                         new
                         {
                             DescontoId = 2,
-                            Descricao = "Desconto de 25% desconto",
+                            Descricao = "25% discount",
                             IsLoja = true,
                             PontosNecessarios = 20,
                             Valor = 25.0

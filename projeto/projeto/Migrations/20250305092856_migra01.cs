@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class migra01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -216,8 +216,8 @@ namespace projeto.Migrations
                 columns: new[] { "DescontoId", "DataFim", "DataObtencao", "Descricao", "IsLoja", "PontosNecessarios", "UtilizadorId", "Valor" },
                 values: new object[,]
                 {
-                    { 1, null, null, "Desconto de 10% na Loja", true, 10, null, 10.0 },
-                    { 2, null, null, "Desconto de 25% desconto", true, 20, null, 25.0 }
+                    { 1, null, null, "10% discount", true, 10, null, 10.0 },
+                    { 2, null, null, "25% discount", true, 20, null, 25.0 }
                 });
 
             migrationBuilder.CreateIndex(

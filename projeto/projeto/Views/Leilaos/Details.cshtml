@@ -3,57 +3,75 @@
 @using Microsoft.EntityFrameworkCore
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Leilão";
     var loggedUserId = ViewData["UserId"] as int?;
 }
 
-<h1>Detalhes do Leilão</h1>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
 
-<div>
-    <h4>Leilão: @Model.Item.Titulo</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Item)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Item.ItemId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInicio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataInicio)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataFim)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataFim)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ValorIncrementoMinimo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ValorIncrementoMinimo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vencedor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vencedor)
-        </dd>
-    </dl>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@{
+    var userEmail = Context.Session.GetString("UserEmail");
+    var isOwner = Model.UtilizadorId == ViewData["UserId"] as int?;
+}
+
+<link rel="stylesheet" href="~/css/leilao.css" />
+
+<div class="auction-container">
+    <h1 class="auction-title">@Model.Item.Titulo</h1>
+
+    <div class="auction-content">
+        <div class="auction-image">
+            <img src="@Url.Content(Model.Item.FotoUrl)" alt="@Model.Item.Titulo" />
+            <div class="current-bid">Current bid: <span>@Model.ValorAtualLance€</span></div>
+        </div>
+
+        <div class="auction-details">
+            <h2>Product Description:</h2>
+            <p>@Model.Item.Descricao</p>
+            <p><strong>Category:</strong> @Model.Item.Categoria</p>
+            <p><strong>Sustainable:</strong> @(Model.Item.Sustentavel ? "✅" : "⬜")</p>
+            <p class="end-time" data-endtime="@Model.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
+                <strong>Time left:</strong> <span class="countdown"></span>
+            </p>
+            <p><strong>Minimum increment:</strong> @Model.ValorIncrementoMinimo€</p>
+
+            <div class="bid-section">
+                <form asp-action="FazerLicitacao" method="post">
+                    <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
+                    <input type="number" name="valorLicitacao" step="0.01" placeholder="Place bid" required />
+
+                    <button type="submit" class="bid-button" @(isOwner ? "disabled" : "")>
+                        Place Bid
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Botão para exibir as licitações se o leilão estiver encerrado -->
+@if (isOwner)
+{
+    <p class="text-danger">You cannot place bids on your own auction.</p>
+}
+
 @if (Model.EstadoLeilao == EstadoLeilao.Encerrado)
 {
-    <button id="btnShowBids" class="btn btn-success btn-sm">Ver Licitações</button>
-
-    <div id="bidsList" style="display:none; margin-top: 20px;">
-        <h4>Licitações</h4>
-        <table class="table">
+    <button id="btnShowBids" class="toggle-bids">Ver Licitações</button>
+    <div id="bidsList" class="bids-list" style="display:none;">
+        <h3>Licitações</h3>
+        <table>
             <thead>
                 <tr>
                     <th>Usuário</th>
@@ -65,12 +83,10 @@
                 @{
                     var licitacoes = _context.Licitacoes
                     .Where(l => l.LeilaoId == Model.LeilaoId)
-                    .Include(l => l.Utilizador) // Inclui o utilizador para evitar NullReferenceException
+                    .Include(l => l.Utilizador)
                     .OrderByDescending(l => l.ValorLicitacao)
                     .ToList();
-
                 }
-
                 @foreach (var licitacao in licitacoes)
                 {
                     <tr>
@@ -82,7 +98,6 @@
             </tbody>
         </table>
     </div>
-
     <script>
         document.getElementById("btnShowBids").onclick = function() {
             var bidsList = document.getElementById("bidsList");
@@ -90,17 +105,30 @@
         };
     </script>
 }
-else
-{
-    <p>Este leilão ainda está ativo.</p>
-}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function updateCountdowns() {
+            document.querySelectorAll(".end-time").forEach(function (element) {
+                let endTime = new Date(element.getAttribute("data-endtime")).getTime();
+                let now = new Date().getTime();
+                let timeLeft = endTime - now;
 
-<div>
-    @if (loggedUserId != null && loggedUserId == Model.UtilizadorId)
-    {
-        <a asp-action="Edit" asp-route-id="@Model.LeilaoId">Editar</a>
- 
-    }
-    <a asp-action="Index">Voltar à Lista</a>
-</div>
+                if (timeLeft > 0) {
+                    let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    element.querySelector(".countdown").textContent =
+                        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    element.querySelector(".countdown").textContent = "Leilão Encerrado";
+                }
+            });
+        }
+
+        updateCountdowns(); // Atualiza imediatamente ao carregar a página
+        setInterval(updateCountdowns, 1000); // Atualiza a cada segundo
+    });
+</script>
