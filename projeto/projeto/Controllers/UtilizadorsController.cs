@@ -10,11 +10,13 @@ namespace projeto.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IConfiguration _configuration;
 
-        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _configuration = configuration;
         }
 
         // Método Register (GET)
@@ -373,6 +375,12 @@ namespace projeto.Controllers
             {
                 VerificationCode = verificationCode
             };
+
+            var emailSender = new EmailSender(_configuration); 
+            string subject = "Código de Verificação";
+            string message = $"Seu código de verificação é: {verificationCode}";
+            await emailSender.SendEmailAsync(email, subject, message);
+
 
             _context.VerificationModel.Add(verificationModel);
             await _context.SaveChangesAsync();

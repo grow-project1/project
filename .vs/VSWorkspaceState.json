@@ -3,7 +3,7 @@
     "",
     "\\projeto",
     "\\projeto\\projeto",
-    "\\projeto\\projeto\\Models",
+    "\\projeto\\projeto\\Controllers",
     "\\projeto\\projeto\\Views",
     "\\projeto\\projeto\\Views\\Leilaos",
     "\\projeto\\projeto\\Views\\Shared",
@@ -11,6 +11,6 @@
     "\\projeto\\projeto\\wwwroot",
     "\\projeto\\projeto\\wwwroot\\css"
   ],
-  "SelectedNode": "\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
+  "SelectedNode": "\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
   "PreviewInSolutionExplorer": false
 }
