@@ -88,25 +88,23 @@ namespace projeto.Controllers
         {
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
-                .Include(l => l.Licitacoes)
-                .FirstOrDefaultAsync(m => m.LeilaoId == id);
+                .FirstOrDefaultAsync(l => l.LeilaoId == id);
 
             if (leilao == null)
             {
                 return NotFound();
             }
 
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
-
-            if (user != null)
+            if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
             {
-                ViewData["CurrentUserId"] = user.UtilizadorId;
+                leilao.Licitacoes = await _context.Licitacoes
+                    .Where(l => l.LeilaoId == id)
+                    .OrderByDescending(l => l.ValorLicitacao) 
+                    .ToListAsync();
             }
 
-            return View(leilao);
+            return View(leilao);  
         }
-
 
         // GET: Leilaos/Create
         public async Task<IActionResult> Create()
@@ -206,6 +204,8 @@ namespace projeto.Controllers
         }
 
         // POST: Leilaos/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LeilaoId,ItemId,DataInicio,DataFim,ValorIncrementoMinimo,Vencedor")] Leilao leilao)
@@ -280,10 +280,12 @@ namespace projeto.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool LeilaoExists(int id)
         {
             return _context.Leiloes.Any(e => e.LeilaoId == id);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -299,7 +301,7 @@ namespace projeto.Controllers
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
-                .Include(l => l.Item)
+                .Include(l => l.Item) 
                 .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
 
             if (leilao == null)
@@ -307,16 +309,10 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            if (leilao.UtilizadorId == user.UtilizadorId)
-            {
-                TempData["Error"] = "You cannot place bids on your own auction.";
-                return RedirectToAction("Details", new { id = leilaoId });
-            }
-
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
             {
-                TempData["Error"] = "This auction has already ended and no longer accepts bids.";
-                return RedirectToAction("Details", new { id = leilaoId });
+                TempData["Error"] = "This auction has already ended and no longer accepts bids..";
+                return RedirectToAction("Index", "Leilaos"); 
             }
 
             double lanceMinimo = leilao.Licitacoes.Any()
@@ -328,7 +324,7 @@ namespace projeto.Controllers
             if (valorLicitacao < valorNecessario)
             {
                 TempData["Error"] = $"The bid must be higher than {valorNecessario:C2}.";
-                return RedirectToAction("Details", new { id = leilaoId });
+                return RedirectToAction("Index", "Leilaos"); 
             }
 
             var licitacao = new Licitacao
@@ -342,22 +338,11 @@ namespace projeto.Controllers
             _context.Licitacoes.Add(licitacao);
             user.Pontos += 1;
             _context.Update(user);
+
             await _context.SaveChangesAsync();
 
-            leilao = await _context.Leiloes
-                .Include(l => l.Licitacoes)
-                .Include(l => l.Item)
-                .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
-
-            if (leilao != null)
-            {
-                leilao.ValorAtualLance = leilao.Licitacoes.Max(l => l.ValorLicitacao);
-                _context.Update(leilao);
-                await _context.SaveChangesAsync();
-            }
-
-            TempData["Success"] = "Successful bid!";
-            return RedirectToAction("Details", new { id = leilaoId });
+            TempData["Success"] = "Sucessfull bid!";
+            return RedirectToAction("Index", "Leilaos"); 
         }
 
         public async Task<IActionResult> AtualizarEstadoLeiloes()

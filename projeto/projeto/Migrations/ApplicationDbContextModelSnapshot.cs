@@ -62,7 +62,7 @@ namespace projeto.Migrations
                         new
                         {
                             DescontoId = 1,
-                            Descricao = "10% discount",
+                            Descricao = "Desconto de 10% na Loja",
                             IsLoja = true,
                             PontosNecessarios = 10,
                             Valor = 10.0
@@ -70,7 +70,7 @@ namespace projeto.Migrations
                         new
                         {
                             DescontoId = 2,
-                            Descricao = "25% discount",
+                            Descricao = "Desconto de 25% desconto",
                             IsLoja = true,
                             PontosNecessarios = 20,
                             Valor = 25.0
