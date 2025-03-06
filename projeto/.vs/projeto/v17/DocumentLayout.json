@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Escola\\PV\\project\\projeto\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -47,6 +67,71 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAowHkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T11:04:59.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T11:04:46.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAPEBAAAAAAAAAAAAAA8CAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-06T10:59:27.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LeilaosController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\LeilaosController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\LeilaosController.cs",
+              "ViewState": "AgIAADMBAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T10:58:42.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Leilaos\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T10:58:27.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Shared\\_Layout.cshtml",
@@ -59,7 +144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Utilizador.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
@@ -67,12 +152,11 @@
               "RelativeToolTip": "projeto\\Models\\Utilizador.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:33.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:33.771Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "EstadoLeilao.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\EstadoLeilao.cs",
@@ -80,12 +164,11 @@
               "RelativeToolTip": "projeto\\Models\\EstadoLeilao.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:29.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:29.938Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\ErrorViewModel.cs",
@@ -93,12 +176,11 @@
               "RelativeToolTip": "projeto\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:28.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:28.079Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "Item.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Item.cs",
@@ -106,12 +188,11 @@
               "RelativeToolTip": "projeto\\Models\\Item.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:26.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:26.238Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "DescontoResgatado.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\DescontoResgatado.cs",
@@ -119,12 +200,11 @@
               "RelativeToolTip": "projeto\\Models\\DescontoResgatado.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:25.256Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:25.256Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "Categoria.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Categoria.cs",
@@ -132,8 +212,7 @@
               "RelativeToolTip": "projeto\\Models\\Categoria.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:24.301Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:24.301Z"
             }
           ]
         }

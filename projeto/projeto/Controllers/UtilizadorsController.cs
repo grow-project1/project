@@ -120,7 +120,6 @@ namespace projeto.Controllers
                         HttpContext.Session.SetString("UserEmail", utilizador.Email);
                         HttpContext.Session.SetString("UserNome", utilizador.Nome);
 
-                        TempData["Success"] = "Login successful";
                         return RedirectToAction("Index", "Leilaos");
                     }
                     else

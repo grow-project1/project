@@ -3,32 +3,24 @@
   "WorkspaceRootPath": "C:\\Escola\\PV\\project\\projeto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\logutilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\logutilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\licitacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\licitacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\estadoleilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -67,45 +59,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Delete.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Delete.cshtml",
-              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Delete.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Descontos\\Delete.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-04T19:35:47.697Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Create.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Create.cshtml",
-              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Create.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Descontos\\Create.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-04T19:35:42.115Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VerificationModel.cs",
-              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\VerificationModel.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\VerificationModel.cs",
-              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\VerificationModel.cs",
-              "RelativeToolTip": "projeto\\Models\\VerificationModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:34.829Z",
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css*",
+              "RelativeToolTip": "projeto\\wwwroot\\css\\site.css*",
+              "ViewState": "AgIAAPEBAAAAAAAAAAAAAA8CAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-06T10:59:27.271Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "LeilaosController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\LeilaosController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\LeilaosController.cs",
+              "ViewState": "AgIAADMBAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T10:58:42.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml*",
+              "RelativeToolTip": "projeto\\Views\\Leilaos\\Index.cshtml*",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAGsAAABwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T10:58:27.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAC8AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-04T19:40:31.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Utilizador.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
@@ -113,51 +118,11 @@
               "RelativeToolTip": "projeto\\Models\\Utilizador.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:33.771Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LogUtilizador.cs",
-              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LogUtilizador.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\LogUtilizador.cs",
-              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LogUtilizador.cs",
-              "RelativeToolTip": "projeto\\Models\\LogUtilizador.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:32.845Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:33.771Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "LoginModel.cs",
-              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LoginModel.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\LoginModel.cs",
-              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LoginModel.cs",
-              "RelativeToolTip": "projeto\\Models\\LoginModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:31.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Licitacao.cs",
-              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Licitacao.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\Licitacao.cs",
-              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Licitacao.cs",
-              "RelativeToolTip": "projeto\\Models\\Licitacao.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:30.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "EstadoLeilao.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\EstadoLeilao.cs",
@@ -165,12 +130,11 @@
               "RelativeToolTip": "projeto\\Models\\EstadoLeilao.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:29.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:29.938Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\ErrorViewModel.cs",
@@ -178,12 +142,11 @@
               "RelativeToolTip": "projeto\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:28.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:28.079Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "Item.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Item.cs",
@@ -191,12 +154,11 @@
               "RelativeToolTip": "projeto\\Models\\Item.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:26.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:26.238Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "DescontoResgatado.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\DescontoResgatado.cs",
@@ -204,12 +166,11 @@
               "RelativeToolTip": "projeto\\Models\\DescontoResgatado.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:25.256Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:25.256Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "Categoria.cs",
               "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Categoria.cs",
@@ -217,8 +178,7 @@
               "RelativeToolTip": "projeto\\Models\\Categoria.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:24.301Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:35:24.301Z"
             }
           ]
         }

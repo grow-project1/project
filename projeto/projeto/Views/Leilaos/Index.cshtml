@@ -55,14 +55,14 @@
     <!-- MENSAGENS DE SUCESSO OU ERRO -->
     @if (TempData["Error"] != null)
     {
-        <div class="alert alert-danger">
+        <div class="alertt alert-danger">
             @TempData["Error"]
         </div>
     }
 
     @if (TempData["Success"] != null)
     {
-        <div class="alert alert-success">
+        <div class="alertt alert-success">
             @TempData["Success"]
         </div>
     }
@@ -103,7 +103,7 @@
                 </div>
                   
             </div>
-            @if (leilao.EstadoLeilao != EstadoLeilao.Encerrado)
+            @if (leilao.EstadoLeilao != EstadoLeilao.Encerrado && leilao.LeilaoId != loggedUserId)
             {
                 <form asp-action="FazerLicitacao" asp-controller="Leilaos" method="post" class="licitacao-form">
                     <input type="hidden" name="leilaoId" value="@leilao.LeilaoId" />
