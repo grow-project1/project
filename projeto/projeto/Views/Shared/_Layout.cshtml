@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,31 +26,41 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <!-- Itens sempre visíveis -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Leilaos" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Leilaos" asp-action="Index">
+                                @(english ? "Home" : "Início")
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" asp-controller="Utilizadors" asp-action="ToggleLanguage">
+                                🌍 @(english ? "English" : "Português")
+                            </a>
                         </li>
                     </ul>
 
                     <!-- Itens de Login e Register alinhados à direita -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Aqui está o ajuste para alinhá-los à direita -->
+                        
                         @if (Context.Session.GetString("UserEmail") == null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Register">Register</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Register">@(english ? "Register" : "Registar")</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="Index">Discounts</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="Index">
+                                    @(english ? "Discounts" : "Descontos")
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="MeusDescontos">My Discounts</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="MeusDescontos">
+                                    @(english ? "My Discounts" : "Meus Descontos")
+                                </a>
                             </li>
                             <li class="nav-item position-relative">
                                 <a class="nav-link text-dark position-relative" asp-area="" asp-controller="Utilizadors" asp-action="Profile">
@@ -57,10 +71,11 @@
                                     </span>
                                 </a>
                             </li>
-
-
+                            
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Logout">Logout</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Logout">
+                                    @(english ? "Lougout" : "Sair")
+                                </a>
                             </li>
                         }
                     </ul>
@@ -73,7 +88,6 @@
             @RenderBody()
         </main>
     </div>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

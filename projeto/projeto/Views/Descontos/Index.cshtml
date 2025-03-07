@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<projeto.Models.Desconto>
 
 @{
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+@{
     ViewData["Title"] = "Descontos";
 }
 
@@ -22,9 +26,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Description</th>
-            <th>Value</th>
-            <th>Required Points</th>
+            <th>@(english ? "Description" : "Descrição")</th>
+            <th>@(english ? "Value" : "Valor")</th>
+            <th>@(english ? "Required Points" : "Pontos Necessários")</th>
         </tr>
     </thead>
     <tbody>
@@ -35,8 +39,8 @@
                 <td>@item.Valor%</td>
                 <td>@item.PontosNecessarios</td>
                 <td>
- 
-                    <a href="#" class="btn btn-primary" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })')">Resgatar</a>
+
+                    <a href="#" class="btn btn-primary" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })')">@(english ? "Redeem" : "Resgatar")</a>
                 </td>
             </tr>
         }
@@ -48,15 +52,22 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">Confirmar Resgatar Desconto</h5>
+                <h5 class="modal-title" id="confirmModalLabel">
+                    @(english ? "Confirm" : "Confirmar")
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Você tem certeza que deseja resgatar o desconto?
+                @(english ? "Are you sure you want to redeem the discount?" : "Tem certeza que deseja resgatar o desconto?")
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="confirmResgate">Confirmar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    @(english ? "Cancel" : "Cancelar")
+                </button>
+                <button type="button" class="btn btn-primary" id="confirmResgate">
+                    @(english ? "Yes" : "Confirmar")
+                </button>
             </div>
         </div>
     </div>

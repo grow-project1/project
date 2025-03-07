@@ -19,6 +19,29 @@ namespace projeto.Controllers
             _configuration = configuration;
         }
 
+        public IActionResult ToggleLanguage()
+        {
+            // Obtém o idioma atual do cookie (se não existir, assume "en")
+            string currentLanguage = Request.Cookies["language"] ?? "en";
+
+            // Alterna entre "en" e "pt"
+            string newLanguage = currentLanguage == "en" ? "pt" : "en";
+
+            // Define o novo idioma no cookie com validade de 1 ano
+            CookieOptions options = new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddYears(1),
+                HttpOnly = false // Permite acesso pelo JavaScript
+            };
+
+            Response.Cookies.Append("language", newLanguage, options);
+
+            // Redireciona de volta para a página atual
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+
+
         // Método Register (GET)
         public IActionResult Register()
         {

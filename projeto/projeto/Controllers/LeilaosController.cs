@@ -144,6 +144,8 @@ namespace projeto.Controllers
                 return RedirectToAction("Login", "Utilizadors"); 
             }
 
+           
+
             leilao.UtilizadorId = user.UtilizadorId;
 
             if (leilao.Item.fotoo != null && leilao.Item.fotoo.Length > 0)

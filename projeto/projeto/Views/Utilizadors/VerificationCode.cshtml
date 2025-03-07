@@ -3,19 +3,22 @@
 @{
     ViewData["Title"] = "Verification Code";
 }
+@{
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
 
 <div class="container login-page">
     <div class="login-container">
-        <h2>Verification Code</h2>
-        <p class="text-muted">Enter the code sent to your email.</p>
+        <h2>@(english ? "Verification Code" : "Código de Verificação")</h2>
+        <p class="text-muted">@(english ? "Enter the code sent to your email." : "Insira o código enviado para o seu email.")</p>
 
         <form asp-action="VerificationCode" method="post">
             <div class="form-group">
-                <input asp-for="VerificationCode" class="form-control form-control-lg" placeholder="Enter verification code" />
+                <input asp-for="VerificationCode" class="form-control form-control-lg" placeholder="@(english ? "Enter verification code" : "Insira o código de verificação")"/>
                 <span asp-validation-for="VerificationCode" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn login-btn btn-block">Verify Code</button>
+            <button type="submit" class="btn login-btn btn-block">@(english ? "Verify Code" : "Verificar código")</button>
         </form>
 
         @if (TempData["Error"] != null)

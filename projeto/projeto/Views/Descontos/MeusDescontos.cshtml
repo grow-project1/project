@@ -4,36 +4,52 @@
     ViewData["Title"] = "Os meus descontos";
 }
 
-<h1>Os meus descontos</h1>
+@{
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+<h1>@(english ? "My Discounts" : "Os meus descontos")</h1>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Data de Resgate</th>
-            <th>Expira em:</th>
-        </tr>
-    </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model.Any())
         {
-            <tr>
-                <td>@item.Desconto.Descricao</td>
-                <td>@item.Desconto.Valor</td>
-                <td>@item.DataResgate.ToString("dd/MM/yyyy")</td>
-                <td>
-                    @if (item.DataValidade < DateTime.Now)
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@(english ? "Description" : "Descrição")</th>
+                        <th>@(english ? "Value" : "Valor")</th>
+                        <th>@(english ? "Redeem Date" : "Data de Resgate")</th>
+                        <th>@(english ? "Expires in:" : "Expira em:") </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
-                        <span class="text-danger">Expirado</span>
+                        <tr>
+                            <td>@item.Desconto.Descricao</td>
+                            <td>@item.Desconto.Valor</td>
+                            <td>@item.DataResgate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @if (item.DataValidade < DateTime.Now)
+                                {
+                                    <span class="text-danger">@(english ? "Expired" : "Expirado")</span>
+                                }
+                                else
+                                {
+                                    @item.DataValidade.ToString("dd/MM/yyyy")
+                                }
+                            </td>
+                        </tr>
                     }
-                    else
-                    {
-                        @item.DataValidade.ToString("dd/MM/yyyy")
-                    }
-                </td>
-
-            </tr>
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="text-center text-muted mt-4">
+                @(english ? "You have no redeemed discounts yet." : "Ainda não tem descontos resgatados.")
+            </p>
         }
     </tbody>
 </table>

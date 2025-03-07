@@ -3,72 +3,57 @@
 @using Microsoft.EntityFrameworkCore
 
 @{
-    ViewData["Title"] = "Details";
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+    ViewData["Title"] = english ? "Auction Details" : "Detalhes do Leilão";
     var loggedUserId = ViewData["UserId"] as int?;
 }
 
-<h1>Detalhes do Leilão</h1>
+<h1>@(english ? "Auction Details" : "Detalhes do Leilão")</h1>
 
 <div>
-    <h4>Leilão: @Model.Item.Titulo</h4>
+    <h4>@(english ? "Auction" : "Leilão"): @Model.Item.Titulo</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Item)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Item.ItemId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInicio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataInicio)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataFim)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataFim)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ValorIncrementoMinimo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ValorIncrementoMinimo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vencedor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vencedor)
-        </dd>
+        <dt class="col-sm-2">@(english ? "Item" : "Item")</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Item.ItemId)</dd>
+
+        <dt class="col-sm-2">@(english ? "Start Date" : "Data de Início")</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DataInicio)</dd>
+
+        <dt class="col-sm-2">@(english ? "End Date" : "Data de Fim")</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DataFim)</dd>
+
+        <dt class="col-sm-2">@(english ? "Minimum Increment" : "Incremento Mínimo")</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.ValorIncrementoMinimo)</dd>
+
+        <dt class="col-sm-2">@(english ? "Winner" : "Vencedor")</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Vencedor)</dd>
     </dl>
 </div>
 
-<!-- Botão para exibir as licitações se o leilão estiver encerrado -->
 @if (Model.EstadoLeilao == EstadoLeilao.Encerrado)
 {
-    <button id="btnShowBids" class="btn btn-success btn-sm">Ver Licitações</button>
+    <button id="btnShowBids" class="btn btn-success btn-sm">
+        @(english ? "View Bids" : "Ver Licitações")
+    </button>
 
     <div id="bidsList" style="display:none; margin-top: 20px;">
-        <h4>Licitações</h4>
+        <h4>@(english ? "Bids" : "Licitações")</h4>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Usuário</th>
-                    <th>Valor</th>
-                    <th>Data</th>
+                    <th>@(english ? "User" : "Usuário")</th>
+                    <th>@(english ? "Amount" : "Valor")</th>
+                    <th>@(english ? "Date" : "Data")</th>
                 </tr>
             </thead>
             <tbody>
                 @{
                     var licitacoes = _context.Licitacoes
                     .Where(l => l.LeilaoId == Model.LeilaoId)
-                    .Include(l => l.Utilizador) // Inclui o utilizador para evitar NullReferenceException
+                    .Include(l => l.Utilizador)
                     .OrderByDescending(l => l.ValorLicitacao)
                     .ToList();
-
                 }
 
                 @foreach (var licitacao in licitacoes)
@@ -92,15 +77,15 @@
 }
 else
 {
-    <p>Este leilão ainda está ativo.</p>
+    <p>@(english ? "This auction is still active." : "Este leilão ainda está ativo.")</p>
 }
-
 
 <div>
     @if (loggedUserId != null && loggedUserId == Model.UtilizadorId)
     {
-        <a asp-action="Edit" asp-route-id="@Model.LeilaoId">Editar</a>
- 
+        <a asp-action="Edit" asp-route-id="@Model.LeilaoId">
+            @(english ? "Edit" : "Editar")
+        </a>
     }
-    <a asp-action="Index">Voltar à Lista</a>
+    <a asp-action="Index">@(english ? "Back to List" : "Voltar à Lista")</a>
 </div>

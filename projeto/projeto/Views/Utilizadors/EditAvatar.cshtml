@@ -1,15 +1,18 @@
 ﻿@model projeto.Models.Utilizador
 
 @{
-    ViewData["Title"] = "Editar Avatar";
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+    ViewData["Title"] = english ? "Edit Avatar" : "Editar Avatar";
     var avatarList = ViewBag.AvatarList as List<string>;
 }
 
+
+
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow-sm text-center" style="max-width: 400px; width: 100%;">
-        <h4 class="mb-3">Escolha um novo Avatar</h4>
+        <h4 class="mb-3">@(english ? "Choose a new Avatar" : "Escolha um novo Avatar")</h4>
 
-        <img id="preview" src="@Url.Content(Model.ImagePath)" class="img-fluid rounded-circle border mb-3" width="120" height="120" alt="Avatar Atual">
+        <img id="preview" src="@Url.Content(Model.ImagePath)" class="img-fluid rounded-circle border mb-3" width="120" height="120" alt="@(english ? "Current Avatar" : "Avatar Atual")">
 
         <form asp-action="EditAvatar" method="post">
             <input type="hidden" name="id" value="@Model.UtilizadorId" />
@@ -29,13 +32,13 @@
                 }
                 else
                 {
-                    <p class="text-danger">Nenhum avatar disponível.</p>
+                    <p class="text-danger">@(english ? "No avatars available." : "Nenhum avatar disponível.")</p>
                 }
             </div>
 
             <div class="mt-3 d-flex justify-content-between">
-                <button type="submit" class="btn btn-sm btn-primary px-3">Salvar</button>
-                <a asp-action="Profile" class="btn btn-sm btn-secondary px-3">Cancelar</a>
+                <button type="submit" class="btn btn-sm btn-primary px-3">@(english ? "Save" : "Salvar")</button>
+                <a asp-action="Profile" class="btn btn-sm btn-secondary px-3">@(english ? "Cancel" : "Cancelar")</a>
             </div>
         </form>
     </div>
@@ -46,4 +49,3 @@
         document.getElementById("preview").src = imageSrc;
     }
 </script>
-

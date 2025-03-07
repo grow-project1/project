@@ -4,18 +4,22 @@
     ViewData["Title"] = "Profile";
 }
 
+@{
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg border-0 rounded">
                 <div class="card-header bg-success text-white text-center">
-                    <h3>Welcome, <b>@Model.Nome </b></h3>
+                    <h3>@(english ? "Welcom," : "Bem-vindo,") <b>@Model.Nome </b></h3>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="card-title">Profile Information</h5>
+                        <h5 class="card-title">@(english ? "Profile Information" : "Informação do perfil")</h5>
                         <a href="@Url.Action("Edit", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-dark btn-sm">
-                            <i class="fas fa-edit"></i> Edit Profile
+                            <i class="fas fa-edit"></i> @(english ? "Edit Profile" : "Editar profile")
                         </a>
                     </div>
 
@@ -23,77 +27,37 @@
                     <div class="row">
                         <div class="col-md-9">
                             <p><strong>Email:</strong> @Model.Email</p>
-                            <p><strong>Nome:</strong> @Model.Nome</p>
-                            <p><strong>Morada:</strong> @Model.Morada</p>
-                            <p><strong>Código Postal:</strong> @Model.CodigoPostal</p>
-                            <p><strong>Telemóvel:</strong> @Model.Telemovel</p>
-                            <p><strong>País:</strong> @Model.Pais</p>
-                            <p><strong>Pontos:</strong> @Model.Pontos</p>
-                            <p><strong>Tipo de utilizador:</strong> @Model.EstadoConta</p>
+                            <p><strong>@(english ? "Name:" : "Nome:")</strong> @Model.Nome</p>
+                            <p><strong>@(english ? "Address:" : "Morada:")</strong> @Model.Morada</p>
+                            <p><strong>@(english ? "Postal Code:" : "Código Postal:")</strong> @Model.CodigoPostal</p>
+                            <p><strong>@(english ? "Phone:" : "Telemóvel:")</strong> @Model.Telemovel</p>
+                            <p><strong>@(english ? "Country:" : "País:")</strong> @Model.Pais</p>
+                            <p><strong>@(english ? "Points:" : "Pontos:")</strong> @Model.Pontos</p>
+                            <p><strong>@(english ? "User Type:" : "Tipo de utilizador:")</strong> @Model.EstadoConta</p>
                         </div>
                         <div class="col-md-3">
                             <img src="@Url.Content(Model.ImagePath)" class="img-fluid rounded-circle" alt="Profile Image" width="150" height="150" />
                             <br />
                             <a href="@Url.Action("EditAvatar", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-dark btn-sm mt-2">
-                                <i class="fas fa-edit"></i> Edit Avatar
+                                <i class="fas fa-edit"></i> @(english ? "Edit Avatar" : "Editar Avatar")
                             </a>
                         </div>
                     </div>
 
                     <div class="btn-group w-100" role="group">
                         <a href="@Url.Action("MyAuctions", "Auctions", new { userId = Model.UtilizadorId })" class="btn-profile">
-                            My Auctions
+                            @(english ? "My Auctions" : "Meus Leilões")
                         </a>
                         <a href="@Url.Action("ConfirmPassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile">
-                            Change Password
+                            @(english ? "Change Password" : "Alterar Senha")
                         </a>
                         <button id="cancel-account-btn" class="btn-profile cancel-btn">
-                            Cancel Account
+                            @(english ? "Cancel Account" : "Cancelar Conta")
                         </button>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!--
-@section Scripts {
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-                    $(document).ready(function () {
-                $('#cancel-account-btn').click(function (e) {
-                    e.preventDefault(); // Impede o envio automático do formulário
-
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this action!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Yes, cancel it!',
-                        cancelButtonText: 'No, keep it'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = '@Url.Action("Login", "Utilizadors", new { id = Model.UtilizadorId })';
-                        }
-                    });
-                });
-
-        @if (TempData["Success"] != null)
-        {
-            <text>
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: '@TempData["Success"]',
-                                timer: 3000,
-                                showConfirmButton: false
-                            });
-            </text>
-        }
-            });
-        </script>
-}
--->
