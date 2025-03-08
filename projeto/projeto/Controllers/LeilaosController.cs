@@ -374,5 +374,23 @@ namespace projeto.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> MyAuctions()
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var userAuctions = await _context.Leiloes
+                .Include(l => l.Item)
+                .Where(l => l.UtilizadorId == user.UtilizadorId)
+                .ToListAsync();
+
+            return View(userAuctions);
+        }
     }
 }
