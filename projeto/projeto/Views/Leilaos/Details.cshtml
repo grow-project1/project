@@ -8,84 +8,145 @@
     var loggedUserId = ViewData["UserId"] as int?;
 }
 
-<h1>@(english ? "Auction Details" : "Detalhes do Leilão")</h1>
-
-<div>
-    <h4>@(english ? "Auction" : "Leilão"): @Model.Item.Titulo</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">@(english ? "Item" : "Item")</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Item.ItemId)</dd>
-
-        <dt class="col-sm-2">@(english ? "Start Date" : "Data de Início")</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.DataInicio)</dd>
-
-        <dt class="col-sm-2">@(english ? "End Date" : "Data de Fim")</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.DataFim)</dd>
-
-        <dt class="col-sm-2">@(english ? "Minimum Increment" : "Incremento Mínimo")</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.ValorIncrementoMinimo)</dd>
-
-        <dt class="col-sm-2">@(english ? "Winner" : "Vencedor")</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Vencedor)</dd>
-    </dl>
-</div>
-
-@if (Model.EstadoLeilao == EstadoLeilao.Encerrado)
+@if (TempData["Error"] != null)
 {
-    <button id="btnShowBids" class="btn btn-success btn-sm">
-        @(english ? "View Bids" : "Ver Licitações")
-    </button>
-
-    <div id="bidsList" style="display:none; margin-top: 20px;">
-        <h4>@(english ? "Bids" : "Licitações")</h4>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@(english ? "User" : "Usuário")</th>
-                    <th>@(english ? "Amount" : "Valor")</th>
-                    <th>@(english ? "Date" : "Data")</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    var licitacoes = _context.Licitacoes
-                    .Where(l => l.LeilaoId == Model.LeilaoId)
-                    .Include(l => l.Utilizador)
-                    .OrderByDescending(l => l.ValorLicitacao)
-                    .ToList();
-                }
-
-                @foreach (var licitacao in licitacoes)
-                {
-                    <tr>
-                        <td>@licitacao.Utilizador.Nome</td>
-                        <td>€@licitacao.ValorLicitacao</td>
-                        <td>@licitacao.DataLicitacao.ToString("dd/MM/yyyy HH:mm")</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="alert alert-danger">
+        @TempData["Error"]
     </div>
-
-    <script>
-        document.getElementById("btnShowBids").onclick = function() {
-            var bidsList = document.getElementById("bidsList");
-            bidsList.style.display = (bidsList.style.display === "none") ? "block" : "none";
-        };
-    </script>
 }
-else
+
+@if (TempData["Success"] != null)
 {
-    <p>@(english ? "This auction is still active." : "Este leilão ainda está ativo.")</p>
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
 }
 
-<div>
-    @if (loggedUserId != null && loggedUserId == Model.UtilizadorId)
-    {
-        <a asp-action="Edit" asp-route-id="@Model.LeilaoId">
-            @(english ? "Edit" : "Editar")
-        </a>
-    }
-    <a asp-action="Index">@(english ? "Back to List" : "Voltar à Lista")</a>
+@{
+    var userEmail = Context.Session.GetString("UserEmail");
+    var isOwner = Model.UtilizadorId == ViewData["UserId"] as int?;
+    var ownerName = _context.Utilizador
+        .Where(u => u.UtilizadorId == Model.UtilizadorId)
+        .Select(u => u.Nome)
+        .FirstOrDefault();
+}
+
+<link rel="stylesheet" href="~/css/leilao.css" />
+
+<div class="auction-container">
+    <h1 class="auction-title">@Model.Item.Titulo</h1>
+
+    <div class="auction-content">
+        <div class="auction-image">
+            <img src="@Url.Content(Model.Item.FotoUrl)" alt="@Model.Item.Titulo" />
+            <div class="current-bid">
+                <p class="card-text">
+                    @(english ? "Current Bid:" : "Lance Atual:") <b>@Model.ValorAtualLance.ToString("C")</b>
+                </p>
+            </div>
+        </div>
+
+        <div class="auction-details">
+            <h2>@(english ? "Product Description:" : "Descrição do Produto:") </h2>
+            <p>@Model.Item.Descricao</p>
+            <p><strong>@(english ? "Category:" : "Categoria:")</strong> @Model.Item.Categoria</p>
+            <p><strong>@(english ? "Sustainable:" : "Sustentável:")</strong> @(Model.Item.Sustentavel ? "✅" : "⬜")</p>
+            <p class="end-time" data-endtime="@Model.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
+                <strong>@(english ? "Time left:" : "Tempo restante:")</strong> <span class="countdown"></span>
+            </p>
+            <p><strong>@(english ? "Minimum increment:" : "Incremento mínimo:")</strong> @Model.ValorIncrementoMinimo.ToString("C")</p>
+            <p><strong>@(english ? "Owner:" : "Proprietário:")</strong> @ownerName</p>
+
+            <form asp-action="FazerLicitacaoDetails" method="post">
+                <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
+                <input type="number" name="valorLicitacao" step="0.01" placeholder="@(english ? "Place bid" : "Fazer lance")" required />
+
+                <button type="submit" class="bid-button" @(isOwner ? "disabled" : "")>
+                    @(english ? "Place Bid" : "Fazer Lance")
+                </button>
+
+                @if (TempData["BidError"] != null)
+                {
+                    <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
+                }
+
+                <span class="text-danger d-block mt-2">
+                    @if (isOwner)
+                    {
+                        <text>@(english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão.")</text>
+                    }
+                </span>
+            </form>
+
+            <button id="btnShowBids" class="toggle-bids">@(english ? "View Bids" : "Ver Licitações")</button>
+            <div id="bidsList" class="bids-list" style="display:none;">
+                <h3>@(english ? "Bids" : "Licitações")</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>@(english ? "User" : "Usuário")</th>
+                            <th>@(english ? "Amount" : "Valor")</th>
+                            <th>@(english ? "Date" : "Data")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var licitacoes = _context.Licitacoes
+                            .Where(l => l.LeilaoId == Model.LeilaoId)
+                            .Include(l => l.Utilizador)
+                            .OrderByDescending(l => l.ValorLicitacao)
+                            .ToList();
+                        }
+                        @foreach (var licitacao in licitacoes)
+                        {
+                            <tr>
+                                <td>@licitacao.Utilizador.Nome</td>
+                                <td>@licitacao.ValorLicitacao.ToString("C")</td>
+                                <td>@licitacao.DataLicitacao.ToString("dd/MM/yyyy HH:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <script>
+                document.getElementById("btnShowBids").onclick = function() {
+                    var bidsList = document.getElementById("bidsList");
+                    bidsList.style.display = (bidsList.style.display === "none") ? "block" : "none";
+                };
+            </script>
+
+        </div>
+    </div>
 </div>
+
+@if (isOwner)
+{
+    <p class="text-danger">@english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão."</p>
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function updateCountdowns() {
+            document.querySelectorAll(".end-time").forEach(function (element) {
+                let endTime = new Date(element.getAttribute("data-endtime")).getTime();
+                let now = new Date().getTime();
+                let timeLeft = endTime - now;
+
+                if (timeLeft > 0) {
+                    let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    element.querySelector(".countdown").textContent =
+                        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    element.querySelector(".countdown").textContent = "Leilão Encerrado";
+                }
+            });
+        }
+
+        updateCountdowns();
+        setInterval(updateCountdowns, 1000);
+    });
+</script>
