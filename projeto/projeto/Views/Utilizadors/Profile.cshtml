@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="btn-group w-100" role="group">
-                        <a href="@Url.Action("MyAuctions", "Auctions", new { userId = Model.UtilizadorId })" class="btn-profile">
+                        <a href="@Url.Action("MyAuctions", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile">
                             @(english ? "My Auctions" : "Meus Leilões")
                         </a>
                         <a href="@Url.Action("ConfirmPassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile">

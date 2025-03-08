@@ -347,6 +347,81 @@ namespace projeto.Controllers
             return RedirectToAction("Index", "Leilaos"); 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> FazerLicitacaoDetails(int leilaoId, double valorLicitacao)
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var leilao = await _context.Leiloes
+                .Include(l => l.Licitacoes)
+                .Include(l => l.Item)
+                .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
+
+            if (leilao == null)
+            {
+                return NotFound();
+            }
+
+            if (leilao.UtilizadorId == user.UtilizadorId)
+            {
+                TempData["BidError"] = "You cannot place bids on your own auction.";
+                return RedirectToAction("Details", new { id = leilaoId });
+            }
+
+            if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
+            {
+                TempData["BidError"] = "This auction has already ended and no longer accepts bids.";
+                return RedirectToAction("Details", new { id = leilaoId });
+            }
+
+            double lanceMinimo = leilao.Licitacoes.Any()
+                ? leilao.Licitacoes.Max(l => l.ValorLicitacao)
+                : leilao.Item.PrecoInicial;
+
+            double valorNecessario = lanceMinimo + leilao.ValorIncrementoMinimo;
+
+            if (valorLicitacao < valorNecessario)
+            {
+                TempData["BidError"] = $"The bid must be higher than {valorNecessario:C2}.";
+                return RedirectToAction("Details", new { id = leilaoId });
+            }
+
+            var licitacao = new Licitacao
+            {
+                LeilaoId = leilaoId,
+                UtilizadorId = user.UtilizadorId,
+                ValorLicitacao = valorLicitacao,
+                DataLicitacao = DateTime.Now
+            };
+
+            _context.Licitacoes.Add(licitacao);
+            user.Pontos += 1;
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+
+            leilao = await _context.Leiloes
+                .Include(l => l.Licitacoes)
+                .Include(l => l.Item)
+                .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
+
+            if (leilao != null)
+            {
+                leilao.ValorAtualLance = leilao.Licitacoes.Max(l => l.ValorLicitacao);
+                _context.Update(leilao);
+                await _context.SaveChangesAsync();
+            }
+
+            TempData["Success"] = "Successful bid!";
+            return RedirectToAction("Details", new { id = leilaoId });
+        }
+
         public async Task<IActionResult> AtualizarEstadoLeiloes()
         {
             var leiloes = await _context.Leiloes.ToListAsync();
@@ -373,6 +448,24 @@ namespace projeto.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> MyAuctions()
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var userAuctions = await _context.Leiloes
+                .Include(l => l.Item)
+                .Where(l => l.UtilizadorId == user.UtilizadorId)
+                .ToListAsync();
+
+            return View(userAuctions);
         }
     }
 }
