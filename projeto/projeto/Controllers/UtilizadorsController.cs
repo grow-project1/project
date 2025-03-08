@@ -312,8 +312,11 @@ namespace projeto.Controllers
             {
                 _context.Update(utilizadorExistente);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Profile", new { id = utilizadorExistente.UtilizadorId });
 
+                // Adiciona mensagem de sucesso
+                TempData["Success"] = "Perfil atualizado com sucesso!";
+
+                return RedirectToAction("Profile", new { id = utilizadorExistente.UtilizadorId });
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -327,6 +330,7 @@ namespace projeto.Controllers
                 }
             }
         }
+
 
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
