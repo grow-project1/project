@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\GitHub\\PV\\project\\projeto\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\views\\utilizadors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\views\\utilizadors\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -111,10 +115,6 @@
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\editavatar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\views\\utilizadors\\verificationcode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\verificationcode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -174,7 +174,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -186,7 +186,70 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ViewState": "AgIAAOoBAAAAAAAAAAAYwPYBAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T11:04:59.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-07T15:47:05.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Login.cshtml",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-07T15:23:22.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Index.cshtml",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-07T15:56:22.832Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-07T15:37:39.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Utilizador.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
@@ -198,59 +261,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UtilizadorsController.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
-              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
-              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ViewState": "AgIAAOQBAAAAAAAAAAAAwPgBAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T11:04:59.684Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Profile.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Profile.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Profile.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-07T15:47:05.256Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Login.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-07T15:23:22.66Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Index.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-07T15:56:22.832Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ConfirmPassword.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
@@ -274,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Home\\Index.cshtml",
@@ -286,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Home\\Privacy.cshtml",
@@ -298,7 +309,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Create.cshtml",
@@ -310,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Edit.cshtml",
@@ -322,7 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Details.cshtml",
@@ -334,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Delete.cshtml",
@@ -346,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Leilao.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Leilao.cs",
@@ -358,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "DescontosController.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\DescontosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\DescontosController.cs",
@@ -370,7 +381,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Edit.cshtml",
@@ -382,7 +393,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Delete.cshtml",
@@ -394,7 +405,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Details.cshtml",
@@ -406,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Edit.cshtml",
@@ -418,7 +429,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "EditAvatar.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
@@ -442,7 +453,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "UpdatePassword.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
@@ -451,18 +462,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-07T15:40:43.707Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "ResetPassword.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-07T15:37:39.549Z"
             },
             {
               "$type": "Document",
@@ -478,7 +477,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Register.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Register.cshtml",
@@ -502,7 +501,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "MeusDescontos.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\MeusDescontos.cshtml",
@@ -514,7 +513,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Index.cshtml",
@@ -538,7 +537,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Program.cs",
               "RelativeDocumentMoniker": "projeto\\Program.cs",
@@ -586,7 +585,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "LeilaosController.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\LeilaosController.cs",
@@ -598,7 +597,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Shared\\_Layout.cshtml",
@@ -610,7 +609,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Index.cshtml",

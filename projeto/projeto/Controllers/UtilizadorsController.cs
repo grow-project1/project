@@ -477,11 +477,25 @@ namespace projeto.Controllers
 
             if (string.IsNullOrEmpty(newPassword))
             {
-                ModelState.AddModelError("newPassword", "New password is required");
+                ModelState.AddModelError("newPassword", "New password is required.");
             }
             else if (newPassword.Length < 6)
             {
-                ModelState.AddModelError("newPassword", "Password must have atleast 6 characters");
+                ModelState.AddModelError("newPassword", "Password must have at least 6 characters.");
+            }
+
+            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (utilizador == null)
+            {
+                TempData["Error"] = "User not found";
+                return View();
+            }
+
+            // 🔴 Verificar se a nova palavra-passe é igual à atual
+            if (BCrypt.Net.BCrypt.Verify(newPassword, utilizador.Password))
+            {
+                ModelState.AddModelError("newPassword", "The new password cannot be the same as the current password.");
             }
 
             if (!ModelState.IsValid)
@@ -489,24 +503,17 @@ namespace projeto.Controllers
                 return View();
             }
 
-            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
+            // Se passou nas verificações, atualiza a palavra-passe
+            utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            _context.Utilizador.Update(utilizador);
+            await _context.SaveChangesAsync();
 
-            if (utilizador != null)
-            {
-                utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
 
-                _context.Utilizador.Update(utilizador);
-                await _context.SaveChangesAsync();
-
-                await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
-
-                TempData["Success"] = "Password successfully reset! Please log in with the new password.";
-                return RedirectToAction("Login");
-            }
-
-            TempData["Error"] = "User not found";
-            return View();
+            TempData["Success"] = "Password successfully reset! Please log in with the new password.";
+            return RedirectToAction("Login");
         }
+
 
         public IActionResult ConfirmPassword(int id)
         {
