@@ -99,15 +99,6 @@
                     }
                 </div>
             </div>
-
-            @if (leilao.EstadoLeilao != EstadoLeilao.Encerrado && leilao.LeilaoId != loggedUserId)
-            {
-                <form asp-action="FazerLicitacao" asp-controller="Leilaos" method="post" class="licitacao-form">
-                    <input type="hidden" name="leilaoId" value="@leilao.LeilaoId" />
-                    <input type="number" name="valorLicitacao" step="0.01" placeholder="@(english ? "Bid Amount" : "Valor da oferta")" required />
-                    <button type="submit" class="btn-lance">@(english ? "Place Bid" : "Fazer Licitação")</button>
-                </form>
-            }
         }
     </div>
 </div>
