@@ -1,23 +1,29 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #e9f5e1;
+    height: 100%;
+}
+
 /* Navbar */
 .navbar {
-    background-color: #2c6e49 !important;
+    background-color: #2c6e49;
     display: flex !important;
-    justify-content: space-between !important; /* Para garantir que o logo fique à esquerda e os links à direita */
-    align-items: center !important; /* Garante que todos os itens da navbar fiquem verticalmente alinhados */
+    justify-content: space-between;
+    align-items: center;
     z-index: 101;
     position: fixed;
     top:0;
     width: 100%;
 }
 
-/* Ajusta o alinhamento do ul que contém Login e Register */
 .navbar-nav.ml-auto {
     margin-left: auto;
-    display: flex; /* Torna os itens em linha */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
+    display: flex; 
+    align-items: center; 
 }
 
-/* Estilo para o logo */
 .navbar img {
     margin-left: 20px;
     height: 40px;
@@ -30,26 +36,20 @@
     margin-right: 10px !important;
 }
 
-    .navbar .navbar-nav .nav-link:hover {
-        color: #e0e0e0 !important;
-    }
-
-
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #e9f5e1;
-    height: 100%;
+.navbar .navbar-nav .nav-link:hover {
+    color: #e0e0e0 !important;
 }
 
+/* ---------------------------- */
+
+/** LOGIN AND REGISTER PAGE*/
 .login-page, .register-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     padding: 0 20px;
-    margin-top: -100px;
+    margin-top: -50px;
 }
 
 .login-container, .register-container {
@@ -68,17 +68,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Ajuste no tamanho do input e borda */
-input {
-    padding: 12px;
-    font-size: 14px; /* Ajuste para um tamanho de fonte menor */
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-    margin-bottom: 12px;
-    outline: none;
-}
-
 .form-control {
     font-size: 0.8rem; /* Tamanho menor */
 }
@@ -88,16 +77,15 @@ input {
     font-size: 0.8rem; /* Tamanho menor para o texto de erro */
 }
 
+input::placeholder {
+    font-size: 14px; /* Tamanho menor do placeholder */
+    color: #bbb; /* Cor do placeholder */
+}
 
-    input::placeholder {
-        font-size: 14px; /* Tamanho menor do placeholder */
-        color: #bbb; /* Cor do placeholder */
-    }
-
-    input:focus {
-        border-color: #45a049;
-        outline: none;
-    }
+input:focus {
+    border-color: #45a049;
+    outline: none;
+}
 
 .btn {
     padding: 12px;
@@ -107,10 +95,10 @@ input {
     transition: background-color 0.3s ease;
 }
 
-    .btn:hover {
-        background-color: #45a049;
-        color: white;
-    }
+.btn:hover {
+    background-color: #45a049;
+    color: white;
+}
 
 .login-btn, .register-btn, .btn-save {
     background-color: #4caf50;
@@ -124,10 +112,10 @@ input {
     text-decoration: none;
 }
 
-    .forgot-password-link:hover {
-        text-decoration: underline;
-        color: #4caf50;
-    }
+.forgot-password-link:hover {
+    text-decoration: underline;
+    color: #4caf50;
+}
 
 .alert {
     margin-top: 0px;
@@ -136,19 +124,24 @@ input {
     border-radius: 5px;
 }
 
+/* --------------------------- */
+
+/*
+
 .alert-danger {
     background-color: #f44336;
     color: white;
 }
 
+*/
 
-/* Estilo para o cartão de perfil */
+
+/* HOME PAGE*/
 .card {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header do cartão */
 .card-header {
     background-color: #28a745;
     color: white;
@@ -168,9 +161,9 @@ input {
     transition: all 0.3s ease;
 }
 
-    .btn:hover {
-        transform: scale(1.01);
-    }
+.btn:hover {
+    transform: scale(1.01);
+}
 
 .btn-info {
     background-color: #17a2b8;
@@ -192,10 +185,10 @@ input {
     color: #343a40;
 }
 
-    .btn-outline-dark:hover {
-        background-color: #343a40;
-        color: white;
-    }
+.btn-outline-dark:hover {
+    background-color: #343a40;
+    color: white;
+}
 
 /* Espaçamento entre os botões */
 .btn-group .btn {
@@ -326,23 +319,37 @@ h2 {
 
 
 /* PARTE DOS LEILOES */
+.categorias {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .checkbox-container {
     display: flex;
-    justify-content: flex-end; /* Alinha o conteúdo à direita */
-    align-items: center; /* Alinha verticalmente */
-    margin: 10px 0;
+    justify-content: flex-end; /* Alinha a checkbox à direita */
+    align-items: center; /* Alinha o texto e a checkbox verticalmente */
+    width: 100%; /* Garante que a largura ocupe toda a linha */
+    margin-bottom: 4px; /* Espaçamento entre as linhas de checkboxes */
 }
 
     .checkbox-container span {
-        margin-right: 10px; /* Espaçamento entre o texto e o checkbox */
+        margin-right: 10px; /* Espaço entre o texto e a checkbox */
+        text-align: left; /* Garante que o texto esteja à esquerda */
     }
+
+    .checkbox-container input[type="checkbox"] {
+        margin-left: 40px; /* Espaço entre a checkbox e o texto */
+    }
+
+
 
 /* Barra lateral *//* Sidebar */
 .sidebar {
     position: fixed;
-    top: 0;
+    top: 60px;
     left: 0;
-    width: 280px; /* Largura fixa da sidebar */
+    width: 200px; /* Largura fixa da sidebar */
     height: 100%;
     background-color: #f4f4f4;
     padding: 20px;
@@ -351,13 +358,15 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Garante que os itens comecem de cima */
-    align-items: stretch; /* Garante que os itens se estendam para toda a largura */
 }
 
+
+
 .sidebar h3 {
-    font-size: 1.5em; /* Aumentei o tamanho do título para maior destaque */
+    font-size: 1.3em; /* Aumentei o tamanho do título para maior destaque */
     color: #333;
-    margin-bottom: 20px;
+    font-weight:bold;
+    margin-bottom: 10px;
     text-align: left; /* Garantir que o título da sidebar esteja alinhado à esquerda */
 }
 
@@ -372,6 +381,8 @@ h2 {
     width: 100%; /* Garante que o input ocupe toda a largura disponível */
     padding: 8px;
     margin-bottom: 8px;
+    border-radius: 7px;
+    border: 1px solid black;
 }
 
 .btn-apply, .btn-clear, .btn-create {
@@ -383,29 +394,33 @@ h2 {
     margin-top: 20px;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease;
 }
 
 .btn-clear {
-    background-color: #dc3545;
+    background-color: gray;
 }
 
 .btn-create {
     background-color: #007bff;
 }
 
-.btn-apply:hover, .btn-clear:hover, .btn-create:hover {
+.btn-apply:hover {
     background-color: #2d9c49;
 }
 
+.btn-clear:hover{
+    background-color: dimgrey;
+}
+
 .sidebar .btn-apply, .sidebar .btn-clear, .sidebar .btn-create {
-    width: 100%; /* Faz os botões ocuparem toda a largura disponível */
+    width: 100%;
 }
 
 /* Leilões Grid */
 .grid-leiloes {
-    margin-left: 280px; /* Garante que o grid de leilões tenha espaço para a sidebar */
-    margin-top: 75px;
+    margin-left: 110px; /* Garante que o grid de leilões tenha espaço para a sidebar */
+    margin-top: 95px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;

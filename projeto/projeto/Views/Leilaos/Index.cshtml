@@ -26,19 +26,18 @@
                 }
             }
         </div>
-
-        <h3>@(english ? "Filters" : "Filtros")</h3>
-        <label>@(english ? "Time Left" : "Tempo Restante")</label>
+        <br />
+        <h3>@(english ? "Time Left" : "Tempo restante")</h3>
         <div class="filters">
             <label class="checkbox-container"><span>&lt; 1d</span><input type="checkbox"></label>
             <label class="checkbox-container"><span>&lt; 5d</span><input type="checkbox"></label>
             <label class="checkbox-container"><span>&lt; 10d</span><input type="checkbox"></label>
         </div>
 
-        <label>@(english ? "Price Range" : "Faixa de Preço")</label>
+        <h3>@(english ? "Price Range" : "Faixa de Preço")</h3>
         <div class="price-range">
             <input type="number" placeholder="@(english ? "Min" : "Mínimo")">
-            até
+            @(english ? "To" : "Até")
             <input type="number" placeholder="@(english ? "Max" : "Máximo")">
         </div>
 

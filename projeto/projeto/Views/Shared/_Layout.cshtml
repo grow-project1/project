@@ -39,8 +39,7 @@
                     </ul>
 
                     <!-- Itens de Login e Register alinhados à direita -->
-                    <ul class="navbar-nav ml-auto">
-                        
+                    <ul class="navbar-nav ms-auto">
                         @if (Context.Session.GetString("UserEmail") == null)
                         {
                             <li class="nav-item">
@@ -65,16 +64,14 @@
                             <li class="nav-item position-relative">
                                 <a class="nav-link text-dark position-relative" asp-area="" asp-controller="Utilizadors" asp-action="Profile">
                                     <i class="fas fa-user fa-lg"></i> <!-- Ícone de perfil -->
-                                    <!-- Círculo branco com os pontos -->
                                     <span class="badge rounded-circle position-absolute top-0 start-100 translate-middle bg-white border border-dark text-dark d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; font-size: 14px;">
                                         @ViewData["UserPoints"]
                                     </span>
                                 </a>
                             </li>
-                            
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Logout">
-                                    @(english ? "Lougout" : "Sair")
+                                    @(english ? "Logout" : "Sair")
                                 </a>
                             </li>
                         }
@@ -83,7 +80,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="main">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -93,5 +91,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

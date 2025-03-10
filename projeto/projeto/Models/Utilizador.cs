@@ -16,7 +16,7 @@ namespace projeto.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "The Password field is required")]
-        [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters")]
+        [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be atleast 6 characters")]
         public string Password { get; set; }
 
         [StringLength(255)]
