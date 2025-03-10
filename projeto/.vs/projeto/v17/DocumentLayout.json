@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\GitHub\\PV\\project\\projeto\\",
+  "WorkspaceRootPath": "C:\\Escola\\PV\\project\\projeto\\",
   "Documents": [
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -140,30 +141,181 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+=======
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\wwwroot\\css\\edit.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\edit.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+>>>>>>> Stashed changes
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\estadoleilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\estadoleilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\estadoleilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\logutilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\logutilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\confirmpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\confirmpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\descontoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\descontoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\meusdescontos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\meusdescontos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\updatepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\updatepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\editavatar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\editavatar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\verificationcode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\verificationcode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\services\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\services\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\migrations\\20250308131417_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\migrations\\20250308131417_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\migrations\\20250308131417_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -174,7 +326,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< Updated upstream
           "SelectedChildIndex": 5,
+=======
+          "SelectedChildIndex": 2,
+>>>>>>> Stashed changes
           "Children": [
             {
               "$type": "Bookmark",
@@ -186,11 +342,66 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 5,
+=======
+              "DocumentIndex": 0,
+              "Title": "Edit.css",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\Edit.css",
+              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\Edit.css",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\Edit.css",
+              "RelativeToolTip": "projeto\\wwwroot\\css\\Edit.css",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-10T19:06:57.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LogUtilizador.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LogUtilizador.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\LogUtilizador.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LogUtilizador.cs",
+              "RelativeToolTip": "projeto\\Models\\LogUtilizador.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T18:13:51.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoginModel.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LoginModel.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\LoginModel.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\LoginModel.cs",
+              "RelativeToolTip": "projeto\\Models\\LoginModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T18:13:50.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ViewState": "AgIAAOoBAAAAAAAAAAAYwPYBAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T11:04:59.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+>>>>>>> Stashed changes
               "Title": "Profile.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Profile.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Profile.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -198,23 +409,31 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 1,
+=======
+              "DocumentIndex": 4,
+>>>>>>> Stashed changes
               "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Login.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-07T15:23:22.66Z"
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 2,
+=======
+              "DocumentIndex": 13,
+>>>>>>> Stashed changes
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Index.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -222,6 +441,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\appsettings.json",
@@ -248,10 +468,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+=======
+              "DocumentIndex": 11,
+>>>>>>> Stashed changes
               "Title": "ResetPassword.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -259,24 +482,45 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 6,
+=======
+              "DocumentIndex": 7,
+>>>>>>> Stashed changes
               "Title": "Utilizador.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeToolTip": "projeto\\Models\\Utilizador.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAiwDQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-04T19:35:33.771Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 7,
+=======
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-04T19:40:31.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+>>>>>>> Stashed changes
               "Title": "ConfirmPassword.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -285,11 +529,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 43,
               "Title": "20250308131417_Initial.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
               "RelativeDocumentMoniker": "projeto\\Migrations\\20250308131417_Initial.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
               "RelativeToolTip": "projeto\\Migrations\\20250308131417_Initial.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -297,11 +541,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 19,
+=======
+              "DocumentIndex": 24,
+>>>>>>> Stashed changes
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Home\\Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "projeto\\Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -309,11 +557,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 20,
+=======
+              "DocumentIndex": 25,
+>>>>>>> Stashed changes
               "Title": "Privacy.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Home\\Privacy.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
               "RelativeToolTip": "projeto\\Views\\Home\\Privacy.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -321,11 +573,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 16,
+=======
+              "DocumentIndex": 21,
+>>>>>>> Stashed changes
               "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Create.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Create.cshtml",
               "ViewState": "AgIAADYAAAAAAAAAAAAiwFgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -333,11 +589,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 17,
+=======
+              "DocumentIndex": 22,
+>>>>>>> Stashed changes
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Edit.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Edit.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -345,11 +605,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 9,
+=======
+              "DocumentIndex": 16,
+>>>>>>> Stashed changes
               "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Details.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Details.cshtml",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -357,11 +621,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 10,
+=======
+              "DocumentIndex": 17,
+>>>>>>> Stashed changes
               "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Delete.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -369,11 +637,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 14,
+=======
+              "DocumentIndex": 20,
+>>>>>>> Stashed changes
               "Title": "Leilao.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Leilao.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
               "RelativeToolTip": "projeto\\Models\\Leilao.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -381,11 +653,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 11,
+=======
+              "DocumentIndex": 18,
+>>>>>>> Stashed changes
               "Title": "DescontosController.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\DescontosController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\DescontosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\DescontosController.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\DescontosController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\DescontosController.cs",
               "RelativeToolTip": "projeto\\Controllers\\DescontosController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -393,11 +669,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 23,
+=======
+              "DocumentIndex": 28,
+>>>>>>> Stashed changes
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Edit.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
               "RelativeToolTip": "projeto\\Views\\Descontos\\Edit.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -405,11 +685,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 25,
+=======
+              "DocumentIndex": 30,
+>>>>>>> Stashed changes
               "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Delete.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -417,11 +701,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 26,
+=======
+              "DocumentIndex": 31,
+>>>>>>> Stashed changes
               "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Details.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Details.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -429,11 +717,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 27,
+=======
+              "DocumentIndex": 32,
+>>>>>>> Stashed changes
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Edit.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Edit.cshtml",
               "ViewState": "AgIAANsAAAAAAAAAAAAAAA0AAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -441,11 +733,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 28,
+=======
+              "DocumentIndex": 33,
+>>>>>>> Stashed changes
               "Title": "EditAvatar.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -453,11 +749,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 29,
+=======
+              "DocumentIndex": 34,
+>>>>>>> Stashed changes
               "Title": "VerificationCode.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -465,11 +765,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 22,
+=======
+              "DocumentIndex": 27,
+>>>>>>> Stashed changes
               "Title": "UpdatePassword.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -478,35 +782,49 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 30,
+=======
+              "DocumentIndex": 5,
+>>>>>>> Stashed changes
               "Title": "ForgotPassword.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-07T15:32:03.612Z"
+              "WhenOpened": "2025-03-07T15:32:03.612Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 8,
+=======
+              "DocumentIndex": 10,
+>>>>>>> Stashed changes
               "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Register.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Register.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-07T15:25:50.913Z"
+              "WhenOpened": "2025-03-07T15:25:50.913Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 31,
+=======
+              "DocumentIndex": 35,
+>>>>>>> Stashed changes
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "projeto\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "projeto\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -514,11 +832,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 21,
+=======
+              "DocumentIndex": 26,
+>>>>>>> Stashed changes
               "Title": "MeusDescontos.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\MeusDescontos.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
               "RelativeToolTip": "projeto\\Views\\Descontos\\MeusDescontos.cshtml",
               "ViewState": "AgIAABIAAAAAAAAAAAAAAAwAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -526,11 +848,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 24,
+=======
+              "DocumentIndex": 29,
+>>>>>>> Stashed changes
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Index.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
               "RelativeToolTip": "projeto\\Views\\Descontos\\Index.cshtml",
               "ViewState": "AgIAACoAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -538,11 +864,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 37,
               "Title": "EmailSender.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Services\\EmailSender.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Services\\EmailSender.cs",
               "RelativeDocumentMoniker": "projeto\\Services\\EmailSender.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Services\\EmailSender.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Services\\EmailSender.cs",
               "RelativeToolTip": "projeto\\Services\\EmailSender.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAcwAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -551,11 +877,15 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 18,
+=======
+              "DocumentIndex": 23,
+>>>>>>> Stashed changes
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Program.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Program.cs",
               "RelativeDocumentMoniker": "projeto\\Program.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Program.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Program.cs",
               "RelativeToolTip": "projeto\\Program.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAuwBUAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -563,11 +893,27 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 33,
+=======
+              "DocumentIndex": 36,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\appsettings.json",
+              "RelativeDocumentMoniker": "projeto\\appsettings.json",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\appsettings.json",
+              "RelativeToolTip": "projeto\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-06T18:07:09.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+>>>>>>> Stashed changes
               "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
               "RelativeToolTip": "projeto\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAAwCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -575,6 +921,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 34,
               "Title": "site.css",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
@@ -588,10 +935,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 13,
+=======
+              "DocumentIndex": 19,
+>>>>>>> Stashed changes
               "Title": "LeilaosController.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\LeilaosController.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
               "RelativeToolTip": "projeto\\Controllers\\LeilaosController.cs",
               "ViewState": "AgIAAIgAAAAAAAAAAAAuwJIAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -600,6 +950,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 15,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
@@ -613,34 +964,52 @@
             {
               "$type": "Document",
               "DocumentIndex": 12,
+=======
+              "DocumentIndex": 3,
+>>>>>>> Stashed changes
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Index.cshtml",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Index.cshtml",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAACgAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE4AAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-06T10:58:27.304Z"
+              "WhenOpened": "2025-03-06T10:58:27.304Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 6,
               "Title": "EstadoLeilao.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\EstadoLeilao.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
               "RelativeToolTip": "projeto\\Models\\EstadoLeilao.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T19:35:29.938Z"
+              "WhenOpened": "2025-03-04T19:35:29.938Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 1,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-06T10:59:27.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
               "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\ErrorViewModel.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
               "RelativeToolTip": "projeto\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -648,11 +1017,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 40,
               "Title": "Item.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Item.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
               "RelativeToolTip": "projeto\\Models\\Item.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -661,11 +1030,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 41,
               "Title": "DescontoResgatado.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\DescontoResgatado.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeToolTip": "projeto\\Models\\DescontoResgatado.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -674,11 +1043,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 42,
               "Title": "Categoria.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Categoria.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
               "RelativeToolTip": "projeto\\Models\\Categoria.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
