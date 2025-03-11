@@ -23,69 +23,94 @@ namespace projeto.Controllers
         }
 
         // GET: Leilaos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string categorias, string tempo, double? min, double? max)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
-
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
             ViewData["UserPoints"] = user?.Pontos;
             ViewData["Logged"] = user != null;
             ViewData["UserId"] = user?.UtilizadorId;
 
-            var categorias = Enum.GetValues(typeof(Categoria)).Cast<Categoria>().ToList();
-            ViewData["Categorias"] = categorias;
+            var categoriasEnum = Enum.GetValues(typeof(Categoria)).Cast<Categoria>().ToList();
+            ViewData["Categorias"] = categoriasEnum;
 
-            var leiloes = await _context.Leiloes
-                .Include(l => l.Item)  
+            var query = _context.Leiloes.Include(l => l.Item).AsQueryable();
+
+            // Aplicar filtros
+            if (!string.IsNullOrEmpty(categorias))
+            {
+                var categoriasSelecionadas = categorias.Split(',').Select(c => Enum.Parse<Categoria>(c)).ToList();
+                query = query.Where(l => categoriasSelecionadas.Contains(l.Item.Categoria));
+            }
+
+            if (!string.IsNullOrEmpty(tempo))
+            {
+                var agora = DateTime.Now;
+                var filtrosTempo = tempo.Split(',');
+
+                if (filtrosTempo.Contains("< 1d")) query = query.Where(l => l.DataFim <= agora.AddDays(1));
+                else if (filtrosTempo.Contains("< 5d")) query = query.Where(l => l.DataFim <= agora.AddDays(5));
+                else if (filtrosTempo.Contains("< 10d")) query = query.Where(l => l.DataFim <= agora.AddDays(10));
+            }
+
+            // Aplicar filtros de preço
+            if (min.HasValue)
+                query = query.Where(l => l.ValorAtualLance >= min.Value);  // Substituir PrecoInicial por ValorAtualLance
+            if (max.HasValue)
+                query = query.Where(l => l.ValorAtualLance <= max.Value);  // Substituir PrecoInicial por ValorAtualLance
+
+
+            var leiloes = await query.ToListAsync();
+
+            // Calcular o maior lance para cada leilão
+            var leilaoIds = leiloes.Select(l => l.LeilaoId).ToList();
+            var maioresLances = await _context.Licitacoes
+                .Where(l => leilaoIds.Contains(l.LeilaoId))
+                .GroupBy(l => l.LeilaoId)
+                .Select(g => new { LeilaoId = g.Key, MaiorLance = g.Max(l => (double?)l.ValorLicitacao) })
                 .ToListAsync();
 
             foreach (var leilao in leiloes)
             {
-                var maiorLance = await _context.Licitacoes
-                    .Where(l => l.LeilaoId == leilao.LeilaoId)
-                    .MaxAsync(l => (double?)l.ValorLicitacao);
-
-                leilao.ValorAtualLance = maiorLance ?? leilao.Item.PrecoInicial;
+                leilao.ValorAtualLance = maioresLances.FirstOrDefault(l => l.LeilaoId == leilao.LeilaoId)?.MaiorLance ?? leilao.Item.PrecoInicial;
             }
 
-            foreach (var leilao in leiloes)
+            // Verificar e encerrar leilões
+            foreach (var leilao in leiloes.Where(l => DateTime.Now > l.DataFim && l.EstadoLeilao != EstadoLeilao.Encerrado))
             {
-                if (DateTime.Now > leilao.DataFim && leilao.EstadoLeilao != EstadoLeilao.Encerrado)
+                leilao.EstadoLeilao = EstadoLeilao.Encerrado;
+                var licitacaoVencedora = await _context.Licitacoes
+                    .Where(l => l.LeilaoId == leilao.LeilaoId)
+                    .OrderByDescending(l => l.ValorLicitacao)
+                    .FirstOrDefaultAsync();
+
+                if (licitacaoVencedora != null)
                 {
-                    leilao.EstadoLeilao = EstadoLeilao.Encerrado;
-
-                    var licitacaoVencedora = await _context.Licitacoes
-                        .Where(l => l.LeilaoId == leilao.LeilaoId) 
-                        .OrderByDescending(l => l.ValorLicitacao) 
-                        .FirstOrDefaultAsync();
-
-                    if (licitacaoVencedora != null)
+                    var vencedor = await _context.Utilizador.FindAsync(licitacaoVencedora.UtilizadorId);
+                    if (vencedor != null)
                     {
-                        var vencedor = await _context.Utilizador.FindAsync(licitacaoVencedora.UtilizadorId);
-
-                        if (vencedor != null)
-                        {
-                            bool isSustentavel = leilao.Item.Sustentavel;
-
-                            vencedor.Pontos += isSustentavel ? 50 : 20;
-                            _context.Update(vencedor);
-
-                            leilao.Vencedor = vencedor.Nome;
-                        }
+                        vencedor.Pontos += leilao.Item.Sustentavel ? 50 : 20;
+                        _context.Update(vencedor);
+                        leilao.Vencedor = vencedor.Nome;
                     }
-
-                    _context.Update(leilao);
                 }
+                _context.Update(leilao);
             }
+
             await _context.SaveChangesAsync();
             return View(leiloes);
         }
 
 
+
         // GET: Leilaos/Details/5
         public async Task<IActionResult> Details(int id)
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+            ViewData["UserPoints"] = user?.Pontos;
+
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
                 .FirstOrDefaultAsync(l => l.LeilaoId == id);
@@ -144,7 +169,12 @@ namespace projeto.Controllers
                 return RedirectToAction("Login", "Utilizadors"); 
             }
 
-           
+            if (leilao.Item.fotoo == null || leilao.Item.fotoo.Length == 0)
+            {
+                // Se não, adiciona o erro de validação para a foto
+                ModelState.AddModelError("Item.fotoo", "A foto é obrigatória.");
+                return View(leilao); // Retorna a view com o erro
+            }
 
             leilao.UtilizadorId = user.UtilizadorId;
 

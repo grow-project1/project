@@ -339,7 +339,7 @@ h2 {
     }
 
     .checkbox-container input[type="checkbox"] {
-        margin-left: 40px; /* Espaço entre a checkbox e o texto */
+        margin-left: 60px; /* Espaço entre a checkbox e o texto */
     }
 
 
@@ -349,7 +349,7 @@ h2 {
     position: fixed;
     top: 60px;
     left: 0;
-    width: 200px; /* Largura fixa da sidebar */
+    width: 240px; /* Largura fixa da sidebar */
     height: 100%;
     background-color: #f4f4f4;
     padding: 20px;
@@ -419,7 +419,7 @@ h2 {
 
 /* Leilões Grid */
 .grid-leiloes {
-    margin-left: 110px; /* Garante que o grid de leilões tenha espaço para a sidebar */
+    margin-left: 180px; /* Garante que o grid de leilões tenha espaço para a sidebar */
     margin-top: 95px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -434,6 +434,7 @@ h2 {
     display: flex;
     flex-direction: column;
     transition: .4s;
+    width: 280px;
 }
 
 .leilao-card:hover {
@@ -556,3 +557,117 @@ h2 {
         top: 80px;
         left: 900px;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+.auction-container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: rgba(249, 249, 249, 10.9); /* Deixa o fundo do formulário levemente transparente */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+.auction-form {
+    padding: 20px;
+}
+
+.section-title h4 {
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 14px;
+    width: 100%;
+}
+
+    .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+
+.custom-file-input {
+    background-color: #28a745;
+    display: none;
+}
+
+.custom-file-label {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+    .custom-file-label:hover {
+        background-color: #2980b9;
+    }
+
+.form-submit {
+    text-align: center;
+}
+
+.btn-submit {
+    background-color: #28a745; /* Botão verde */
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-submit:hover {
+        background-color: #218838; /* Verde mais escuro para hover */
+    }
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .back-link a {
+        color: #28a745;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+}
+
+
+

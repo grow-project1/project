@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="~/css/Edit.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/projeto.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 </head>
 <body>
     <header>
@@ -27,14 +26,30 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Leilaos" asp-action="Index">
-                                @(english ? "Home" : "Início")
-                            </a>
+                            <div class="d-flex justify-content-center mx-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Leilaos" asp-action="Index">
+                                    @(english ? "Home" : "Início")
+                                </a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-primary" asp-controller="Utilizadors" asp-action="ToggleLanguage">
+
+                        <!-- Dropdown de Idioma -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 🌍 @(english ? "English" : "Português")
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Utilizadors" asp-action="ToggleLanguage" asp-route-language="en">
+                                        English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Utilizadors" asp-action="ToggleLanguage" asp-route-language="pt">
+                                        Português
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
 
@@ -64,7 +79,7 @@
                             <li class="nav-item position-relative">
                                 <a class="nav-link text-dark position-relative" asp-area="" asp-controller="Utilizadors" asp-action="Profile">
                                     <i class="fas fa-user fa-lg"></i> <!-- Ícone de perfil -->
-                                    <span class="badge rounded-circle position-absolute top-0 start-100 translate-middle bg-white border border-dark text-dark d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; font-size: 14px;">
+                                    <span class="badge rounded-circle position-absolute top-0 mt-2 start-100 translate-middle bg-white border border-dark text-dark d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; font-size: 14px;">
                                         @ViewData["UserPoints"]
                                     </span>
                                 </a>
@@ -91,6 +106,5 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
 </html>

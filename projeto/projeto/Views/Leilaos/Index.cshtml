@@ -103,6 +103,35 @@
 </div>
 
 <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const applyButton = document.querySelector(".btn-apply");
+        const clearButton = document.querySelector(".btn-clear");
+
+        applyButton.addEventListener("click", function () {
+            let selectedCategories = Array.from(document.querySelectorAll("input[name='categorias']:checked"))
+                .map(cb => cb.value);
+
+            let timeFilters = Array.from(document.querySelectorAll(".filters input:checked"))
+                .map(cb => cb.nextElementSibling.textContent.trim());
+
+            let minPrice = document.querySelector(".price-range input[placeholder='Mínimo'], .price-range input[placeholder='Min']").value;
+            let maxPrice = document.querySelector(".price-range input[placeholder='Máximo'], .price-range input[placeholder='Max']").value;
+
+            let queryParams = new URLSearchParams();
+            if (selectedCategories.length > 0) queryParams.append("categorias", selectedCategories.join(","));
+            if (timeFilters.length > 0) queryParams.append("tempo", timeFilters.join(","));
+            if (minPrice) queryParams.append("min", minPrice);
+            if (maxPrice) queryParams.append("max", maxPrice);
+
+            window.location.href = "?" + queryParams.toString();
+        });
+
+        clearButton.addEventListener("click", function () {
+            window.location.href = "?";
+        });
+    });
+
+
     document.addEventListener("DOMContentLoaded", function () {
         function updateCountdowns() {
             document.querySelectorAll(".end-time").forEach(function (element) {
