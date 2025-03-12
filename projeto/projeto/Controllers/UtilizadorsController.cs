@@ -63,9 +63,9 @@ namespace projeto.Controllers
             {
                 ModelState.AddModelError("Password", "Password is required");
             }
-            else if (utilizador.Password.Length < 6)
+            else if (!IsPasswordStrong(utilizador.Password))
             {
-                ModelState.AddModelError("Password", "Password must be at least 6 characters");
+                ModelState.AddModelError("Password", "Password must have at least 6 characters, one uppercase letter, one number, and one special character.");
             }
 
             if (!ModelState.IsValid)
@@ -76,7 +76,7 @@ namespace projeto.Controllers
             var userExists = await _context.Utilizador.AnyAsync(u => u.Email == utilizador.Email);
             if (userExists)
             {
-                ModelState.AddModelError("Email", "This email is alredy registered");
+                ModelState.AddModelError("Email", "This email is already registered");
                 return View(utilizador);
             }
 
@@ -91,6 +91,16 @@ namespace projeto.Controllers
 
             return RedirectToAction("Login");
         }
+
+        // Função para validar a força da senha
+        private bool IsPasswordStrong(string password)
+        {
+            return password.Length >= 6 &&
+                   password.Any(char.IsUpper) &&
+                   password.Any(char.IsDigit) &&
+                   password.Any(ch => !char.IsLetterOrDigit(ch));
+        }
+
 
         // Método Login (GET)
         public IActionResult Login()
@@ -268,6 +278,12 @@ namespace projeto.Controllers
         // GET: Utilizadors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
+
             if (id == null)
             {
                 return NotFound();
@@ -510,9 +526,14 @@ namespace projeto.Controllers
         }
 
 
-        public IActionResult ConfirmPassword(int id)
+        public async Task<IActionResult> ConfirmPasswordAsync(int id)
         {
             var utilizador = _context.Utilizador.Find(id);
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
             if (utilizador == null)
             {
                 return NotFound();
@@ -526,6 +547,13 @@ namespace projeto.Controllers
         public async Task<IActionResult> ConfirmPassword(int id, string currentPassword)
         {
             var utilizador = await _context.Utilizador.FindAsync(id);
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
+
             if (utilizador == null)
             {
                 ModelState.AddModelError("confirmPassword", "User not found");
@@ -610,9 +638,15 @@ namespace projeto.Controllers
             }
         }
 
-        public IActionResult EditAvatar(int id)
+        public async Task<IActionResult> EditAvatarAsync(int id)
         {
             var utilizador = _context.Utilizador.Find(id);
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
+
             if (utilizador == null)
             {
                 return NotFound();
@@ -629,8 +663,15 @@ namespace projeto.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditAvatar(int id, string selectedAvatar)
+        public async Task<IActionResult> EditAvatarAsync(int id, string selectedAvatar)
         {
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
+
             var utilizador = _context.Utilizador.Find(id);
             if (utilizador == null)
             {
@@ -646,5 +687,34 @@ namespace projeto.Controllers
 
             return RedirectToAction("Profile");
         }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Pagamentos()
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null) return RedirectToAction("Login");
+
+            // Buscar pagamentos pendentes
+            var pagamentos = await _context.Leiloes
+             .Where(l => l.UtilizadorId == user.UtilizadorId ||
+                         l.Licitacoes.OrderByDescending(li => li.DataLicitacao).FirstOrDefault().UtilizadorId == user.UtilizadorId)
+             .ToListAsync();
+
+            // Buscar leilões ganhos
+            var leiloesGanhos = await _context.Leiloes
+                .Include(l => l.Item)
+                .Where(l => l.Vencedor == user.Nome)
+                .ToListAsync();
+
+            ViewData["UserPoints"] = user.Pontos;
+            ViewData["LeiloesGanhos"] = leiloesGanhos;
+
+            return View(pagamentos);
+        }
+
     }
 }

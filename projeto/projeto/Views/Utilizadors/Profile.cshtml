@@ -16,32 +16,24 @@
     var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
 }
 
-
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["Success"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
-
-<div class="container mt-5">
+<div class="profile">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="card shadow-lg border-0 rounded">
-                <div class="card-header bg-success text-white text-center">
-                    <h3>@(english ? "Welcom," : "Bem-vindo,") <b>@Model.Nome </b></h3>
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h3 class="mb-0">@(english ? "Welcome," : "Bem-vindo,") <b>@Model.Nome </b></h3>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="card-title">@(english ? "Profile Information" : "Informação do perfil")</h5>
-                        <a href="@Url.Action("Edit", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-dark btn-sm">
-                            <i class="fas fa-edit"></i> @(english ? "Edit Profile" : "Editar profile")
-                        </a>
-                    </div>
+                        
+                    <h5 class="card-title" style="font-weight: 600; font-size: 1.2rem;">@(english ? "Profile Information" : "Informação do perfil")</h5>    
+                    <a href="@Url.Action("Edit", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-success btn-custom">
+                        <i class="fas fa-edit"></i> @(english ? "Edit Profile" : "Editar perfil")
+                    </a>
 
-
-                    <div class="row">
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row mb-4">
                         <div class="col-md-9">
                             <p><strong>Email:</strong> @Model.Email</p>
                             <p><strong>@(english ? "Name:" : "Nome:")</strong> @Model.Nome</p>
@@ -50,7 +42,6 @@
                             <p><strong>@(english ? "Phone:" : "Telemóvel:")</strong> @Model.Telemovel</p>
                             <p><strong>@(english ? "Country:" : "País:")</strong> @Model.Pais</p>
                             <p><strong>@(english ? "Points:" : "Pontos:")</strong> @Model.Pontos</p>
-                            <p><strong>@(english ? "User Type:" : "Tipo de utilizador:")</strong> @Model.EstadoConta</p>
                         </div>
                         <div class="col-md-3">
                             <img src="@Url.Content(Model.ImagePath)" class="img-fluid rounded-circle" alt="Profile Image" width="150" height="150" />
@@ -61,14 +52,14 @@
                         </div>
                     </div>
 
-                    <div class="btn-group w-100" role="group">
-                        <a href="@Url.Action("MyAuctions", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile">
+                    <div class="btn-group w-100 d-flex justify-content-between mt-4" role="group">
+                        <a href="@Url.Action("MyAuctions", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
                             @(english ? "My Auctions" : "Meus Leilões")
                         </a>
-                        <a href="@Url.Action("ConfirmPassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile">
+                        <a href="@Url.Action("ConfirmPassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
                             @(english ? "Change Password" : "Alterar Senha")
                         </a>
-                        <button id="cancel-account-btn" class="btn-profile cancel-btn">
+                        <button id="cancel-account-btn" class="btn-profile flex-grow-1 text-center cancel-btn">
                             @(english ? "Cancel Account" : "Cancelar Conta")
                         </button>
                     </div>

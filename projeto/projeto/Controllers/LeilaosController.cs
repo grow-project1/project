@@ -483,7 +483,10 @@ namespace projeto.Controllers
         public async Task<IActionResult> MyAuctions()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
+
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {

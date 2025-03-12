@@ -70,17 +70,18 @@
                 <div class="leilao-details">
                     <h5>@leilao.Item.Titulo</h5>
                     <p class="price">
-                        <strong>@(english ? "Current Bid:" : "Oferta Atual:")</strong> €@leilao.ValorAtualLance
+                        <strong>@(english ? "Current Bid:" : "Oferta Atual:")</strong> @leilao.ValorAtualLance€
                     </p>
                     <p class="price">
-                        <strong>@(english ? "Minimum Increment:" : "Incremento Mínimo:")</strong> €@leilao.ValorIncrementoMinimo
+                        <strong>@(english ? "Minimum Increment:" : "Incremento Mínimo:")</strong> @leilao.ValorIncrementoMinimo€
                     </p>
 
                     @if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
                     {
                         <strong>@(english ? "Auction Closed" : "Leilão Encerrado")</strong>
-                        <p><strong>@(english ? "Winner:" : "Vencedor:")</strong> @leilao.Vencedor</p>
+                        <p><strong>@(english ? "Winner:" : "Vencedor:")</strong> @(leilao.Vencedor != null ? leilao.Vencedor : " - ")</p>
                     }
+
                     else
                     {
                         <p class="end-time" data-endtime="@leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">

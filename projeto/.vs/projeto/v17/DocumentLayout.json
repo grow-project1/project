@@ -1,173 +1,177 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\",
+  "WorkspaceRootPath": "C:\\Escola\\PV\\project\\projeto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\leilaos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\leilaos\\myauctions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\myauctions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\leilaos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\confirmpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\confirmpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\leilaos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\controllers\\descontoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\descontoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\leilaos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\descontos\\meusdescontos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\meusdescontos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\updatepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\updatepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\descontos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\descontos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\editavatar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\editavatar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\editavatar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\verificationcode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\leilaoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\myauctions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\myauctions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\meusdescontos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\meusdescontos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\confirmpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\confirmpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\controllers\\descontoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\descontoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\leilaos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\updatepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\updatepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\descontos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\descontos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\verificationcode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\verificationcode.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\views\\utilizadors\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\views\\utilizadors\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\services\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\services\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\services\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\estadoleilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\estadoleilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\estadoleilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\migrations\\20250308131417_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\escola\\pv\\project\\projeto\\projeto\\migrations\\20250308131417_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\migrations\\20250308131417_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -178,7 +182,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -190,88 +194,104 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "Pagamentos.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-12T22:23:12.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "MyAuctions.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\MyAuctions.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\MyAuctions.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\MyAuctions.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\MyAuctions.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\MyAuctions.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\MyAuctions.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAmwBUAAABvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-12T17:24:08.86Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAADcCAAAAAAAAAAAAAFICAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-03-11T20:47:05.507Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Index.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T20:47:05.297Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Leilao.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Leilao.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\Leilao.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Leilao.cs",
-              "RelativeToolTip": "projeto\\Models\\Leilao.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T20:47:05.398Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAH4BAAAAAAAAAAAjwJoBAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-11T20:47:05.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Index.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Utilizadors\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-11T20:47:05.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Leilao.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\Leilao.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
+              "RelativeToolTip": "projeto\\Models\\Leilao.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T20:47:05.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Create.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Create.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Create.cshtml",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAuwHYAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAAGcAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-11T20:47:05.364Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "LeilaosController.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\LeilaosController.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\LeilaosController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
               "RelativeToolTip": "projeto\\Controllers\\LeilaosController.cs",
-              "ViewState": "AgIAAMsAAAAAAAAAAAAMwD8BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEQBAAAAAAAAAAAowOQBAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T20:47:05.511Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Details.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Details.cshtml",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFcAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-11T20:47:05.384Z",
               "EditorCaption": ""
@@ -280,22 +300,22 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "UtilizadorsController.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
               "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ViewState": "AgIAANUAAAAAAAAAAAASwOMAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAK4CAAAAAAAAAAAmwLUCAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T20:47:05.309Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "20250308131417_Initial.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
               "RelativeDocumentMoniker": "projeto\\Migrations\\20250308131417_Initial.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Migrations\\20250308131417_Initial.cs",
               "RelativeToolTip": "projeto\\Migrations\\20250308131417_Initial.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -303,11 +323,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "ConfirmPassword.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\ConfirmPassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -317,34 +337,35 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Index.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Index.cshtml",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAAAHcAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAGIAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-11T20:47:05.52Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "Utilizador.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Utilizador.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Utilizador.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeToolTip": "projeto\\Models\\Utilizador.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAiwDQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T20:47:05.323Z"
+              "WhenOpened": "2025-03-11T20:47:05.323Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 23,
               "Title": "ResetPassword.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\ResetPassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -352,11 +373,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 21,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\appsettings.json",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\appsettings.json",
               "RelativeDocumentMoniker": "projeto\\appsettings.json",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\appsettings.json",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\appsettings.json",
               "RelativeToolTip": "projeto\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -364,11 +385,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 22,
               "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Login.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Login.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Login.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -376,35 +397,37 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "Profile.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Profile.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Profile.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Profile.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAmwB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T20:47:05.25Z"
+              "WhenOpened": "2025-03-11T20:47:05.25Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "projeto\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAmwDcAAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T21:48:59.893Z"
+              "WhenOpened": "2025-03-11T21:48:59.893Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Home\\Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "projeto\\Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -412,11 +435,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "Privacy.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Home\\Privacy.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Home\\Privacy.cshtml",
               "RelativeToolTip": "projeto\\Views\\Home\\Privacy.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -424,11 +447,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Edit.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Edit.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -436,11 +459,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Delete.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Delete.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -448,11 +471,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "DescontosController.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\DescontosController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\DescontosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\DescontosController.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\DescontosController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\DescontosController.cs",
               "RelativeToolTip": "projeto\\Controllers\\DescontosController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -460,11 +483,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Edit.cshtml",
               "RelativeToolTip": "projeto\\Views\\Descontos\\Edit.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -472,11 +495,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Delete.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Delete.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -484,11 +507,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 18,
               "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Details.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Details.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Details.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -496,35 +519,37 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 10,
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Edit.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Edit.cshtml",
-              "ViewState": "AgIAANsAAAAAAAAAAAAAAA0AAABJAAAAAAAAAA==",
+              "ViewState": "AgIAANIAAAAAAAAAAAAAAOcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T20:47:05.439Z"
+              "WhenOpened": "2025-03-11T20:47:05.439Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 9,
               "Title": "EditAvatar.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\EditAvatar.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T20:47:05.446Z"
+              "WhenOpened": "2025-03-11T20:47:05.446Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "VerificationCode.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\VerificationCode.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -532,11 +557,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "UpdatePassword.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\UpdatePassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -544,11 +569,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "ForgotPassword.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -556,23 +581,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 17,
               "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Register.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\Register.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Register.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAByAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T20:47:05.473Z"
+              "WhenOpened": "2025-03-11T20:47:05.473Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "projeto\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "projeto\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -580,35 +606,37 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 15,
               "Title": "MeusDescontos.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\MeusDescontos.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\MeusDescontos.cshtml",
               "RelativeToolTip": "projeto\\Views\\Descontos\\MeusDescontos.cshtml",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAAwAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACAAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T20:47:05.483Z"
+              "WhenOpened": "2025-03-11T20:47:05.483Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 13,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Index.cshtml",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
               "RelativeToolTip": "projeto\\Views\\Descontos\\Index.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T20:47:05.489Z"
+              "WhenOpened": "2025-03-11T20:47:05.489Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "EmailSender.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Services\\EmailSender.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Services\\EmailSender.cs",
               "RelativeDocumentMoniker": "projeto\\Services\\EmailSender.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Services\\EmailSender.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Services\\EmailSender.cs",
               "RelativeToolTip": "projeto\\Services\\EmailSender.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAcwAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -616,11 +644,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Program.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Program.cs",
               "RelativeDocumentMoniker": "projeto\\Program.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Program.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Program.cs",
               "RelativeToolTip": "projeto\\Program.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAuwBUAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -628,11 +656,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\HomeController.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
               "RelativeToolTip": "projeto\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAAwCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -640,11 +668,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "EstadoLeilao.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\EstadoLeilao.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\EstadoLeilao.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\EstadoLeilao.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\EstadoLeilao.cs",
               "RelativeToolTip": "projeto\\Models\\EstadoLeilao.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -652,11 +680,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\ErrorViewModel.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\ErrorViewModel.cs",
               "RelativeToolTip": "projeto\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -664,11 +692,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "Item.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Item.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Item.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Item.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Item.cs",
               "RelativeToolTip": "projeto\\Models\\Item.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -676,11 +704,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "DescontoResgatado.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\DescontoResgatado.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\DescontoResgatado.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\DescontoResgatado.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeToolTip": "projeto\\Models\\DescontoResgatado.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -688,11 +716,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "Categoria.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Categoria.cs",
+              "DocumentMoniker": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Categoria.cs",
-              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Categoria.cs",
+              "ToolTip": "C:\\Escola\\PV\\project\\projeto\\projeto\\Models\\Categoria.cs",
               "RelativeToolTip": "projeto\\Models\\Categoria.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

@@ -161,6 +161,8 @@ input:focus {
     transition: all 0.3s ease;
 }
 
+
+
 .btn:hover {
     transform: scale(1.01);
 }
@@ -386,7 +388,7 @@ h2 {
 }
 
 .btn-apply, .btn-clear, .btn-create {
-    background-color: #28a745;
+    background-color: #2c6e49;
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -406,7 +408,7 @@ h2 {
 }
 
 .btn-apply:hover {
-    background-color: #2d9c49;
+    background-color: #2e7e49;
 }
 
 .btn-clear:hover{
@@ -515,10 +517,10 @@ h2 {
     transition: transform 0.2s ease-in-out;
 }
 
-    .btn-delete:hover {
-        transform: scale(1.1);
-        background: none;
-    }
+.btn-delete:hover {
+    transform: scale(1.1);
+    background: none;
+}
 
 .btn-create {
     position: fixed;
@@ -540,23 +542,23 @@ h2 {
     transition: background-color 0.3s, transform 0.2s;
 }
 
-    .btn-create:hover {
-        background-color: #1c6e49; /* Azul mais escuro no hover */
-        transform: scale(1.1); /* Efeito de crescimento ao passar o mouse */
-        color:white;
-    }
+.btn-create:hover {
+    background-color: #1c6e49; /* Azul mais escuro no hover */
+    transform: scale(1.1); /* Efeito de crescimento ao passar o mouse */
+    color:white;
+}
 
-    .btn-create:active {
-        transform: scale(0.9); /* Efeito de clique */
-    }
+.btn-create:active {
+    transform: scale(0.9); /* Efeito de clique */
+}
 
 
-    .alertt{
-        width: 500px;
-        position: absolute;
-        top: 80px;
-        left: 900px;
-    }
+.alertt{
+    width: 500px;
+    position: absolute;
+    top: 80px;
+    left: 900px;
+}
 
 
 
@@ -631,7 +633,7 @@ h2 {
 }
 
     .custom-file-label:hover {
-        background-color: #2980b9;
+        background-color: #218838;
     }
 
 .form-submit {
@@ -666,8 +668,166 @@ h2 {
 
         .back-link a:hover {
             text-decoration: underline;
+            color: #28a745;
         }
+
+
+
+
+
+
+/* --------------------- DESCONTOS PAGE ------------------------- */
+
+
+
+
+
+/* -------------------- PROFILE PAGE --------------------------- */
+.profile {
+   
+    margin-top: 100px;
 }
 
+/* -------------------- MY AUCTIONS PAGE ------------------------ */
+/* Estilo para o contêiner das minhas ações */
+.container-my-auctions {
+    margin-top: 100px;
+    display: flex;
+
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    max-width: 1600px;
+    padding: 20px;
+}
+
+
+/* Botão de criação com tamanho menor */
+.btn-create-auction {
+    font-size: 1rem; /* Ajuste do tamanho da fonte */
+    padding: 5px 15px; /* Tamanho do botão reduzido */
+    width: auto; /* Largura automática */
+    margin-top: 30px; /* Distância inferior */
+    position: absolute;
+    left: 110px;
+    background-color: #2c6e49;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Estilo do botão de criação */
+.text-end a {
+    font-size: 1rem; /* Ajuste de tamanho para o botão */
+}
+
+/* Container para os cards */
+.my-auctions {
+    display: inline-block;
+    width: calc(22.33% - 20px);
+    margin: 10px;
+    box-sizing: border-box;
+    vertical-align: top;
+    text-align: center; /* Centraliza os elementos dentro do card */
+}
+
+/* Estilo do card */
+.card-my-auctions {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    background-color: #fff;
+    text-align: center; /* Centraliza o conteúdo dentro do card */
+}
+
+    .card-my-auctions img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+.card-body {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.card-my-auctions .btn {
+    width: 100%;
+    margin: 5px 0;
+}
+
+/* Estilo dos botões */
+.btn-sm {
+    font-size: 0.7rem;
+}
+
+/* Estilo geral para os botões */
+.btn-details-auction, .btn-edit-auction, .btn-delete-auction {
+    display: block;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: none;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    color: white;
+    border-bottom: 1px solid black;
+}
+
+.btn-details-auction {
+    color: black;
+}
+
+.btn-edit-auction {
+    color: black;
+}
+
+.btn-delete-auction {
+    color: black;
+}
+
+.btn-details-auction:hover {
+    color: black;
+    transform: scale(1.04);
+    border-bottom: 3px solid black;
+}
+
+.btn-edit-auction:hover {
+    color: black;
+    transform: scale(1.04);
+    border-bottom: 3px solid black;
+}
+
+.btn-delete-auction:hover {
+    color: red;
+    transform: scale(1.04);
+    border-bottom: 3px solid black;
+}
+
+.btn-details-auction i, .btn-edit-auction i, .btn-delete-auction i {
+    margin-right: 5px;
+}
+
+/* Adicionando efeito de foco */
+.btn-details-auction:focus, .btn-edit-auction:focus, .btn-delete-auction:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
 

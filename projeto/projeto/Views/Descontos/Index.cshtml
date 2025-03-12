@@ -7,45 +7,49 @@
 @{
     ViewData["Title"] = "Descontos";
 }
-
-<h1>Descontos Disponíveis</h1>
-
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success">
+    <div class="alert alert-success-discount" style="position: fixed; top: 90px; left: 50%; transform: translate(-50%, -50%); padding: 9px 17px; background-color: lightgreen; color: white; justify-content: center;">
         @TempData["SuccessMessage"]
     </div>
 }
 @if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" style="position: fixed; top: 90px; left: 50%; transform: translate(-50%, -50%); padding: 9px 17px; background-color: tomato; color: white; justify-content: center;">
         @TempData["ErrorMessage"]
     </div>
+
 }
+<div class="descontos-container" style="width: 800px; margin: 0 auto;">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>@(english ? "Description" : "Descrição")</th>
-            <th>@(english ? "Value" : "Valor")</th>
-            <th>@(english ? "Required Points" : "Pontos Necessários")</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Where(d => d.IsLoja))
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>@item.Descricao</td>
-                <td>@item.Valor%</td>
-                <td>@item.PontosNecessarios</td>
-                <td>
-
-                    <a href="#" class="btn btn-primary" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })')">@(english ? "Redeem" : "Resgatar")</a>
-                </td>
+                <th>@(english ? "Description" : "Descrição")</th>
+                <th>@(english ? "Value" : "Valor")</th>
+                <th>@(english ? "Required Points" : "Pontos Necessários")</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(d => d.IsLoja))
+            {
+                <tr>
+                    <td>@item.Descricao</td>
+                    <td>@item.Valor%</td>
+                    <td>@item.PontosNecessarios</td>
+                    <td>
+                        <a href="#" class="btn" style="background-color: #28a745; color: white; border: 1px solid #28a745;" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })', '@item.Descricao', '@item.Valor')">@(english ? "Redeem" : "Resgatar")</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <!-- Modal de Confirmação -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -58,17 +62,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Você tem certeza que deseja resgatar o desconto?
-                @(english ? "Are you sure you want to redeem the discount?" : "Tem certeza que deseja resgatar o desconto?")
+                <div>
+                    <strong>@(english ? "Discount" : "Desconto"):</strong>
+                    <span id="modalDescricao"></span>
+                </div>
+                <div>
+                    <strong>@(english ? "Amount to Spend" : "Serão gastos"):</strong>
+                    <span id="modalPontosNecessarios"></span><span>@(english ? " points" : " pontos")</span>
+                </div>
+                <br />
+                <p>
+                    @(english ? "Are you sure you want to redeem the discount?" : "Tem certeza que deseja resgatar o desconto?")
+                </p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    @(english ? "Cancel" : "Cancelar")
-                </button>
-                <button type="button" class="btn btn-primary" id="confirmResgate">
+            <div class="modal-footer d-flex justify-content-center w-100">
+                <button type="button" class="btn btn-primary" style="background-color: #28a745; color: white; border: 1px solid #28a745; width: 80%; height: 50px; padding: 10px 0; font-size: 16px;" id="confirmResgate">
                     @(english ? "Yes" : "Confirmar")
                 </button>
+                <button type="button" class="btn btn-primary" style="background-color: red; color: white; border: 1px solid red; width: 80%; height: 50px; padding: 10px 0; font-size: 16px;" data-bs-dismiss="modal">
+                    @(english ? "Cancel" : "Cancelar")
+                </button>
             </div>
+
+
         </div>
     </div>
 </div>
@@ -78,10 +94,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let urlResgate = '';
+        let descricaoDesconto = '';
+        let valorDesconto = '';
 
-        // Função para abrir o modal e armazenar o URL do resgate
-        function abrirModal(url) {
+        // Função para abrir o modal e armazenar o URL do resgate e os dados do desconto
+        function abrirModal(url, descricao, valor) {
             urlResgate = url; // Armazena o URL para redirecionar posteriormente
+            descricaoDesconto = descricao; // Armazena a descrição do desconto
+            valorDesconto = valor; // Armazena o valor do desconto
+
+            // Atualiza os valores no modal
+            document.getElementById('modalDescricao').innerText = descricaoDesconto;
+            document.getElementById('modalPontosNecessarios').innerText = valorDesconto; // Adiciona o símbolo de porcentagem
+
             var myModal = new bootstrap.Modal(document.getElementById('confirmModal'), {
                 keyboard: false
             });
@@ -94,3 +119,4 @@
         });
     </script>
 }
+
