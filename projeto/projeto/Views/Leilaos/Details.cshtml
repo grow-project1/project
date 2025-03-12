@@ -84,8 +84,8 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>@(english ? "User" : "Usuário")</th>
-                            <th>@(english ? "Amount" : "Valor")</th>
+                            <th>@(english ? "User Id " : "Utilizador Id")</th>
+                            <th>@(english ? "Amount " : "Valor")</th>
                             <th>@(english ? "Date" : "Data")</th>
                         </tr>
                     </thead>
@@ -100,7 +100,7 @@
                         @foreach (var licitacao in licitacoes)
                         {
                             <tr>
-                                <td>@licitacao.Utilizador.Nome</td>
+                                <td>@licitacao.Utilizador.UtilizadorId</td>
                                 <td>@licitacao.ValorLicitacao.ToString("C")</td>
                                 <td>@licitacao.DataLicitacao.ToString("dd/MM/yyyy HH:mm")</td>
                             </tr>
