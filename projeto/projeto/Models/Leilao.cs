@@ -11,10 +11,7 @@
         public List<Licitacao>? Licitacoes { get; set; }
         public string? Vencedor { get; set; }
         public int UtilizadorId { get; set; }
-
         public double ValorAtualLance { get; set; }
-
         public EstadoLeilao EstadoLeilao { get; set; } 
     }
-
 }
