@@ -50,7 +50,7 @@
             <h2>@(english ? "Product Description:" : "Descrição do Produto:") </h2>
             <p>@Model.Item.Descricao</p>
             <p><strong>@(english ? "Category:" : "Categoria:")</strong> @Model.Item.Categoria</p>
-            <p><strong>@(english ? "Sustainable:" : "Sustentável:")</strong> @(Model.Item.Sustentavel ? "✅" : "⬜")</p>
+            <p><strong>@(english ? "Sustainable:" : "Sustentável:")</strong> @(Model.Item.Categoria == 0 ? "✅" : "⬜")</p>
             <p class="end-time" data-endtime="@Model.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
                 <strong>@(english ? "Time left:" : "Tempo restante:")</strong> <span class="countdown"></span>
             </p>
