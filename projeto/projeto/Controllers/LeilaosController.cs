@@ -480,25 +480,50 @@ namespace projeto.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> MyAuctions()
+        public async Task<IActionResult> MyAuctions(int page = 1)
         {
+            int pageSize = 3;
             var userEmail = HttpContext.Session.GetString("UserEmail");
-
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
-
-            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
             }
 
-            var userAuctions = await _context.Leiloes
-                .Include(l => l.Item)
+            var totalLeiloes = await _context.Leiloes.CountAsync(l => l.UtilizadorId == user.UtilizadorId);
+            var leiloes = await _context.Leiloes
                 .Where(l => l.UtilizadorId == user.UtilizadorId)
+                .Include(l => l.Item)
+                .OrderBy(l => l.DataFim)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
-            return View(userAuctions);
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalLeiloes / pageSize);
+
+            return View(leiloes);
+        }
+
+        public async Task<IActionResult> MyBids()
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var meusLances = await _context.Licitacoes
+                .Where(l => l.UtilizadorId == user.UtilizadorId)
+                .Include(l => l.Leilao)
+                .ThenInclude(l => l.Item)
+                .OrderByDescending(l => l.DataLicitacao)
+                .ToListAsync();
+
+            return View(meusLances);
         }
     }
 }

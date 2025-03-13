@@ -56,6 +56,9 @@
                         <a href="@Url.Action("MyAuctions", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
                             @(english ? "My Auctions" : "Meus Leilões")
                         </a>
+                        <a href="@Url.Action("MyBids", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
+                            @(english ? "My Bids" : "Minhas licitações")
+                        </a>
                         <a href="@Url.Action("ConfirmPassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
                             @(english ? "Change Password" : "Alterar Senha")
                         </a>

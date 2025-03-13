@@ -1,0 +1,58 @@
+﻿@model List<projeto.Models.Licitacao>
+
+@{
+    ViewData["Title"] = "My Bids";
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+<h2 class="text-center my-4">@(english ? "My Bids" : "Minhas Licitações")</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center">
+        @(english ? "You haven't placed any bids yet." : "Ainda não fizeste nenhuma licitação.")
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped">
+                <thead class="table-success">
+                    <tr>
+                        <th>@(english ? "Auction Id" : "Leilão id")</th>
+                        <th>@(english ? "Bid Amount" : "Valor da Licitação")</th>
+                        <th>@(english ? "Status" : "Estado")</th>
+                        <th>@(english ? "Date" : "Data")</th>
+                        <th>@(english ? "Actions" : "Ações")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var bid in Model)
+                    {
+                        <tr>
+                            <td>@bid.LeilaoId</td>
+                            <td>@bid.ValorLicitacao€</td>
+                            <td>
+                                @if (bid.Leilao.EstadoLeilao == 0)
+                                {
+                                    <span class="badge bg-success">@(english ? "Open" : "Aberto")</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">@(english ? "Closed" : "Encerrado")</span>
+                                }
+                            </td>
+                            <td>@bid.DataLicitacao.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                <a href="@Url.Action("Details", "Leilaos", new { id = bid.LeilaoId })" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-eye"></i> @(english ? "View" : "Ver")
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
