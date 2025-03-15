@@ -66,6 +66,12 @@
         @foreach (var leilao in Model)
         {
             <div class="leilao-card" onclick="window.location.href='@Url.Action("Details", "Leilaos", new { id = leilao.LeilaoId })'">
+                @if (leilao.Item.Categoria == 0)
+                {
+                    <div class="sustentavel-container">
+                        <i class="fas fa-leaf sustentavel-icon" title="Leilão Sustentável"></i>
+                    </div>
+                }
                 <img src="@leilao.Item.FotoUrl" alt="@leilao.Item.Titulo" class="img-leilao" />
                 <div class="leilao-details">
                     <h5>@leilao.Item.Titulo</h5>
@@ -81,7 +87,6 @@
                         <strong>@(english ? "Auction Closed" : "Leilão Encerrado")</strong>
                         <p><strong>@(english ? "Winner:" : "Vencedor:")</strong> @(leilao.Vencedor != null ? leilao.Vencedor : " - ")</p>
                     }
-
                     else
                     {
                         <p class="end-time" data-endtime="@leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
@@ -158,3 +163,28 @@
         setInterval(updateCountdowns, 1000); // Atualiza a cada segundo
     });
 </script>
+
+<style>
+    .sustentavel-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .sustentavel-icon {
+        font-size: 20px;
+        color: green;
+    }
+
+    .leilao-card {
+        position: relative;
+    }
+</style>
