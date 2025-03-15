@@ -7,8 +7,12 @@
       "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\forgotpasswordtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\growtests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\growtests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\growtests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\growtests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,33 +50,45 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "growTests",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\growTests.csproj",
+              "RelativeDocumentMoniker": "growTests\\growTests.csproj",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\growTests.csproj",
+              "RelativeToolTip": "growTests\\growTests.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-15T15:35:12.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "growTests",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\growTests.csproj",
+              "RelativeDocumentMoniker": "growTests\\growTests.csproj",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\growTests.csproj",
+              "RelativeToolTip": "growTests\\growTests.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-15T15:34:26.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ForgotPasswordTests.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\ForgotPasswordTests.cs",
               "RelativeDocumentMoniker": "growTests\\ForgotPasswordTests.cs",
               "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\ForgotPasswordTests.cs",
               "RelativeToolTip": "growTests\\ForgotPasswordTests.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAiwBwAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAADgv1AAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-15T14:40:28.572Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UnitTest1.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\UnitTest1.cs",
-              "RelativeDocumentMoniker": "growTests\\UnitTest1.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\UnitTest1.cs",
-              "RelativeToolTip": "growTests\\UnitTest1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T14:40:07.162Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Utilizador.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
@@ -80,12 +96,11 @@
               "RelativeToolTip": "projeto\\Models\\Utilizador.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T14:24:58.12Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T14:24:58.12Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "VerificationModel.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\VerificationModel.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\VerificationModel.cs",
@@ -93,12 +108,11 @@
               "RelativeToolTip": "projeto\\Models\\VerificationModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T14:24:47.459Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T14:24:47.459Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ForgotPassword.cshtml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
@@ -106,12 +120,11 @@
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\ForgotPassword.cshtml",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-15T14:23:33.746Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T14:23:33.746Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "UtilizadorsController.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
@@ -119,8 +132,7 @@
               "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
               "ViewState": "AgIAAHEBAAAAAAAAAADwv4EBAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T10:24:36.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T10:24:36.477Z"
             }
           ]
         }

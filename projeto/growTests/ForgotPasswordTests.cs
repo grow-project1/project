@@ -11,6 +11,9 @@ using projeto.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using projeto.Models;
+using Microsoft.EntityFrameworkCore.InMemory;
+using System.Linq.Expressions;
+
 
 
 
@@ -41,7 +44,9 @@ namespace growTests
             // Arrange
             var testEmail = "teste@email.com";
             var utilizador = new Utilizador { Email = testEmail, UtilizadorId = 1 };
-            _mockContext.Setup(c => c.Utilizador.FirstOrDefaultAsync(u => u.Email == testEmail))
+            _mockContext.Setup(c => c.Utilizador
+                                     .FirstOrDefaultAsync(It.IsAny<Expression<Func<Utilizador, bool>>>(),
+                                                          It.IsAny<CancellationToken>()))
                         .ReturnsAsync(utilizador);
 
             // Act
@@ -59,7 +64,9 @@ namespace growTests
         {
             // Arrange
             var testEmail = "naoexiste@email.com";
-            _mockContext.Setup(c => c.Utilizador.FirstOrDefaultAsync(u => u.Email == testEmail))
+            _mockContext.Setup(c => c.Utilizador
+                                     .FirstOrDefaultAsync(It.IsAny<Expression<Func<Utilizador, bool>>>(),
+                                                          It.IsAny<CancellationToken>()))
                         .ReturnsAsync((Utilizador)null);
 
             // Act
