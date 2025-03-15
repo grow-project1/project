@@ -50,13 +50,12 @@ namespace projeto.Controllers
             if (!string.IsNullOrEmpty(tempo))
             {
                 var agora = DateTime.Now;
-                var filtrosTempo = tempo.Split(',');
+                var filtrosTempo = tempo.Split(',').Select(int.Parse).ToList();
 
-                if (filtrosTempo.Contains("< 1d")) query = query.Where(l => l.DataFim <= agora.AddDays(1));
-                else if (filtrosTempo.Contains("< 5d")) query = query.Where(l => l.DataFim <= agora.AddDays(5));
-                else if (filtrosTempo.Contains("< 10d")) query = query.Where(l => l.DataFim <= agora.AddDays(10));
+                query = query.Where(l => filtrosTempo.Any(t => l.DataFim <= agora.AddDays(t)));
             }
-            
+
+
             if (min.HasValue)
                 query = query.Where(l => l.ValorAtualLance >= min.Value);
             if (max.HasValue)
