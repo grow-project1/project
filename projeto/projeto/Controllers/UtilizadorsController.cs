@@ -35,8 +35,6 @@ namespace projeto.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
-
-
         // Método Register (GET)
         public IActionResult Register()
         {
