@@ -30,10 +30,10 @@ namespace growTests
                 .Options;
             _dbContext = new ApplicationDbContext(options);
 
-            // 2) Mock da IConfiguration (caso precises de chaves para algo)
+            // 2) Mock da IConfiguration 
             _mockConfig = new Mock<IConfiguration>();
 
-            // 3) FakeEmailSender para não tentar SMTP real
+            // 3) FakeEmailSender
             _fakeEmailSender = new FakeEmailSender();
 
             // 4) Cria o Controller com injeção do fake
@@ -130,7 +130,7 @@ namespace growTests
             Assert.NotNull(verification);
             Assert.InRange(verification.VerificationCode, 100000, 999999);
 
-            // Se quiseres até podes verificar se a Session guardou algo
+            // verificar se a Session guardou algo
             Assert.True(defaultHttpContext.Session.TryGetValue("ResetEmail", out var resetEmailBytes));
             var resetEmail = System.Text.Encoding.UTF8.GetString(resetEmailBytes);
             Assert.Equal(validEmail, resetEmail);
