@@ -4,38 +4,69 @@
     ViewData["Title"] = "Profile";
 }
 
-<div class="container mt-5">
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@{
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+<div class="profile">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="card shadow-lg border-0 rounded">
-                <div class="card-header bg-success text-white text-center">
-                    
-                    <h3>Welcome, @Model.Nome</h3>
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h3 class="mb-0">@(english ? "Welcome," : "Bem-vindo,") <b>@Model.Nome </b></h3>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="card-title">Profile Information</h5>
-                        <a href="@Url.Action("Edit", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-dark btn-sm">
-                            <i class="fas fa-edit"></i> Edit Profile
-                        </a>
+                        
+                    <h5 class="card-title" style="font-weight: 600; font-size: 1.2rem;">@(english ? "Profile Information" : "Informação do perfil")</h5>    
+                    <a href="@Url.Action("Edit", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-success btn-custom">
+                        <i class="fas fa-edit"></i> @(english ? "Edit Profile" : "Editar perfil")
+                    </a>
+
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row mb-4">
+                        <div class="col-md-9">
+                            <p><strong>Email:</strong> @Model.Email</p>
+                            <p><strong>@(english ? "Name:" : "Nome:")</strong> @Model.Nome</p>
+                            <p><strong>@(english ? "Address:" : "Morada:")</strong> @Model.Morada</p>
+                            <p><strong>@(english ? "Postal Code:" : "Código Postal:")</strong> @Model.CodigoPostal</p>
+                            <p><strong>@(english ? "Phone:" : "Telemóvel:")</strong> @Model.Telemovel</p>
+                            <p><strong>@(english ? "Country:" : "País:")</strong> @Model.Pais</p>
+                            <p><strong>@(english ? "Points:" : "Pontos:")</strong> @Model.Pontos</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="@Url.Content(Model.ImagePath)" class="img-fluid rounded-circle" alt="Profile Image" width="150" height="150" />
+                            <br />
+                            <a href="@Url.Action("EditAvatar", "Utilizadors", new { id = Model.UtilizadorId })" class="btn btn-outline-dark btn-sm mt-2">
+                                <i class="fas fa-edit"></i> @(english ? "Edit Avatar" : "Editar Avatar")
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="mb-4">
-                        <p><strong>Email:</strong> @Model.Email</p>
-                        <p><strong>Nome:</strong> @Model.Nome</p>
+                    <div class="btn-group w-100 d-flex justify-content-between mt-4" role="group">
+                        <a href="@Url.Action("MyAuctions", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
+                            @(english ? "My Auctions" : "Meus Leilões")
+                        </a>
+                        <a href="@Url.Action("MyBids", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
+                            @(english ? "My Bids" : "Minhas licitações")
+                        </a>
+                        <a href="@Url.Action("ConfirmPassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
+                            @(english ? "Change Password" : "Alterar Senha")
+                        </a>
+                        <button id="cancel-account-btn" class="btn-profile flex-grow-1 text-center cancel-btn">
+                            @(english ? "Cancel Account" : "Cancelar Conta")
+                        </button>
                     </div>
 
-                    <div class="btn-group w-100" role="group">
-                        <a href="@Url.Action("MyAuctions", "Auctions", new { userId = Model.UtilizadorId })" class="btn-profile">
-                            My Auctions
-                        </a>
-                        <a href="@Url.Action("ChangePassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile">
-                            Change Password
-                        </a>
-                        <a href="@Url.Action("CancelAccount", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile cancel-btn"> 
-                            Cancel Account
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

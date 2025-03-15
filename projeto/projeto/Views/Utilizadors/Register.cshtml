@@ -3,26 +3,33 @@
 @{
     ViewData["Title"] = "Register";
 }
+@{
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
 
 <div class="container register-page">
     <div class="register-container">
-        <h2>Register</h2>
+        <div class="logo-container">
+            <img src="~/css/images/logotipo.png" alt="Logo" class="logo" />
+        </div>
+
+        <h2>@(english ? "Register" : "Registar")</h2>
 
         <form asp-action="Register" method="post">
             <div class="form-group">
-                <input asp-for="Nome" class="form-control form-control-lg" placeholder="Enter your name" />
+                <input asp-for="Nome" class="form-control form-control-lg" placeholder="@(english ? "Enter your name" : "Insira o seu nome")" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Email" class="form-control form-control-lg" placeholder="Enter your email" />
+                <input asp-for="Email" class="form-control form-control-lg" placeholder="@(english ? "Enter your email" : "Insira a sua palavra-passe")" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="Enter your password" />
+                <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="@(english ? "Enter your password" : "Insira a sua palavra-passe")" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn register-btn btn-block">Register</button>
+            <button type="submit" class="btn register-btn btn-block">@(english ? "Register" : "Registar")</button>
         </form>
 
         @if (!string.IsNullOrEmpty(ViewData.ModelState[string.Empty]?.Errors.FirstOrDefault()?.ErrorMessage))

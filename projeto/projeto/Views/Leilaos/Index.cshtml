@@ -1,0 +1,190 @@
+﻿@model IEnumerable<projeto.Models.Leilao>
+@using projeto.Models
+@{
+    ViewData["Title"] = "Leilões";
+    var loggedUserId = ViewData["UserId"] as int?;
+    var categorias = ViewData["Categorias"] as List<Categoria>;
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<div class="container">
+    <aside class="sidebar">
+        <h3>@(english ? "Categories" : "Categorias")</h3>
+        <div class="categorias">
+            @if (categorias != null)
+            {
+                @foreach (var categoria in categorias)
+                {
+                    <label class="checkbox-container">
+                        <span>@categoria</span>
+                        <input type="checkbox" name="categorias" value="@categoria">
+                    </label>
+                }
+            }
+        </div>
+        <br />
+        <h3>@(english ? "Time Left" : "Tempo restante")</h3>
+        <div class="filters">
+            <label class="checkbox-container"><span>&lt; 1d</span><input type="checkbox"></label>
+            <label class="checkbox-container"><span>&lt; 5d</span><input type="checkbox"></label>
+            <label class="checkbox-container"><span>&lt; 10d</span><input type="checkbox"></label>
+        </div>
+
+        <h3>@(english ? "Price Range" : "Faixa de Preço")</h3>
+        <div class="price-range">
+            <input type="number" placeholder="@(english ? "Min" : "Mínimo")">
+            @(english ? "To" : "Até")
+            <input type="number" placeholder="@(english ? "Max" : "Máximo")">
+        </div>
+
+        <button class="btn-apply">@(english ? "Apply" : "Aplicar")</button>
+        <button class="btn-clear">@(english ? "Clear" : "Limpar")</button>
+    </aside>
+
+    <a asp-action="Create" class="btn-create">+</a>
+
+    <!-- MENSAGENS DE SUCESSO OU ERRO -->
+    @if (TempData["Error"] != null)
+    {
+        <div class="alertt alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alertt alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="grid-leiloes">
+        @foreach (var leilao in Model)
+        {
+            <div class="leilao-card" onclick="window.location.href='@Url.Action("Details", "Leilaos", new { id = leilao.LeilaoId })'">
+                @if (leilao.Item.Categoria == 0)
+                {
+                    <div class="sustentavel-container">
+                        <i class="fas fa-leaf sustentavel-icon" title="Leilão Sustentável"></i>
+                    </div>
+                }
+                <img src="@leilao.Item.FotoUrl" alt="@leilao.Item.Titulo" class="img-leilao" />
+                <div class="leilao-details">
+                    <h5>@leilao.Item.Titulo</h5>
+                    <p class="price">
+                        <strong>@(english ? "Current Bid:" : "Oferta Atual:")</strong> @leilao.ValorAtualLance€
+                    </p>
+                    <p class="price">
+                        <strong>@(english ? "Minimum Increment:" : "Incremento Mínimo:")</strong> @leilao.ValorIncrementoMinimo€
+                    </p>
+
+                    @if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
+                    {
+                        <strong>@(english ? "Auction Closed" : "Leilão Encerrado")</strong>
+                        <p><strong>@(english ? "Winner:" : "Vencedor:")</strong> @(leilao.Vencedor != null ? leilao.Vencedor : " - ")</p>
+                    }
+                    else
+                    {
+                        <p class="end-time" data-endtime="@leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
+                            <strong>@(english ? "Ends in:" : "Termina em:")</strong> <span class="countdown"></span>
+                        </p>
+                    }
+
+                    @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
+                    {
+                        <form asp-action="Delete" asp-route-id="@leilao.LeilaoId" method="post" class="delete-form">
+                            <button type="submit" class="btn-delete" title="Delete">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const applyButton = document.querySelector(".btn-apply");
+        const clearButton = document.querySelector(".btn-clear");
+
+        applyButton.addEventListener("click", function () {
+            let selectedCategories = Array.from(document.querySelectorAll("input[name='categorias']:checked"))
+                .map(cb => cb.value);
+
+            let timeFilters = Array.from(document.querySelectorAll(".filters input:checked"))
+                .map(cb => cb.nextElementSibling.textContent.trim());
+
+            let minPrice = document.querySelector(".price-range input[placeholder='Mínimo'], .price-range input[placeholder='Min']").value;
+            let maxPrice = document.querySelector(".price-range input[placeholder='Máximo'], .price-range input[placeholder='Max']").value;
+
+            let queryParams = new URLSearchParams();
+            if (selectedCategories.length > 0) queryParams.append("categorias", selectedCategories.join(","));
+            if (timeFilters.length > 0) queryParams.append("tempo", timeFilters.join(","));
+            if (minPrice) queryParams.append("min", minPrice);
+            if (maxPrice) queryParams.append("max", maxPrice);
+
+            window.location.href = "?" + queryParams.toString();
+        });
+
+        clearButton.addEventListener("click", function () {
+            window.location.href = "?";
+        });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function updateCountdowns() {
+            document.querySelectorAll(".end-time").forEach(function (element) {
+                let endTime = new Date(element.getAttribute("data-endtime")).getTime();
+                let now = new Date().getTime();
+                let timeLeft = endTime - now;
+
+                if (timeLeft > 0) {
+                    let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    element.querySelector(".countdown").textContent =
+                        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    element.querySelector(".countdown").textContent = "@(english ? "Auction Closed" : "Leilão Encerrado")";
+                }
+            });
+        }
+
+        updateCountdowns(); // Atualiza imediatamente ao carregar a página
+        setInterval(updateCountdowns, 1000); // Atualiza a cada segundo
+    });
+</script>
+
+<style>
+    .sustentavel-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .sustentavel-icon {
+        font-size: 20px;
+        color: green;
+    }
+
+    .leilao-card {
+        position: relative;
+    }
+</style>

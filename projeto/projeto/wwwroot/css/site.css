@@ -1,19 +1,29 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #e9f5e1;
+    height: 100%;
+}
+
 /* Navbar */
 .navbar {
-    background-color: #2c6e49 !important;
+    background-color: #2c6e49;
     display: flex !important;
-    justify-content: space-between !important; /* Para garantir que o logo fique à esquerda e os links à direita */
-    align-items: center !important; /* Garante que todos os itens da navbar fiquem verticalmente alinhados */
+    justify-content: space-between;
+    align-items: center;
+    z-index: 101;
+    position: fixed;
+    top:0;
+    width: 100%;
 }
 
-/* Ajusta o alinhamento do ul que contém Login e Register */
 .navbar-nav.ml-auto {
     margin-left: auto;
-    display: flex; /* Torna os itens em linha */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
+    display: flex; 
+    align-items: center; 
 }
 
-/* Estilo para o logo */
 .navbar img {
     margin-left: 20px;
     height: 40px;
@@ -26,26 +36,20 @@
     margin-right: 10px !important;
 }
 
-    .navbar .navbar-nav .nav-link:hover {
-        color: #e0e0e0 !important;
-    }
-
-
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #e9f5e1;
-    height: 100%;
+.navbar .navbar-nav .nav-link:hover {
+    color: #e0e0e0 !important;
 }
 
+/* ---------------------------- */
+
+/** LOGIN AND REGISTER PAGE*/
 .login-page, .register-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     padding: 0 20px;
-    margin-top: -100px;
+    margin-top: -50px;
 }
 
 .login-container, .register-container {
@@ -64,26 +68,24 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Ajuste no tamanho do input e borda */
-input {
-    padding: 12px;
-    font-size: 14px; /* Ajuste para um tamanho de fonte menor */
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-    margin-bottom: 12px;
-    outline: none;
+.form-control {
+    font-size: 0.8rem; /* Tamanho menor */
 }
 
-    input::placeholder {
-        font-size: 14px; /* Tamanho menor do placeholder */
-        color: #bbb; /* Cor do placeholder */
-    }
+.text-danger {
+    margin-top:-20px;
+    font-size: 0.8rem; /* Tamanho menor para o texto de erro */
+}
 
-    input:focus {
-        border-color: #45a049;
-        outline: none;
-    }
+input::placeholder {
+    font-size: 14px; /* Tamanho menor do placeholder */
+    color: #bbb; /* Cor do placeholder */
+}
+
+input:focus {
+    border-color: #45a049;
+    outline: none;
+}
 
 .btn {
     padding: 12px;
@@ -93,10 +95,10 @@ input {
     transition: background-color 0.3s ease;
 }
 
-    .btn:hover {
-        background-color: #45a049;
-        color: white;
-    }
+.btn:hover {
+    background-color: #45a049;
+    color: white;
+}
 
 .login-btn, .register-btn, .btn-save {
     background-color: #4caf50;
@@ -110,31 +112,36 @@ input {
     text-decoration: none;
 }
 
-    .forgot-password-link:hover {
-        text-decoration: underline;
-        color: #4caf50;
-    }
+.forgot-password-link:hover {
+    text-decoration: underline;
+    color: #4caf50;
+}
 
 .alert {
-    margin-top: 20px;
+    margin-top: 0px;
     padding: 15px;
     font-size: 1rem;
     border-radius: 5px;
 }
+
+/* --------------------------- */
+
+/*
 
 .alert-danger {
     background-color: #f44336;
     color: white;
 }
 
+*/
 
-/* Estilo para o cartão de perfil */
+
+/* HOME PAGE*/
 .card {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header do cartão */
 .card-header {
     background-color: #28a745;
     color: white;
@@ -154,9 +161,11 @@ input {
     transition: all 0.3s ease;
 }
 
-    .btn:hover {
-        transform: scale(1.05);
-    }
+
+
+.btn:hover {
+    transform: scale(1.01);
+}
 
 .btn-info {
     background-color: #17a2b8;
@@ -178,10 +187,10 @@ input {
     color: #343a40;
 }
 
-    .btn-outline-dark:hover {
-        background-color: #343a40;
-        color: white;
-    }
+.btn-outline-dark:hover {
+    background-color: #343a40;
+    color: white;
+}
 
 /* Espaçamento entre os botões */
 .btn-group .btn {
@@ -251,3 +260,574 @@ input {
     .btn-profile.cancel-btn:hover {
         background-color: #8c1a1a; /* Vermelho mais escuro no hover */
     }
+
+
+
+
+
+.forgot-password-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.forgot-password-container {
+    width: 700px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ 
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.forgot-password-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.back-to-login-link {
+    text-decoration: none;
+    color: #007bff;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+
+
+/* PARTE DOS LEILOES */
+.categorias {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: flex-end; /* Alinha a checkbox à direita */
+    align-items: center; /* Alinha o texto e a checkbox verticalmente */
+    width: 100%; /* Garante que a largura ocupe toda a linha */
+    margin-bottom: 4px; /* Espaçamento entre as linhas de checkboxes */
+}
+
+    .checkbox-container span {
+        margin-right: 10px; /* Espaço entre o texto e a checkbox */
+        text-align: left; /* Garante que o texto esteja à esquerda */
+    }
+
+    .checkbox-container input[type="checkbox"] {
+        margin-left: 60px; /* Espaço entre a checkbox e o texto */
+    }
+
+
+
+/* Barra lateral *//* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 240px; /* Largura fixa da sidebar */
+    height: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Garante que os itens comecem de cima */
+}
+
+
+
+.sidebar h3 {
+    font-size: 1.3em; /* Aumentei o tamanho do título para maior destaque */
+    color: #333;
+    font-weight:bold;
+    margin-bottom: 10px;
+    text-align: left; /* Garantir que o título da sidebar esteja alinhado à esquerda */
+}
+
+.filters, .price-range {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os itens da sidebar à esquerda */
+}
+
+.price-range input {
+    width: 100%; /* Garante que o input ocupe toda a largura disponível */
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 7px;
+    border: 1px solid black;
+}
+
+.btn-apply, .btn-clear, .btn-create {
+    background-color: #2c6e49;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.btn-clear {
+    background-color: gray;
+}
+
+.btn-create {
+    background-color: #007bff;
+}
+
+.btn-apply:hover {
+    background-color: #2e7e49;
+}
+
+.btn-clear:hover{
+    background-color: dimgrey;
+}
+
+.sidebar .btn-apply, .sidebar .btn-clear, .sidebar .btn-create {
+    width: 100%;
+}
+
+/* Leilões Grid */
+.grid-leiloes {
+    margin-left: 180px; /* Garante que o grid de leilões tenha espaço para a sidebar */
+    margin-top: 95px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.leilao-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: .4s;
+    width: 280px;
+}
+
+.leilao-card:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.img-leilao {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    border-bottom: 1px solid black;
+}
+
+.leilao-details h5 {
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.btn-view, .btn-delete {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-view:hover, .btn-delete:hover {
+    background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .grid-leiloes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-leiloes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-leiloes {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: absolute; /* Torna a sidebar fixa apenas no topo */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto; /* Torna a sidebar com altura automática */
+        padding: 10px;
+        border-right: none;
+    }
+
+    .grid-leiloes {
+        margin-left: 0;
+    }
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-delete:hover {
+    transform: scale(1.1);
+    background: none;
+}
+
+.btn-create {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px; /* Definir uma largura fixa */
+    height: 60px; /* Definir uma altura fixa para mantê-lo redondo */
+    border-radius: 100%; /* Deixa o botão completamente redondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2c6e49; /* Cor azul padrão */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para dar destaque */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-create:hover {
+    background-color: #1c6e49; /* Azul mais escuro no hover */
+    transform: scale(1.1); /* Efeito de crescimento ao passar o mouse */
+    color:white;
+}
+
+.btn-create:active {
+    transform: scale(0.9); /* Efeito de clique */
+}
+
+
+.alertt{
+    width: 500px;
+    position: absolute;
+    top: 80px;
+    left: 900px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.auction-container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: rgba(249, 249, 249, 10.9); /* Deixa o fundo do formulário levemente transparente */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+.auction-form {
+    padding: 20px;
+}
+
+.section-title h4 {
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 14px;
+    width: 100%;
+}
+
+    .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+
+.custom-file-input {
+    background-color: #28a745;
+    display: none;
+}
+
+.custom-file-label {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+    .custom-file-label:hover {
+        background-color: #218838;
+    }
+
+.form-submit {
+    text-align: center;
+}
+
+.btn-submit {
+    background-color: #28a745; /* Botão verde */
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-submit:hover {
+        background-color: #218838; /* Verde mais escuro para hover */
+    }
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .back-link a {
+        color: #28a745;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+        .back-link a:hover {
+            text-decoration: underline;
+            color: #28a745;
+        }
+
+
+
+
+
+
+/* --------------------- DESCONTOS PAGE ------------------------- */
+
+
+
+
+
+/* -------------------- PROFILE PAGE --------------------------- */
+.profile {
+   
+    margin-top: 100px;
+}
+
+/* -------------------- MY AUCTIONS PAGE ------------------------ */
+/* Estilo para o contêiner das minhas ações */
+.container-my-auctions {
+    margin-top: 100px;
+    display: flex;
+
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    max-width: 1600px;
+    padding: 20px;
+}
+
+
+/* Botão de criação com tamanho menor */
+.btn-create-auction {
+    font-size: 1rem; /* Ajuste do tamanho da fonte */
+    padding: 5px 15px; /* Tamanho do botão reduzido */
+    width: auto; /* Largura automática */
+    margin-top: 30px; /* Distância inferior */
+    position: absolute;
+    left: 110px;
+    background-color: #2c6e49;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Estilo do botão de criação */
+.text-end a {
+    font-size: 1rem; /* Ajuste de tamanho para o botão */
+}
+
+/* Container para os cards */
+.my-auctions {
+    display: inline-block;
+    width: calc(22.33% - 20px);
+    margin: 10px;
+    box-sizing: border-box;
+    vertical-align: top;
+    text-align: center; /* Centraliza os elementos dentro do card */
+}
+
+/* Estilo do card */
+.card-my-auctions {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    background-color: #fff;
+    text-align: center; /* Centraliza o conteúdo dentro do card */
+}
+
+    .card-my-auctions img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+.card-body {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.card-my-auctions .btn {
+    width: 100%;
+    margin: 5px 0;
+}
+
+/* Estilo dos botões */
+.btn-sm {
+    font-size: 0.7rem;
+}
+
+/* Estilo geral para os botões */
+.btn-details-auction, .btn-edit-auction, .btn-delete-auction {
+    display: block;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: none;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    color: white;
+    border-bottom: 1px solid black;
+}
+
+.btn-details-auction {
+    color: black;
+}
+
+.btn-edit-auction {
+    color: black;
+}
+
+.btn-delete-auction {
+    color: black;
+}
+
+.btn-details-auction:hover {
+    color: black;
+    transform: scale(1.04);
+    border-bottom: 3px solid black;
+}
+
+.btn-edit-auction:hover {
+    color: black;
+    transform: scale(1.04);
+    border-bottom: 3px solid black;
+}
+
+.btn-delete-auction:hover {
+    color: red;
+    transform: scale(1.04);
+    border-bottom: 3px solid black;
+}
+
+.btn-details-auction i, .btn-edit-auction i, .btn-delete-auction i {
+    margin-right: 5px;
+}
+
+/* Adicionando efeito de foco */
+.btn-details-auction:focus, .btn-edit-auction:focus, .btn-delete-auction:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+

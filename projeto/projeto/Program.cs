@@ -1,5 +1,6 @@
 using projeto.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,10 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true; // Necessário para GDPR em alguns cenários
 });
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
+
 // Adicionar os outros serviços
 builder.Services.AddControllersWithViews();
 
@@ -29,6 +34,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage(); // Para ambientes de desenvolvimento
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -39,6 +55,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Leilaos}/{action=Index}/{id?}");
 
 app.Run();
