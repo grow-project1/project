@@ -1,4 +1,4 @@
-﻿namespace projeto.Models
+﻿namespace growTests.Models
 {
     public class Licitacao
     {

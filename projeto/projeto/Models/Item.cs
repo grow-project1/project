@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
-namespace projeto.Models
+namespace growTests.Models
 {
     public class Item
     { 

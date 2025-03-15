@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace projeto.Migrations
+namespace growTests.Migrations
 {
     /// <inheritdoc />
     public partial class init : Migration

@@ -1,22 +1,27 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using projeto.Data;
-using projeto.Models;
+using growTests.Data;
+using growTests.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity;
 
-namespace projeto.Controllers
+
+namespace growTests.Controllers
 {
     public class UtilizadorsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IConfiguration _configuration;
+        private readonly IEmailSender _emailSender;
 
-        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
+        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration configuration, IEmailSender emailSender)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _configuration = configuration;
+            _emailSender = emailSender;
         }
 
         public IActionResult ToggleLanguage(string language)
@@ -411,11 +416,10 @@ namespace projeto.Controllers
             {
                 VerificationCode = verificationCode
             };
-
-            var emailSender = new EmailSender(_configuration); 
+            // Em vez de criar new EmailSender(...) aqui, usa _emailSender
             string subject = "Código de Verificação";
             string message = $"Seu código de verificação é: {verificationCode}";
-            await emailSender.SendEmailAsync(email, subject, message);
+            await _emailSender.SendEmailAsync(email, subject, message);
 
 
             _context.VerificationModel.Add(verificationModel);

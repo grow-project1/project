@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 
-namespace projeto.Models
+namespace growTests.Models
 
 {
     public class Desconto

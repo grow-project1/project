@@ -1,10 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using projeto.Data;
-using projeto.Models;
+using growTests.Data;
+using growTests.Models;
 
-namespace projeto.Controllers
+namespace growTests.Controllers
 {
     public class HomeController : Controller
     {

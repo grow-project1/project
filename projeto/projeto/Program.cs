@@ -1,6 +1,7 @@
-using projeto.Data;
+using growTests.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,7 @@ builder.Services.AddSession(options =>
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Adicionar os outros serviços
 builder.Services.AddControllersWithViews();

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using projeto.Data;
-using projeto.Models;
+using growTests.Data;
+using growTests.Models;
 
-namespace projeto.Controllers
+namespace growTests.Controllers
 {
     public class DescontosController : Controller
     {

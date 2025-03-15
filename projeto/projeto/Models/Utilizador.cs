@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace projeto.Models
+namespace growTests.Models
 {
     public class Utilizador
     {
