@@ -10,10 +10,14 @@ namespace growTests
 {
     public class FakeEmailSender : IEmailSender
     {
+        public List<(string To, string Subject, string Body)> SentEmails { get; }
+            = new List<(string To, string Subject, string Body)>();
+
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            // Não faz nada (simula envio de email com sucesso).
+            SentEmails.Add((email, subject, htmlMessage));
             return Task.CompletedTask;
         }
     }
+
 }

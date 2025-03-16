@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-using projeto.Data;
-using projeto.Models;
+using growTests.Data;
+using growTests.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 
 namespace growTests.Controllers
 {
@@ -17,12 +19,14 @@ namespace growTests.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
         private readonly IConfiguration _config;
+        private readonly IEmailSender _emailSender;
 
-        public LeilaosController(ApplicationDbContext context, IWebHostEnvironment env, IConfiguration config)
+        public LeilaosController(ApplicationDbContext context, IWebHostEnvironment env, IConfiguration config, IEmailSender emailSender)
         {
             _context = context;
             _env = env;
             _config = config;
+            _emailSender = emailSender;
         }
 
         // GET: Leilaos
@@ -30,7 +34,6 @@ namespace growTests.Controllers
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
-            var emailSender = new EmailSender(_config);
 
             ViewData["UserPoints"] = user?.Pontos;
             ViewData["Logged"] = user != null;
@@ -101,7 +104,7 @@ namespace growTests.Controllers
                                            $"<p>Você venceu o leilão do item <strong>{leilao.Item.Titulo}</strong> pelo valor de {licitacaoVencedora.ValorLicitacao}€.</p>" +
                                            "<p>Entre na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> para proceder à entrega do item.</p>";
 
-                        await emailSender.SendEmailAsync(vencedor.Email, subject, message);
+                        await _emailSender.SendEmailAsync(vencedor.Email, subject, message);
 
                         if (leiloeiro != null)
                         {
@@ -111,7 +114,7 @@ namespace growTests.Controllers
                                                       $"<p>O vencedor foi: <strong>{vencedor.Nome}</strong></p>" +
                                                       "<p>Entre na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> para coordenar a entrega do item.</p>";
 
-                            await emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiro, messageLeiloeiro);
+                            await _emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiro, messageLeiloeiro);
                         }
                     }
                 }
@@ -126,7 +129,7 @@ namespace growTests.Controllers
                                                               "<p>Considere repostar o item ou ajustar o preço inicial para atrair mais interessados.</p>" +
                                                               "<p>Você pode gerir os seus leilões na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> indo ao seu perfil e aos seus leilões para recolocar o seu leilão.</p>";
 
-                        await emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiroSemLicitacoes, messageLeiloeiroSemLicitacoes);
+                        await _emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiroSemLicitacoes, messageLeiloeiroSemLicitacoes);
                     }
                 }
                 leilao.EstadoLeilao = EstadoLeilao.Encerrado;

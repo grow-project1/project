@@ -1,10 +1,4 @@
 C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\CoverletSourceRootsMapping_growTests
-C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.csproj.AssemblyReference.cache
-C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.GeneratedMSBuildEditorConfig.editorconfig
-C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.AssemblyInfoInputs.cache
-C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.AssemblyInfo.cs
-C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.csproj.CoreCompileInputs.cache
-C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.sourcelink.json
 C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\testhost.dll
 C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\projeto.deps.json
 C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\projeto.runtimeconfig.json
@@ -350,6 +344,12 @@ C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\runtimes\browser\lib\net
 C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\projeto.dll
 C:\GitHub\PV\project\projeto\growTests\bin\Debug\net8.0\projeto.pdb
+C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.csproj.AssemblyReference.cache
+C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.AssemblyInfoInputs.cache
+C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.AssemblyInfo.cs
+C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.csproj.CoreCompileInputs.cache
+C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.sourcelink.json
 C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.csproj.Up2Date
 C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\growTests.dll
 C:\GitHub\PV\project\projeto\growTests\obj\Debug\net8.0\refint\growTests.dll
