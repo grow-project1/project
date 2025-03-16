@@ -263,8 +263,6 @@ namespace growTests.Controllers
         }
 
         // POST: Utilizadors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UtilizadorId,Email,Password")] Utilizador utilizador)
@@ -345,7 +343,6 @@ namespace growTests.Controllers
             }
         }
 
-
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -384,7 +381,6 @@ namespace growTests.Controllers
             return _context.Utilizador.Any(e => e.UtilizadorId == id);
         }
 
-        // Método para "Esqueci Minha Senha" - POST
         // Método ForgotPassword (GET)
         public IActionResult ForgotPassword()
         {
@@ -460,7 +456,6 @@ namespace growTests.Controllers
                 return View();
             }
 
-            // Código válido, redireciona para a redefinição de senha
             return RedirectToAction("ResetPassword");
         }
 
@@ -505,7 +500,6 @@ namespace growTests.Controllers
                 return View();
             }
 
-            // 🔴 Verificar se a nova palavra-passe é igual à atual
             if (BCrypt.Net.BCrypt.Verify(newPassword, utilizador.Password))
             {
                 ModelState.AddModelError("newPassword", "The new password cannot be the same as the current password.");
@@ -516,7 +510,6 @@ namespace growTests.Controllers
                 return View();
             }
 
-            // Se passou nas verificações, atualiza a palavra-passe
             utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
             _context.Utilizador.Update(utilizador);
             await _context.SaveChangesAsync();
@@ -526,7 +519,6 @@ namespace growTests.Controllers
             TempData["Success"] = "Password successfully reset! Please log in with the new password.";
             return RedirectToAction("Login");
         }
-
 
         public async Task<IActionResult> ConfirmPasswordAsync(int id)
         {
@@ -562,14 +554,12 @@ namespace growTests.Controllers
                 return View();
             }
 
-            // Verificar se a senha atual está correta
             if (!BCrypt.Net.BCrypt.Verify(currentPassword, utilizador.Password))
             {
                 ModelState.AddModelError("confirmPassword", "Invalid password");
                 return View();
             }
 
-            // Redireciona para a página de atualização da nova senha
             return RedirectToAction("UpdatePassword", new { id = utilizador.UtilizadorId });
         }
 
@@ -654,9 +644,8 @@ namespace growTests.Controllers
                 return NotFound();
             }
 
-            // Diretório onde os avatares estão armazenados
             string avatarDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-            var avatars = Directory.GetFiles(avatarDirectory, "avatar*.png") // Filtra arquivos que começam com "avatar"
+            var avatars = Directory.GetFiles(avatarDirectory, "avatar*.png")
                                    .Select(Path.GetFileName)
                                    .ToList();
 
@@ -690,8 +679,6 @@ namespace growTests.Controllers
             return RedirectToAction("Profile");
         }
 
-
-
         [HttpGet]
         public async Task<IActionResult> Pagamentos()
         {
@@ -700,13 +687,11 @@ namespace growTests.Controllers
 
             if (user == null) return RedirectToAction("Login");
 
-            // Buscar pagamentos pendentes
             var pagamentos = await _context.Leiloes
              .Where(l => l.UtilizadorId == user.UtilizadorId ||
                          l.Licitacoes.OrderByDescending(li => li.DataLicitacao).FirstOrDefault().UtilizadorId == user.UtilizadorId)
              .ToListAsync();
 
-            // Buscar leilões ganhos
             var leiloesGanhos = await _context.Leiloes
                 .Include(l => l.Item)
                 .Where(l => l.Vencedor == user.Nome)
