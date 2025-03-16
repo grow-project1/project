@@ -5,6 +5,22 @@
     var loggedUserId = ViewData["UserId"] as int?;
     var categorias = ViewData["Categorias"] as List<Categoria>;
     var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+
+    string MaskName(string nome)
+    {
+        if (string.IsNullOrEmpty(nome) || nome.Length < 2)
+            return nome;
+
+        var partesNome = nome.Split(' ');
+        for (int i = 0; i < partesNome.Length; i++)
+        {
+            if (partesNome[i].Length > 2)
+            {
+                partesNome[i] = partesNome[i][0] + new string('*', partesNome[i].Length - 2) + partesNome[i][^1];
+            }
+        }
+        return string.Join(" ", partesNome);
+    }
 }
 
 <head>
@@ -29,9 +45,9 @@
         <br />
         <h3>@(english ? "Time Left" : "Tempo restante")</h3>
         <div class="filters">
-            <label class="checkbox-container"><span>&lt; 1d</span><input type="checkbox"></label>
-            <label class="checkbox-container"><span>&lt; 5d</span><input type="checkbox"></label>
-            <label class="checkbox-container"><span>&lt; 10d</span><input type="checkbox"></label>
+            <label class="checkbox-container"><span>&lt; 1d</span><input type="checkbox" value="1"></label>
+            <label class="checkbox-container"><span>&lt; 5d</span><input type="checkbox" value="5"></label>
+            <label class="checkbox-container"><span>&lt; 10d</span><input type="checkbox" value="10"></label>
         </div>
 
         <h3>@(english ? "Price Range" : "Faixa de Preço")</h3>
@@ -47,7 +63,6 @@
 
     <a asp-action="Create" class="btn-create">+</a>
 
-    <!-- MENSAGENS DE SUCESSO OU ERRO -->
     @if (TempData["Error"] != null)
     {
         <div class="alertt alert-danger">
@@ -85,7 +100,10 @@
                     @if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
                     {
                         <strong>@(english ? "Auction Closed" : "Leilão Encerrado")</strong>
-                        <p><strong>@(english ? "Winner:" : "Vencedor:")</strong> @(leilao.Vencedor != null ? leilao.Vencedor : " - ")</p>
+                        <p>
+                            <strong>@(english ? "Winner:" : "Vencedor:")</strong>
+                            @(leilao.Vencedor != null ? MaskName(leilao.Vencedor) : " - ")
+                        </p>
                     }
                     else
                     {
@@ -109,7 +127,7 @@
 </div>
 
 <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         const applyButton = document.querySelector(".btn-apply");
         const clearButton = document.querySelector(".btn-clear");
 
@@ -118,7 +136,7 @@
                 .map(cb => cb.value);
 
             let timeFilters = Array.from(document.querySelectorAll(".filters input:checked"))
-                .map(cb => cb.nextElementSibling.textContent.trim());
+                .map(cb => cb.value);
 
             let minPrice = document.querySelector(".price-range input[placeholder='Mínimo'], .price-range input[placeholder='Min']").value;
             let maxPrice = document.querySelector(".price-range input[placeholder='Máximo'], .price-range input[placeholder='Max']").value;
@@ -136,7 +154,6 @@
             window.location.href = "?";
         });
     });
-
 
     document.addEventListener("DOMContentLoaded", function () {
         function updateCountdowns() {
@@ -159,10 +176,11 @@
             });
         }
 
-        updateCountdowns(); // Atualiza imediatamente ao carregar a página
-        setInterval(updateCountdowns, 1000); // Atualiza a cada segundo
+        updateCountdowns();
+        setInterval(updateCountdowns, 1000);
     });
 </script>
+
 
 <style>
     .sustentavel-container {
