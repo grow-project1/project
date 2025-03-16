@@ -36,6 +36,7 @@
 <div class="auction-container">
     <h1 class="auction-title">@Model.Item.Titulo</h1>
 
+
     <div class="auction-content">
         <div class="auction-image">
             <img src="@Url.Content(Model.Item.FotoUrl)" alt="@Model.Item.Titulo" />
@@ -43,7 +44,22 @@
                 <p class="card-text">
                     @(english ? "Current Bid:" : "Lance Atual:") <b>@Model.ValorAtualLance.ToString("C")</b>
                 </p>
+
+                <div>
+                    @if (isOwner && Model.EstadoLeilao == EstadoLeilao.Encerrado && Model.Vencedor == null)
+                    {
+                        <div class="repost-container">
+                            <form asp-action="RecolocarLeilao" method="post">
+                                <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
+                                <button type="submit" class="btn-repost">
+                                    🔄 @(english ? "Relist Auction" : "Recolocar Leilão")
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
             </div>
+            
         </div>
 
         <div class="auction-details">
@@ -70,12 +86,7 @@
                     <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
                 }
 
-                <span class="text-danger d-block mt-2">
-                    @if (isOwner)
-                    {
-                        <text>@(english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão.")</text>
-                    }
-                </span>
+       
             </form>
 
             <button id="btnShowBids" class="toggle-bids">@(english ? "View Bids" : "Ver Licitações")</button>
@@ -117,12 +128,10 @@
 
         </div>
     </div>
+
 </div>
 
-@if (isOwner)
-{
-    <p class="text-danger">@english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão."</p>
-}
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

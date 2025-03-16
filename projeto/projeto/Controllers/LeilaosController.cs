@@ -117,6 +117,7 @@ namespace projeto.Controllers
                 }
                 else
                 {
+                    leilao.Vencedor = null;
                     if (leiloeiro != null)
                     {
                         string subjectLeiloeiroSemLicitacoes = $"O seu leilão {leilao.Item.Titulo} terminou sem licitações";
@@ -128,7 +129,9 @@ namespace projeto.Controllers
                         await emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiroSemLicitacoes, messageLeiloeiroSemLicitacoes);
                     }
                 }
+                leilao.EstadoLeilao = EstadoLeilao.Encerrado;
                 _context.Update(leilao);
+
             }
 
             await _context.SaveChangesAsync();
@@ -141,6 +144,11 @@ namespace projeto.Controllers
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
             ViewData["UserPoints"] = user?.Pontos;
+
+            if (user != null)
+            {
+                ViewData["UserId"] = user.UtilizadorId; // 🔹 Definindo UserId para a View
+            }
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
