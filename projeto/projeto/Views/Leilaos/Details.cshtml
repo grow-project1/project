@@ -29,11 +29,6 @@
         .Where(u => u.UtilizadorId == Model.UtilizadorId)
         .Select(u => u.Nome)
         .FirstOrDefault();
-
-    var vencedorNome = _context.Utilizador
-        .Where(u => u.Nome == Model.Vencedor)
-        .Select(u => u.Nome)
-        .FirstOrDefault();
 }
 
 <link rel="stylesheet" href="~/css/leilao.css" />
@@ -46,23 +41,8 @@
             <img src="@Url.Content(Model.Item.FotoUrl)" alt="@Model.Item.Titulo" />
             <div class="current-bid">
                 <p class="card-text">
-                    @(Model.EstadoLeilao == EstadoLeilao.Encerrado ? (english ? "Final Bid:" : "Lance Final:") : (english ? "Current Bid:" : "Lance Atual:"))
-                    <b>@Model.ValorAtualLance.ToString("C")</b>
+                    @(english ? "Current Bid:" : "Lance Atual:") <b>@Model.ValorAtualLance.ToString("C")</b>
                 </p>
-
-                @if (Model.EstadoLeilao == EstadoLeilao.Encerrado)
-                {
-                    <p class="winner-info">
-                        @if (!string.IsNullOrEmpty(Model.Vencedor))
-                        {
-                            <strong>@(english ? "Congrats to the winner!!" : "Parabéns ao vencedor!!")</strong> 
-                        }
-                        else
-                        {
-                            <strong class="text-danger">@(english ? "No winners" : "Não houve vencedores")</strong>
-                        }
-                    </p>
-                }
             </div>
         </div>
 
@@ -77,22 +57,26 @@
             <p><strong>@(english ? "Minimum increment:" : "Incremento mínimo:")</strong> @Model.ValorIncrementoMinimo.ToString("C")</p>
             <p><strong>@(english ? "Owner:" : "Proprietário:")</strong> @ownerName</p>
 
-            @if (Model.EstadoLeilao != EstadoLeilao.Encerrado)
-            {
-                <form asp-action="FazerLicitacaoDetails" method="post">
-                    <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
-                    <input type="number" name="valorLicitacao" step="0.01" placeholder="@(english ? "Place bid" : "Fazer lance")" required />
+            <form asp-action="FazerLicitacaoDetails" method="post">
+                <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
+                <input type="number" name="valorLicitacao" step="0.01" placeholder="@(english ? "Place bid" : "Fazer lance")" required />
 
-                    <button type="submit" class="bid-button" @(isOwner ? "disabled" : "")>
-                        @(english ? "Place Bid" : "Fazer Lance")
-                    </button>
+                <button type="submit" class="bid-button" @(isOwner ? "disabled" : "")>
+                    @(english ? "Place Bid" : "Fazer Lance")
+                </button>
 
-                    @if (TempData["BidError"] != null)
+                @if (TempData["BidError"] != null)
+                {
+                    <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
+                }
+
+                <span class="text-danger d-block mt-2">
+                    @if (isOwner)
                     {
-                        <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
+                        <text>@(english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão.")</text>
                     }
-                </form>
-            }
+                </span>
+            </form>
 
             <button id="btnShowBids" class="toggle-bids">@(english ? "View Bids" : "Ver Licitações")</button>
             <div id="bidsList" class="bids-list" style="display:none;">
@@ -125,14 +109,20 @@
                 </table>
             </div>
             <script>
-                document.getElementById("btnShowBids").onclick = function () {
+                document.getElementById("btnShowBids").onclick = function() {
                     var bidsList = document.getElementById("bidsList");
                     bidsList.style.display = (bidsList.style.display === "none") ? "block" : "none";
                 };
             </script>
+
         </div>
     </div>
 </div>
+
+@if (isOwner)
+{
+    <p class="text-danger">@english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão."</p>
+}
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

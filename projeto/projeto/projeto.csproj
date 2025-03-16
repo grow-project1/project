@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Leilaos\Recolocar.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Services\EmailSender.cs" />
   </ItemGroup>
 

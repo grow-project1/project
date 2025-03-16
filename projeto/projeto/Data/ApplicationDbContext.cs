@@ -21,8 +21,6 @@ namespace growTests.Data
         public DbSet<Item> Itens { get; set; } = default!;
         public DbSet<Leilao> Leiloes { get; set; } = default!;
         public DbSet<Licitacao> Licitacoes { get; set; } = default!;
-       
-
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
