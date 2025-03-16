@@ -54,8 +54,7 @@
               "RelativeToolTip": "projeto\\wwwroot\\css\\Edit.css",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-03-16T16:18:42.482Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T16:18:42.482Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Index.cshtml",
               "ViewState": "AgIAAGkAAAAAAAAAAAAAAHsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-15T10:27:23.089Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T10:27:23.089Z"
             },
             {
               "$type": "Document",
@@ -80,8 +78,7 @@
               "RelativeToolTip": "projeto\\Controllers\\LeilaosController.cs",
               "ViewState": "AgIAAIUAAAAAAAAAAAAgwJYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T08:17:20.892Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T08:17:20.892Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,7 @@
               "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
               "ViewState": "AgIAAH8BAAAAAAAAAAAcwJ0BAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T10:24:36.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T10:24:36.477Z"
             },
             {
               "$type": "Document",
@@ -104,7 +100,7 @@
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Details.cshtml",
               "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Views\\Leilaos\\Details.cshtml",
               "RelativeToolTip": "projeto\\Views\\Leilaos\\Details.cshtml",
-              "ViewState": "AgIAAJQAAAAAAAAAAAAwwKEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAHwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-13T08:29:52.65Z",
               "EditorCaption": ""
@@ -119,8 +115,7 @@
               "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
               "ViewState": "AgIAABIAAAAAAAAAAAAowBQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-03-15T10:33:15.212Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T10:33:15.212Z"
             }
           ]
         }

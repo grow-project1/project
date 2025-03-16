@@ -29,6 +29,11 @@
         .Where(u => u.UtilizadorId == Model.UtilizadorId)
         .Select(u => u.Nome)
         .FirstOrDefault();
+
+    var vencedorNome = _context.Utilizador
+        .Where(u => u.Nome == Model.Vencedor)
+        .Select(u => u.Nome)
+        .FirstOrDefault();
 }
 
 <link rel="stylesheet" href="~/css/leilao.css" />
@@ -36,30 +41,29 @@
 <div class="auction-container">
     <h1 class="auction-title">@Model.Item.Titulo</h1>
 
-
     <div class="auction-content">
         <div class="auction-image">
             <img src="@Url.Content(Model.Item.FotoUrl)" alt="@Model.Item.Titulo" />
             <div class="current-bid">
                 <p class="card-text">
-                    @(english ? "Current Bid:" : "Lance Atual:") <b>@Model.ValorAtualLance.ToString("C")</b>
+                    @(Model.EstadoLeilao == EstadoLeilao.Encerrado ? (english ? "Final Bid:" : "Lance Final:") : (english ? "Current Bid:" : "Lance Atual:"))
+                    <b>@Model.ValorAtualLance.ToString("C")</b>
                 </p>
 
-                <div>
-                    @if (isOwner && Model.EstadoLeilao == EstadoLeilao.Encerrado && Model.Vencedor == null)
-                    {
-                        <div class="repost-container">
-                            <form asp-action="RecolocarLeilao" method="post">
-                                <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
-                                <button type="submit" class="btn-repost">
-                                    🔄 @(english ? "Relist Auction" : "Recolocar Leilão")
-                                </button>
-                            </form>
-                        </div>
-                    }
-                </div>
+                @if (Model.EstadoLeilao == EstadoLeilao.Encerrado)
+                {
+                    <p class="winner-info">
+                        @if (!string.IsNullOrEmpty(Model.Vencedor))
+                        {
+                            <strong>@(english ? "Congrats to the winner!!" : "Parabéns ao vencedor!!")</strong> 
+                        }
+                        else
+                        {
+                            <strong class="text-danger">@(english ? "No winners" : "Não houve vencedores")</strong>
+                        }
+                    </p>
+                }
             </div>
-            
         </div>
 
         <div class="auction-details">
@@ -73,21 +77,22 @@
             <p><strong>@(english ? "Minimum increment:" : "Incremento mínimo:")</strong> @Model.ValorIncrementoMinimo.ToString("C")</p>
             <p><strong>@(english ? "Owner:" : "Proprietário:")</strong> @ownerName</p>
 
-            <form asp-action="FazerLicitacaoDetails" method="post">
-                <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
-                <input type="number" name="valorLicitacao" step="0.01" placeholder="@(english ? "Place bid" : "Fazer lance")" required />
+            @if (Model.EstadoLeilao != EstadoLeilao.Encerrado)
+            {
+                <form asp-action="FazerLicitacaoDetails" method="post">
+                    <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
+                    <input type="number" name="valorLicitacao" step="0.01" placeholder="@(english ? "Place bid" : "Fazer lance")" required />
 
-                <button type="submit" class="bid-button" @(isOwner ? "disabled" : "")>
-                    @(english ? "Place Bid" : "Fazer Lance")
-                </button>
+                    <button type="submit" class="bid-button" @(isOwner ? "disabled" : "")>
+                        @(english ? "Place Bid" : "Fazer Lance")
+                    </button>
 
-                @if (TempData["BidError"] != null)
-                {
-                    <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
-                }
-
-       
-            </form>
+                    @if (TempData["BidError"] != null)
+                    {
+                        <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
+                    }
+                </form>
+            }
 
             <button id="btnShowBids" class="toggle-bids">@(english ? "View Bids" : "Ver Licitações")</button>
             <div id="bidsList" class="bids-list" style="display:none;">
@@ -120,18 +125,14 @@
                 </table>
             </div>
             <script>
-                document.getElementById("btnShowBids").onclick = function() {
+                document.getElementById("btnShowBids").onclick = function () {
                     var bidsList = document.getElementById("bidsList");
                     bidsList.style.display = (bidsList.style.display === "none") ? "block" : "none";
                 };
             </script>
-
         </div>
     </div>
-
 </div>
-
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
