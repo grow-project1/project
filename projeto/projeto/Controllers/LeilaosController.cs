@@ -123,7 +123,7 @@ namespace projeto.Controllers
                         string messageLeiloeiroSemLicitacoes = $"<h2>O seu leilão chegou ao fim, mas não obteve nenhuma licitação.</h2>" +
                                                               $"<p>Infelizmente, o item <strong>{leilao.Item.Titulo}</strong> não recebeu lances durante o período do leilão.</p>" +
                                                               "<p>Considere repostar o item ou ajustar o preço inicial para atrair mais interessados.</p>" +
-                                                              "<p>Você pode gerir os seus leilões na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a>.</p>";
+                                                              "<p>Você pode gerir os seus leilões na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> indo ao seu perfil e aos seus leilões para recolocar o seu leilão.</p>";
 
                         await emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiroSemLicitacoes, messageLeiloeiroSemLicitacoes);
                     }
@@ -551,5 +551,137 @@ namespace projeto.Controllers
 
             return View(meusLances);
         }
+
+        [HttpGet]
+        [Route("Leiloes/RecolocarLeilao/{id}")]
+        public async Task<IActionResult> RecolocarLeilao(int id)
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var leilao = await _context.Leiloes
+                .Include(l => l.Item)
+                .FirstOrDefaultAsync(l => l.LeilaoId == id);
+
+            if (leilao == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["Categorias"] = Enum.GetValues(typeof(Categoria))
+                .Cast<Categoria>()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.ToString(),
+                    Text = c.ToString()
+                }).ToList();
+
+            ViewData["UserPoints"] = user.Pontos;
+            CarregarCategorias();
+
+            return View(leilao);
+        }
+
+        private void CarregarCategorias()
+        {
+            ViewBag.Categorias = new SelectList(Enum.GetValues(typeof(Categoria)));
+        }
+
+
+
+        [HttpPost]
+        [Route("Leiloes/RecolocarLeilao/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RecolocarLeilao(int id, IFormFile novaFoto, [Bind("LeilaoId, DataFim, ValorIncrementoMinimo, Item")] Leilao leilaoAtualizado)
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var leilao = await _context.Leiloes
+                .Include(l => l.Item)
+                .FirstOrDefaultAsync(l => l.LeilaoId == id);
+
+            if (leilao == null)
+            {
+                return NotFound();
+            }
+
+            // 🚨 Verificação antecipada para a DataFim
+            if (leilaoAtualizado.DataFim <= DateTime.Now)
+            {
+                ModelState.AddModelError("DataFim", "Data Invalida.");
+                return View(leilao); // Retorna sem validar outros campos
+            }
+
+            
+
+            // Atualiza os dados do leilão
+            leilao.DataFim = leilaoAtualizado.DataFim;
+            leilao.ValorIncrementoMinimo = leilaoAtualizado.ValorIncrementoMinimo;
+            leilao.EstadoLeilao = EstadoLeilao.Disponivel;
+
+            // Atualiza os dados do item
+            leilao.Item.Titulo = leilaoAtualizado.Item.Titulo;
+            leilao.Item.Descricao = leilaoAtualizado.Item.Descricao;
+            leilao.Item.PrecoInicial = leilaoAtualizado.Item.PrecoInicial;
+            leilao.Item.Categoria = leilaoAtualizado.Item.Categoria;
+
+            // Se não houver nova foto, mantém a antiga
+            if (novaFoto != null && novaFoto.Length > 0)
+            {
+                string folder = "leilao/fotos/";
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(novaFoto.FileName);
+                string serverFolder = Path.Combine(_env.WebRootPath, folder);
+
+                if (!Directory.Exists(serverFolder))
+                {
+                    Directory.CreateDirectory(serverFolder);
+                }
+
+                string filePath = Path.Combine(serverFolder, fileName);
+
+                if (novaFoto.Length > 5 * 1024 * 1024)
+                {
+                    ModelState.AddModelError("Item.fotoo", "O tamanho do ficheiro é demasiado grande.");
+                    return View(leilao);
+                }
+
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                if (!allowedExtensions.Contains(Path.GetExtension(novaFoto.FileName).ToLower()))
+                {
+                    ModelState.AddModelError("Item.fotoo", "Apenas ficheiros .jpg, .jpeg, .png, .gif são permitidos.");
+                    return View(leilao);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await novaFoto.CopyToAsync(stream);
+                }
+
+                // Atualiza a URL da foto
+                leilao.Item.FotoUrl = "/" + folder + fileName;
+            }
+
+            CarregarCategorias();
+
+            _context.Update(leilao);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("MyAuctions");
+        }
+
+
     }
+
 }
+
