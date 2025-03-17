@@ -479,13 +479,16 @@ namespace projeto.Controllers
                 return RedirectToAction("ForgotPassword");
             }
 
-            if (string.IsNullOrEmpty(newPassword))
+            // Verifica se a password foi preenchida (mas sem adicionar erro manual)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("newPassword", "New password is required.");
+                return View(); // ASP.NET já adicionou "The newPassword field is required."
             }
-            else if (newPassword.Length < 6)
+
+            if (!IsPasswordStrong(newPassword))
             {
-                ModelState.AddModelError("newPassword", "Password must have at least 6 characters.");
+                ModelState.AddModelError("newPassword", "Password must have at least 6 characters, one uppercase letter, one number, and one special character.");
+                return View();
             }
 
             var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
@@ -499,10 +502,6 @@ namespace projeto.Controllers
             if (BCrypt.Net.BCrypt.Verify(newPassword, utilizador.Password))
             {
                 ModelState.AddModelError("newPassword", "The new password cannot be the same as the current password.");
-            }
-
-            if (!ModelState.IsValid)
-            {
                 return View();
             }
 
@@ -510,11 +509,10 @@ namespace projeto.Controllers
             _context.Utilizador.Update(utilizador);
             await _context.SaveChangesAsync();
 
-            await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
-
             TempData["Success"] = "Password successfully reset! Please log in with the new password.";
             return RedirectToAction("Login");
         }
+
 
         public async Task<IActionResult> ConfirmPasswordAsync(int id)
         {
