@@ -9,9 +9,10 @@
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info text-center">
+    <div class="text-center mt-sm-4" style="color: #555; font-style: italic;">
         @(english ? "You haven't placed any bids yet." : "Ainda não fizeste nenhuma licitação.")
     </div>
+
 }
 else
 {

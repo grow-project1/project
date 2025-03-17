@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projeto.Data;
 using projeto.Models;
+using Stripe;
 
 namespace projeto.Controllers
 {
@@ -320,8 +321,8 @@ namespace projeto.Controllers
                 _context.Update(utilizadorExistente);
                 await _context.SaveChangesAsync();
 
-                // Adiciona mensagem de sucesso
-                TempData["Success"] = "Perfil atualizado com sucesso!";
+
+                TempData["SuccessMessage"] = "Profile saved";
 
                 return RedirectToAction("Profile", new { id = utilizadorExistente.UtilizadorId });
             }
@@ -522,6 +523,8 @@ namespace projeto.Controllers
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
             ViewData["UserPoints"] = user?.Pontos;
+
+
             if (utilizador == null)
             {
                 return NotFound();
@@ -553,6 +556,8 @@ namespace projeto.Controllers
                 ModelState.AddModelError("confirmPassword", "Invalid password");
                 return View();
             }
+
+            TempData["SuccessMessage"] = "Password changed successfully!";
 
             return RedirectToAction("UpdatePassword", new { id = utilizador.UtilizadorId });
         }
@@ -643,6 +648,9 @@ namespace projeto.Controllers
                                    .Select(Path.GetFileName)
                                    .ToList();
 
+
+            TempData["SuccessMessage"] = "Avatar updated successfully!";
+
             ViewBag.AvatarList = avatars;
             return View(utilizador);
         }
@@ -673,29 +681,54 @@ namespace projeto.Controllers
             return RedirectToAction("Profile");
         }
 
+        [HttpPost]
+        public IActionResult ProcessPayment()
+        {
+            try
+            {
+                var options = new PaymentIntentCreateOptions
+                {
+                    Amount = 1000, // Valor em cêntimos (€10.00)
+                    Currency = "eur",
+                    PaymentMethod = "pm_card_visa", // Cartão de teste do Stripe
+                    Confirm = true,
+                    AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+                    {
+                        Enabled = true,
+                        AllowRedirects = "never" // 🔥 Impede redirecionamentos
+                    }
+                };
+
+                var service = new PaymentIntentService();
+                PaymentIntent pagamento = service.Create(options);
+
+                return Json(new
+                {
+                    success = true,
+                    id = pagamento.Id,
+                    status = pagamento.Status,
+                    amount = pagamento.Amount / 100.0
+                });
+            }
+            catch (StripeException e)
+            {
+                return Json(new { success = false, error = e.Message });
+            }
+        }
+
         [HttpGet]
-        public async Task<IActionResult> Pagamentos()
+        public async Task<IActionResult> PagamentosAsync()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
-            if (user == null) return RedirectToAction("Login");
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
 
-            var pagamentos = await _context.Leiloes
-             .Where(l => l.UtilizadorId == user.UtilizadorId ||
-                         l.Licitacoes.OrderByDescending(li => li.DataLicitacao).FirstOrDefault().UtilizadorId == user.UtilizadorId)
-             .ToListAsync();
-
-            var leiloesGanhos = await _context.Leiloes
-                .Include(l => l.Item)
-                .Where(l => l.Vencedor == user.Nome)
-                .ToListAsync();
-
-            ViewData["UserPoints"] = user.Pontos;
-            ViewData["LeiloesGanhos"] = leiloesGanhos;
-
-            return View(pagamentos);
+            return View();
         }
-
-    }
+        }
 }
+

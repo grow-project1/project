@@ -154,7 +154,7 @@ input:focus {
 }
 
 .card-header {
-    background-color: #28a745;
+    background-color: #2c6e49;
     color: white;
     padding: 20px;
     font-size: 1.5rem;
@@ -241,7 +241,7 @@ input:focus {
     font-weight: bold;
     text-transform: uppercase;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 50%; /* Faz o botão ocupar a largura disponível */
+   /* Faz o botão ocupar a largura disponível */
     margin-bottom: 10px; /* Adiciona espaçamento entre os botões */
     transition: 0.4s;
     /* Centraliza o texto dentro do botão */
@@ -416,6 +416,7 @@ h2 {
 
 .btn-create {
     background-color: #007bff;
+    z-index: 10;
 }
 
 .btn-apply:hover {
@@ -583,8 +584,10 @@ h2 {
 
 
 .auction-container {
-    max-width: 800px;
-    margin: 100px auto;
+
+    width: 800px;
+    height: 600px;
+    margin: 300px auto;
     padding: 20px;
     background-color: rgba(249, 249, 249, 10.9); /* Deixa o fundo do formulário levemente transparente */
     border-radius: 10px;
@@ -696,149 +699,130 @@ h2 {
 /* -------------------- PROFILE PAGE --------------------------- */
 .profile {
    
-    margin-top: 100px;
+    margin-top: 140px;
 }
 
 /* -------------------- MY AUCTIONS PAGE ------------------------ */
-/* Estilo para o contêiner das minhas ações */
 .container-my-auctions {
-    margin-top: 100px;
-    display: flex;
-
-    align-items: center; /* Centraliza o conteúdo verticalmente */
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    max-width: 1600px;
-    padding: 20px;
-}
-
-
-/* Botão de criação com tamanho menor */
-.btn-create-auction {
-    font-size: 1rem; /* Ajuste do tamanho da fonte */
-    padding: 5px 15px; /* Tamanho do botão reduzido */
-    width: auto; /* Largura automática */
-    margin-top: 30px; /* Distância inferior */
-    position: absolute;
-    left: 110px;
-    background-color: #2c6e49;
-    border-bottom: 1px solid black;
-    border-radius: 10px;
-    color: white;
-}
-
-/* Estilo do botão de criação */
-.text-end a {
-    font-size: 1rem; /* Ajuste de tamanho para o botão */
-}
-
-/* Container para os cards */
-.my-auctions {
-    display: inline-block;
-    width: calc(22.33% - 20px);
-    margin: 10px;
-    box-sizing: border-box;
-    vertical-align: top;
-    text-align: center; /* Centraliza os elementos dentro do card */
-}
-
-/* Estilo do card */
-.card-my-auctions {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    height: 500px;
-    background-color: #fff;
-    text-align: center; /* Centraliza o conteúdo dentro do card */
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
 }
 
-    .card-my-auctions img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
 
-.card-body {
+
+.auctions-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 80%;
+    margin-bottom: 20px;
+}
+
+.auction-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 280px; /* Ajustando a largura das cartas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 15px;
-    flex-grow: 1;
+    margin-bottom: 20px;
 }
 
-.card-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
+
+
+.auction-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.auction-info {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.auction-title {
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
-.card-text {
+.auction-text {
     font-size: 1rem;
-    margin-bottom: 15px;
+    color: #555;
 }
 
-.card-my-auctions .btn {
-    width: 100%;
-    margin: 5px 0;
+.auction-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
 }
 
-/* Estilo dos botões */
-.btn-sm {
-    font-size: 0.7rem;
-}
-
-/* Estilo geral para os botões */
-.btn-details-auction, .btn-edit-auction, .btn-delete-auction {
-    display: block;
+.btn-my-auctions {
+    color: black;
     padding: 10px 20px;
-    margin: 5px 0;
+    border-bottom: 2px solid black;
     border-radius: 5px;
     text-decoration: none;
-    background-color: none;
-    font-weight: bold;
-    text-align: center;
-    transition: all 0.3s ease;
-    color: white;
-    border-bottom: 1px solid black;
+    display: block;
+    transition: 0.3s ease-in-out;
 }
 
-.btn-details-auction {
+.butt-del {
+    padding: 10px 20px;
+    border-radius: 5px;
     color: black;
 }
 
-.btn-edit-auction {
+.btn-my-auctions:hover {
+    transform: scale(1.05);
     color: black;
 }
 
-.btn-delete-auction {
-    color: black;
-}
-
-.btn-details-auction:hover {
-    color: black;
-    transform: scale(1.04);
-    border-bottom: 3px solid black;
-}
-
-.btn-edit-auction:hover {
-    color: black;
-    transform: scale(1.04);
-    border-bottom: 3px solid black;
-}
-
-.btn-delete-auction:hover {
+.butt-del:hover {
+    transform: scale(1.05);
     color: red;
-    transform: scale(1.04);
-    border-bottom: 3px solid black;
 }
 
-.btn-details-auction i, .btn-edit-auction i, .btn-delete-auction i {
-    margin-right: 5px;
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Adicionando efeito de foco */
-.btn-details-auction:focus, .btn-edit-auction:focus, .btn-delete-auction:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+.page-link {
+    border-radius: 10px;
+    color: green;
+    text-decoration: none;
 }
 
+    .page-link:hover {
+        color: seagreen;
+    }
 
+
+
+.no-auctions {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.create-auction-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* ------------------------------------------------------------------- */

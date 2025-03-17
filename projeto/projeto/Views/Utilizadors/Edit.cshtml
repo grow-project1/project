@@ -229,8 +229,9 @@
             </div>
             <button type="submit" class="btn edit-btn btn-block">@(english ? "Save Changes" : "Guardar Alterações")</button>
         </form>
-
-        <a href="/" class="back-link">@(english ? "Back to Home" : "Voltar para a Página Inicial")</a>
+        <div class="mt-3">
+            <a href="@Url.Action("Profile", "Utilizadors")" class="forgot-password-link">@(english ? "Back" : "Voltar")</a>
+        </div>
     </div>
 </div>
 

@@ -520,6 +520,8 @@ namespace projeto.Controllers
             int pageSize = 3;
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+       
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {
@@ -545,6 +547,8 @@ namespace projeto.Controllers
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+       
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {
@@ -688,6 +692,11 @@ namespace projeto.Controllers
         public async Task<IActionResult> TopAuctions()
 
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
+
             var topLeiloes = await _context.Leiloes
                 .Include(l => l.Item)
                 .Include(l => l.Licitacoes)

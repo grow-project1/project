@@ -8,10 +8,8 @@
     int itemsPerPage = 3;
 }
 
-<link rel="stylesheet" href="~/css/MyAuctions.css" />
 
-<div class="container">
-    <h2 class="title">@(english ? "My Auctions" : "Meus Leilões")</h2>
+<div class="container-my-auctions">
 
     @if (Model != null && Model.Any())
     {
@@ -22,17 +20,17 @@
                     <img src="@Url.Content(auction.Item.FotoUrl)" class="auction-image" alt="Auction Image">
                     <div class="auction-info">
                         <h3 class="auction-title">@auction.Item.Titulo</h3>
-                        <p class="auction-text">@(english ? "Current Bid:" : "Lance Atual:") <b>@auction.ValorAtualLance.ToString("C")</b></p>
-                        <p class="auction-text">@(english ? "Ends On:" : "Termina em:") @auction.DataFim.ToString("dd/MM/yyyy HH:mm")</p>
+                        <p class="auction-text">@(english ? "Current bid:" : "Preço atual:") <b>@auction.ValorAtualLance.ToString("C")</b></p>
+                        <p class="auction-text">@(english ? "Ends on:" : "Termina em:") @auction.DataFim.ToString("dd/MM/yyyy HH:mm")</p>
                     </div>
                     <div class="auction-actions">
-                        <a href="@Url.Action("Details", "Leilaos", new { id = auction.LeilaoId })" class="btn btn-details">
+                        <a href="@Url.Action("Details", "Leilaos", new { id = auction.LeilaoId })" class="btn-my-auctions">
                             <i class="fas fa-eye"></i> @(english ? "View" : "Ver")
                         </a>
                         @* <a href="@Url.Action("Edit", "Leilaos", new { id = auction.LeilaoId })" class="btn btn-edit">
                             <i class="fas fa-edit"></i> @(english ? "Edit" : "Editar")
                         </a> *@
-                        <a href="@Url.Action("Delete", "Leilaos", new { id = auction.LeilaoId })" class="btn btn-delete" onclick="return confirm('@(english ? "Are you sure?" : "Tem certeza?")');">
+                        <a href="@Url.Action("Delete", "Leilaos", new { id = auction.LeilaoId })" class="btn-my-auctions butt-del" onclick="return confirm('@(english ? "Are you sure?" : "Tem a certeza?")');">
                             <i class="fas fa-trash"></i> @(english ? "Delete" : "Eliminar")
                         </a>
                         @if (auction.EstadoLeilao == EstadoLeilao.Encerrado && auction.Vencedor == null)
@@ -51,15 +49,17 @@
         <div class="pagination">
             @if (currentPage > 1)
             {
-                <a href="@Url.Action("MyAuctions", new { page = currentPage - 1 })" class="page-link">« @(english ? "Previous" : "Anterior")</a>
+                <a href="@Url.Action("MyAuctions", new { page = currentPage - 1 })" class="page-link"> @(english ? "Previous" : "Anterior")</a>
             }
 
-            <span class="page-number">@(english ? "Page" : "Página") @currentPage of @totalPages</span>
+            <span class="page-number">@(english ? "Page" : "Página") @currentPage <span>@(english ? "of" : "de")</span> @totalPages</span>
 
             @if (currentPage < totalPages)
             {
-                <a href="@Url.Action("MyAuctions", new { page = currentPage + 1 })" class="page-link">@(english ? "Next" : "Próxima") »</a>
-            }
+                <div class="next-page">
+                    <a href="@Url.Action("MyAuctions", new { page = currentPage + 1 })" class="page-link">@(english ? "Next" : "Próxima") </a
+                </div>
+               }
         </div>
     }
     else
