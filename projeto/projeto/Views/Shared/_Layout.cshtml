@@ -58,6 +58,13 @@
                                 </a>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <div class="d-flex justify-content-center mx-auto">
+                                <a class="nav-link text-dark" asp-controller="Leilaos" asp-action="TopAuctions">
+                                    <i class="fas fa-trophy"></i> @(english ? "Top Auctions" : "Top Leilões")
+                                </a>
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Itens de Login e Register alinhados à direita -->
@@ -85,7 +92,7 @@
                             </li>
                             <li class="nav-item position-relative">
                                 <a class="nav-link text-dark position-relative" asp-area="" asp-controller="Utilizadors" asp-action="Profile">
-                                    <i class="fas fa-user fa-lg"></i> <!-- Ícone de perfil -->
+                                    <i class="fas fa-user fa-lg"></i>
                                     <span class="badge rounded-circle position-absolute top-0 mt-2 start-100 translate-middle bg-white border border-dark text-dark d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; font-size: 14px;">
                                         @ViewData["UserPoints"]
                                     </span>
