@@ -15,14 +15,14 @@ using growTests;
 
 namespace growTests
 {
-    public class ForgotPasswordTests
+    public class ForgotPasswordNotificationsTests
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly Mock<IConfiguration> _mockConfig; // Mock da IConfiguration
         private readonly FakeEmailSender _fakeEmailSender; // Fake para não ligar a SMTP
         private readonly UtilizadorsController _controller;
 
-        public ForgotPasswordTests()
+        public ForgotPasswordNotificationsTests()
         {
             // 1) Configura DB em memória
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
