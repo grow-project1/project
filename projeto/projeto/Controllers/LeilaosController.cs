@@ -147,7 +147,7 @@ namespace projeto.Controllers
 
             if (user != null)
             {
-                ViewData["UserId"] = user.UtilizadorId; // 🔹 Definindo UserId para a View
+                ViewData["UserId"] = user.UtilizadorId;
             }
 
             var leilao = await _context.Leiloes
