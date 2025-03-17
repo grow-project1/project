@@ -573,26 +573,126 @@ h2 {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-.auction-container {
-
-    width: 800px;
-    height: 600px;
-    margin: 300px auto;
-    padding: 20px;
-    background-color: rgba(249, 249, 249, 10.9); /* Deixa o fundo do formulário levemente transparente */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* ----------------------- DETAILS PAGE ------------------------------- */
+.back-button {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    color: #2c6e49;
+    font-size: 14px;
+    border: none;
+    text-decoration: none;
 }
+
+    .back-button:hover {
+        color: #2c6e49;
+    }
+
+
+.auction-details-container {
+    max-width: 900px;
+    background: white;
+    padding: 20px;
+    margin: 150px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auction--details-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.auction--details-content {
+    display: flex;
+    gap: 20px;
+}
+
+.auction--details-image img {
+    width: 350px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.current-bid-details {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.winner-info-details {
+    font-size: 16px;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.auction-details {
+    flex: 1;
+}
+
+    .auction-details p {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+
+.bid-button-details {
+    background-color: #2c6e49;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.button-details-bids {
+    background-color: #bdc3c7 !important;
+    color: black !important;
+    padding: 5px 10px !important; 
+    font-size: 14px !important;
+    border-radius: 3px !important;
+    border: 1px solid #7f8c8d !important;
+    cursor: pointer !important;
+    transition: 0.4s step-end ease-in-out !important;
+    margin-top: 20px !important;
+}
+
+    .button-details-bids:hover {
+        background-color: #95a5a6 !important;
+    }
+
+
+
+    .bid-button-details:hover {
+        background-color: seagreen;
+    }
+
+
+  .input-details{
+      padding: 9px;
+      border-radius: 10px;
+      border: 1px solid black;
+  }
+
+  .bid{
+      margin-top: 20px;
+      justify-content: center;
+  }
+
+
+/* ---------------------------------------------------- */
+
+
+
+
+
+
+
+
+
 
 .page-title {
     text-align: center;
@@ -826,3 +926,39 @@ h2 {
 }
 
 /* ------------------------------------------------------------------- */
+.container-my-auctions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.table-responsive {
+    width: 70%;
+}
+
+.table {
+    font-size: 14px;
+    text-align: center; 
+}
+
+th, td {
+    padding: 8px 12px; 
+    text-align: center;
+    vertical-align: middle; 
+}
+
+th {
+    background-color: #2c6e49 !important;
+    color: white;
+}
+
+.badge {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+

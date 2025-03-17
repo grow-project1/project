@@ -390,7 +390,7 @@ namespace projeto.Controllers
 
             if (valorLicitacao < valorNecessario)
             {
-                TempData["Error"] = $"The bid must be higher than {valorNecessario:C2}.";
+                TempData["Error"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
                 return RedirectToAction("Index", "Leilaos");
             }
 
@@ -454,7 +454,7 @@ namespace projeto.Controllers
 
             if (valorLicitacao < valorNecessario)
             {
-                TempData["BidError"] = $"The bid must be higher than {valorNecessario:C2}.";
+                TempData["BidError"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
                 return RedirectToAction("Details", new { id = leilaoId });
             }
 
@@ -465,6 +465,9 @@ namespace projeto.Controllers
                 ValorLicitacao = valorLicitacao,
                 DataLicitacao = DateTime.Now
             };
+
+            TempData["BidSuccess"] = "Bid placed successfully!";
+
 
             _context.Licitacoes.Add(licitacao);
             user.Pontos += 1;
