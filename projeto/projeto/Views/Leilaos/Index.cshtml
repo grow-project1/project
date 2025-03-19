@@ -29,28 +29,37 @@
 
 <div class="container">
     <aside class="sidebar">
-        <h3>@(english ? "Categories" : "Categorias")</h3>
+        <h3>@(english ? "Categories" : "Categorias")</h3><hr>
         <div class="categorias">
             @if (categorias != null)
             {
                 @foreach (var categoria in categorias)
                 {
                     <label class="checkbox-container">
-                        <span>@categoria</span>
                         <input type="checkbox" name="categorias" value="@categoria">
+                        <span> @categoria</span>
                     </label>
                 }
             }
         </div>
         <br />
-        <h3>@(english ? "Time Left" : "Tempo restante")</h3>
+        <h3>@(english ? "Time Left" : "Tempo restante")</h3><hr>
         <div class="filters">
-            <label class="checkbox-container"><span>&lt; 1d</span><input type="checkbox" value="1"></label>
-            <label class="checkbox-container"><span>&lt; 5d</span><input type="checkbox" value="5"></label>
-            <label class="checkbox-container"><span>&lt; 10d</span><input type="checkbox" value="10"></label>
+            <label class="radio-container">
+                <input type="radio" name="tempo" value="1">
+                <span>&lt; 1d</span>
+            </label>
+            <label class="radio-container">
+                <input type="radio" name="tempo" value="5">
+                <span>&lt; 5d</span>
+            </label>
+            <label class="radio-container">
+                <input type="radio" name="tempo" value="10">
+                <span>&lt; 10d</span>
+            </label>
         </div>
 
-        <h3>@(english ? "Price Range" : "Faixa de Preço")</h3>
+        <h3>@(english ? "Price Range" : "Faixa de Preço")</h3><hr>
         <div class="price-range">
             <input type="number" placeholder="@(english ? "Min" : "Mínimo")">
             @(english ? "To" : "Até")
@@ -78,7 +87,9 @@
     }
 
     <div class="grid-leiloes">
-        @foreach (var leilao in Model)
+        @foreach (var leilao in Model
+        .Where(l => l.EstadoLeilao != EstadoLeilao.Encerrado)
+        .OrderBy(l => l.DataFim))
         {
             <div class="leilao-card" onclick="window.location.href='@Url.Action("Details", "Leilaos", new { id = leilao.LeilaoId })'">
                 @if (leilao.Item.Categoria == 0)
@@ -97,20 +108,9 @@
                         <strong>@(english ? "Minimum Increment:" : "Incremento Mínimo:")</strong> @leilao.ValorIncrementoMinimo€
                     </p>
 
-                    @if (leilao.EstadoLeilao == EstadoLeilao.Encerrado)
-                    {
-                        <strong>@(english ? "Auction Closed" : "Leilão Encerrado")</strong>
-                        <p>
-                            <strong>@(english ? "Winner:" : "Vencedor:")</strong>
-                            @(leilao.Vencedor != null ? MaskName(leilao.Vencedor) : " - ")
-                        </p>
-                    }
-                    else
-                    {
-                        <p class="end-time" data-endtime="@leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
-                            <strong>@(english ? "Ends in:" : "Termina em:")</strong> <span class="countdown"></span>
-                        </p>
-                    }
+                    <p class="end-time" data-endtime="@leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss")">
+                        <strong>@(english ? "Ends in:" : "Termina em:")</strong> <span class="countdown"></span>
+                    </p>
 
                     @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
                     {
@@ -204,5 +204,30 @@
 
     .leilao-card {
         position: relative;
+    }
+
+    .checkbox-container {
+        justify-content: flex-start;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+        margin-left: 0px;
+        margin-right: 10px;
+    }
+
+    hr {
+        height: 2px;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: #333333;
+    }
+
+    .sidebar h3 {
+        margin-bottom: 0;
+        margin-top: 15px;
+    }
+
+    .filters {
+        margin-bottom: 0px;
     }
 </style>

@@ -5,20 +5,21 @@
     var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
 }
 
-<h2 class="text-center my-4">@(english ? "My Bids" : "Minhas Licitações")</h2>
+
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info text-center">
+    <div class="text-center mt-sm-4" style="color: #555; font-style: italic;">
         @(english ? "You haven't placed any bids yet." : "Ainda não fizeste nenhuma licitação.")
     </div>
+
 }
 else
 {
-    <div class="container">
+    <div class="container-my-auctions">
         <div class="table-responsive d-flex justify-content-center">
             <table class="table table-striped">
-                <thead class="table-success">
+                <thead>
                     <tr>
                         <th>@(english ? "Auction Id" : "Leilão id")</th>
                         <th>@(english ? "Bid Amount" : "Valor da Licitação")</th>
@@ -45,7 +46,7 @@ else
                             </td>
                             <td>@bid.DataLicitacao.ToString("dd/MM/yyyy HH:mm")</td>
                             <td>
-                                <a href="@Url.Action("Details", "Leilaos", new { id = bid.LeilaoId })" class="btn btn-outline-primary btn-sm">
+                                <a href="@Url.Action("Details", "Leilaos", new { id = bid.LeilaoId })" class="btn-my-auctions">
                                     <i class="fas fa-eye"></i> @(english ? "View" : "Ver")
                                 </a>
                             </td>

@@ -2,36 +2,39 @@ using growTests.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicionar o DbContext à coleção de serviços
+// Adicionar o DbContext ï¿½ coleï¿½ï¿½o de serviï¿½os
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")
     ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
-builder.Services.AddDistributedMemoryCache(); // Necessário para armazenar sessões na memória
+builder.Services.AddDistributedMemoryCache(); // Necessï¿½rio para armazenar sessï¿½es na memï¿½ria
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Defina o tempo de inatividade conforme necessário
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Defina o tempo de inatividade conforme necessï¿½rio
     options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true; // Necessário para GDPR em alguns cenários
+    options.Cookie.IsEssential = true; // Necessï¿½rio para GDPR em alguns cenï¿½rios
 });
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-// Adicionar os outros serviços
+// Adicionar os outros serviï¿½os
 builder.Services.AddControllersWithViews();
+
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 var app = builder.Build();
 
-// Configurar o pipeline de requisições HTTP
+// Configurar o pipeline de requisiï¿½ï¿½es HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // O valor padrão de HSTS é 30 dias. Você pode querer mudar isso para cenários de produção.
+    // O valor padrï¿½o de HSTS ï¿½ 30 dias. Vocï¿½ pode querer mudar isso para cenï¿½rios de produï¿½ï¿½o.
     app.UseHsts();
 }
 
@@ -50,7 +53,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseSession(); // Adiciona o middleware de sessão
+app.UseSession(); // Adiciona o middleware de sessï¿½o
 
 app.UseAuthorization();
 

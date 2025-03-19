@@ -28,7 +28,7 @@
                         <li class="nav-item">
                             <div class="d-flex justify-content-center mx-auto">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Leilaos" asp-action="Index">
-                                    @(english ? "Home" : "Início")
+                                    <i class="fas fa-home"></i> @(english ? "Home" : "Início")
                                 </a>
                             </div>
                         </li>
@@ -54,7 +54,14 @@
                         <li class="nav-item">
                             <div class="d-flex justify-content-center mx-auto">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Pagamentos">
-                                    @(english ? "Payments" : "Pagamentos")
+                                    <i class="fas fa-credit-card"></i> @(english ? "Payments" : "Pagamentos")
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="d-flex justify-content-center mx-auto">
+                                <a class="nav-link text-dark" asp-controller="Leilaos" asp-action="TopAuctions">
+                                    <i class="fas fa-trophy"></i> @(english ? "Top Auctions" : "Top Leilões")
                                 </a>
                             </div>
                         </li>
@@ -75,7 +82,7 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Descontos" asp-action="Index">
-                                    @(english ? "Discounts" : "Descontos")
+                                    <i class="fas fa-tags"></i> @(english ? "Discounts" : "Descontos")
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -85,7 +92,7 @@
                             </li>
                             <li class="nav-item position-relative">
                                 <a class="nav-link text-dark position-relative" asp-area="" asp-controller="Utilizadors" asp-action="Profile">
-                                    <i class="fas fa-user fa-lg"></i> <!-- Ícone de perfil -->
+                                    <i class="fas fa-user fa-lg"></i>
                                     <span class="badge rounded-circle position-absolute top-0 mt-2 start-100 translate-middle bg-white border border-dark text-dark d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; font-size: 14px;">
                                         @ViewData["UserPoints"]
                                     </span>
@@ -93,7 +100,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadors" asp-action="Logout">
-                                    @(english ? "Logout" : "Sair")
+                                    @(english ? "Logout" : "Sair") <i class="fas fa-sign-out-alt"></i>
                                 </a>
                             </li>
                         }

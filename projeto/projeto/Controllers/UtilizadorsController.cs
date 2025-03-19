@@ -5,6 +5,9 @@ using growTests.Data;
 using growTests.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
+using projeto.Data;
+using projeto.Models;
+using Stripe;
 
 
 namespace growTests.Controllers
@@ -83,15 +86,93 @@ namespace growTests.Controllers
                 return View(utilizador);
             }
 
-            utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
 
-            _context.Add(utilizador);
+            //
+
+            // Gera o código de verificação
+            var random = new Random();
+            int verificationCode = random.Next(100000, 999999);
+
+            // Envia email com o código
+            var emailSender = new EmailSender(_configuration);
+            string subject = "Código de Verificação - Confirmação de Registo";
+            string message = $"Seu código de verificação é: {verificationCode}";
+            await emailSender.SendEmailAsync(utilizador.Email, subject, message);
+
+            // Guarda tudo na sessão (ou TempData)
+            // Atenção: Sessão não deve armazenar strings muito grandes. Aqui é pequeno, deve servir.
+            HttpContext.Session.SetString("PendingRegName", utilizador.Nome);
+            HttpContext.Session.SetString("PendingRegEmail", utilizador.Email);
+            HttpContext.Session.SetString("PendingRegPassword", utilizador.Password);
+
+            // Armazena também o code
+            HttpContext.Session.SetInt32("PendingRegCode", verificationCode);
+
+            TempData["Info"] = "We sent a verification code to your email. Please confirm.";
+            return RedirectToAction("ConfirmRegistration");
+
+
+            ////
+            //utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
+
+            //_context.Add(utilizador);
+            //await _context.SaveChangesAsync();
+
+            //await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
+
+            //TempData["Success"] = "Account successfully created! Please log in to access your account";
+
+            //return RedirectToAction("Login");
+        }
+
+        // GET
+        public IActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmRegistration(int verificationCode)
+        {
+            // Resgata dados da sessão
+            var pendingName = HttpContext.Session.GetString("PendingRegName");
+            var pendingEmail = HttpContext.Session.GetString("PendingRegEmail");
+            var pendingPass = HttpContext.Session.GetString("PendingRegPassword");
+            int? storedCode = HttpContext.Session.GetInt32("PendingRegCode");
+
+            if (string.IsNullOrEmpty(pendingEmail) || storedCode == null)
+            {
+                // Sessão expirou, ou o user já foi criado
+                TempData["Error"] = "Session expired. Please register again.";
+                return RedirectToAction("Register");
+            }
+
+            // Verifica o code
+            if (verificationCode != storedCode.Value)
+            {
+                TempData["Error"] = "Invalid code. Please try again.";
+                return View();
+            }
+
+            // OK: Criar o utilizador no DB
+            var utilizador = new Utilizador
+            {
+                Nome = pendingName,
+                Email = pendingEmail,
+                Password = BCrypt.Net.BCrypt.HashPassword(pendingPass),
+            };
+
+            _context.Utilizador.Add(utilizador);
             await _context.SaveChangesAsync();
 
-            await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
+            // Limpa a sessão
+            HttpContext.Session.Remove("PendingRegName");
+            HttpContext.Session.Remove("PendingRegEmail");
+            HttpContext.Session.Remove("PendingRegPassword");
+            HttpContext.Session.Remove("PendingRegCode");
 
-            TempData["Success"] = "Account successfully created! Please log in to access your account";
-
+            TempData["Success"] = "Account confirmed! Please log in.";
             return RedirectToAction("Login");
         }
 
@@ -325,8 +406,8 @@ namespace growTests.Controllers
                 _context.Update(utilizadorExistente);
                 await _context.SaveChangesAsync();
 
-                // Adiciona mensagem de sucesso
-                TempData["Success"] = "Perfil atualizado com sucesso!";
+
+                TempData["SuccessMessage"] = "Profile saved";
 
                 return RedirectToAction("Profile", new { id = utilizadorExistente.UtilizadorId });
             }
@@ -483,13 +564,16 @@ namespace growTests.Controllers
                 return RedirectToAction("ForgotPassword");
             }
 
-            if (string.IsNullOrEmpty(newPassword))
+            // Verifica se a password foi preenchida (mas sem adicionar erro manual)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("newPassword", "New password is required.");
+                return View(); // ASP.NET já adicionou "The newPassword field is required."
             }
-            else if (newPassword.Length < 6)
+
+            if (!IsPasswordStrong(newPassword))
             {
-                ModelState.AddModelError("newPassword", "Password must have at least 6 characters.");
+                ModelState.AddModelError("newPassword", "Password must have at least 6 characters, one uppercase letter, one number, and one special character.");
+                return View();
             }
 
             var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
@@ -503,10 +587,6 @@ namespace growTests.Controllers
             if (BCrypt.Net.BCrypt.Verify(newPassword, utilizador.Password))
             {
                 ModelState.AddModelError("newPassword", "The new password cannot be the same as the current password.");
-            }
-
-            if (!ModelState.IsValid)
-            {
                 return View();
             }
 
@@ -514,11 +594,10 @@ namespace growTests.Controllers
             _context.Utilizador.Update(utilizador);
             await _context.SaveChangesAsync();
 
-            await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
-
             TempData["Success"] = "Password successfully reset! Please log in with the new password.";
             return RedirectToAction("Login");
         }
+
 
         public async Task<IActionResult> ConfirmPasswordAsync(int id)
         {
@@ -528,6 +607,8 @@ namespace growTests.Controllers
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
             ViewData["UserPoints"] = user?.Pontos;
+
+
             if (utilizador == null)
             {
                 return NotFound();
@@ -559,6 +640,8 @@ namespace growTests.Controllers
                 ModelState.AddModelError("confirmPassword", "Invalid password");
                 return View();
             }
+
+            TempData["SuccessMessage"] = "Password changed successfully!";
 
             return RedirectToAction("UpdatePassword", new { id = utilizador.UtilizadorId });
         }
@@ -649,6 +732,9 @@ namespace growTests.Controllers
                                    .Select(Path.GetFileName)
                                    .ToList();
 
+
+            TempData["SuccessMessage"] = "Avatar updated successfully!";
+
             ViewBag.AvatarList = avatars;
             return View(utilizador);
         }
@@ -679,29 +765,54 @@ namespace growTests.Controllers
             return RedirectToAction("Profile");
         }
 
+        [HttpPost]
+        public IActionResult ProcessPayment()
+        {
+            try
+            {
+                var options = new PaymentIntentCreateOptions
+                {
+                    Amount = 1000, // Valor em cêntimos (€10.00)
+                    Currency = "eur",
+                    PaymentMethod = "pm_card_visa", // Cartão de teste do Stripe
+                    Confirm = true,
+                    AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+                    {
+                        Enabled = true,
+                        AllowRedirects = "never" // 🔥 Impede redirecionamentos
+                    }
+                };
+
+                var service = new PaymentIntentService();
+                PaymentIntent pagamento = service.Create(options);
+
+                return Json(new
+                {
+                    success = true,
+                    id = pagamento.Id,
+                    status = pagamento.Status,
+                    amount = pagamento.Amount / 100.0
+                });
+            }
+            catch (StripeException e)
+            {
+                return Json(new { success = false, error = e.Message });
+            }
+        }
+
         [HttpGet]
-        public async Task<IActionResult> Pagamentos()
+        public async Task<IActionResult> PagamentosAsync()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
-            if (user == null) return RedirectToAction("Login");
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
 
-            var pagamentos = await _context.Leiloes
-             .Where(l => l.UtilizadorId == user.UtilizadorId ||
-                         l.Licitacoes.OrderByDescending(li => li.DataLicitacao).FirstOrDefault().UtilizadorId == user.UtilizadorId)
-             .ToListAsync();
-
-            var leiloesGanhos = await _context.Leiloes
-                .Include(l => l.Item)
-                .Where(l => l.Vencedor == user.Nome)
-                .ToListAsync();
-
-            ViewData["UserPoints"] = user.Pontos;
-            ViewData["LeiloesGanhos"] = leiloesGanhos;
-
-            return View(pagamentos);
+            return View();
         }
-
-    }
+        }
 }
+

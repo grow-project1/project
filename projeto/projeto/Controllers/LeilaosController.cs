@@ -150,7 +150,7 @@ namespace growTests.Controllers
 
             if (user != null)
             {
-                ViewData["UserId"] = user.UtilizadorId; // 🔹 Definindo UserId para a View
+                ViewData["UserId"] = user.UtilizadorId;
             }
 
             var leilao = await _context.Leiloes
@@ -166,11 +166,11 @@ namespace growTests.Controllers
             {
                 leilao.Licitacoes = await _context.Licitacoes
                     .Where(l => l.LeilaoId == id)
-                    .OrderByDescending(l => l.ValorLicitacao) 
+                    .OrderByDescending(l => l.ValorLicitacao)
                     .ToListAsync();
             }
 
-            return View(leilao);  
+            return View(leilao);
         }
 
         // GET: Leilaos/Create
@@ -190,8 +190,9 @@ namespace growTests.Controllers
 
             ViewData["UserPoints"] = user?.Pontos;
 
-            if (user == null) {
-                return RedirectToAction("Login", "Utilizadors"); 
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
 
             }
 
@@ -208,7 +209,7 @@ namespace growTests.Controllers
 
             if (user == null)
             {
-                return RedirectToAction("Login", "Utilizadors"); 
+                return RedirectToAction("Login", "Utilizadors");
             }
 
             if (leilao.Item.fotoo == null || leilao.Item.fotoo.Length == 0)
@@ -222,7 +223,7 @@ namespace growTests.Controllers
             if (leilao.Item.fotoo != null && leilao.Item.fotoo.Length > 0)
             {
                 string folder = "leilao/fotos/";
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName);  
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName);
                 string serverFolder = Path.Combine(_env.WebRootPath, folder);
 
                 if (!Directory.Exists(serverFolder))
@@ -232,17 +233,17 @@ namespace growTests.Controllers
 
                 string filePath = Path.Combine(serverFolder, fileName);
 
-                if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)  
+                if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)
                 {
                     ModelState.AddModelError("Item.fotoo", "Size is to big");
-                    return View(leilao); 
+                    return View(leilao);
                 }
 
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
                 if (!allowedExtensions.Contains(Path.GetExtension(leilao.Item.fotoo.FileName).ToLower()))
                 {
                     ModelState.AddModelError("Item.fotoo", "Only extensions (.jpg, .jpeg, .png, .gif) allowed.");
-                    return View(leilao); 
+                    return View(leilao);
                 }
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -254,9 +255,9 @@ namespace growTests.Controllers
             }
 
             _context.Add(leilao);
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));  
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Leilaos/Edit/5
@@ -335,7 +336,7 @@ namespace growTests.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var leilao = await _context.Leiloes
-                .Include(l => l.Item) 
+                .Include(l => l.Item)
                 .FirstOrDefaultAsync(l => l.LeilaoId == id);
 
             if (leilao != null)
@@ -370,7 +371,7 @@ namespace growTests.Controllers
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
-                .Include(l => l.Item) 
+                .Include(l => l.Item)
                 .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
 
             if (leilao == null)
@@ -381,7 +382,7 @@ namespace growTests.Controllers
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
             {
                 TempData["Error"] = "This auction has already ended and no longer accepts bids..";
-                return RedirectToAction("Index", "Leilaos"); 
+                return RedirectToAction("Index", "Leilaos");
             }
 
             double lanceMinimo = leilao.Licitacoes.Any()
@@ -392,8 +393,8 @@ namespace growTests.Controllers
 
             if (valorLicitacao < valorNecessario)
             {
-                TempData["Error"] = $"The bid must be higher than {valorNecessario:C2}.";
-                return RedirectToAction("Index", "Leilaos"); 
+                TempData["Error"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
+                return RedirectToAction("Index", "Leilaos");
             }
 
             var licitacao = new Licitacao
@@ -411,7 +412,7 @@ namespace growTests.Controllers
             await _context.SaveChangesAsync();
 
             TempData["Success"] = "Sucessfull bid!";
-            return RedirectToAction("Index", "Leilaos"); 
+            return RedirectToAction("Index", "Leilaos");
         }
 
         [HttpPost]
@@ -456,7 +457,7 @@ namespace growTests.Controllers
 
             if (valorLicitacao < valorNecessario)
             {
-                TempData["BidError"] = $"The bid must be higher than {valorNecessario:C2}.";
+                TempData["BidError"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
                 return RedirectToAction("Details", new { id = leilaoId });
             }
 
@@ -467,6 +468,9 @@ namespace growTests.Controllers
                 ValorLicitacao = valorLicitacao,
                 DataLicitacao = DateTime.Now
             };
+
+            TempData["BidSuccess"] = "Bid placed successfully!";
+
 
             _context.Licitacoes.Add(licitacao);
             user.Pontos += 1;
@@ -522,6 +526,8 @@ namespace growTests.Controllers
             int pageSize = 3;
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+       
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {
@@ -547,6 +553,8 @@ namespace growTests.Controllers
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+       
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {
@@ -627,27 +635,21 @@ namespace growTests.Controllers
                 return NotFound();
             }
 
-            // 🚨 Verificação antecipada para a DataFim
             if (leilaoAtualizado.DataFim <= DateTime.Now)
             {
                 ModelState.AddModelError("DataFim", "Data Invalida.");
-                return View(leilao); // Retorna sem validar outros campos
+                return View(leilao);
             }
 
-            
-
-            // Atualiza os dados do leilão
             leilao.DataFim = leilaoAtualizado.DataFim;
             leilao.ValorIncrementoMinimo = leilaoAtualizado.ValorIncrementoMinimo;
             leilao.EstadoLeilao = EstadoLeilao.Disponivel;
 
-            // Atualiza os dados do item
             leilao.Item.Titulo = leilaoAtualizado.Item.Titulo;
             leilao.Item.Descricao = leilaoAtualizado.Item.Descricao;
             leilao.Item.PrecoInicial = leilaoAtualizado.Item.PrecoInicial;
             leilao.Item.Categoria = leilaoAtualizado.Item.Categoria;
 
-            // Se não houver nova foto, mantém a antiga
             if (novaFoto != null && novaFoto.Length > 0)
             {
                 string folder = "leilao/fotos/";
@@ -691,8 +693,27 @@ namespace growTests.Controllers
             return RedirectToAction("MyAuctions");
         }
 
+        [HttpGet]
+        [Route("[controller]/TopAuctions")]
+        public async Task<IActionResult> TopAuctions()
+
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
+
+            var topLeiloes = await _context.Leiloes
+                .Include(l => l.Item)
+                .Include(l => l.Licitacoes)
+                .Where(l => l.EstadoLeilao == EstadoLeilao.Disponivel)
+                .OrderByDescending(l => l.Licitacoes.Count)
+                .Take(3)
+                .ToListAsync();
+
+            return View(topLeiloes);
+        }
 
     }
-
 }
 
