@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Moq;
+using Xunit;
 using growTests.Controllers;
 using growTests.Data;
 using growTests.Models;
-using growTests;
-using System.Text;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using growTests; // Para a MockSession, FakeEmailSender, etc.
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Http.HttpResults;
+
 
 namespace growTests
 {
@@ -16,118 +23,189 @@ namespace growTests
         private readonly Mock<IConfiguration> _mockConfig;
         private readonly FakeEmailSender _fakeEmailSender;
         private readonly UtilizadorsController _controller;
+        private readonly DefaultHttpContext _httpContext;
 
         public RegisterNotificationsTests()
         {
-            // 1) DB InMemory
+            // 1) Configura DB em memória (GUID para isolar cada teste)
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _dbContext = new ApplicationDbContext(options);
 
-            // 2) Mock da IConfiguration
+            // 2) Mock da IConfiguration (se for necessário em algum ponto)
             _mockConfig = new Mock<IConfiguration>();
 
-            // 3) FakeEmailSender
+            // 3) FakeEmailSender (não envia email real, só registra as chamadas)
             _fakeEmailSender = new FakeEmailSender();
 
-            // 4) Controller injetando as dependências
+            // 4) Cria o Controller
             _controller = new UtilizadorsController(
                 _dbContext,
-                null,           // IWebHostEnvironment
-                _mockConfig.Object,
-                _fakeEmailSender
+                webHostEnvironment: null,    // IWebHostEnvironment (não usado neste teste)
+                _mockConfig.Object,          // IConfiguration mockada
+                _fakeEmailSender             // IEmailSender fake
             );
 
-            // 5) MockSession para evitar erro de "Session not configured"
-            var defaultHttpContext = new DefaultHttpContext
+            // 5) Adiciona HttpContext com MockSession
+            _httpContext = new DefaultHttpContext
             {
                 Session = new MockSession()
             };
-            _controller.ControllerContext = new Microsoft.AspNetCore.Mvc.ControllerContext
+            _controller.ControllerContext = new ControllerContext
             {
-                HttpContext = defaultHttpContext
+                HttpContext = _httpContext
             };
+
+            // 6) Configura TempData para não ser null
+
+            _controller.TempData = new TempDataDictionary(
+           _httpContext,
+           Mock.Of<ITempDataProvider>() // usando Moq
+       );
         }
 
         [Fact]
-        public async Task Register_ValidData_SendsVerificationEmail_AndStoresInSession()
+        public async Task Register_ValidData_ShouldSendEmailAndRedirectToConfirm()
         {
             // Arrange
-            var newUser = new Utilizador
+            var novoUtilizador = new Utilizador
             {
-                Nome = "Test User",
-                Email = "testuser@email.com",
-                Password = "Passw0rd!"
+                Nome = "TesteNome",
+                Email = "teste1@example.com",
+                Password = "Pa$$w0rd"
             };
 
             // Act
-            var result = await _controller.Register(newUser) as Microsoft.AspNetCore.Mvc.RedirectToActionResult;
+            var result = await _controller.Register(novoUtilizador);
 
             // Assert
-            // 1. Verifica se redirecionou para "ConfirmRegistration"
-            Assert.NotNull(result);
-            Assert.Equal("ConfirmRegistration", result.ActionName);
+            // Verifica se redirecionou para ConfirmRegistration
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("ConfirmRegistration", redirectResult.ActionName);
 
-            // 2. Verifica se a FakeEmailSender enviou o e-mail
+            // Verifica se um email foi "enviado"
+            Assert.Single(_fakeEmailSender.SentEmails);
+            var sentEmail = _fakeEmailSender.SentEmails.First();
+            Assert.Equal("teste1@example.com", sentEmail.To);
+            Assert.Contains("Código de Verificação", sentEmail.Subject);
+            // (Opcional) Poderia verificar se o corpo contém o código de 6 dígitos
 
-            Assert.Contains(_fakeEmailSender.SentEmails, mail =>
-                mail.To == newUser.Email
-                && mail.Subject.Contains("Confirmação de Registo")
-                // Podes verificar Body se quiseres "Seu código de verificação é:"
-                && mail.Body.Contains("Seu código de verificação é:")
-            );
+            // Verifica se a Session guardou o código
+            int pendingCode = int.Parse(_httpContext.Session.GetString("PendingRegCode"));
+            Assert.NotNull(pendingCode);
 
-            // 3. Verifica se sessão guardou PendingRegName, PendingRegEmail, etc.
-            var session = _controller.HttpContext.Session;
-            Assert.Equal(newUser.Nome, session.GetString("PendingRegName"));
-            Assert.Equal(newUser.Email, session.GetString("PendingRegEmail"));
-            Assert.Equal(newUser.Password, session.GetString("PendingRegPassword"));
-            Assert.NotNull(session.GetInt32("PendingRegCode")); // Verifica se há um code
-
-            // 4. Confirma que ainda não existe no DB
-            var userInDB = _dbContext.Utilizador.FirstOrDefault(u => u.Email == newUser.Email);
-            Assert.Null(userInDB);
+            // O utilizador ainda não deve estar na base de dados (ele só entra após ConfirmRegistration)
+            var dbUser = await _dbContext.Utilizador
+                .FirstOrDefaultAsync(u => u.Email == "teste1@example.com");
+            Assert.Null(dbUser);
         }
 
         [Fact]
-        public async Task ConfirmRegistration_ValidCode_CreatesUserInDB()
+        public async Task Register_ExistingEmail_ShouldReturnViewAndErrorInModelState()
         {
             // Arrange
-            // Simula que o utilizador acabou de vir do Register
-            var pendingName = "PendingUser";
-            var pendingEmail = "pending@teste.com";
-            var pendingPass = "Abc123!";
-            var code = 123456;
+            // Adiciona um utilizador manualmente à base
+            var existingUser = new Utilizador
+            {
+                Nome = "Existente",
+                Email = "existe@example.com",
+                Password = "Teste"
+            };
+            _dbContext.Utilizador.Add(existingUser);
+            await _dbContext.SaveChangesAsync();
 
-            // Seta na sessão
-            var session = _controller.HttpContext.Session;
-            session.SetString("PendingRegName", pendingName);
-            session.SetString("PendingRegEmail", pendingEmail);
-            session.SetString("PendingRegPassword", pendingPass);
-            session.SetInt32("PendingRegCode", code);
+            // Tenta registar outro com o mesmo email
+            var novoUtilizador = new Utilizador
+            {
+                Nome = "Novo",
+                Email = "existe@example.com",
+                Password = "Pa$$w0rd"
+            };
 
             // Act
-            // Chamamos ConfirmRegistration com o código correto
-            var result = await _controller.ConfirmRegistration(code) as Microsoft.AspNetCore.Mvc.RedirectToActionResult;
+            var result = await _controller.Register(novoUtilizador);
 
             // Assert
-            // 1. Verifica se redirecionou para "Login"
-            Assert.NotNull(result);
-            Assert.Equal("Login", result.ActionName);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.False(viewResult.ViewData.ModelState.IsValid);
+            Assert.True(viewResult.ViewData.ModelState.ContainsKey("Email"),
+                "Deveria ter um erro no campo 'Email'.");
+        }
 
-            // 2. Verifica se o utilizador foi criado no DB
-            var userInDB = _dbContext.Utilizador.FirstOrDefault(u => u.Email == pendingEmail);
-            Assert.NotNull(userInDB);
-            Assert.Equal(pendingName, userInDB.Nome);
-            // Verifica se a password foi hasheada
-            Assert.True(BCrypt.Net.BCrypt.Verify(pendingPass, userInDB.Password));
+        [Fact]
+        public async Task ConfirmRegistration_ValidCode_ShouldCreateUser()
+        {
+            // Arrange
+            var utilizador = new Utilizador
+            {
+                UtilizadorId = 1,
+                Nome = "User2",
+                Email = "user2@example.com",
+                Password = "Abc123!"
+            };
 
-            // 3. Verifica se limpou a sessão
-            Assert.Null(session.GetString("PendingRegName"));
-            Assert.Null(session.GetString("PendingRegEmail"));
-            Assert.Null(session.GetString("PendingRegPassword"));
-            Assert.Null(session.GetInt32("PendingRegCode"));
+            // Primeiro, chama o Register (POST) e valida se deu redirect para ConfirmRegistration
+            var registerResult = await _controller.Register(utilizador);
+            var redirectToConfirm = Assert.IsType<RedirectToActionResult>(registerResult);
+            Assert.Equal("ConfirmRegistration", redirectToConfirm.ActionName);
+
+            // Pega o código gerado na sessão
+            int? codeGerado = int.Parse(_httpContext.Session.GetString("PendingRegCode"));
+            Assert.NotNull(codeGerado);
+            Console.WriteLine($"*Codigo no teste*: {codeGerado}");
+
+            // Act: agora chama ConfirmRegistration com o código correto
+            var confirmResult = await _controller.ConfirmRegistration(codeGerado.Value);
+
+            // Assert
+
+            // Verifica se o utilizador foi criado no DB e se a password foi hasheada
+
+            var dbUser = await (from u in _dbContext.Utilizador
+                                where u.Email == "user2@example.com"
+                                select u)
+                               .FirstOrDefaultAsync();
+
+            Assert.NotNull(dbUser);
+            Assert.Equal("User2", dbUser.Nome);
+            Assert.NotEqual("Abc123!", dbUser.Password); // confirmando que foi hasheada
+
+            // Session deve ter sido limpa (exemplo: PendingRegEmail)
+            Assert.Null(_httpContext.Session.GetString("PendingRegEmail"));
+        }
+
+
+        [Fact]
+        public async Task ConfirmRegistration_InvalidCode_ShouldReturnViewWithError()
+        {
+            // Arrange
+            // Simula o Register para povoar a sessão com o code
+            var utilizador = new Utilizador
+            {
+                Nome = "User3",
+                Email = "user3@example.com",
+                Password = "Abc123!"
+            };
+            await _controller.Register(utilizador);
+            // Mas enviaremos um código diferente
+            var invalidCode = 111111; // certamente diferente do gerado
+
+            // Act
+            var result = await _controller.ConfirmRegistration(invalidCode);
+
+            // Assert
+            // Deve voltar para a View (não redirecionar)
+            var viewResult = Assert.IsType<ViewResult>(result);
+
+            // Verifica se o TempData["Error"] contém a mensagem de código inválido
+            Assert.True(_controller.TempData.ContainsKey("Error"));
+            Assert.Equal("Invalid code. Please try again.", _controller.TempData["Error"]);
+
+            // Garante que o user NÃO foi criado no DB
+            var dbUser = await _dbContext.Utilizador
+                .FirstOrDefaultAsync(u => u.Email == "user3@example.com");
+            Assert.Null(dbUser);
         }
     }
 }

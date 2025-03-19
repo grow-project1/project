@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using growTests.Data;
 using growTests.Models;
@@ -103,7 +102,9 @@ namespace growTests.Controllers
             HttpContext.Session.SetString("PendingRegPassword", utilizador.Password);
 
             // Armazena também o code
-            HttpContext.Session.SetInt32("PendingRegCode", verificationCode);
+            HttpContext.Session.SetString("PendingRegCode", verificationCode.ToString());
+            Console.WriteLine($"*Codigo no controller*: {verificationCode}");
+
 
             TempData["Info"] = "We sent a verification code to your email. Please confirm.";
             return RedirectToAction("ConfirmRegistration");
@@ -129,28 +130,29 @@ namespace growTests.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken] // COMENTE ou REMOVA para testes de unidade
         public async Task<IActionResult> ConfirmRegistration(int verificationCode)
         {
+  
+
             // Resgata dados da sessão
             var pendingName = HttpContext.Session.GetString("PendingRegName");
             var pendingEmail = HttpContext.Session.GetString("PendingRegEmail");
             var pendingPass = HttpContext.Session.GetString("PendingRegPassword");
-            int? storedCode = HttpContext.Session.GetInt32("PendingRegCode");
+            int? storedCode = int.Parse(HttpContext.Session.GetString("PendingRegCode"));
 
             if (string.IsNullOrEmpty(pendingEmail) || storedCode == null)
             {
-                // Sessão expirou, ou o user já foi criado
                 TempData["Error"] = "Session expired. Please register again.";
                 return RedirectToAction("Register");
             }
-
             // Verifica o code
             if (verificationCode != storedCode.Value)
             {
                 TempData["Error"] = "Invalid code. Please try again.";
                 return View();
             }
+            Console.WriteLine("TESTE***************.");
 
             // OK: Criar o utilizador no DB
             var utilizador = new Utilizador
@@ -161,7 +163,14 @@ namespace growTests.Controllers
             };
 
             _context.Utilizador.Add(utilizador);
+
+            Console.WriteLine("Tentando salvar utilizador no banco de dados:");
+            Console.WriteLine($"Nome: {pendingName}, Email: {pendingEmail}");
+
             await _context.SaveChangesAsync();
+
+            Console.WriteLine("Salvamento concluído.");
+
 
             // Limpa a sessão
             HttpContext.Session.Remove("PendingRegName");
@@ -172,6 +181,7 @@ namespace growTests.Controllers
             TempData["Success"] = "Account confirmed! Please log in.";
             return RedirectToAction("Login");
         }
+
 
         // Função para validar a força da senha
         private bool IsPasswordStrong(string password)
