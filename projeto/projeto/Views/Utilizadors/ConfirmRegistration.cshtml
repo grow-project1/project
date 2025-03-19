@@ -1,12 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Confirm Registration";
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
 }
-<h2>Confirm Registration</h2>
 
-<form asp-action="ConfirmRegistration" method="post">
-    <div>
-        <label>Verification Code</label>
-        <input type="number" name="verificationCode" />
+<div class="container login-page">
+    <div class="login-container">
+        <h2>@(english ? "Confirm Registration" : "Confirmar Registo")</h2>
+        <p class="text-muted">
+            @(english
+                ? "Enter the code we sent to your email to confirm your account."
+                : "Insira o código que enviámos para o seu email para confirmar a conta.")
+        </p>
+
+        <form asp-action="ConfirmRegistration" method="post">
+            <div class="form-group">
+                <input type="number"
+                       name="verificationCode"
+                       class="form-control form-control-lg"
+                       placeholder="@(english ? "Enter verification code" : "Insira o código de verificação")"
+                       required />
+            </div>
+
+            <button type="submit" class="btn login-btn btn-block">
+                @(english ? "Verify Code" : "Verificar código")
+            </button>
+        </form>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger mt-3">
+                @TempData["Error"]
+            </div>
+        }
     </div>
-    <button type="submit">Verify</button>
-</form>
+</div>

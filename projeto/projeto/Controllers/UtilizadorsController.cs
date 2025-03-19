@@ -154,7 +154,6 @@ namespace projeto.Controllers
                 Nome = pendingName,
                 Email = pendingEmail,
                 Password = BCrypt.Net.BCrypt.HashPassword(pendingPass),
-                // podes usar EstadoConta = EstadoConta.Ativa
             };
 
             _context.Utilizador.Add(utilizador);
