@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Confirm Registration";
+}
+<h2>Confirm Registration</h2>
+
+<form asp-action="ConfirmRegistration" method="post">
+    <div>
+        <label>Verification Code</label>
+        <input type="number" name="verificationCode" />
+    </div>
+    <button type="submit">Verify</button>
+</form>

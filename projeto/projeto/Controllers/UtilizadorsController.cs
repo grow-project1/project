@@ -79,15 +79,94 @@ namespace projeto.Controllers
                 return View(utilizador);
             }
 
-            utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
 
-            _context.Add(utilizador);
+            //
+
+            // Gera o código de verificação
+            var random = new Random();
+            int verificationCode = random.Next(100000, 999999);
+
+            // Envia email com o código
+            var emailSender = new EmailSender(_configuration);
+            string subject = "Código de Verificação - Confirmação de Registo";
+            string message = $"Seu código de verificação é: {verificationCode}";
+            await emailSender.SendEmailAsync(utilizador.Email, subject, message);
+
+            // Guarda tudo na sessão (ou TempData)
+            // Atenção: Sessão não deve armazenar strings muito grandes. Aqui é pequeno, deve servir.
+            HttpContext.Session.SetString("PendingRegName", utilizador.Nome);
+            HttpContext.Session.SetString("PendingRegEmail", utilizador.Email);
+            HttpContext.Session.SetString("PendingRegPassword", utilizador.Password);
+
+            // Armazena também o code
+            HttpContext.Session.SetInt32("PendingRegCode", verificationCode);
+
+            TempData["Info"] = "We sent a verification code to your email. Please confirm.";
+            return RedirectToAction("ConfirmRegistration");
+
+
+            ////
+            //utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
+
+            //_context.Add(utilizador);
+            //await _context.SaveChangesAsync();
+
+            //await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
+
+            //TempData["Success"] = "Account successfully created! Please log in to access your account";
+
+            //return RedirectToAction("Login");
+        }
+
+        // GET
+        public IActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmRegistration(int verificationCode)
+        {
+            // Resgata dados da sessão
+            var pendingName = HttpContext.Session.GetString("PendingRegName");
+            var pendingEmail = HttpContext.Session.GetString("PendingRegEmail");
+            var pendingPass = HttpContext.Session.GetString("PendingRegPassword");
+            int? storedCode = HttpContext.Session.GetInt32("PendingRegCode");
+
+            if (string.IsNullOrEmpty(pendingEmail) || storedCode == null)
+            {
+                // Sessão expirou, ou o user já foi criado
+                TempData["Error"] = "Session expired. Please register again.";
+                return RedirectToAction("Register");
+            }
+
+            // Verifica o code
+            if (verificationCode != storedCode.Value)
+            {
+                TempData["Error"] = "Invalid code. Please try again.";
+                return View();
+            }
+
+            // OK: Criar o utilizador no DB
+            var utilizador = new Utilizador
+            {
+                Nome = pendingName,
+                Email = pendingEmail,
+                Password = BCrypt.Net.BCrypt.HashPassword(pendingPass),
+                // podes usar EstadoConta = EstadoConta.Ativa
+            };
+
+            _context.Utilizador.Add(utilizador);
             await _context.SaveChangesAsync();
 
-            await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
+            // Limpa a sessão
+            HttpContext.Session.Remove("PendingRegName");
+            HttpContext.Session.Remove("PendingRegEmail");
+            HttpContext.Session.Remove("PendingRegPassword");
+            HttpContext.Session.Remove("PendingRegCode");
 
-            TempData["Success"] = "Account successfully created! Please log in to access your account";
-
+            TempData["Success"] = "Account confirmed! Please log in.";
             return RedirectToAction("Login");
         }
 
