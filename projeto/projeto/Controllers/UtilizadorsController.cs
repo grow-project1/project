@@ -5,8 +5,6 @@ using growTests.Data;
 using growTests.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
-using projeto.Data;
-using projeto.Models;
 using Stripe;
 
 
@@ -94,10 +92,9 @@ namespace growTests.Controllers
             int verificationCode = random.Next(100000, 999999);
 
             // Envia email com o código
-            var emailSender = new EmailSender(_configuration);
             string subject = "Código de Verificação - Confirmação de Registo";
             string message = $"Seu código de verificação é: {verificationCode}";
-            await emailSender.SendEmailAsync(utilizador.Email, subject, message);
+            await _emailSender.SendEmailAsync(utilizador.Email, subject, message);
 
             // Guarda tudo na sessão (ou TempData)
             // Atenção: Sessão não deve armazenar strings muito grandes. Aqui é pequeno, deve servir.
@@ -567,7 +564,8 @@ namespace growTests.Controllers
             // Verifica se a password foi preenchida (mas sem adicionar erro manual)
             if (!ModelState.IsValid)
             {
-                return View(); // ASP.NET já adicionou "The newPassword field is required."
+                return View(); // ASP.NET já adicionou "The
+                               // Password field is required."
             }
 
             if (!IsPasswordStrong(newPassword))
