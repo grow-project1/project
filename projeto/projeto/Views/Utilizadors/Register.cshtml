@@ -29,7 +29,19 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn register-btn btn-block">@(english ? "Register" : "Registar")</button>
+            <!-- Checkbox para Aceitar os Termos e Condições -->
+            <div class="form-group">
+                <label for="acceptedTerms">
+                    <input type="checkbox" id="acceptedTerms" name="acceptedTerms" value="true" />
+                    @(english ? "I accept the " : "Aceito os ")<a href="@Url.Action("Terms", "Home")" target="_blank">
+                        @(english ? "Terms and Conditions" : "Termos e Condições")
+                    </a>
+                </label>
+            </div>
+
+            <button type="submit" id="registerBtn" class="btn register-btn btn-block" disabled="disabled">
+                @(english ? "Register" : "Registar")
+            </button>
         </form>
         <div class="mt-3">
             <a href="@Url.Action("Login", "Utilizadors")" class="forgot-password-link">@(english ? "Already have an account? Log in" : "Já tem uma conta? Faça login")</a>
@@ -44,3 +56,8 @@
     </div>
 </div>
 
+<script>
+    document.getElementById("acceptedTerms").addEventListener("change", function() {
+        document.getElementById("registerBtn").disabled = !this.checked;
+    });
+</script>

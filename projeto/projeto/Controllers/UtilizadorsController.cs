@@ -45,7 +45,7 @@ namespace projeto.Controllers
         // Método Register (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Nome,Email,Password")] Utilizador utilizador)
+        public async Task<IActionResult> Register([Bind("Nome,Email,Password")] Utilizador utilizador, bool acceptedTerms)
         {
             // Validações adicionais
             if (string.IsNullOrEmpty(utilizador.Nome))
@@ -67,6 +67,12 @@ namespace projeto.Controllers
                 ModelState.AddModelError("Password", "Password must have at least 6 characters, one uppercase letter, one number, and one special character.");
             }
 
+            // Verifica se os termos foram aceitos
+            if (!acceptedTerms)
+            {
+                ModelState.AddModelError(string.Empty, "You must accept the Terms and Conditions.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(utilizador);
@@ -79,9 +85,6 @@ namespace projeto.Controllers
                 return View(utilizador);
             }
 
-
-            //
-
             // Gera o código de verificação
             var random = new Random();
             int verificationCode = random.Next(100000, 999999);
@@ -93,30 +96,15 @@ namespace projeto.Controllers
             await emailSender.SendEmailAsync(utilizador.Email, subject, message);
 
             // Guarda tudo na sessão (ou TempData)
-            // Atenção: Sessão não deve armazenar strings muito grandes. Aqui é pequeno, deve servir.
             HttpContext.Session.SetString("PendingRegName", utilizador.Nome);
             HttpContext.Session.SetString("PendingRegEmail", utilizador.Email);
             HttpContext.Session.SetString("PendingRegPassword", utilizador.Password);
-
-            // Armazena também o code
             HttpContext.Session.SetInt32("PendingRegCode", verificationCode);
 
             TempData["Info"] = "We sent a verification code to your email. Please confirm.";
             return RedirectToAction("ConfirmRegistration");
-
-
-            ////
-            //utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
-
-            //_context.Add(utilizador);
-            //await _context.SaveChangesAsync();
-
-            //await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
-
-            //TempData["Success"] = "Account successfully created! Please log in to access your account";
-
-            //return RedirectToAction("Login");
         }
+
 
         // GET
         public IActionResult ConfirmRegistration()

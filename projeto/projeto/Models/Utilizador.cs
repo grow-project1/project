@@ -13,7 +13,7 @@ namespace projeto.Models
         [StringLength(100, ErrorMessage = "Name cannot exceed 100 characters")]
         public string Nome { get; set; }
 
-        [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be atleast 6 characters")]
+        [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must have at least 6 characters, one uppercase letter, one number, and one special character.")]
         public string Password { get; set; }
 
         [StringLength(255)]
