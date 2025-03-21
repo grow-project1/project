@@ -1,33 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\GitHub\\PV\\project\\projeto\\",
+  "WorkspaceRootPath": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\growtests\\rewardstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\rewardstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\registernotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\registernotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\projeto.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\projeto.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\testshelpers\\fakeemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\testshelpers\\fakeemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\testshelpers\\mocksession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\testshelpers\\mocksession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\auctionsnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\growtests\\auctionsnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\auctionsnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\growtests\\registernotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\registernotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\growtests\\testshelpers\\fakeemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\testshelpers\\fakeemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\growtests\\testshelpers\\mocksession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\testshelpers\\mocksession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\users\\migue\\desktop\\grow\\projeto\\projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -38,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,11 +58,37 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RewardsTests.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\RewardsTests.cs",
+              "RelativeDocumentMoniker": "growTests\\RewardsTests.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\RewardsTests.cs",
+              "RelativeToolTip": "growTests\\RewardsTests.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T13:15:52.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "projeto",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\projeto.csproj",
+              "RelativeDocumentMoniker": "projeto\\projeto.csproj",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\projeto.csproj",
+              "RelativeToolTip": "projeto\\projeto.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-21T13:15:52.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "RegisterNotificationsTests.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\RegisterNotificationsTests.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\RegisterNotificationsTests.cs",
               "RelativeDocumentMoniker": "growTests\\RegisterNotificationsTests.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\RegisterNotificationsTests.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\RegisterNotificationsTests.cs",
               "RelativeToolTip": "growTests\\RegisterNotificationsTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -62,11 +96,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "UtilizadorsController.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
               "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -75,11 +109,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "FakeEmailSender.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\TestsHelpers\\FakeEmailSender.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\TestsHelpers\\FakeEmailSender.cs",
               "RelativeDocumentMoniker": "growTests\\TestsHelpers\\FakeEmailSender.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\TestsHelpers\\FakeEmailSender.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\TestsHelpers\\FakeEmailSender.cs",
               "RelativeToolTip": "growTests\\TestsHelpers\\FakeEmailSender.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -87,11 +121,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "VerificationModel.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\VerificationModel.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\VerificationModel.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\VerificationModel.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\VerificationModel.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\VerificationModel.cs",
               "RelativeToolTip": "projeto\\Models\\VerificationModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -99,11 +133,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "MockSession.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
               "RelativeDocumentMoniker": "growTests\\TestsHelpers\\MockSession.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
               "RelativeToolTip": "growTests\\TestsHelpers\\MockSession.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAowCQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -111,23 +145,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "AuctionsNotificationsTests.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\AuctionsNotificationsTests.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\AuctionsNotificationsTests.cs",
               "RelativeDocumentMoniker": "growTests\\AuctionsNotificationsTests.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\AuctionsNotificationsTests.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\growTests\\AuctionsNotificationsTests.cs",
               "RelativeToolTip": "growTests\\AuctionsNotificationsTests.cs",
               "ViewState": "AgIAAAUBAAAAAAAAAAAYwBEBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T13:32:58.348Z"
+              "WhenOpened": "2025-03-19T13:32:58.348Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Utilizador.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Utilizador.cs",
+              "ToolTip": "C:\\Users\\migue\\Desktop\\GROW\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeToolTip": "projeto\\Models\\Utilizador.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAA9wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
