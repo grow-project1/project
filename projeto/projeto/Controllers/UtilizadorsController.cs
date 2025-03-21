@@ -851,8 +851,64 @@ namespace projeto.Controllers
             public decimal Valor { get; set; }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string confirmCancel)
+        {
+            var emailSender = new EmailSender(_configuration);
 
+<<<<<<< HEAD
 
+=======
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            if (userEmail == null)
+            {
+                TempData["Error"] = "You must be logged in.";
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var utilizador = await _context.Utilizador
+                .FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (utilizador == null)
+            {
+                TempData["Error"] = "User not found.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (confirmCancel?.Trim().ToLower() != "cancel")
+            {
+                TempData["Error"] = "To confirm account cancellation, please type 'Cancel'.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            var leiloesAtivos = await _context.Leiloes
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId && l.EstadoLeilao == EstadoLeilao.Disponivel)
+                .ToListAsync();
+
+            if (leiloesAtivos.Any())
+            {
+                TempData["Error"] = "You cannot cancel your account while you have active auctions.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            _context.Utilizador.Remove(utilizador);
+            await _context.SaveChangesAsync();
+            HttpContext.Session.Clear();
+
+            string assunto = "Conta cancelada com sucesso - Grow";
+            string mensagem = $"<h2>Olá {utilizador.Nome},</h2>" +
+                              "<p>A sua conta na plataforma <strong>Grow</strong> foi cancelada com sucesso.</p>" +
+                              "<p>Agradecemos a sua participação e esperamos vê-lo novamente no futuro.</p>" +
+                              "<p>Se esta ação não foi realizada por si ou se mudou de ideias, entre em contacto connosco através do nosso site.</p>" +
+                              "<br /><p>Cumprimentos,<br/>Equipa Grow</p>";
+
+            await emailSender.SendEmailAsync(utilizador.Email, assunto, mensagem);
+
+            TempData["Success"] = "Your account has been successfully cancelled.";
+            return RedirectToAction("Index", "Home");
+        }
+>>>>>>> eeb4c68346823dd5d62321e964896b38552a9262
     }
 }
 
