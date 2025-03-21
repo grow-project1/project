@@ -99,6 +99,11 @@ namespace projeto.Controllers
             HttpContext.Session.SetString("PendingRegName", utilizador.Nome);
             HttpContext.Session.SetString("PendingRegEmail", utilizador.Email);
             HttpContext.Session.SetString("PendingRegPassword", utilizador.Password);
+<<<<<<< HEAD
+=======
+
+            // Armazena também o code
+>>>>>>> parent of a620216 (Testes notificações completos)
             HttpContext.Session.SetInt32("PendingRegCode", verificationCode);
 
             TempData["Info"] = "We sent a verification code to your email. Please confirm.";
