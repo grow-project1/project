@@ -857,9 +857,7 @@ namespace projeto.Controllers
         {
             var emailSender = new EmailSender(_configuration);
 
-<<<<<<< HEAD
 
-=======
             var userEmail = HttpContext.Session.GetString("UserEmail");
             if (userEmail == null)
             {
@@ -908,7 +906,6 @@ namespace projeto.Controllers
             TempData["Success"] = "Your account has been successfully cancelled.";
             return RedirectToAction("Index", "Home");
         }
->>>>>>> eeb4c68346823dd5d62321e964896b38552a9262
     }
 }
 
