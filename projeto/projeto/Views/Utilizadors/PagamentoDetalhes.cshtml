@@ -1,11 +1,9 @@
-﻿@model projeto.Models.Leilao
+﻿@model PagamentoDetalhesViewModel
 
 @{
     ViewData["Title"] = "Pagamento do Leilão";
-    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+    var isEnglish = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
 }
-
-<h2>@(english ? "Payment for Auction" : "Pagamento do Leilão")</h2>
 
 @if (TempData["PaymentError"] != null)
 {
@@ -14,38 +12,119 @@
     </div>
 }
 
-<div class="auction-details-container">
-    <h3>@Model.Item.Titulo</h3>
-    <p><strong>@(english ? "Description:" : "Descrição:")</strong> @Model.Item.Descricao</p>
-    <p><strong>@(english ? "Current Bid:" : "Lance Atual:")</strong> @Model.ValorAtualLance.ToString("C")</p>
 
-    <h4>@(english ? "Total to Pay" : "Total a Pagar"):</h4>
-    <p><strong>@Model.ValorAtualLance.ToString("C")</strong></p>
+@if (TempData["PaymentSuccess"] != null)
+{
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
+        @TempData["Success"]
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let message = document.getElementById("successMessage");
+            if (message) {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    setTimeout(() => message.remove(), 500);
+                }, 2300);
+            }
+        });
+    </script>
+
+    <style>
+        #successMessage {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+}
+
+<div class="payment-details-container">
+    <h3>@Model.Leilao.Item.Titulo</h3>
+
+    <h4>@(isEnglish ? "Total to Pay" : "Total a Pagar"):</h4>
+    <p><strong>@Model.Leilao.ValorAtualLance.ToString("C")</strong></p>
+
+    <!-- Dados de Envio -->
+    <div class="shipping-details-container">
+        <h4>@(isEnglish ? "Shipping Information" : "Informações de Envio"):</h4>
+
+        <form id="shipping-form" method="POST" class="shipping-form">
+            <div class="form-group">
+                <label for="full-name">@("Full Name")</label>
+                <input type="text" id="full-name" name="fullName" class="form-control" placeholder="Enter your full name" value="@Model.Utilizador?.Nome" required />
+            </div>
+
+            <div class="form-group">
+                <label for="address">@("Address")</label>
+                <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" value="@Model.Utilizador?.Morada" required />
+            </div>
+
+            <div class="form-group">
+                <label for="city">@("City")</label>
+                <input type="text" id="city" name="city" class="form-control" placeholder="Enter your city" value="@Model.Utilizador?.Telemovel" required />
+            </div>
+
+            <div class="form-group">
+                <label for="postal-code">@("Postal Code")</label>
+                <input type="text" id="postal-code" name="postalCode" class="form-control" placeholder="Enter your postal code" value="@Model.Utilizador?.CodigoPostal" required />
+            </div>
+
+            <div class="form-group">
+                <label for="country">@("Country")</label>
+                <input type="text" id="country" name="country" class="form-control" placeholder="Enter your country" value="@Model.Utilizador?.Pais" required />
+            </div>
+
+            @if (Model.Utilizador == null)
+            {
+                <div class="alert alert-warning">
+                    @(isEnglish ? "Please complete your shipping information" : "Por favor, complete as informações de envio")
+                </div>
+            }
+        </form>
+    </div>
 
     <!-- Formulário de pagamento -->
-    <form id="payment-form" method="POST">
-        <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
-        <input type="hidden" name="valor" value="@Model.ValorAtualLance" />
+    <form id="payment-form" method="POST" class="payment-form">
+        <input type="hidden" name="leilaoId" value="@Model.Leilao.LeilaoId" />
+        <input type="hidden" name="valor" value="@Model.Leilao.ValorAtualLance" />
 
-        <div id="card-element">
-            <!-- Um elemento do Stripe será montado aqui -->
+        <div id="card-element" class="card-element">
+            <!-- Stripe Element será inserido aqui -->
         </div>
 
         <!-- Exibe erros do Stripe -->
-        <div id="card-errors" role="alert"></div>
+        <div id="card-errors" role="alert" class="error-message"></div>
 
         <button type="submit" class="btn btn-success">
-            @(english ? "Pay Now" : "Pagar Agora")
+            @(isEnglish ? "Pay Now" : "Pagar Agora")
+        </button>
+    </form>
+</div>
+
+
+    <!-- Formulário de pagamento -->
+    <form id="payment-form" method="POST" class="payment-form">
+        <input type="hidden" name="leilaoId" value="@Model.Leilao.LeilaoId" />
+        <input type="hidden" name="valor" value="@Model.Leilao.ValorAtualLance" />
+
+        <div id="card-element" class="card-element">
+            <!-- Stripe Element será inserido aqui -->
+        </div>
+
+        <!-- Exibe erros do Stripe -->
+        <div id="card-errors" role="alert" class="error-message"></div>
+
+        <button type="submit" class="btn btn-success">
+            @(isEnglish ? "Pay Now" : "Pagar Agora")
         </button>
     </form>
 
-    <div class="payment-methods">
-        <h4>@(english ? "Payment Methods" : "Métodos de Pagamento"):</h4>
-        <div class="payment-options">
-            <button class="btn btn-primary">@("Cartão de Crédito")</button>
-            <button class="btn btn-secondary">@("PayPal")</button>
-        </div>
-    </div>
+ 
 </div>
 
 <!-- Inclui o Stripe.js -->
@@ -71,7 +150,7 @@
                 var valor = form.querySelector('input[name="valor"]').value;
 
                 // Envia os dados para o servidor processar o pagamento
-                fetch('/Leiloes/ProcessarPagamento', {
+                fetch('/Utilizadors/ProcessarPagamento', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -82,13 +161,15 @@
                         valor: valor
                     })
                 }).then(function (response) {
-                    return response.json();
+                    return response.json(); // Verifique se a resposta é um JSON válido
                 }).then(function (data) {
                     if (data.success) {
-                        alert('Pagamento realizado com sucesso!');
+                        window.location.href = '/Utilizadors/Pagamentos';
                     } else {
-                        alert('Erro ao realizar o pagamento.');
+                        window.location.href = '/Utilizadors/PagamentosDetalhes';
                     }
+                }).catch(function (error) {
+                    console.error('Erro:', error); // Adicione tratamento de erro
                 });
             }
         });

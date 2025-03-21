@@ -747,40 +747,6 @@ namespace projeto.Controllers
             return RedirectToAction("Profile");
         }
 
-        [HttpPost]
-        public IActionResult ProcessPayment()
-        {
-            try
-            {
-                var options = new PaymentIntentCreateOptions
-                {
-                    Amount = 1000, // Valor em cêntimos (€10.00)
-                    Currency = "eur",
-                    PaymentMethod = "pm_card_visa", // Cartão de teste do Stripe
-                    Confirm = true,
-                    AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
-                    {
-                        Enabled = true,
-                        AllowRedirects = "never" // 🔥 Impede redirecionamentos
-                    }
-                };
-
-                var service = new PaymentIntentService();
-                PaymentIntent pagamento = service.Create(options);
-
-                return Json(new
-                {
-                    success = true,
-                    id = pagamento.Id,
-                    status = pagamento.Status,
-                    amount = pagamento.Amount / 100.0
-                });
-            }
-            catch (StripeException e)
-            {
-                return Json(new { success = false, error = e.Message });
-            }
-        }
 
         [HttpGet]
         public async Task<IActionResult> Pagamentos()
@@ -788,6 +754,7 @@ namespace projeto.Controllers
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            ViewData["UserPoints"] = user?.Pontos;
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
@@ -821,22 +788,28 @@ namespace projeto.Controllers
                 return RedirectToAction("Pagamentos");
             }
 
-            
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
-            return View(leilao);
+
+            var viewModel = new PagamentoDetalhesViewModel
+            {
+                Leilao = leilao,
+                Utilizador = utilizador
+            };
+
+            return View(viewModel);
         }
 
 
 
 
-        // Processar o pagamento (simulação)
-        [HttpPost]
         [HttpPost]
         public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
         {
             var stripeOptions = new RequestOptions
             {
-                ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Substitua pela sua chave secreta do Stripe
+                ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Sua chave secreta do Stripe
             };
 
             try
@@ -844,10 +817,16 @@ namespace projeto.Controllers
                 var paymentIntentService = new PaymentIntentService();
                 var paymentIntent = await paymentIntentService.CreateAsync(new PaymentIntentCreateOptions
                 {
-                    Amount = (long)(request.Valor * 100), // Stripe espera o valor em centavos
+                    Amount = (long)(request.Valor * 100), // Valor em centavos
                     Currency = "eur",
                     PaymentMethod = request.PaymentMethodId,
                     Confirm = true,
+                    AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+                    {
+                        Enabled = true, // Habilita métodos automáticos de pagamento
+                        AllowRedirects = "never" // Desabilita métodos de pagamento que envolvem redirecionamento
+                    },
+                    ReturnUrl = "https://localhost:7079/Utilizadors/Pagamentos" // URL de retorno após o pagamento
                 }, stripeOptions);
 
                 var leilao = await _context.Leiloes.FindAsync(request.LeilaoId);
@@ -855,14 +834,15 @@ namespace projeto.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["PaymentSuccess"] = "Pagamento realizado com sucesso!";
-                return Json(new { success = true });
+                return RedirectToAction("Pagamentos", "Utilizadors");
             }
-            catch (StripeException ex)
+            catch (StripeException ex) 
             {
                 TempData["PaymentError"] = $"Erro: {ex.Message}";
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
 
         public class PagamentoRequest
         {
@@ -870,6 +850,7 @@ namespace projeto.Controllers
             public int LeilaoId { get; set; }
             public decimal Valor { get; set; }
         }
+
 
 
     }
