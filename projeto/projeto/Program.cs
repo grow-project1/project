@@ -1,6 +1,7 @@
 using projeto.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSe
 
 // Adicionar os outros serviços
 builder.Services.AddControllersWithViews();
+
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 var app = builder.Build();
 

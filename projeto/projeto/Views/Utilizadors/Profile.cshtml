@@ -3,14 +3,22 @@
 @{
     ViewData["Title"] = "Profile";
 }
-
-@if (TempData["Success"] != null)
+@if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["Success"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="alert alert-success" role="alert" style="position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 1050; background-color: mediumseagreen; color: white; padding: 10px 20px; border-radius: 5px; text-align: center; opacity: 1; transition: opacity 1s ease-out;">
+        @TempData["SuccessMessage"]
     </div>
+    <script>
+        setTimeout(function() {
+            const alertElement = document.querySelector('.alert');
+            alertElement.style.opacity = '0'; // Faz o alerta desaparecer gradualmente
+            setTimeout(function() {
+                alertElement.style.display = 'none'; // Remove o alerta após a transição
+            }, 1000); // Espera a duração da transição antes de esconder
+        }, 3000);
+    </script>
 }
+
 
 @{
     var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
@@ -52,7 +60,7 @@
                         </div>
                     </div>
 
-                    <div class="btn-group w-100 d-flex justify-content-between mt-4" role="group">
+                    <div class="btn-group w-110 d-flex justify-content-between mt-4" role="group">
                         <a href="@Url.Action("MyAuctions", "Leilaos", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
                             @(english ? "My Auctions" : "Meus Leilões")
                         </a>
