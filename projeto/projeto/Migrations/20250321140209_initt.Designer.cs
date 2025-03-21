@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projeto.Data;
 
@@ -11,9 +12,11 @@ using projeto.Data;
 namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250321140209_initt")]
+    partial class initt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,8 +181,6 @@ namespace projeto.Migrations
 
                     b.HasIndex("ItemId")
                         .IsUnique();
-
-                    b.HasIndex("VencedorId");
 
                     b.ToTable("Leiloes");
                 });
@@ -378,13 +379,7 @@ namespace projeto.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("projeto.Models.Utilizador", "Vencedor")
-                        .WithMany()
-                        .HasForeignKey("VencedorId");
-
                     b.Navigation("Item");
-
-                    b.Navigation("Vencedor");
                 });
 
             modelBuilder.Entity("projeto.Models.Licitacao", b =>

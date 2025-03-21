@@ -291,7 +291,7 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            return View(user); 
+            return View(user);
         }
 
         // GET: Utilizadors
@@ -475,7 +475,7 @@ namespace projeto.Controllers
                 VerificationCode = verificationCode
             };
 
-            var emailSender = new EmailSender(_configuration); 
+            var emailSender = new EmailSender(_configuration);
             string subject = "Código de Verificação";
             string message = $"Seu código de verificação é: {verificationCode}";
             await emailSender.SendEmailAsync(email, subject, message);
@@ -783,7 +783,7 @@ namespace projeto.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> PagamentosAsync()
+        public async Task<IActionResult> Pagamentos()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
@@ -793,8 +793,85 @@ namespace projeto.Controllers
                 return RedirectToAction("Login", "Utilizadors");
             }
 
-            return View();
+            // Alterado para incluir o Utilizador (Vencedor) relacionado ao VencedorId
+            var meusLeiloesGanhos = await _context.Leiloes
+                .Where(l => l.VencedorId == user.UtilizadorId)
+                .Include(l => l.Vencedor)  // Inclui o Utilizador associado ao VencedorId
+                .Include(l => l.Item)      // Inclui o Item relacionado ao Leilão
+                .ToListAsync();
+
+            var viewModel = new PagamentosViewModel
+            {
+                LeiloesGanhos = meusLeiloesGanhos
+            };
+
+            return View(viewModel);
         }
+
+        public async Task<IActionResult> PagamentoDetalhes(int leilaoId)
+        {
+            var leilao = await _context.Leiloes
+                .Include(l => l.Item) // Certifique-se de incluir o item associado ao leilão
+                .Where(l => l.LeilaoId == leilaoId && !l.Pago) // Filtro para leilão não pago
+                .FirstOrDefaultAsync(); // Obtém o primeiro (e único) leilão ou null
+
+            if (leilao == null)
+            {
+                TempData["PaymentError"] = "Leilão não encontrado ou já pago.";
+                return RedirectToAction("Pagamentos");
+            }
+
+            
+
+            return View(leilao);
         }
+
+
+
+
+        // Processar o pagamento (simulação)
+        [HttpPost]
+        [HttpPost]
+        public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
+        {
+            var stripeOptions = new RequestOptions
+            {
+                ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Substitua pela sua chave secreta do Stripe
+            };
+
+            try
+            {
+                var paymentIntentService = new PaymentIntentService();
+                var paymentIntent = await paymentIntentService.CreateAsync(new PaymentIntentCreateOptions
+                {
+                    Amount = (long)(request.Valor * 100), // Stripe espera o valor em centavos
+                    Currency = "eur",
+                    PaymentMethod = request.PaymentMethodId,
+                    Confirm = true,
+                }, stripeOptions);
+
+                var leilao = await _context.Leiloes.FindAsync(request.LeilaoId);
+                leilao.Pago = true;
+                await _context.SaveChangesAsync();
+
+                TempData["PaymentSuccess"] = "Pagamento realizado com sucesso!";
+                return Json(new { success = true });
+            }
+            catch (StripeException ex)
+            {
+                TempData["PaymentError"] = $"Erro: {ex.Message}";
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        public class PagamentoRequest
+        {
+            public string PaymentMethodId { get; set; }
+            public int LeilaoId { get; set; }
+            public decimal Valor { get; set; }
+        }
+
+
+    }
 }
 

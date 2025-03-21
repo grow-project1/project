@@ -1,0 +1,96 @@
+﻿@model projeto.Models.Leilao
+
+@{
+    ViewData["Title"] = "Pagamento do Leilão";
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+<h2>@(english ? "Payment for Auction" : "Pagamento do Leilão")</h2>
+
+@if (TempData["PaymentError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["PaymentError"]
+    </div>
+}
+
+<div class="auction-details-container">
+    <h3>@Model.Item.Titulo</h3>
+    <p><strong>@(english ? "Description:" : "Descrição:")</strong> @Model.Item.Descricao</p>
+    <p><strong>@(english ? "Current Bid:" : "Lance Atual:")</strong> @Model.ValorAtualLance.ToString("C")</p>
+
+    <h4>@(english ? "Total to Pay" : "Total a Pagar"):</h4>
+    <p><strong>@Model.ValorAtualLance.ToString("C")</strong></p>
+
+    <!-- Formulário de pagamento -->
+    <form id="payment-form" method="POST">
+        <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
+        <input type="hidden" name="valor" value="@Model.ValorAtualLance" />
+
+        <div id="card-element">
+            <!-- Um elemento do Stripe será montado aqui -->
+        </div>
+
+        <!-- Exibe erros do Stripe -->
+        <div id="card-errors" role="alert"></div>
+
+        <button type="submit" class="btn btn-success">
+            @(english ? "Pay Now" : "Pagar Agora")
+        </button>
+    </form>
+
+    <div class="payment-methods">
+        <h4>@(english ? "Payment Methods" : "Métodos de Pagamento"):</h4>
+        <div class="payment-options">
+            <button class="btn btn-primary">@("Cartão de Crédito")</button>
+            <button class="btn btn-secondary">@("PayPal")</button>
+        </div>
+    </div>
+</div>
+
+<!-- Inclui o Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    var stripe = Stripe('pk_test_51R3dfgFTcoPiNF4zCzoyI7fSXrs0RCLWkAay2TWT2r3o3rt4bxFQwZS6JYD9LfjyA2Y6OjTqYfWDyjcL85j649ni00um8zUZx5'); // Substitua pela sua chave pública do Stripe
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        stripe.createPaymentMethod('card', card).then(function (result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                var paymentMethod = result.paymentMethod.id;
+                var leilaoId = form.querySelector('input[name="leilaoId"]').value;
+                var valor = form.querySelector('input[name="valor"]').value;
+
+                // Envia os dados para o servidor processar o pagamento
+                fetch('/Leiloes/ProcessarPagamento', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        paymentMethodId: paymentMethod,
+                        leilaoId: leilaoId,
+                        valor: valor
+                    })
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    if (data.success) {
+                        alert('Pagamento realizado com sucesso!');
+                    } else {
+                        alert('Erro ao realizar o pagamento.');
+                    }
+                });
+            }
+        });
+    });
+</script>
