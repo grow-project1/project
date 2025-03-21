@@ -1,0 +1,177 @@
+﻿@model PagamentoDetalhesViewModel
+
+@{
+    ViewData["Title"] = "Pagamento do Leilão";
+    var isEnglish = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+@if (TempData["PaymentError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["PaymentError"]
+    </div>
+}
+
+
+@if (TempData["PaymentSuccess"] != null)
+{
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
+        @TempData["Success"]
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let message = document.getElementById("successMessage");
+            if (message) {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    setTimeout(() => message.remove(), 500);
+                }, 2300);
+            }
+        });
+    </script>
+
+    <style>
+        #successMessage {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+}
+
+<div class="payment-details-container">
+    <h3>@Model.Leilao.Item.Titulo</h3>
+
+    <h4>@(isEnglish ? "Total to Pay" : "Total a Pagar"):</h4>
+    <p><strong>@Model.Leilao.ValorAtualLance.ToString("C")</strong></p>
+
+    <!-- Dados de Envio -->
+    <div class="shipping-details-container">
+        <h4>@(isEnglish ? "Shipping Information" : "Informações de Envio"):</h4>
+
+        <form id="shipping-form" method="POST" class="shipping-form">
+            <div class="form-group">
+                <label for="full-name">@("Full Name")</label>
+                <input type="text" id="full-name" name="fullName" class="form-control" placeholder="Enter your full name" value="@Model.Utilizador?.Nome" required />
+            </div>
+
+            <div class="form-group">
+                <label for="address">@("Address")</label>
+                <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" value="@Model.Utilizador?.Morada" required />
+            </div>
+
+            <div class="form-group">
+                <label for="city">@("City")</label>
+                <input type="text" id="city" name="city" class="form-control" placeholder="Enter your city" value="@Model.Utilizador?.Telemovel" required />
+            </div>
+
+            <div class="form-group">
+                <label for="postal-code">@("Postal Code")</label>
+                <input type="text" id="postal-code" name="postalCode" class="form-control" placeholder="Enter your postal code" value="@Model.Utilizador?.CodigoPostal" required />
+            </div>
+
+            <div class="form-group">
+                <label for="country">@("Country")</label>
+                <input type="text" id="country" name="country" class="form-control" placeholder="Enter your country" value="@Model.Utilizador?.Pais" required />
+            </div>
+
+            @if (Model.Utilizador == null)
+            {
+                <div class="alert alert-warning">
+                    @(isEnglish ? "Please complete your shipping information" : "Por favor, complete as informações de envio")
+                </div>
+            }
+        </form>
+    </div>
+
+    <!-- Formulário de pagamento -->
+    <form id="payment-form" method="POST" class="payment-form">
+        <input type="hidden" name="leilaoId" value="@Model.Leilao.LeilaoId" />
+        <input type="hidden" name="valor" value="@Model.Leilao.ValorAtualLance" />
+
+        <div id="card-element" class="card-element">
+            <!-- Stripe Element será inserido aqui -->
+        </div>
+
+        <!-- Exibe erros do Stripe -->
+        <div id="card-errors" role="alert" class="error-message"></div>
+
+        <button type="submit" class="btn btn-success">
+            @(isEnglish ? "Pay Now" : "Pagar Agora")
+        </button>
+    </form>
+</div>
+
+
+    <!-- Formulário de pagamento -->
+    <form id="payment-form" method="POST" class="payment-form">
+        <input type="hidden" name="leilaoId" value="@Model.Leilao.LeilaoId" />
+        <input type="hidden" name="valor" value="@Model.Leilao.ValorAtualLance" />
+
+        <div id="card-element" class="card-element">
+            <!-- Stripe Element será inserido aqui -->
+        </div>
+
+        <!-- Exibe erros do Stripe -->
+        <div id="card-errors" role="alert" class="error-message"></div>
+
+        <button type="submit" class="btn btn-success">
+            @(isEnglish ? "Pay Now" : "Pagar Agora")
+        </button>
+    </form>
+
+ 
+</div>
+
+<!-- Inclui o Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    var stripe = Stripe('pk_test_51R3dfgFTcoPiNF4zCzoyI7fSXrs0RCLWkAay2TWT2r3o3rt4bxFQwZS6JYD9LfjyA2Y6OjTqYfWDyjcL85j649ni00um8zUZx5'); // Substitua pela sua chave pública do Stripe
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        stripe.createPaymentMethod('card', card).then(function (result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                var paymentMethod = result.paymentMethod.id;
+                var leilaoId = form.querySelector('input[name="leilaoId"]').value;
+                var valor = form.querySelector('input[name="valor"]').value;
+
+                // Envia os dados para o servidor processar o pagamento
+                fetch('/Utilizadors/ProcessarPagamento', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        paymentMethodId: paymentMethod,
+                        leilaoId: leilaoId,
+                        valor: valor
+                    })
+                }).then(function (response) {
+                    return response.json(); // Verifique se a resposta é um JSON válido
+                }).then(function (data) {
+                    if (data.success) {
+                        window.location.href = '/Utilizadors/Pagamentos';
+                    } else {
+                        window.location.href = '/Utilizadors/PagamentosDetalhes';
+                    }
+                }).catch(function (error) {
+                    console.error('Erro:', error); // Adicione tratamento de erro
+                });
+            }
+        });
+    });
+</script>
