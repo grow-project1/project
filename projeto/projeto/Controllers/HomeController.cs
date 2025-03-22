@@ -19,22 +19,22 @@ namespace projeto.Controllers
 
         public IActionResult Index()
         {
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            if (!string.IsNullOrEmpty(userEmail))
-            {
-                var user = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
-                if (user != null)
-                {
-                    ViewData["UserPoints"] = user.Pontos; 
-                }
-            }
+            //var userEmail = HttpContext.Session.GetString("UserEmail");
+            //if (!string.IsNullOrEmpty(userEmail))
+            //{
+            //    var user = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
+            //    if (user != null)
+            //    {
+            //        ViewData["UserPoints"] = user.Pontos; 
+            //    }
+            //}
 
-            var leiloes = _context.Leiloes
-                .Include(l => l.Item) 
-                .Where(l => l.DataFim > DateTime.Now) 
-                .ToList();
+            //var leiloes = _context.Leiloes
+            //    .Include(l => l.Item) 
+            //    .Where(l => l.DataFim > DateTime.Now) 
+            //    .ToList();
 
-            ViewData["Leiloes"] = leiloes;
+            //ViewData["Leiloes"] = leiloes;
 
 
             return View();

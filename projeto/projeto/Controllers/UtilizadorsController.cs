@@ -865,7 +865,6 @@ namespace projeto.Controllers
         {
             var emailSender = new EmailSender(_configuration);
 
-
             var userEmail = HttpContext.Session.GetString("UserEmail");
             if (userEmail == null)
             {
@@ -882,26 +881,55 @@ namespace projeto.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // Exigir que o user digite "Cancel"
             if (confirmCancel?.Trim().ToLower() != "cancel")
             {
                 TempData["Error"] = "To confirm account cancellation, please type 'Cancel'.";
                 return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
             }
 
+            // 1) Verificar se o user tem leilões ativos (como antes)
             var leiloesAtivos = await _context.Leiloes
-                .Where(l => l.UtilizadorId == utilizador.UtilizadorId && l.EstadoLeilao == EstadoLeilao.Disponivel)
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId
+                            && l.EstadoLeilao == EstadoLeilao.Disponivel)
                 .ToListAsync();
 
             if (leiloesAtivos.Any())
             {
-                TempData["Error"] = "You cannot cancel your account while you have active auctions.";
+                TempData["Error"] = "You cannot cancel your account while you have auctions.";
                 return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
             }
 
+            // 2) Verificar se o user tem leilões ganhos e não pagos (como antes)
+            var pendentes = await _context.Leiloes
+                .Where(l => l.VencedorId == utilizador.UtilizadorId && !l.Pago)
+                .ToListAsync();
+
+            if (pendentes.Any())
+            {
+                TempData["Error"] = "You have pending payments. You cannot cancel your account until all payments are settled.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // 3) NOVO: Verificar se o user tem licitações em leilões ativos
+            var licitacoesAtivas = await _context.Licitacoes
+                .Include(l => l.Leilao)
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId
+                            && l.Leilao.EstadoLeilao == EstadoLeilao.Disponivel)
+                .ToListAsync();
+
+            if (licitacoesAtivas.Any())
+            {
+                TempData["Error"] = "You cannot cancel your account while you have active bids.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // Se passou de todas as verificações, pode remover
             _context.Utilizador.Remove(utilizador);
             await _context.SaveChangesAsync();
             HttpContext.Session.Clear();
 
+            // Envia email de confirmação
             string assunto = "Conta cancelada com sucesso - Grow";
             string mensagem = $"<h2>Olá {utilizador.Nome},</h2>" +
                               "<p>A sua conta na plataforma <strong>Grow</strong> foi cancelada com sucesso.</p>" +
@@ -912,7 +940,7 @@ namespace projeto.Controllers
             await emailSender.SendEmailAsync(utilizador.Email, assunto, mensagem);
 
             TempData["Success"] = "Your account has been successfully cancelled.";
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Leilaos");
         }
     }
 }
