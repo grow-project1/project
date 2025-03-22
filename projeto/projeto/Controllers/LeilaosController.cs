@@ -337,19 +337,35 @@ namespace projeto.Controllers
         {
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
+                .Include(l => l.Licitacoes)
                 .FirstOrDefaultAsync(l => l.LeilaoId == id);
 
-            if (leilao != null)
+            if (leilao == null)
             {
-                if (leilao.Item != null)
-                {
-                    _context.Itens.Remove(leilao.Item);
-                }
-                _context.Leiloes.Remove(leilao);
-                await _context.SaveChangesAsync();
+                TempData["Error"] = "Leilão não encontrado.";
+                return RedirectToAction("MyAuctions");
             }
 
-            return RedirectToAction(nameof(Index));
+            // Verifica se existem licitações
+            bool temLicitacoes = leilao.Licitacoes != null && leilao.Licitacoes.Any();
+
+            if (temLicitacoes && !leilao.Pago)
+            {
+                TempData["Error"] = "Não pode eliminar um leilão com licitações ativas que ainda não foi pago.";
+                return RedirectToAction("MyAuctions");
+            }
+
+            // Se estiver tudo ok, elimina
+            if (leilao.Item != null)
+            {
+                _context.Itens.Remove(leilao.Item);
+            }
+
+            _context.Leiloes.Remove(leilao);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Leilão eliminado com sucesso.";
+            return RedirectToAction("MyAuctions");
         }
 
         private bool LeilaoExists(int id)
