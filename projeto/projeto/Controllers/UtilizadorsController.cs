@@ -785,6 +785,12 @@ namespace projeto.Controllers
 
         public async Task<IActionResult> PagamentoDetalhes(int leilaoId)
         {
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = utilizador?.Pontos;
+
             var leilao = await _context.Leiloes
                 .Include(l => l.Item) // Certifique-se de incluir o item associado ao leilão
                 .Where(l => l.LeilaoId == leilaoId && !l.Pago) // Filtro para leilão não pago
@@ -796,8 +802,6 @@ namespace projeto.Controllers
                 return RedirectToAction("Pagamentos");
             }
 
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
 
             var viewModel = new PagamentoDetalhesViewModel
@@ -815,6 +819,7 @@ namespace projeto.Controllers
         [HttpPost]
         public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
         {
+
             var stripeOptions = new RequestOptions
             {
                 ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Sua chave secreta do Stripe
@@ -833,23 +838,28 @@ namespace projeto.Controllers
                     {
                         Enabled = true, // Habilita métodos automáticos de pagamento
                         AllowRedirects = "never" // Desabilita métodos de pagamento que envolvem redirecionamento
-                    },
-                    ReturnUrl = "https://localhost:7079/Utilizadors/Pagamentos" // URL de retorno após o pagamento
+                    }
                 }, stripeOptions);
 
                 var leilao = await _context.Leiloes.FindAsync(request.LeilaoId);
                 leilao.Pago = true;
                 await _context.SaveChangesAsync();
 
-                TempData["PaymentSuccess"] = "Pagamento realizado com sucesso!";
-                return RedirectToAction("Pagamentos", "Utilizadors");
+
+
+
+                TempData["PaymentSuccess"] = "Payment successfully completed!";
+
+                // Retorna um JSON indicando sucesso
+                return Json(new { success = true });
             }
-            catch (StripeException ex) 
+            catch (StripeException ex)
             {
-                TempData["PaymentError"] = $"Erro: {ex.Message}";
+                // Retorna um JSON com a mensagem de erro
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
 
 
         public class PagamentoRequest

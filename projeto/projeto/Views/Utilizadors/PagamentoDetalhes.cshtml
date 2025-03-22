@@ -131,7 +131,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    var stripe = Stripe('pk_test_51R3dfgFTcoPiNF4zCzoyI7fSXrs0RCLWkAay2TWT2r3o3rt4bxFQwZS6JYD9LfjyA2Y6OjTqYfWDyjcL85j649ni00um8zUZx5'); // Substitua pela sua chave pública do Stripe
+    var stripe = Stripe('pk_test_51R3dfgFTcoPiNF4zCzoyI7fSXrs0RCLWkAay2TWT2r3o3rt4bxFQwZS6JYD9LfjyA2Y6OjTqYfWDyjcL85j649ni00um8zUZx5'); 
     var elements = stripe.elements();
     var card = elements.create('card');
     card.mount('#card-element');
@@ -150,27 +150,31 @@
                 var valor = form.querySelector('input[name="valor"]').value;
 
                 // Envia os dados para o servidor processar o pagamento
-                fetch('/Utilizadors/ProcessarPagamento', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        paymentMethodId: paymentMethod,
-                        leilaoId: leilaoId,
-                        valor: valor
-                    })
-                }).then(function (response) {
-                    return response.json(); // Verifique se a resposta é um JSON válido
-                }).then(function (data) {
-                    if (data.success) {
-                        window.location.href = '/Utilizadors/Pagamentos';
-                    } else {
-                        window.location.href = '/Utilizadors/PagamentosDetalhes';
-                    }
-                }).catch(function (error) {
-                    console.error('Erro:', error); // Adicione tratamento de erro
-                });
+                    fetch('/Utilizadors/ProcessarPagamento', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            paymentMethodId: paymentMethod,
+            leilaoId: leilaoId,
+            valor: valor
+        })
+    }).then(function (response) {
+        return response.json(); // Agora esperamos um JSON como resposta
+    }).then(function (data) {
+        if (data.success) {
+            // Se o pagamento foi bem-sucedido, redireciona para a página de pagamentos
+            
+            window.location.href = '/Utilizadors/Pagamentos';
+        } else {
+            // Caso haja um erro, exibe a mensagem de erro
+            document.getElementById('card-errors').textContent = data.message || "Erro ao processar o pagamento.";
+        }
+    }).catch(function (error) {
+        console.error('Erro:', error); // Adiciona tratamento de erro
+    });
+
             }
         });
     });
