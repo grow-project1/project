@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace projeto.Models
+﻿namespace growTests.Models
 {
     public class Leilao
     {
@@ -11,12 +9,9 @@ namespace projeto.Models
         public DateTime DataFim { get; set; }
         public double ValorIncrementoMinimo { get; set; }
         public List<Licitacao>? Licitacoes { get; set; }
-        public int? VencedorId { get; set; }
-        public Boolean Pago { get; set; } = false;
+        public string? Vencedor { get; set; }
         public int UtilizadorId { get; set; }
         public double ValorAtualLance { get; set; }
-        public EstadoLeilao EstadoLeilao { get; set; }
-
-        public Utilizador Vencedor { get; set; }
+        public EstadoLeilao EstadoLeilao { get; set; } 
     }
 }

@@ -33,7 +33,7 @@
                         <a href="@Url.Action("Delete", "Leilaos", new { id = auction.LeilaoId })" class="btn-my-auctions butt-del" onclick="return confirm('@(english ? "Are you sure?" : "Tem a certeza?")');">
                             <i class="fas fa-trash"></i> @(english ? "Delete" : "Eliminar")
                         </a>
-                        @if (auction.EstadoLeilao == EstadoLeilao.Encerrado && auction.VencedorId == null)
+                        @if (auction.EstadoLeilao == EstadoLeilao.Encerrado && auction.Vencedor == null)
                         {
                             <a asp-controller="Leiloes" asp-action="RecolocarLeilao" asp-route-id="@auction.LeilaoId" class="btn btn-primary">
                                 Recolocar Leilão

@@ -97,8 +97,7 @@ namespace growTests.Controllers
                     {
                         vencedor.Pontos += leilao.Item.Sustentavel ? 50 : 20;
                         _context.Update(vencedor);
-
-                        leilao.VencedorId = vencedor.UtilizadorId;
+                        leilao.Vencedor = vencedor.Nome;
 
                         string subject = $"Parabéns! Ganhaste o leilão {leilao.Item.Titulo}";
                         string message = $"<h2>Parabéns, {vencedor.Nome}!</h2>" +
@@ -121,7 +120,7 @@ namespace growTests.Controllers
                 }
                 else
                 {
-                    
+                    leilao.Vencedor = null;
                     if (leiloeiro != null)
                     {
                         string subjectLeiloeiroSemLicitacoes = $"O seu leilão {leilao.Item.Titulo} terminou sem licitações";
