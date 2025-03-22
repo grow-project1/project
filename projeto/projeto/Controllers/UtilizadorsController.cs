@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using growTests.Data;
-using growTests.Models;
+using projeto.Data;
+using projeto.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Stripe;
 
-
-namespace growTests.Controllers
+namespace projeto.Controllers
 {
     public class UtilizadorsController : Controller
     {
@@ -49,7 +49,7 @@ namespace growTests.Controllers
         // Método Register (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Nome,Email,Password")] Utilizador utilizador)
+        public async Task<IActionResult> Register([Bind("Nome,Email,Password")] Utilizador utilizador, bool acceptedTerms)
         {
             // Validações adicionais
             if (string.IsNullOrEmpty(utilizador.Nome))
@@ -71,6 +71,12 @@ namespace growTests.Controllers
                 ModelState.AddModelError("Password", "Password must have at least 6 characters, one uppercase letter, one number, and one special character.");
             }
 
+            // Verifica se os termos foram aceitos
+            if (!acceptedTerms)
+            {
+                ModelState.AddModelError(string.Empty, "You must accept the Terms and Conditions.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(utilizador);
@@ -82,9 +88,6 @@ namespace growTests.Controllers
                 ModelState.AddModelError("Email", "This email is already registered");
                 return View(utilizador);
             }
-
-
-            //
 
             // Gera o código de verificação
             var random = new Random();
@@ -108,20 +111,8 @@ namespace growTests.Controllers
 
             TempData["Info"] = "We sent a verification code to your email. Please confirm.";
             return RedirectToAction("ConfirmRegistration");
-
-
-            ////
-            //utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
-
-            //_context.Add(utilizador);
-            //await _context.SaveChangesAsync();
-
-            //await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
-
-            //TempData["Success"] = "Account successfully created! Please log in to access your account";
-
-            //return RedirectToAction("Login");
         }
+
 
         // GET
         public IActionResult ConfirmRegistration()
@@ -130,11 +121,9 @@ namespace growTests.Controllers
         }
 
         [HttpPost]
-        // [ValidateAntiForgeryToken] // COMENTE ou REMOVA para testes de unidade
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmRegistration(int verificationCode)
         {
-  
-
             // Resgata dados da sessão
             var pendingName = HttpContext.Session.GetString("PendingRegName");
             var pendingEmail = HttpContext.Session.GetString("PendingRegEmail");
@@ -143,16 +132,17 @@ namespace growTests.Controllers
 
             if (string.IsNullOrEmpty(pendingEmail) || storedCode == null)
             {
+                // Sessão expirou, ou o user já foi criado
                 TempData["Error"] = "Session expired. Please register again.";
                 return RedirectToAction("Register");
             }
+
             // Verifica o code
             if (verificationCode != storedCode.Value)
             {
                 TempData["Error"] = "Invalid code. Please try again.";
                 return View();
             }
-            Console.WriteLine("TESTE***************.");
 
             // OK: Criar o utilizador no DB
             var utilizador = new Utilizador
@@ -163,14 +153,7 @@ namespace growTests.Controllers
             };
 
             _context.Utilizador.Add(utilizador);
-
-            Console.WriteLine("Tentando salvar utilizador no banco de dados:");
-            Console.WriteLine($"Nome: {pendingName}, Email: {pendingEmail}");
-
             await _context.SaveChangesAsync();
-
-            Console.WriteLine("Salvamento concluído.");
-
 
             // Limpa a sessão
             HttpContext.Session.Remove("PendingRegName");
@@ -181,7 +164,6 @@ namespace growTests.Controllers
             TempData["Success"] = "Account confirmed! Please log in.";
             return RedirectToAction("Login");
         }
-
 
         // Função para validar a força da senha
         private bool IsPasswordStrong(string password)
@@ -317,7 +299,7 @@ namespace growTests.Controllers
                 return NotFound();
             }
 
-            return View(user); 
+            return View(user);
         }
 
         // GET: Utilizadors
@@ -773,54 +755,165 @@ namespace growTests.Controllers
             return RedirectToAction("Profile");
         }
 
-        [HttpPost]
-        public IActionResult ProcessPayment()
-        {
-            try
-            {
-                var options = new PaymentIntentCreateOptions
-                {
-                    Amount = 1000, // Valor em cêntimos (€10.00)
-                    Currency = "eur",
-                    PaymentMethod = "pm_card_visa", // Cartão de teste do Stripe
-                    Confirm = true,
-                    AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
-                    {
-                        Enabled = true,
-                        AllowRedirects = "never" // 🔥 Impede redirecionamentos
-                    }
-                };
-
-                var service = new PaymentIntentService();
-                PaymentIntent pagamento = service.Create(options);
-
-                return Json(new
-                {
-                    success = true,
-                    id = pagamento.Id,
-                    status = pagamento.Status,
-                    amount = pagamento.Amount / 100.0
-                });
-            }
-            catch (StripeException e)
-            {
-                return Json(new { success = false, error = e.Message });
-            }
-        }
 
         [HttpGet]
-        public async Task<IActionResult> PagamentosAsync()
+        public async Task<IActionResult> Pagamentos()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            ViewData["UserPoints"] = user?.Pontos;
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
             }
 
-            return View();
+            // Alterado para incluir o Utilizador (Vencedor) relacionado ao VencedorId
+            var meusLeiloesGanhos = await _context.Leiloes
+                .Where(l => l.VencedorId == user.UtilizadorId)
+                .Include(l => l.Vencedor)  // Inclui o Utilizador associado ao VencedorId
+                .Include(l => l.Item)      // Inclui o Item relacionado ao Leilão
+                .ToListAsync();
+
+            var viewModel = new PagamentosViewModel
+            {
+                LeiloesGanhos = meusLeiloesGanhos
+            };
+
+            return View(viewModel);
         }
+
+        public async Task<IActionResult> PagamentoDetalhes(int leilaoId)
+        {
+            var leilao = await _context.Leiloes
+                .Include(l => l.Item) // Certifique-se de incluir o item associado ao leilão
+                .Where(l => l.LeilaoId == leilaoId && !l.Pago) // Filtro para leilão não pago
+                .FirstOrDefaultAsync(); // Obtém o primeiro (e único) leilão ou null
+
+            if (leilao == null)
+            {
+                TempData["PaymentError"] = "Leilão não encontrado ou já pago.";
+                return RedirectToAction("Pagamentos");
+            }
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+
+            var viewModel = new PagamentoDetalhesViewModel
+            {
+                Leilao = leilao,
+                Utilizador = utilizador
+            };
+
+            return View(viewModel);
         }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
+        {
+            var stripeOptions = new RequestOptions
+            {
+                ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Sua chave secreta do Stripe
+            };
+
+            try
+            {
+                var paymentIntentService = new PaymentIntentService();
+                var paymentIntent = await paymentIntentService.CreateAsync(new PaymentIntentCreateOptions
+                {
+                    Amount = (long)(request.Valor * 100), // Valor em centavos
+                    Currency = "eur",
+                    PaymentMethod = request.PaymentMethodId,
+                    Confirm = true,
+                    AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+                    {
+                        Enabled = true, // Habilita métodos automáticos de pagamento
+                        AllowRedirects = "never" // Desabilita métodos de pagamento que envolvem redirecionamento
+                    },
+                    ReturnUrl = "https://localhost:7079/Utilizadors/Pagamentos" // URL de retorno após o pagamento
+                }, stripeOptions);
+
+                var leilao = await _context.Leiloes.FindAsync(request.LeilaoId);
+                leilao.Pago = true;
+                await _context.SaveChangesAsync();
+
+                TempData["PaymentSuccess"] = "Pagamento realizado com sucesso!";
+                return RedirectToAction("Pagamentos", "Utilizadors");
+            }
+            catch (StripeException ex) 
+            {
+                TempData["PaymentError"] = $"Erro: {ex.Message}";
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+
+        public class PagamentoRequest
+        {
+            public string PaymentMethodId { get; set; }
+            public int LeilaoId { get; set; }
+            public decimal Valor { get; set; }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string confirmCancel)
+        {
+            var emailSender = new EmailSender(_configuration);
+
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            if (userEmail == null)
+            {
+                TempData["Error"] = "You must be logged in.";
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var utilizador = await _context.Utilizador
+                .FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (utilizador == null)
+            {
+                TempData["Error"] = "User not found.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (confirmCancel?.Trim().ToLower() != "cancel")
+            {
+                TempData["Error"] = "To confirm account cancellation, please type 'Cancel'.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            var leiloesAtivos = await _context.Leiloes
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId && l.EstadoLeilao == EstadoLeilao.Disponivel)
+                .ToListAsync();
+
+            if (leiloesAtivos.Any())
+            {
+                TempData["Error"] = "You cannot cancel your account while you have active auctions.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            _context.Utilizador.Remove(utilizador);
+            await _context.SaveChangesAsync();
+            HttpContext.Session.Clear();
+
+            string assunto = "Conta cancelada com sucesso - Grow";
+            string mensagem = $"<h2>Olá {utilizador.Nome},</h2>" +
+                              "<p>A sua conta na plataforma <strong>Grow</strong> foi cancelada com sucesso.</p>" +
+                              "<p>Agradecemos a sua participação e esperamos vê-lo novamente no futuro.</p>" +
+                              "<p>Se esta ação não foi realizada por si ou se mudou de ideias, entre em contacto connosco através do nosso site.</p>" +
+                              "<br /><p>Cumprimentos,<br/>Equipa Grow</p>";
+
+            await emailSender.SendEmailAsync(utilizador.Email, assunto, mensagem);
+
+            TempData["Success"] = "Your account has been successfully cancelled.";
+            return RedirectToAction("Index", "Home");
+        }
+    }
 }
 

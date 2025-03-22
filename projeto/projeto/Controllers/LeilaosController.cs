@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-using growTests.Data;
-using growTests.Models;
+using projeto.Data;
+using projeto.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 
-namespace growTests.Controllers
+namespace projeto.Controllers
 {
     public class LeilaosController : Controller
     {
@@ -97,7 +97,7 @@ namespace growTests.Controllers
                     {
                         vencedor.Pontos += leilao.Item.Sustentavel ? 50 : 20;
                         _context.Update(vencedor);
-                        leilao.Vencedor = vencedor.Nome;
+                        leilao.Vencedor = vencedor;
 
                         string subject = $"Parabéns! Ganhaste o leilão {leilao.Item.Titulo}";
                         string message = $"<h2>Parabéns, {vencedor.Nome}!</h2>" +
