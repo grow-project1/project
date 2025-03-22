@@ -989,109 +989,314 @@ th {
 
 
 
-/* ----------------------------- PAYMENT DETAILS PAGE ------------------------------- */
-/* Página de Pagamento */
-.payment-title {
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
+/* ===================== RESPONSIVE STYLES ===================== */
+/* Tablets and small desktops */
+@media (max-width: 992px) {
+    .grid-leiloes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .auction-card {
+        max-width: 90%;
+    }
+    .navbar img {
+        height: 35px;
+    }
 }
 
-/* Container dos detalhes do leilão */
-.payment-details-container {
-    width: 30%;
-    margin: 100px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+/* Tablets */
+@media (max-width: 768px) {
+    .grid-leiloes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        border-right: none;
+        padding: 10px;
+    }
+    .grid-leiloes {
+        margin-left: 0;
+    }
+    .navbar .navbar-nav .nav-link {
+        font-size: 16px;
+        padding-left: 10px;
+        margin-right: 5px;
+    }
 }
 
-    .payment-details-container h3 {
-        font-size: 1.8rem;
+/* Mobile */
+@media (max-width: 576px) {
+    .grid-leiloes {
+        grid-template-columns: 1fr;
+    }
+
+    .register-container, .login-container, .auction-container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+        .navbar .navbar-nav {
+            flex-direction: column;
+            width: 100%;
+        }
+
+            .navbar .navbar-nav .nav-link {
+                padding: 5px 10px;
+                width: 100%;
+                text-align: center;
+            }
+    /* Ajusta o botão de criação para mobile */
+    .btn-create {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .auction-container {
+        width: 90%; /* Amplia o container para ocupar mais espaço */
+        margin: 20px auto; /* Reduz a margem superior/inferior para caber melhor na tela */
+        padding: 20px 10px; /* Ajusta o padding para diminuir espaços internos */
+    }
+}
+
+    /* ----------------------------- PAYMENT DETAILS PAGE ------------------------------- */
+    /* Página de Pagamento */
+    .payment-title {
+        font-size: 2rem;
         color: #333;
-        margin-bottom: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
     }
 
-    .payment-details-container p {
-        font-size: 1.1rem;
-        color: #555;
-        margin: 10px 0;
+    /* Container dos detalhes do leilão */
+    .payment-details-container {
+        width: 30%;
+        margin: 100px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
     }
 
-.total-amount {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 20px;
-}
+        .payment-details-container h3 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
 
-/* Stripe Card Element */
-.stripe-card-element {
-    margin: 20px 0;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-}
+        .payment-details-container p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 10px 0;
+        }
 
-#card-element {
-    height: 40px;
-}
-
-/* Erros de pagamento */
-#card-errors {
-    color: red;
-    font-size: 1rem;
-    margin-top: 10px;
-}
-
-/* Botão de pagamento */
-.btn-pay-now {
-    display: inline-block;
-    width: 100%;
-    padding: 12px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-    .btn-pay-now:hover {
-        background-color: #218838;
+    .total-amount {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 20px;
     }
 
+    /* Stripe Card Element */
+    .stripe-card-element {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+    }
 
+    #card-element {
+        height: 40px;
+    }
 
-/* ----------------------- PAYMENTS PAGE ----------------------------- */
-.payments-container{
-    margin: 160px auto;
-    width: 80%;
-}
+    /* Erros de pagamento */
+    #card-errors {
+        color: red;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
 
-.btn-payment {
-    color: white;
-    background-color: darkgreen;
-    text-decoration: none;
-    padding: 5px 10px; 
-    border-radius: 5px;
-    font-size: 13px; 
-    font-weight: bold;
-    display: inline-block;
-    text-align: center; 
-    cursor: pointer; 
-    transition: all 0.3s ease-in-out; 
-}
-
-    .btn-payment:hover {
+    /* Botão de pagamento */
+    .btn-pay-now {
+        display: inline-block;
+        width: 100%;
+        padding: 12px;
+        background-color: #28a745;
         color: white;
-        background-color: #006400; 
-        transform: scale(1.04);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
     }
+
+        .btn-pay-now:hover {
+            background-color: #218838;
+        }
+
+
+
+    /* ----------------------- PAYMENTS PAGE ----------------------------- */
+    .payments-container {
+        margin: 160px auto;
+        width: 80%;
+    }
+
+    .btn-payment {
+        color: white;
+        background-color: darkgreen;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: bold;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn-payment:hover {
+            color: white;
+            background-color: #006400;
+            transform: scale(1.04);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+@media (max-width: 576px) {
+    .sidebar {
+        position: relative; /* Torna-a parte do fluxo, não fixa */
+        top: 0;
+        left: 0;
+        width: 100%; /* Ocupa toda a largura */
+        height: auto; /* Ajusta a altura conforme o conteúdo */
+        padding: 10px;
+        border-right: none;
+        margin-bottom: 20px; /* Espaço abaixo para separar do conteúdo principal */
+        overflow-y: auto; /* Se o conteúdo for grande, permite rolagem vertical */
+        margin-top: 100px;
+    }
+
+    /* Remove a margem esquerda que empurra a grid para a direita */
+    .grid-leiloes {
+        margin-left: 0;
+    }
+    .btn-group {
+        flex-wrap: wrap; /* Permite que os botões “quebrem” de linha */
+        justify-content: center; /* Centraliza os botões no ecrã */
+        gap: 10px; /* Espaço entre os botões */
+    }
+
+    .btn-profile {
+        width: 100%; /* Cada botão ocupa 100% da largura */
+        margin-bottom: 5px; /* Espaço extra entre eles */
+    }
+}
+
+@media (max-width: 576px) {
+    /* Ajusta a div de descontos para permitir scroll horizontal */
+    .descontos-container {
+        width: 100% !important; /* Usa 100% da tela no mobile */
+        margin: 0 auto !important;
+        overflow-x: auto; /* Se a tabela for maior que a tela, cria scroll */
+        padding: 0 10px; /* Espaço lateral para não colar na borda */
+    }
+
+        /* Garante que a tabela tenha uma largura mínima, forçando scroll se exceder a tela */
+        .descontos-container table {
+            min-width: 350px; /* Ajuste conforme o número de colunas */
+        }
+
+    .meus-descontos-container {
+        width: 100% !important; /* Usa 100% da tela no mobile */
+        margin: 0 auto !important;
+        overflow-x: auto; /* Se a tabela for maior que a tela, cria scroll */
+        padding: 0 10px;
+    }
+
+        .meus-descontos-container table {
+            min-width: 350px;
+        }
+}
+
+/* ===================== MOBILE RESPONSIVE ADJUSTMENTS ===================== */
+@media (max-width: 576px) {
+    /* Sidebar (filtros) passa a ocupar a largura total e ficar acima do conteúdo */
+    .sidebar {
+        position: relative; /* Remove a posição fixa */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        border-right: none;
+        margin-bottom: 20px; /* Espaço abaixo para separar dos leilões */
+        overflow-y: auto;
+    }
+
+    /* Remove a margem da grid para que o conteúdo ocupe toda a largura */
+    .grid-leiloes {
+        margin-left: 0;
+        grid-template-columns: 1fr; /* Uma coluna para facilitar a visualização */
+    }
+
+    /* Ajustes para o container de criar leilões */
+    .auction-container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 20px 10px;
+    }
+
+    /* Para as tabelas de descontos (ou similares), envolver em um contêiner scrollável */
+    .descontos-container,
+    .meus-descontos-container {
+        width: 100% !important;
+        margin: 0 auto;
+        overflow-x: auto;
+        padding: 0 10px;
+    }
+
+        .descontos-container table,
+        .meus-descontos-container table {
+            min-width: 350px; /* Ajuste conforme o número de colunas */
+        }
+
+    /* Ajuste nos botões do perfil (caso estejam em grupo) */
+    .btn-group {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-profile {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    /* Na página de detalhes do leilão, ajusta o layout dos detalhes para coluna */
+    .auction--details-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .auction--details-image img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .auction-details {
+        width: 100%;
+    }
+}
