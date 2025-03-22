@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using projeto.Data;
 using projeto.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 
 namespace projeto.Controllers
 {
@@ -17,12 +19,14 @@ namespace projeto.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
         private readonly IConfiguration _config;
+        private readonly IEmailSender _emailSender;
 
-        public LeilaosController(ApplicationDbContext context, IWebHostEnvironment env, IConfiguration config)
+        public LeilaosController(ApplicationDbContext context, IWebHostEnvironment env, IConfiguration config, IEmailSender emailSender)
         {
             _context = context;
             _env = env;
             _config = config;
+            _emailSender = emailSender;
         }
 
         // GET: Leilaos
@@ -30,7 +34,6 @@ namespace projeto.Controllers
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
-            var emailSender = new EmailSender(_config);
 
             ViewData["UserPoints"] = user?.Pontos;
             ViewData["Logged"] = user != null;
@@ -94,15 +97,14 @@ namespace projeto.Controllers
                     {
                         vencedor.Pontos += leilao.Item.Sustentavel ? 50 : 20;
                         _context.Update(vencedor);
-
-                        leilao.VencedorId = vencedor.UtilizadorId;
+                        leilao.Vencedor = vencedor;
 
                         string subject = $"Parabéns! Ganhaste o leilão {leilao.Item.Titulo}";
                         string message = $"<h2>Parabéns, {vencedor.Nome}!</h2>" +
                                            $"<p>Você venceu o leilão do item <strong>{leilao.Item.Titulo}</strong> pelo valor de {licitacaoVencedora.ValorLicitacao}€.</p>" +
                                            "<p>Entre na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> para proceder à entrega do item.</p>";
 
-                        await emailSender.SendEmailAsync(vencedor.Email, subject, message);
+                        await _emailSender.SendEmailAsync(vencedor.Email, subject, message);
 
                         if (leiloeiro != null)
                         {
@@ -112,13 +114,13 @@ namespace projeto.Controllers
                                                       $"<p>O vencedor foi: <strong>{vencedor.Nome}</strong></p>" +
                                                       "<p>Entre na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> para coordenar a entrega do item.</p>";
 
-                            await emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiro, messageLeiloeiro);
+                            await _emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiro, messageLeiloeiro);
                         }
                     }
                 }
                 else
                 {
-                    
+                    leilao.Vencedor = null;
                     if (leiloeiro != null)
                     {
                         string subjectLeiloeiroSemLicitacoes = $"O seu leilão {leilao.Item.Titulo} terminou sem licitações";
@@ -127,7 +129,7 @@ namespace projeto.Controllers
                                                               "<p>Considere repostar o item ou ajustar o preço inicial para atrair mais interessados.</p>" +
                                                               "<p>Você pode gerir os seus leilões na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> indo ao seu perfil e aos seus leilões para recolocar o seu leilão.</p>";
 
-                        await emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiroSemLicitacoes, messageLeiloeiroSemLicitacoes);
+                        await _emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiroSemLicitacoes, messageLeiloeiroSemLicitacoes);
                     }
                 }
                 leilao.EstadoLeilao = EstadoLeilao.Encerrado;

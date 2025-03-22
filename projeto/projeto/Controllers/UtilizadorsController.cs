@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projeto.Data;
 using projeto.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity;
 using Stripe;
 
 namespace projeto.Controllers
@@ -12,12 +14,14 @@ namespace projeto.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IConfiguration _configuration;
+        private readonly IEmailSender _emailSender;
 
-        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
+        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration configuration, IEmailSender emailSender)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _configuration = configuration;
+            _emailSender = emailSender;
         }
 
         public IActionResult ToggleLanguage(string language)
@@ -90,16 +94,20 @@ namespace projeto.Controllers
             int verificationCode = random.Next(100000, 999999);
 
             // Envia email com o código
-            var emailSender = new EmailSender(_configuration);
             string subject = "Código de Verificação - Confirmação de Registo";
             string message = $"Seu código de verificação é: {verificationCode}";
-            await emailSender.SendEmailAsync(utilizador.Email, subject, message);
+            await _emailSender.SendEmailAsync(utilizador.Email, subject, message);
 
             // Guarda tudo na sessão (ou TempData)
+            // Atenção: Sessão não deve armazenar strings muito grandes. Aqui é pequeno, deve servir.
             HttpContext.Session.SetString("PendingRegName", utilizador.Nome);
             HttpContext.Session.SetString("PendingRegEmail", utilizador.Email);
             HttpContext.Session.SetString("PendingRegPassword", utilizador.Password);
-            HttpContext.Session.SetInt32("PendingRegCode", verificationCode);
+
+            // Armazena também o code
+            HttpContext.Session.SetString("PendingRegCode", verificationCode.ToString());
+            Console.WriteLine($"*Codigo no controller*: {verificationCode}");
+
 
             TempData["Info"] = "We sent a verification code to your email. Please confirm.";
             return RedirectToAction("ConfirmRegistration");
@@ -120,7 +128,7 @@ namespace projeto.Controllers
             var pendingName = HttpContext.Session.GetString("PendingRegName");
             var pendingEmail = HttpContext.Session.GetString("PendingRegEmail");
             var pendingPass = HttpContext.Session.GetString("PendingRegPassword");
-            int? storedCode = HttpContext.Session.GetInt32("PendingRegCode");
+            int? storedCode = int.Parse(HttpContext.Session.GetString("PendingRegCode"));
 
             if (string.IsNullOrEmpty(pendingEmail) || storedCode == null)
             {
@@ -474,11 +482,10 @@ namespace projeto.Controllers
             {
                 VerificationCode = verificationCode
             };
-
-            var emailSender = new EmailSender(_configuration);
+            // Em vez de criar new EmailSender(...) aqui, usa _emailSender
             string subject = "Código de Verificação";
             string message = $"Seu código de verificação é: {verificationCode}";
-            await emailSender.SendEmailAsync(email, subject, message);
+            await _emailSender.SendEmailAsync(email, subject, message);
 
 
             _context.VerificationModel.Add(verificationModel);
@@ -549,7 +556,8 @@ namespace projeto.Controllers
             // Verifica se a password foi preenchida (mas sem adicionar erro manual)
             if (!ModelState.IsValid)
             {
-                return View(); // ASP.NET já adicionou "The newPassword field is required."
+                return View(); // ASP.NET já adicionou "The
+                               // Password field is required."
             }
 
             if (!IsPasswordStrong(newPassword))
