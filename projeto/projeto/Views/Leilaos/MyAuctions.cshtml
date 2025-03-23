@@ -11,6 +11,21 @@
 
 <div class="container-my-auctions">
 
+        @* Mensagens de sucesso ou erro *@
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success mt-3" role="alert">
+            @TempData["Success"]
+        </div>
+    }
+
     @if (Model != null && Model.Any())
     {
         <div class="auctions-container">

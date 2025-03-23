@@ -1,29 +1,47 @@
-﻿@model growTests.Models.Utilizador
-
+﻿@model projeto.Models.Utilizador
 @{
     ViewData["Title"] = "Profile";
-}
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success" role="alert" style="position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 1050; background-color: mediumseagreen; color: white; padding: 10px 20px; border-radius: 5px; text-align: center; opacity: 1; transition: opacity 1s ease-out;">
-        @TempData["SuccessMessage"]
-    </div>
-    <script>
-        setTimeout(function() {
-            const alertElement = document.querySelector('.alert');
-            alertElement.style.opacity = '0'; // Faz o alerta desaparecer gradualmente
-            setTimeout(function() {
-                alertElement.style.display = 'none'; // Remove o alerta após a transição
-            }, 1000); // Espera a duração da transição antes de esconder
-        }, 3000);
-    </script>
-}
-
-
-@{
     var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
 }
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert" style="position: fixed; ...">
+        @TempData["SuccessMessage"]
+    </div>
+    <script>
+        setTimeout(...); /* Lógica de fade-out */
+    </script>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert"
+         style="position: fixed;
+                top: 90px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 9999;
+                padding: 10px 20px;
+                border-radius: 5px;
+                text-align: center;
+                opacity: 1;
+                transition: opacity 1s ease-out;">
+        @TempData["Error"]
+    </div>
+
+    <script>
+        setTimeout(function () {
+            const alertElement = document.querySelector('.alert-danger');
+            if (alertElement) {
+                alertElement.style.opacity = '0';
+                setTimeout(function () {
+                    alertElement.style.display = 'none';
+                }, 1000);
+            }
+        }, 3000);
+    </script>
+}
 <div class="profile">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8 col-lg-6">

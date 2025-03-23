@@ -785,6 +785,12 @@ namespace projeto.Controllers
 
         public async Task<IActionResult> PagamentoDetalhes(int leilaoId)
         {
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = utilizador?.Pontos;
+
             var leilao = await _context.Leiloes
                 .Include(l => l.Item) // Certifique-se de incluir o item associado ao leilão
                 .Where(l => l.LeilaoId == leilaoId && !l.Pago) // Filtro para leilão não pago
@@ -796,14 +802,17 @@ namespace projeto.Controllers
                 return RedirectToAction("Pagamentos");
             }
 
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            var descontosDisponiveis = await _context.DescontoResgatado
+                    .Include(d => d.Desconto)
+                    .Where(d => d.UtilizadorId == utilizador.UtilizadorId && !d.Usado && d.DataValidade >= DateTime.Now)
+                    .ToListAsync();
 
             var viewModel = new PagamentoDetalhesViewModel
             {
                 Leilao = leilao,
-                Utilizador = utilizador
+                Utilizador = utilizador,
+                DescontosDisponiveis = descontosDisponiveis
             };
 
             return View(viewModel);
@@ -825,7 +834,7 @@ namespace projeto.Controllers
                 var paymentIntentService = new PaymentIntentService();
                 var paymentIntent = await paymentIntentService.CreateAsync(new PaymentIntentCreateOptions
                 {
-                    Amount = (long)(request.Valor * 100), // Valor em centavos
+                    Amount = (long)(request.Valor * 100),
                     Currency = "eur",
                     PaymentMethod = request.PaymentMethodId,
                     Confirm = true,
@@ -833,23 +842,36 @@ namespace projeto.Controllers
                     {
                         Enabled = true, // Habilita métodos automáticos de pagamento
                         AllowRedirects = "never" // Desabilita métodos de pagamento que envolvem redirecionamento
-                    },
-                    ReturnUrl = "https://localhost:7079/Utilizadors/Pagamentos" // URL de retorno após o pagamento
+                    }
                 }, stripeOptions);
 
                 var leilao = await _context.Leiloes.FindAsync(request.LeilaoId);
                 leilao.Pago = true;
+
+                var desconto = await _context.DescontoResgatado.FirstOrDefaultAsync(d => d.DescontoResgatadoId == request.DescontoUsadoId);
+                if (desconto == null)
+                {
+                    return Json(new { success = false, message = "Desconto não encontrado ou já utilizado." });
+                }
+
+                desconto.Usado = true;
+                _context.DescontoResgatado.Update(desconto);
+
                 await _context.SaveChangesAsync();
 
-                TempData["PaymentSuccess"] = "Pagamento realizado com sucesso!";
-                return RedirectToAction("Pagamentos", "Utilizadors");
+                TempData["PaymentSuccess"] = "Payment successfully completed!";
+
+                // Retorna um JSON indicando sucesso
+                return Json(new { success = true, message = "Payment successfully completed!" });
+
             }
-            catch (StripeException ex) 
+            catch (StripeException ex)
             {
-                TempData["PaymentError"] = $"Erro: {ex.Message}";
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
+
 
 
         public class PagamentoRequest
@@ -857,6 +879,7 @@ namespace projeto.Controllers
             public string PaymentMethodId { get; set; }
             public int LeilaoId { get; set; }
             public decimal Valor { get; set; }
+            public int? DescontoUsadoId { get; set; }
         }
 
         [HttpPost]
@@ -864,7 +887,6 @@ namespace projeto.Controllers
         public async Task<IActionResult> DeleteConfirmed(string confirmCancel)
         {
             var emailSender = new EmailSender(_configuration);
-
 
             var userEmail = HttpContext.Session.GetString("UserEmail");
             if (userEmail == null)
@@ -882,26 +904,55 @@ namespace projeto.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // Exigir que o user digite "Cancel"
             if (confirmCancel?.Trim().ToLower() != "cancel")
             {
                 TempData["Error"] = "To confirm account cancellation, please type 'Cancel'.";
                 return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
             }
 
+            // 1) Verificar se o user tem leilões ativos (como antes)
             var leiloesAtivos = await _context.Leiloes
-                .Where(l => l.UtilizadorId == utilizador.UtilizadorId && l.EstadoLeilao == EstadoLeilao.Disponivel)
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId
+                            && l.EstadoLeilao == EstadoLeilao.Disponivel)
                 .ToListAsync();
 
             if (leiloesAtivos.Any())
             {
-                TempData["Error"] = "You cannot cancel your account while you have active auctions.";
+                TempData["Error"] = "You cannot cancel your account while you have auctions.";
                 return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
             }
 
+            // 2) Verificar se o user tem leilões ganhos e não pagos (como antes)
+            var pendentes = await _context.Leiloes
+                .Where(l => l.VencedorId == utilizador.UtilizadorId && !l.Pago)
+                .ToListAsync();
+
+            if (pendentes.Any())
+            {
+                TempData["Error"] = "You have pending payments. You cannot cancel your account until all payments are settled.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // 3) NOVO: Verificar se o user tem licitações em leilões ativos
+            var licitacoesAtivas = await _context.Licitacoes
+                .Include(l => l.Leilao)
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId
+                            && l.Leilao.EstadoLeilao == EstadoLeilao.Disponivel)
+                .ToListAsync();
+
+            if (licitacoesAtivas.Any())
+            {
+                TempData["Error"] = "You cannot cancel your account while you have active bids.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // Se passou de todas as verificações, pode remover
             _context.Utilizador.Remove(utilizador);
             await _context.SaveChangesAsync();
             HttpContext.Session.Clear();
 
+            // Envia email de confirmação
             string assunto = "Conta cancelada com sucesso - Grow";
             string mensagem = $"<h2>Olá {utilizador.Nome},</h2>" +
                               "<p>A sua conta na plataforma <strong>Grow</strong> foi cancelada com sucesso.</p>" +
@@ -912,7 +963,7 @@ namespace projeto.Controllers
             await emailSender.SendEmailAsync(utilizador.Email, assunto, mensagem);
 
             TempData["Success"] = "Your account has been successfully cancelled.";
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Leilaos");
         }
     }
 }

@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using growTests.Data;
+using projeto.Data;
 
 #nullable disable
 
-namespace growTests.Migrations
+namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250323120354_init4")]
+    partial class init4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +97,7 @@ namespace growTests.Migrations
                     b.Property<int>("DescontoId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Used")
+                    b.Property<bool>("Usado")
                         .HasColumnType("bit");
 
                     b.Property<int>("UtilizadorId")
@@ -162,6 +165,9 @@ namespace growTests.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Pago")
+                        .HasColumnType("bit");
+
                     b.Property<int>("UtilizadorId")
                         .HasColumnType("int");
 
@@ -171,13 +177,15 @@ namespace growTests.Migrations
                     b.Property<double>("ValorIncrementoMinimo")
                         .HasColumnType("float");
 
-                    b.Property<string>("Vencedor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("VencedorId")
+                        .HasColumnType("int");
 
                     b.HasKey("LeilaoId");
 
                     b.HasIndex("ItemId")
                         .IsUnique();
+
+                    b.HasIndex("VencedorId");
 
                     b.ToTable("Leiloes");
                 });
@@ -379,7 +387,13 @@ namespace growTests.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("projeto.Models.Utilizador", "Vencedor")
+                        .WithMany()
+                        .HasForeignKey("VencedorId");
+
                     b.Navigation("Item");
+
+                    b.Navigation("Vencedor");
                 });
 
             modelBuilder.Entity("projeto.Models.Licitacao", b =>
