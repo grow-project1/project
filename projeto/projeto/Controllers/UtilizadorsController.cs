@@ -803,11 +803,16 @@ namespace projeto.Controllers
             }
 
 
+            var descontosDisponiveis = await _context.DescontoResgatado
+                    .Include(d => d.Desconto)
+                    .Where(d => d.UtilizadorId == utilizador.UtilizadorId && !d.Usado && d.DataValidade >= DateTime.Now)
+                    .ToListAsync();
 
             var viewModel = new PagamentoDetalhesViewModel
             {
                 Leilao = leilao,
-                Utilizador = utilizador
+                Utilizador = utilizador,
+                DescontosDisponiveis = descontosDisponiveis
             };
 
             return View(viewModel);
@@ -819,7 +824,6 @@ namespace projeto.Controllers
         [HttpPost]
         public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
         {
-
             var stripeOptions = new RequestOptions
             {
                 ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Sua chave secreta do Stripe
@@ -830,7 +834,7 @@ namespace projeto.Controllers
                 var paymentIntentService = new PaymentIntentService();
                 var paymentIntent = await paymentIntentService.CreateAsync(new PaymentIntentCreateOptions
                 {
-                    Amount = (long)(request.Valor * 100), // Valor em centavos
+                    Amount = (long)(request.Valor * 100),
                     Currency = "eur",
                     PaymentMethod = request.PaymentMethodId,
                     Confirm = true,
@@ -843,22 +847,30 @@ namespace projeto.Controllers
 
                 var leilao = await _context.Leiloes.FindAsync(request.LeilaoId);
                 leilao.Pago = true;
+
+                var desconto = await _context.DescontoResgatado.FirstOrDefaultAsync(d => d.DescontoResgatadoId == request.DescontoUsadoId);
+                if (desconto == null)
+                {
+                    return Json(new { success = false, message = "Desconto não encontrado ou já utilizado." });
+                }
+
+                desconto.Usado = true;
+                _context.DescontoResgatado.Update(desconto);
+
                 await _context.SaveChangesAsync();
-
-
-
 
                 TempData["PaymentSuccess"] = "Payment successfully completed!";
 
                 // Retorna um JSON indicando sucesso
-                return Json(new { success = true });
+                return Json(new { success = true, message = "Payment successfully completed!" });
+
             }
             catch (StripeException ex)
             {
-                // Retorna um JSON com a mensagem de erro
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
 
 
 
@@ -867,6 +879,7 @@ namespace projeto.Controllers
             public string PaymentMethodId { get; set; }
             public int LeilaoId { get; set; }
             public decimal Valor { get; set; }
+            public int? DescontoUsadoId { get; set; }
         }
 
         [HttpPost]

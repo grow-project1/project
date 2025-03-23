@@ -6,10 +6,11 @@
 }
 
 
-@if (TempData["PaymentSucess"] != null)
+
+@if (TempData["PaymentSuccess"] != null)
 {
     <div id="successMessage" class="alert alert-success fade show" role="alert">
-        @TempData["Success"]
+        @TempData["PaymentSuccess"]
     </div>
 
     <script>
@@ -39,7 +40,7 @@
 
 @if (!Model.LeiloesGanhos.Any())
 {
-    <p>@(english ? "You haven't won any auctions yet." : "Você ainda não ganhou nenhum leilão.")</p>
+    <p class="m-xl-auto">@(english ? "You haven't won any auctions yet." : "Você ainda não ganhou nenhum leilão.")</p>
 }
 else
 {
