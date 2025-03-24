@@ -1,1 +1,107 @@
-﻿<h2 style="margin-top:400px;">Em desenvolvimento</h2>
+﻿@model PagamentosViewModel
+
+@{
+    ViewData["Title"] = "Pagamentos com Stripe";
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+
+
+@if (TempData["PaymentSuccess"] != null)
+{
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
+        @TempData["PaymentSuccess"]
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let message = document.getElementById("successMessage");
+            if (message) {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    setTimeout(() => message.remove(), 500);
+                }, 2300);
+            }
+        });
+    </script>
+
+    <style>
+        #successMessage {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+}
+
+
+@if (!Model.LeiloesGanhos.Any())
+{
+    <p class="m-xl-auto">@(english ? "You haven't won any auctions yet." : "Você ainda não ganhou nenhum leilão.")</p>
+}
+else
+{
+    <div class="payments-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@(english ? "Item" : "Item")</th>
+                    <th>@(english ? "Price" : "Preço")</th>
+                    <th>@(english ? "Seller" : "Vendedor")</th>
+                    <th>@(english ? "Payment Status" : "Status do Pagamento")</th>
+               
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var leilao in Model.LeiloesGanhos)
+                {
+                    <tr>
+                        <td>@leilao.Item.Titulo</td>
+                        <td>@leilao.ValorAtualLance.ToString("C")</td>
+                    
+                        <td>
+                            @if (leilao.Pago)
+                            {
+                                <span class="text-success">@("Paid")</span>
+                            }
+                            else
+                            {
+                                <span class="text-warning">@("Pending")</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!leilao.Pago)
+                            {
+                                <a href="@Url.Action("PagamentoDetalhes", "Utilizadors", new { leilaoId = leilao.LeilaoId })" class="btn-payment">
+                                    @(english ? "Pay Now" : "Pagar Agora")
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">@("Already Paid")</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (TempData["PaymentSuccess"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["PaymentSuccess"]
+    </div>
+}
+
+@if (TempData["PaymentError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["PaymentError"]
+    </div>
+}
+

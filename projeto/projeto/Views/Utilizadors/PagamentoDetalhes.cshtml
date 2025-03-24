@@ -1,0 +1,215 @@
+﻿@model PagamentoDetalhesViewModel
+
+@{
+    ViewData["Title"] = "Pagamento do Leilão";
+    var isEnglish = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
+
+@if (TempData["PaymentError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["PaymentError"]
+    </div>
+}
+
+
+<div class="payment-details-container">
+    <h3>@Model.Leilao.Item.Titulo</h3>
+
+
+    <!-- Dados de Envio -->
+    <div class="shipping-details-container">
+        <h4>@(isEnglish ? "Shipping Information" : "Informações de Envio"):</h4>
+
+        <form id="shipping-form" method="POST" class="shipping-form">
+            <div class="form-group">
+                <label for="full-name">@("Full Name")</label>
+                <input type="text" id="full-name" name="fullName" class="form-control" placeholder="Enter your full name" value="@Model.Utilizador?.Nome" required />
+            </div>
+
+            <div class="form-group">
+                <label for="address">@("Address")</label>
+                <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" value="@Model.Utilizador?.Morada" required />
+            </div>
+
+            <div class="form-group">
+                <label for="city">@("Phone")</label>
+                <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone" value="@Model.Utilizador?.Telemovel" required />
+            </div>
+
+            <div class="form-group">
+                <label for="city">@("City")</label>
+                <input type="text" id="city" name="city" class="form-control" placeholder="Enter your city" value="@Model.Utilizador?.Cidade" required />
+            </div>
+
+            <div class="form-group">
+                <label for="postal-code">@("Postal Code")</label>
+                <input type="text" id="postal-code" name="postalCode" class="form-control" placeholder="Enter your postal code" value="@Model.Utilizador?.CodigoPostal" required />
+            </div>
+
+            <div class="form-group">
+                <label for="country">@("Country")</label>
+                <input type="text" id="country" name="country" class="form-control" placeholder="Enter your country" value="@Model.Utilizador?.Pais" required />
+            </div>
+
+            @if (Model.Utilizador == null)
+            {
+                <div class="alert alert-warning">
+                    @(isEnglish ? "Please complete your shipping information" : "Por favor, complete as informações de envio")
+                </div>
+            }
+        </form>
+    </div>
+
+    <form id="desconto-form" class="desconto-form">
+        <div class="form-group">
+            <label for="desconto">@("Selecione um Desconto")</label>
+            <select id="desconto" name="DescontoSelecionado" class="form-control">
+                <option value="">-- Nenhum Desconto --</option>
+                @foreach (var desconto in Model.DescontosDisponiveis)
+                {
+                    <option value="@desconto.DescontoResgatadoId" data-porcentagem="@desconto.Desconto.Valor">
+                        @($"{desconto.Desconto.Valor}% - Expira: {desconto.DataValidade.ToShortDateString()}")
+                    </option>
+                }
+            </select>
+        </div>
+
+        <h4>@(isEnglish ? "Total to Pay" : "Total a Pagar"):</h4>
+        <p><strong id="valorTotal">@Model.Leilao.ValorAtualLance.ToString("C")</strong></p>
+    </form>
+
+    <form id="payment-form" class="payment-form">
+        <div class="payment-container">
+            <div id="card-number" class="stripe-input"></div>
+            <div class="expiry-cvc-container">
+                <div id="card-expiry" class="stripe-input"></div>
+                <div id="card-cvc" class="stripe-input"></div>
+            </div>
+        </div>
+
+        <div id="card-errors" role="alert" class="error-message"></div>
+
+        <button type="submit" class="btn btn-success">
+            @("Pay Now")
+        </button>
+    </form>
+</div>
+
+<!-- Inclui o Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var stripe = Stripe('pk_test_51R3dfgFTcoPiNF4zCzoyI7fSXrs0RCLWkAay2TWT2r3o3rt4bxFQwZS6JYD9LfjyA2Y6OjTqYfWDyjcL85j649ni00um8zUZx5');
+        var elements = stripe.elements();
+
+        var style = {
+            base: {
+                fontSize: '16px',
+                color: '#32325d',
+                fontFamily: 'Arial, sans-serif',
+                '::placeholder': { color: '#aab7c4' }
+            },
+            invalid: { color: '#fa755a' }
+        };
+
+        var cardNumber = elements.create('cardNumber', { style: style });
+        var cardExpiry = elements.create('cardExpiry', { style: style });
+        var cardCvc = elements.create('cardCvc', { style: style });
+
+        cardNumber.mount('#card-number');
+        cardExpiry.mount('#card-expiry');
+        cardCvc.mount('#card-cvc');
+
+        // Função para calcular o valor com desconto
+            // Armazene o valor original
+    var valorOriginal = parseFloat(document.getElementById("valorTotal").innerText.replace('€', '').replace(',', '.'));
+
+    function calcularValorComDesconto() {
+        var descontoSelecionado = document.getElementById("desconto").value;
+
+        if (isNaN(valorOriginal)) {
+            console.error("Valor original inválido:", valorOriginal);
+            return valorOriginal; // Retorna o valor original se não for válido
+        }
+
+        if (descontoSelecionado) {
+            // Obtém o valor do desconto selecionado
+            var descontoValor = parseFloat(document.querySelector(`#desconto option[value="${descontoSelecionado}"]`).dataset.porcentagem);
+
+            if (isNaN(descontoValor)) {
+                console.error("Desconto inválido:", descontoValor);
+                return valorOriginal; // Retorna o valor original se o desconto não for válido
+            }
+
+            // Aplica o desconto sobre o valor original
+            var valorComDesconto = valorOriginal - (valorOriginal * (descontoValor / 100));
+
+            var descontoUsadoId = document.getElementById("desconto").value;
+
+            console.log(valorComDesconto.toFixed(2));
+            console.log(descontoUsadoId);
+            return valorComDesconto.toFixed(2); // Retorna o valor com desconto formatado
+        }
+
+        return valorOriginal.toFixed(2); // Retorna o valor original se não houver desconto
+    }
+
+    // Atualiza o valor exibido na página quando o desconto é selecionado
+    function atualizarValorTotal() {
+        var valorComDesconto = calcularValorComDesconto();
+        // Atualiza o texto na página com o valor formatado
+        var valorTotalElement = document.getElementById("valorTotal");
+        valorTotalElement.innerText = '€' + valorComDesconto.replace('.', ','); // Usa ',' como separador decimal
+    }
+
+    // Adiciona um evento para quando o desconto é alterado
+    document.getElementById("desconto").addEventListener("change", function() {
+        // Quando o desconto mudar, atualize o valor total
+        atualizarValorTotal();
+    });
+
+
+
+
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Calcula o valor final com o desconto
+            var valorFinal = calcularValorComDesconto();
+            var descontoUsadoId = document.getElementById("desconto").value;
+
+            // Cria o método de pagamento
+            stripe.createPaymentMethod({
+                type: 'card',
+                card: cardNumber
+            }).then(function (result) {
+                if (result.error) {
+                    document.getElementById('card-errors').textContent = result.error.message;
+                } else {
+                    var paymentMethod = result.paymentMethod.id;
+                    var leilaoId = @Model.Leilao.LeilaoId;
+
+                    // Envia os dados para o backend
+                    fetch('/Utilizadors/ProcessarPagamento', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            paymentMethodId: paymentMethod,
+                            leilaoId: leilaoId,
+                            valor: valorFinal,
+                            DescontoUsadoId: descontoUsadoId
+                        })
+                    }).then(response => response.json()).then(data => {
+                        if (data.success) {
+                            window.location.href = '/Utilizadors/Pagamentos';
+                        } else {
+                            document.getElementById('card-errors').textContent = data.message || "Erro ao processar o pagamento.";
+                        }
+                    }).catch(error => console.error('Erro:', error));
+                }
+            });
+        });
+    });
+</script>

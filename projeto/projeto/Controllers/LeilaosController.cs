@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using projeto.Data;
 using projeto.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 
 namespace projeto.Controllers
 {
@@ -15,11 +18,15 @@ namespace projeto.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _config;
+        private readonly IEmailSender _emailSender;
 
-        public LeilaosController(ApplicationDbContext context, IWebHostEnvironment env)
+        public LeilaosController(ApplicationDbContext context, IWebHostEnvironment env, IConfiguration config, IEmailSender emailSender)
         {
             _context = context;
             _env = env;
+            _config = config;
+            _emailSender = emailSender;
         }
 
         // GET: Leilaos
@@ -37,7 +44,6 @@ namespace projeto.Controllers
 
             var query = _context.Leiloes.Include(l => l.Item).AsQueryable();
 
-            // Aplicar filtros
             if (!string.IsNullOrEmpty(categorias))
             {
                 var categoriasSelecionadas = categorias.Split(',').Select(c => Enum.Parse<Categoria>(c)).ToList();
@@ -47,23 +53,20 @@ namespace projeto.Controllers
             if (!string.IsNullOrEmpty(tempo))
             {
                 var agora = DateTime.Now;
-                var filtrosTempo = tempo.Split(',');
+                var filtrosTempo = tempo.Split(',').Select(int.Parse).ToList();
 
-                if (filtrosTempo.Contains("< 1d")) query = query.Where(l => l.DataFim <= agora.AddDays(1));
-                else if (filtrosTempo.Contains("< 5d")) query = query.Where(l => l.DataFim <= agora.AddDays(5));
-                else if (filtrosTempo.Contains("< 10d")) query = query.Where(l => l.DataFim <= agora.AddDays(10));
+                query = query.Where(l => filtrosTempo.Any(t => l.DataFim <= agora.AddDays(t)));
             }
 
-            // Aplicar filtros de preço
+
             if (min.HasValue)
-                query = query.Where(l => l.ValorAtualLance >= min.Value);  // Substituir PrecoInicial por ValorAtualLance
+                query = query.Where(l => l.ValorAtualLance >= min.Value);
             if (max.HasValue)
-                query = query.Where(l => l.ValorAtualLance <= max.Value);  // Substituir PrecoInicial por ValorAtualLance
+                query = query.Where(l => l.ValorAtualLance <= max.Value);
 
 
             var leiloes = await query.ToListAsync();
 
-            // Calcular o maior lance para cada leilão
             var leilaoIds = leiloes.Select(l => l.LeilaoId).ToList();
             var maioresLances = await _context.Licitacoes
                 .Where(l => leilaoIds.Contains(l.LeilaoId))
@@ -76,7 +79,6 @@ namespace projeto.Controllers
                 leilao.ValorAtualLance = maioresLances.FirstOrDefault(l => l.LeilaoId == leilao.LeilaoId)?.MaiorLance ?? leilao.Item.PrecoInicial;
             }
 
-            // Verificar e encerrar leilões
             foreach (var leilao in leiloes.Where(l => DateTime.Now > l.DataFim && l.EstadoLeilao != EstadoLeilao.Encerrado))
             {
                 leilao.EstadoLeilao = EstadoLeilao.Encerrado;
@@ -85,24 +87,59 @@ namespace projeto.Controllers
                     .OrderByDescending(l => l.ValorLicitacao)
                     .FirstOrDefaultAsync();
 
+                var leiloeiro = await _context.Utilizador.FindAsync(leilao.UtilizadorId);
+
                 if (licitacaoVencedora != null)
                 {
                     var vencedor = await _context.Utilizador.FindAsync(licitacaoVencedora.UtilizadorId);
+
                     if (vencedor != null)
                     {
                         vencedor.Pontos += leilao.Item.Sustentavel ? 50 : 20;
                         _context.Update(vencedor);
-                        leilao.Vencedor = vencedor.Nome;
+                        leilao.Vencedor = vencedor;
+
+                        string subject = $"Parabéns! Ganhaste o leilão {leilao.Item.Titulo}";
+                        string message = $"<h2>Parabéns, {vencedor.Nome}!</h2>" +
+                                           $"<p>Você venceu o leilão do item <strong>{leilao.Item.Titulo}</strong> pelo valor de {licitacaoVencedora.ValorLicitacao}€.</p>" +
+                                           "<p>Entre na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> para proceder à entrega do item.</p>";
+
+                        await _emailSender.SendEmailAsync(vencedor.Email, subject, message);
+
+                        if (leiloeiro != null)
+                        {
+                            string subjectLeiloeiro = $"O seu leilão {leilao.Item.Titulo} foi vendido!";
+                            string messageLeiloeiro = $"<h2>O seu leilão foi concluído com sucesso!</h2>" +
+                                                      $"<p>O item <strong>{leilao.Item.Titulo}</strong> foi vendido por {licitacaoVencedora.ValorLicitacao}€.</p>" +
+                                                      $"<p>O vencedor foi: <strong>{vencedor.Nome}</strong></p>" +
+                                                      "<p>Entre na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> para coordenar a entrega do item.</p>";
+
+                            await _emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiro, messageLeiloeiro);
+                        }
                     }
                 }
+                else
+                {
+                    leilao.Vencedor = null;
+                    if (leiloeiro != null)
+                    {
+                        string subjectLeiloeiroSemLicitacoes = $"O seu leilão {leilao.Item.Titulo} terminou sem licitações";
+                        string messageLeiloeiroSemLicitacoes = $"<h2>O seu leilão chegou ao fim, mas não obteve nenhuma licitação.</h2>" +
+                                                              $"<p>Infelizmente, o item <strong>{leilao.Item.Titulo}</strong> não recebeu lances durante o período do leilão.</p>" +
+                                                              "<p>Considere repostar o item ou ajustar o preço inicial para atrair mais interessados.</p>" +
+                                                              "<p>Você pode gerir os seus leilões na <a href='https://projeto-grow-2025.azurewebsites.net/' target='_blank' style='color: blue; text-decoration: underline;'>GROW</a> indo ao seu perfil e aos seus leilões para recolocar o seu leilão.</p>";
+
+                        await _emailSender.SendEmailAsync(leiloeiro.Email, subjectLeiloeiroSemLicitacoes, messageLeiloeiroSemLicitacoes);
+                    }
+                }
+                leilao.EstadoLeilao = EstadoLeilao.Encerrado;
                 _context.Update(leilao);
+
             }
 
             await _context.SaveChangesAsync();
             return View(leiloes);
         }
-
-
 
         // GET: Leilaos/Details/5
         public async Task<IActionResult> Details(int id)
@@ -110,6 +147,11 @@ namespace projeto.Controllers
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
             ViewData["UserPoints"] = user?.Pontos;
+
+            if (user != null)
+            {
+                ViewData["UserId"] = user.UtilizadorId;
+            }
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
@@ -124,11 +166,11 @@ namespace projeto.Controllers
             {
                 leilao.Licitacoes = await _context.Licitacoes
                     .Where(l => l.LeilaoId == id)
-                    .OrderByDescending(l => l.ValorLicitacao) 
+                    .OrderByDescending(l => l.ValorLicitacao)
                     .ToListAsync();
             }
 
-            return View(leilao);  
+            return View(leilao);
         }
 
         // GET: Leilaos/Create
@@ -148,8 +190,9 @@ namespace projeto.Controllers
 
             ViewData["UserPoints"] = user?.Pontos;
 
-            if (user == null) {
-                return RedirectToAction("Login", "Utilizadors"); 
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
 
             }
 
@@ -166,14 +209,13 @@ namespace projeto.Controllers
 
             if (user == null)
             {
-                return RedirectToAction("Login", "Utilizadors"); 
+                return RedirectToAction("Login", "Utilizadors");
             }
 
             if (leilao.Item.fotoo == null || leilao.Item.fotoo.Length == 0)
             {
-                // Se não, adiciona o erro de validação para a foto
                 ModelState.AddModelError("Item.fotoo", "A foto é obrigatória.");
-                return View(leilao); // Retorna a view com o erro
+                return View(leilao);
             }
 
             leilao.UtilizadorId = user.UtilizadorId;
@@ -181,7 +223,7 @@ namespace projeto.Controllers
             if (leilao.Item.fotoo != null && leilao.Item.fotoo.Length > 0)
             {
                 string folder = "leilao/fotos/";
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName);  
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName);
                 string serverFolder = Path.Combine(_env.WebRootPath, folder);
 
                 if (!Directory.Exists(serverFolder))
@@ -191,17 +233,17 @@ namespace projeto.Controllers
 
                 string filePath = Path.Combine(serverFolder, fileName);
 
-                if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)  
+                if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)
                 {
                     ModelState.AddModelError("Item.fotoo", "Size is to big");
-                    return View(leilao); 
+                    return View(leilao);
                 }
 
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
                 if (!allowedExtensions.Contains(Path.GetExtension(leilao.Item.fotoo.FileName).ToLower()))
                 {
                     ModelState.AddModelError("Item.fotoo", "Only extensions (.jpg, .jpeg, .png, .gif) allowed.");
-                    return View(leilao); 
+                    return View(leilao);
                 }
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -213,9 +255,9 @@ namespace projeto.Controllers
             }
 
             _context.Add(leilao);
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));  
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Leilaos/Edit/5
@@ -236,8 +278,6 @@ namespace projeto.Controllers
         }
 
         // POST: Leilaos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LeilaoId,ItemId,DataInicio,DataFim,ValorIncrementoMinimo,Vencedor")] Leilao leilao)
@@ -296,28 +336,42 @@ namespace projeto.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var leilao = await _context.Leiloes
-                .Include(l => l.Item) 
+                .Include(l => l.Item)
+                .Include(l => l.Licitacoes)
                 .FirstOrDefaultAsync(l => l.LeilaoId == id);
 
-            if (leilao != null)
+            if (leilao == null)
             {
-                if (leilao.Item != null)
-                {
-                    _context.Itens.Remove(leilao.Item);
-                }
-                _context.Leiloes.Remove(leilao);
-                await _context.SaveChangesAsync();
+                TempData["Error"] = "Leilão não encontrado.";
+                return RedirectToAction("MyAuctions");
             }
 
-            return RedirectToAction(nameof(Index));
-        }
+            // Verifica se existem licitações
+            bool temLicitacoes = leilao.Licitacoes != null && leilao.Licitacoes.Any();
 
+            if (temLicitacoes && !leilao.Pago)
+            {
+                TempData["Error"] = "Não pode eliminar um leilão com licitações ativas que ainda não foi pago.";
+                return RedirectToAction("MyAuctions");
+            }
+
+            // Se estiver tudo ok, elimina
+            if (leilao.Item != null)
+            {
+                _context.Itens.Remove(leilao.Item);
+            }
+
+            _context.Leiloes.Remove(leilao);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Leilão eliminado com sucesso.";
+            return RedirectToAction("MyAuctions");
+        }
 
         private bool LeilaoExists(int id)
         {
             return _context.Leiloes.Any(e => e.LeilaoId == id);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -333,7 +387,7 @@ namespace projeto.Controllers
 
             var leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
-                .Include(l => l.Item) 
+                .Include(l => l.Item)
                 .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
 
             if (leilao == null)
@@ -344,7 +398,7 @@ namespace projeto.Controllers
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
             {
                 TempData["Error"] = "This auction has already ended and no longer accepts bids..";
-                return RedirectToAction("Index", "Leilaos"); 
+                return RedirectToAction("Index", "Leilaos");
             }
 
             double lanceMinimo = leilao.Licitacoes.Any()
@@ -355,8 +409,8 @@ namespace projeto.Controllers
 
             if (valorLicitacao < valorNecessario)
             {
-                TempData["Error"] = $"The bid must be higher than {valorNecessario:C2}.";
-                return RedirectToAction("Index", "Leilaos"); 
+                TempData["Error"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
+                return RedirectToAction("Index", "Leilaos");
             }
 
             var licitacao = new Licitacao
@@ -374,7 +428,7 @@ namespace projeto.Controllers
             await _context.SaveChangesAsync();
 
             TempData["Success"] = "Sucessfull bid!";
-            return RedirectToAction("Index", "Leilaos"); 
+            return RedirectToAction("Index", "Leilaos");
         }
 
         [HttpPost]
@@ -419,7 +473,7 @@ namespace projeto.Controllers
 
             if (valorLicitacao < valorNecessario)
             {
-                TempData["BidError"] = $"The bid must be higher than {valorNecessario:C2}.";
+                TempData["BidError"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
                 return RedirectToAction("Details", new { id = leilaoId });
             }
 
@@ -430,6 +484,9 @@ namespace projeto.Controllers
                 ValorLicitacao = valorLicitacao,
                 DataLicitacao = DateTime.Now
             };
+
+            TempData["BidSuccess"] = "Bid placed successfully!";
+
 
             _context.Licitacoes.Add(licitacao);
             user.Pontos += 1;
@@ -485,6 +542,8 @@ namespace projeto.Controllers
             int pageSize = 3;
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+       
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {
@@ -510,6 +569,8 @@ namespace projeto.Controllers
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+       
+            ViewData["UserPoints"] = user?.Pontos;
 
             if (user == null)
             {
@@ -525,5 +586,150 @@ namespace projeto.Controllers
 
             return View(meusLances);
         }
+
+        [HttpGet]
+        [Route("Leiloes/RecolocarLeilao/{id}")]
+        public async Task<IActionResult> RecolocarLeilao(int id)
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var leilao = await _context.Leiloes
+                .Include(l => l.Item)
+                .FirstOrDefaultAsync(l => l.LeilaoId == id);
+
+            if (leilao == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["Categorias"] = Enum.GetValues(typeof(Categoria))
+                .Cast<Categoria>()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.ToString(),
+                    Text = c.ToString()
+                }).ToList();
+
+            ViewData["UserPoints"] = user.Pontos;
+            CarregarCategorias();
+
+            return View(leilao);
+        }
+
+        private void CarregarCategorias()
+        {
+            ViewBag.Categorias = new SelectList(Enum.GetValues(typeof(Categoria)));
+        }
+
+
+
+        [HttpPost]
+        [Route("Leiloes/RecolocarLeilao/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RecolocarLeilao(int id, IFormFile novaFoto, [Bind("LeilaoId, DataFim, ValorIncrementoMinimo, Item")] Leilao leilaoAtualizado)
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var leilao = await _context.Leiloes
+                .Include(l => l.Item)
+                .FirstOrDefaultAsync(l => l.LeilaoId == id);
+
+            if (leilao == null)
+            {
+                return NotFound();
+            }
+
+            if (leilaoAtualizado.DataFim <= DateTime.Now)
+            {
+                ModelState.AddModelError("DataFim", "Data Invalida.");
+                return View(leilao);
+            }
+
+            leilao.DataFim = leilaoAtualizado.DataFim;
+            leilao.ValorIncrementoMinimo = leilaoAtualizado.ValorIncrementoMinimo;
+            leilao.EstadoLeilao = EstadoLeilao.Disponivel;
+
+            leilao.Item.Titulo = leilaoAtualizado.Item.Titulo;
+            leilao.Item.Descricao = leilaoAtualizado.Item.Descricao;
+            leilao.Item.PrecoInicial = leilaoAtualizado.Item.PrecoInicial;
+            leilao.Item.Categoria = leilaoAtualizado.Item.Categoria;
+
+            if (novaFoto != null && novaFoto.Length > 0)
+            {
+                string folder = "leilao/fotos/";
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(novaFoto.FileName);
+                string serverFolder = Path.Combine(_env.WebRootPath, folder);
+
+                if (!Directory.Exists(serverFolder))
+                {
+                    Directory.CreateDirectory(serverFolder);
+                }
+
+                string filePath = Path.Combine(serverFolder, fileName);
+
+                if (novaFoto.Length > 5 * 1024 * 1024)
+                {
+                    ModelState.AddModelError("Item.fotoo", "O tamanho do ficheiro é demasiado grande.");
+                    return View(leilao);
+                }
+
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                if (!allowedExtensions.Contains(Path.GetExtension(novaFoto.FileName).ToLower()))
+                {
+                    ModelState.AddModelError("Item.fotoo", "Apenas ficheiros .jpg, .jpeg, .png, .gif são permitidos.");
+                    return View(leilao);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await novaFoto.CopyToAsync(stream);
+                }
+
+                // Atualiza a URL da foto
+                leilao.Item.FotoUrl = "/" + folder + fileName;
+            }
+
+            CarregarCategorias();
+
+            _context.Update(leilao);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("MyAuctions");
+        }
+
+        [HttpGet]
+        [Route("[controller]/TopAuctions")]
+        public async Task<IActionResult> TopAuctions()
+
+        {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = user?.Pontos;
+
+            var topLeiloes = await _context.Leiloes
+                .Include(l => l.Item)
+                .Include(l => l.Licitacoes)
+                .Where(l => l.EstadoLeilao == EstadoLeilao.Disponivel)
+                .OrderByDescending(l => l.Licitacoes.Count)
+                .Take(3)
+                .ToListAsync();
+
+            return View(topLeiloes);
+        }
+
     }
 }
+

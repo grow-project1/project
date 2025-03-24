@@ -33,7 +33,11 @@
                         <td>@item.Desconto.Valor<span>%</span></td>
                         <td>@item.DataResgate.ToString("dd/MM/yyyy")</td>
                         <td>
-                            @if (item.DataValidade < DateTime.Now)
+                            @if (item.Usado)
+                            {
+                                <span class="text-danger">@(english ? "Used" : "Usado")</span>
+                            }
+                            else if (item.DataValidade < DateTime.Now)
                             {
                                 <span class="text-danger">@(english ? "Expired" : "Expirado")</span>
                             }
@@ -42,6 +46,7 @@
                                 @item.DataValidade.ToString("dd/MM/yyyy")
                             }
                         </td>
+
                     </tr>
                 }
             }

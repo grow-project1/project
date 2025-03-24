@@ -2,11 +2,10 @@
 
 @{
     ViewData["Title"] = "Register";
-}
-@{
     var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
 }
 
+<!-- Se você tem um layout, remova a estrutura <html>, <head>, etc., pois já vêm do _Layout -->
 <div class="container register-page">
     <div class="register-container">
         <div class="logo-container">
@@ -15,23 +14,72 @@
 
         <h2>@(english ? "Register" : "Registar")</h2>
 
+        <!-- Form para Register -->
         <form asp-action="Register" method="post">
-            <div class="form-group">
-                <input asp-for="Nome" class="form-control form-control-lg" placeholder="@(english ? "Enter your name" : "Insira o seu nome")" />
+
+            <!-- Campo Nome -->
+            <div class="form-group mb-3">
+                <input asp-for="Nome"
+                       class="form-control form-control-lg"
+                       placeholder="@(english ? "Enter your name" : "Insira o seu nome")" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input asp-for="Email" class="form-control form-control-lg" placeholder="@(english ? "Enter your email" : "Insira a sua palavra-passe")" />
+
+            <!-- Campo Email -->
+            <div class="form-group mb-3">
+                <input asp-for="Email"
+                       class="form-control form-control-lg"
+                       placeholder="@(english ? "Enter your email" : "Insira o seu email")" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="@(english ? "Enter your password" : "Insira a sua palavra-passe")" />
+
+            <!-- Campo Password + ícone de tooltip (usando input-group do Bootstrap) -->
+            <div class="form-group mb-3">
+                <div class="input-group">
+                    <!-- Input de Password -->
+                    <input asp-for="Password"
+                           type="password"
+                           class="form-control form-control-lg"
+                           placeholder="@(english ? "Enter your password" : "Insira a sua palavra-passe")" />
+
+                    <!-- Ícone dentro do input-group -->
+                    <span class="input-group-text"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="left"
+                          title="@((english
+                             ? "Password must have at least 6 characters, one uppercase letter, one number, and one special character."
+                             : "A palavra-passe deve ter pelo menos 6 caracteres, 1 letra maiúscula, 1 número e 1 caractere especial."))">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn register-btn btn-block">@(english ? "Register" : "Registar")</button>
+            <!-- Checkbox para termos e condições -->
+            <div class="form-group mb-3">
+                <label for="acceptedTerms">
+                    <input type="checkbox" id="acceptedTerms" name="acceptedTerms" value="true" />
+                    @(english ? "I accept the " : "Aceito os ")
+                    <a href="@Url.Action("Terms", "Home")" target="_blank">
+                        @(english ? "Terms and Conditions" : "Termos e Condições")
+                    </a>
+                </label>
+            </div>
+
+            <!-- Botão de Register (desabilitado até marcar checkbox) -->
+            <button type="submit" id="registerBtn" class="btn register-btn btn-block" disabled="disabled">
+                @(english ? "Register" : "Registar")
+            </button>
         </form>
 
+        <!-- Link para Log In -->
+        <div class="mt-3">
+            <a href="@Url.Action("Login", "Utilizadors")" class="forgot-password-link">
+                @(english ? "Already have an account? Log in" : "Já tem uma conta? Faça login")
+            </a>
+        </div>
+
+        <!-- Exibir erro se houver -->
         @if (!string.IsNullOrEmpty(ViewData.ModelState[string.Empty]?.Errors.FirstOrDefault()?.ErrorMessage))
         {
             <div class="alert alert-danger mt-3">
@@ -41,3 +89,23 @@
     </div>
 </div>
 
+@section Scripts {
+    <!-- Se usar Bootstrap 5, inicializamos o tooltip com data-bs-* -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Ativar tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+            // Checkbox e habilitar/desabilitar o botão
+            var chk = document.getElementById("acceptedTerms");
+            var btn = document.getElementById("registerBtn");
+
+            chk.addEventListener("change", function () {
+                btn.disabled = !this.checked;
+            });
+        });
+    </script>
+}

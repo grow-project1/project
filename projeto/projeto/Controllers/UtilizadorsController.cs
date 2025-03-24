@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projeto.Data;
 using projeto.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity;
+using Stripe;
 
 namespace projeto.Controllers
 {
@@ -11,12 +14,14 @@ namespace projeto.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IConfiguration _configuration;
+        private readonly IEmailSender _emailSender;
 
-        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
+        public UtilizadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration configuration, IEmailSender emailSender)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _configuration = configuration;
+            _emailSender = emailSender;
         }
 
         public IActionResult ToggleLanguage(string language)
@@ -44,7 +49,7 @@ namespace projeto.Controllers
         // Método Register (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Nome,Email,Password")] Utilizador utilizador)
+        public async Task<IActionResult> Register([Bind("Nome,Email,Password")] Utilizador utilizador, bool acceptedTerms)
         {
             // Validações adicionais
             if (string.IsNullOrEmpty(utilizador.Nome))
@@ -66,6 +71,12 @@ namespace projeto.Controllers
                 ModelState.AddModelError("Password", "Password must have at least 6 characters, one uppercase letter, one number, and one special character.");
             }
 
+            // Verifica se os termos foram aceitos
+            if (!acceptedTerms)
+            {
+                ModelState.AddModelError(string.Empty, "You must accept the Terms and Conditions.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(utilizador);
@@ -78,15 +89,79 @@ namespace projeto.Controllers
                 return View(utilizador);
             }
 
-            utilizador.Password = BCrypt.Net.BCrypt.HashPassword(utilizador.Password);
+            // Gera o código de verificação
+            var random = new Random();
+            int verificationCode = random.Next(100000, 999999);
 
-            _context.Add(utilizador);
+            // Envia email com o código
+            string subject = "Código de Verificação - Confirmação de Registo";
+            string message = $"Seu código de verificação é: {verificationCode}";
+            await _emailSender.SendEmailAsync(utilizador.Email, subject, message);
+
+            // Guarda tudo na sessão (ou TempData)
+            // Atenção: Sessão não deve armazenar strings muito grandes. Aqui é pequeno, deve servir.
+            HttpContext.Session.SetString("PendingRegName", utilizador.Nome);
+            HttpContext.Session.SetString("PendingRegEmail", utilizador.Email);
+            HttpContext.Session.SetString("PendingRegPassword", utilizador.Password);
+
+            // Armazena também o code
+            HttpContext.Session.SetString("PendingRegCode", verificationCode.ToString());
+            Console.WriteLine($"*Codigo no controller*: {verificationCode}");
+
+
+            TempData["Info"] = "We sent a verification code to your email. Please confirm.";
+            return RedirectToAction("ConfirmRegistration");
+        }
+
+
+        // GET
+        public IActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmRegistration(int verificationCode)
+        {
+            // Resgata dados da sessão
+            var pendingName = HttpContext.Session.GetString("PendingRegName");
+            var pendingEmail = HttpContext.Session.GetString("PendingRegEmail");
+            var pendingPass = HttpContext.Session.GetString("PendingRegPassword");
+            int? storedCode = int.Parse(HttpContext.Session.GetString("PendingRegCode"));
+
+            if (string.IsNullOrEmpty(pendingEmail) || storedCode == null)
+            {
+                // Sessão expirou, ou o user já foi criado
+                TempData["Error"] = "Session expired. Please register again.";
+                return RedirectToAction("Register");
+            }
+
+            // Verifica o code
+            if (verificationCode != storedCode.Value)
+            {
+                TempData["Error"] = "Invalid code. Please try again.";
+                return View();
+            }
+
+            // OK: Criar o utilizador no DB
+            var utilizador = new Utilizador
+            {
+                Nome = pendingName,
+                Email = pendingEmail,
+                Password = BCrypt.Net.BCrypt.HashPassword(pendingPass),
+            };
+
+            _context.Utilizador.Add(utilizador);
             await _context.SaveChangesAsync();
 
-            await RegisterLog("Novo utilizador registrado.", utilizador.UtilizadorId, true);
+            // Limpa a sessão
+            HttpContext.Session.Remove("PendingRegName");
+            HttpContext.Session.Remove("PendingRegEmail");
+            HttpContext.Session.Remove("PendingRegPassword");
+            HttpContext.Session.Remove("PendingRegCode");
 
-            TempData["Success"] = "Account successfully created! Please log in to access your account";
-
+            TempData["Success"] = "Account confirmed! Please log in.";
             return RedirectToAction("Login");
         }
 
@@ -224,7 +299,7 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            return View(user); 
+            return View(user);
         }
 
         // GET: Utilizadors
@@ -258,8 +333,6 @@ namespace projeto.Controllers
         }
 
         // POST: Utilizadors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UtilizadorId,Email,Password")] Utilizador utilizador)
@@ -322,8 +395,8 @@ namespace projeto.Controllers
                 _context.Update(utilizadorExistente);
                 await _context.SaveChangesAsync();
 
-                // Adiciona mensagem de sucesso
-                TempData["Success"] = "Perfil atualizado com sucesso!";
+
+                TempData["SuccessMessage"] = "Profile saved";
 
                 return RedirectToAction("Profile", new { id = utilizadorExistente.UtilizadorId });
             }
@@ -339,7 +412,6 @@ namespace projeto.Controllers
                 }
             }
         }
-
 
         // GET: Utilizadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -379,7 +451,6 @@ namespace projeto.Controllers
             return _context.Utilizador.Any(e => e.UtilizadorId == id);
         }
 
-        // Método para "Esqueci Minha Senha" - POST
         // Método ForgotPassword (GET)
         public IActionResult ForgotPassword()
         {
@@ -411,11 +482,10 @@ namespace projeto.Controllers
             {
                 VerificationCode = verificationCode
             };
-
-            var emailSender = new EmailSender(_configuration); 
+            // Em vez de criar new EmailSender(...) aqui, usa _emailSender
             string subject = "Código de Verificação";
             string message = $"Seu código de verificação é: {verificationCode}";
-            await emailSender.SendEmailAsync(email, subject, message);
+            await _emailSender.SendEmailAsync(email, subject, message);
 
 
             _context.VerificationModel.Add(verificationModel);
@@ -456,7 +526,6 @@ namespace projeto.Controllers
                 return View();
             }
 
-            // Código válido, redireciona para a redefinição de senha
             return RedirectToAction("ResetPassword");
         }
 
@@ -484,13 +553,17 @@ namespace projeto.Controllers
                 return RedirectToAction("ForgotPassword");
             }
 
-            if (string.IsNullOrEmpty(newPassword))
+            // Verifica se a password foi preenchida (mas sem adicionar erro manual)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("newPassword", "New password is required.");
+                return View(); // ASP.NET já adicionou "The
+                               // Password field is required."
             }
-            else if (newPassword.Length < 6)
+
+            if (!IsPasswordStrong(newPassword))
             {
-                ModelState.AddModelError("newPassword", "Password must have at least 6 characters.");
+                ModelState.AddModelError("newPassword", "Password must have at least 6 characters, one uppercase letter, one number, and one special character.");
+                return View();
             }
 
             var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == email);
@@ -501,23 +574,15 @@ namespace projeto.Controllers
                 return View();
             }
 
-            // 🔴 Verificar se a nova palavra-passe é igual à atual
             if (BCrypt.Net.BCrypt.Verify(newPassword, utilizador.Password))
             {
                 ModelState.AddModelError("newPassword", "The new password cannot be the same as the current password.");
-            }
-
-            if (!ModelState.IsValid)
-            {
                 return View();
             }
 
-            // Se passou nas verificações, atualiza a palavra-passe
             utilizador.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
             _context.Utilizador.Update(utilizador);
             await _context.SaveChangesAsync();
-
-            await RegisterLog("Senha redefinida pelo utilizador.", utilizador.UtilizadorId, true);
 
             TempData["Success"] = "Password successfully reset! Please log in with the new password.";
             return RedirectToAction("Login");
@@ -532,6 +597,8 @@ namespace projeto.Controllers
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
             ViewData["UserPoints"] = user?.Pontos;
+
+
             if (utilizador == null)
             {
                 return NotFound();
@@ -558,14 +625,14 @@ namespace projeto.Controllers
                 return View();
             }
 
-            // Verificar se a senha atual está correta
             if (!BCrypt.Net.BCrypt.Verify(currentPassword, utilizador.Password))
             {
                 ModelState.AddModelError("confirmPassword", "Invalid password");
                 return View();
             }
 
-            // Redireciona para a página de atualização da nova senha
+            TempData["SuccessMessage"] = "Password changed successfully!";
+
             return RedirectToAction("UpdatePassword", new { id = utilizador.UtilizadorId });
         }
 
@@ -650,11 +717,13 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
-            // Diretório onde os avatares estão armazenados
             string avatarDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-            var avatars = Directory.GetFiles(avatarDirectory, "avatar*.png") // Filtra arquivos que começam com "avatar"
+            var avatars = Directory.GetFiles(avatarDirectory, "avatar*.png")
                                    .Select(Path.GetFileName)
                                    .ToList();
+
+
+            TempData["SuccessMessage"] = "Avatar updated successfully!";
 
             ViewBag.AvatarList = avatars;
             return View(utilizador);
@@ -687,32 +756,215 @@ namespace projeto.Controllers
         }
 
 
-
         [HttpGet]
         public async Task<IActionResult> Pagamentos()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
-            if (user == null) return RedirectToAction("Login");
+            ViewData["UserPoints"] = user?.Pontos;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Utilizadors");
+            }
 
-            // Buscar pagamentos pendentes
-            var pagamentos = await _context.Leiloes
-             .Where(l => l.UtilizadorId == user.UtilizadorId ||
-                         l.Licitacoes.OrderByDescending(li => li.DataLicitacao).FirstOrDefault().UtilizadorId == user.UtilizadorId)
-             .ToListAsync();
-
-            // Buscar leilões ganhos
-            var leiloesGanhos = await _context.Leiloes
-                .Include(l => l.Item)
-                .Where(l => l.Vencedor == user.Nome)
+            // Alterado para incluir o Utilizador (Vencedor) relacionado ao VencedorId
+            var meusLeiloesGanhos = await _context.Leiloes
+                .Where(l => l.VencedorId == user.UtilizadorId)
+                .Include(l => l.Vencedor)  // Inclui o Utilizador associado ao VencedorId
+                .Include(l => l.Item)      // Inclui o Item relacionado ao Leilão
                 .ToListAsync();
 
-            ViewData["UserPoints"] = user.Pontos;
-            ViewData["LeiloesGanhos"] = leiloesGanhos;
+            var viewModel = new PagamentosViewModel
+            {
+                LeiloesGanhos = meusLeiloesGanhos
+            };
 
-            return View(pagamentos);
+            return View(viewModel);
         }
 
+        public async Task<IActionResult> PagamentoDetalhes(int leilaoId)
+        {
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var utilizador = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            ViewData["UserPoints"] = utilizador?.Pontos;
+
+            var leilao = await _context.Leiloes
+                .Include(l => l.Item) // Certifique-se de incluir o item associado ao leilão
+                .Where(l => l.LeilaoId == leilaoId && !l.Pago) // Filtro para leilão não pago
+                .FirstOrDefaultAsync(); // Obtém o primeiro (e único) leilão ou null
+
+            if (leilao == null)
+            {
+                TempData["PaymentError"] = "Leilão não encontrado ou já pago.";
+                return RedirectToAction("Pagamentos");
+            }
+
+
+            var descontosDisponiveis = await _context.DescontoResgatado
+                    .Include(d => d.Desconto)
+                    .Where(d => d.UtilizadorId == utilizador.UtilizadorId && !d.Usado && d.DataValidade >= DateTime.Now)
+                    .ToListAsync();
+
+            var viewModel = new PagamentoDetalhesViewModel
+            {
+                Leilao = leilao,
+                Utilizador = utilizador,
+                DescontosDisponiveis = descontosDisponiveis
+            };
+
+            return View(viewModel);
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
+        {
+            var stripeOptions = new RequestOptions
+            {
+                ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Sua chave secreta do Stripe
+            };
+
+            try
+            {
+                var paymentIntentService = new PaymentIntentService();
+                var paymentIntent = await paymentIntentService.CreateAsync(new PaymentIntentCreateOptions
+                {
+                    Amount = (long)(request.Valor * 100),
+                    Currency = "eur",
+                    PaymentMethod = request.PaymentMethodId,
+                    Confirm = true,
+                    AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+                    {
+                        Enabled = true, // Habilita métodos automáticos de pagamento
+                        AllowRedirects = "never" // Desabilita métodos de pagamento que envolvem redirecionamento
+                    }
+                }, stripeOptions);
+
+                var leilao = await _context.Leiloes.FindAsync(request.LeilaoId);
+                leilao.Pago = true;
+
+                var desconto = await _context.DescontoResgatado.FirstOrDefaultAsync(d => d.DescontoResgatadoId == request.DescontoUsadoId);
+                if (desconto == null)
+                {
+                    return Json(new { success = false, message = "Desconto não encontrado ou já utilizado." });
+                }
+
+                desconto.Usado = true;
+                _context.DescontoResgatado.Update(desconto);
+
+                await _context.SaveChangesAsync();
+
+                TempData["PaymentSuccess"] = "Payment successfully completed!";
+
+                // Retorna um JSON indicando sucesso
+                return Json(new { success = true, message = "Payment successfully completed!" });
+
+            }
+            catch (StripeException ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+
+
+
+        public class PagamentoRequest
+        {
+            public string PaymentMethodId { get; set; }
+            public int LeilaoId { get; set; }
+            public decimal Valor { get; set; }
+            public int? DescontoUsadoId { get; set; }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string confirmCancel)
+        {
+            var emailSender = new EmailSender(_configuration);
+
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            if (userEmail == null)
+            {
+                TempData["Error"] = "You must be logged in.";
+                return RedirectToAction("Login", "Utilizadors");
+            }
+
+            var utilizador = await _context.Utilizador
+                .FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (utilizador == null)
+            {
+                TempData["Error"] = "User not found.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Exigir que o user digite "Cancel"
+            if (confirmCancel?.Trim().ToLower() != "cancel")
+            {
+                TempData["Error"] = "To confirm account cancellation, please type 'Cancel'.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // 1) Verificar se o user tem leilões ativos (como antes)
+            var leiloesAtivos = await _context.Leiloes
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId
+                            && l.EstadoLeilao == EstadoLeilao.Disponivel)
+                .ToListAsync();
+
+            if (leiloesAtivos.Any())
+            {
+                TempData["Error"] = "You cannot cancel your account while you have auctions.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // 2) Verificar se o user tem leilões ganhos e não pagos (como antes)
+            var pendentes = await _context.Leiloes
+                .Where(l => l.VencedorId == utilizador.UtilizadorId && !l.Pago)
+                .ToListAsync();
+
+            if (pendentes.Any())
+            {
+                TempData["Error"] = "You have pending payments. You cannot cancel your account until all payments are settled.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // 3) NOVO: Verificar se o user tem licitações em leilões ativos
+            var licitacoesAtivas = await _context.Licitacoes
+                .Include(l => l.Leilao)
+                .Where(l => l.UtilizadorId == utilizador.UtilizadorId
+                            && l.Leilao.EstadoLeilao == EstadoLeilao.Disponivel)
+                .ToListAsync();
+
+            if (licitacoesAtivas.Any())
+            {
+                TempData["Error"] = "You cannot cancel your account while you have active bids.";
+                return RedirectToAction("Profile", new { id = utilizador.UtilizadorId });
+            }
+
+            // Se passou de todas as verificações, pode remover
+            _context.Utilizador.Remove(utilizador);
+            await _context.SaveChangesAsync();
+            HttpContext.Session.Clear();
+
+            // Envia email de confirmação
+            string assunto = "Conta cancelada com sucesso - Grow";
+            string mensagem = $"<h2>Olá {utilizador.Nome},</h2>" +
+                              "<p>A sua conta na plataforma <strong>Grow</strong> foi cancelada com sucesso.</p>" +
+                              "<p>Agradecemos a sua participação e esperamos vê-lo novamente no futuro.</p>" +
+                              "<p>Se esta ação não foi realizada por si ou se mudou de ideias, entre em contacto connosco através do nosso site.</p>" +
+                              "<br /><p>Cumprimentos,<br/>Equipa Grow</p>";
+
+            await emailSender.SendEmailAsync(utilizador.Email, assunto, mensagem);
+
+            TempData["Success"] = "Your account has been successfully cancelled.";
+            return RedirectToAction("Index", "Leilaos");
+        }
     }
 }
+

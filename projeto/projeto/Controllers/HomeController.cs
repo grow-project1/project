@@ -25,13 +25,13 @@ namespace projeto.Controllers
                 var user = _context.Utilizador.FirstOrDefault(u => u.Email == userEmail);
                 if (user != null)
                 {
-                    ViewData["UserPoints"] = user.Pontos; 
+                    ViewData["UserPoints"] = user.Pontos;
                 }
             }
 
             var leiloes = _context.Leiloes
-                .Include(l => l.Item) 
-                .Where(l => l.DataFim > DateTime.Now) 
+                .Include(l => l.Item)
+                .Where(l => l.DataFim > DateTime.Now)
                 .ToList();
 
             ViewData["Leiloes"] = leiloes;
@@ -49,6 +49,11 @@ namespace projeto.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Terms()
+        {
+            return View();
         }
     }
 }

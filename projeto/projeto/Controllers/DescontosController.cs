@@ -192,7 +192,9 @@ namespace projeto.Controllers
                 DescontoId = desconto.DescontoId,
                 UtilizadorId = user.UtilizadorId,
                 DataResgate = DateTime.Now,
-                DataValidade = DateTime.Now.AddMonths(1) 
+                DataValidade = DateTime.Now.AddMonths(1),
+                Usado = false
+
             };
 
             _context.DescontoResgatado.Add(descontoResgatado);

@@ -94,6 +94,9 @@ namespace projeto.Migrations
                     b.Property<int>("DescontoId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Used")
+                        .HasColumnType("bit");
+
                     b.Property<int>("UtilizadorId")
                         .HasColumnType("int");
 
@@ -159,6 +162,9 @@ namespace projeto.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Pago")
+                        .HasColumnType("bit");
+
                     b.Property<int>("UtilizadorId")
                         .HasColumnType("int");
 
@@ -168,13 +174,15 @@ namespace projeto.Migrations
                     b.Property<double>("ValorIncrementoMinimo")
                         .HasColumnType("float");
 
-                    b.Property<string>("Vencedor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("VencedorId")
+                        .HasColumnType("int");
 
                     b.HasKey("LeilaoId");
 
                     b.HasIndex("ItemId")
                         .IsUnique();
+
+                    b.HasIndex("VencedorId");
 
                     b.ToTable("Leiloes");
                 });
@@ -268,6 +276,9 @@ namespace projeto.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UtilizadorId"));
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CodigoPostal")
                         .HasMaxLength(20)
@@ -373,7 +384,13 @@ namespace projeto.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("projeto.Models.Utilizador", "Vencedor")
+                        .WithMany()
+                        .HasForeignKey("VencedorId");
+
                     b.Navigation("Item");
+
+                    b.Navigation("Vencedor");
                 });
 
             modelBuilder.Entity("projeto.Models.Licitacao", b =>

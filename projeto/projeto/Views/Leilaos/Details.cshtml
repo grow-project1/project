@@ -8,20 +8,6 @@
     var loggedUserId = ViewData["UserId"] as int?;
 }
 
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["Error"]
-    </div>
-}
-
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Success"]
-    </div>
-}
-
 @{
     var userEmail = Context.Session.GetString("UserEmail");
     var isOwner = Model.UtilizadorId == ViewData["UserId"] as int?;
@@ -29,24 +15,86 @@
         .Where(u => u.UtilizadorId == Model.UtilizadorId)
         .Select(u => u.Nome)
         .FirstOrDefault();
+
+    var vencedorNome = _context.Utilizador
+        .Where(u => u.UtilizadorId == Model.VencedorId)
+        .Select(u => u.Nome)
+        .FirstOrDefault();
 }
 
-<link rel="stylesheet" href="~/css/leilao.css" />
 
-<div class="auction-container">
-    <h1 class="auction-title">@Model.Item.Titulo</h1>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
 
-    <div class="auction-content">
-        <div class="auction-image">
+@if (TempData["BidSuccess"] != null)
+{
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
+        @TempData["BidSuccess"]
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let message = document.getElementById("successMessage");
+            if (message) {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    setTimeout(() => message.remove(), 500);
+                }, 2300);
+            }
+        });
+    </script>
+
+    <style>
+        #successMessage {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+}
+
+
+<div class="auction-details-container">
+    <a href="@Url.Action("Index", "Leilaos")" class="back-button">@(english ? "⬅ Back" : "⬅ Voltar")</a>
+
+    <h1 class="auction--details-title">@Model.Item.Titulo</h1>
+
+    <div class="auction--details-content">
+
+        <div class="auction--details-image">
             <img src="@Url.Content(Model.Item.FotoUrl)" alt="@Model.Item.Titulo" />
-            <div class="current-bid">
-                <p class="card-text">
-                    @(english ? "Current Bid:" : "Lance Atual:") <b>@Model.ValorAtualLance.ToString("C")</b>
+            <div class="current-bid-details">
+                <p class="card-text-details">
+                    @(Model.EstadoLeilao == EstadoLeilao.Encerrado ? (english ? "Final Bid:" : "Lance Final:") : (english ? "Current Bid:" : "Lance Atual:"))
+                    <b>@Model.ValorAtualLance.ToString("C")</b>
                 </p>
+
+                @if (Model.EstadoLeilao == EstadoLeilao.Encerrado)
+                {
+                    <p class="winner-info-details">
+                        @if (Model.VencedorId != null && Model.VencedorId > 0)
+                        {
+                            <strong>@(english ? $"Congrats to {vencedorNome}!!" : $"Parabéns {vencedorNome}!!")</strong>
+                        }
+                        else
+                        {
+                            <strong class="text-danger">@(english ? "No winners" : "Não houve vencedores")</strong>
+                        }
+                    </p>
+                }
+
             </div>
         </div>
 
         <div class="auction-details">
+
             <h2>@(english ? "Product Description:" : "Descrição do Produto:") </h2>
             <p>@Model.Item.Descricao</p>
             <p><strong>@(english ? "Category:" : "Categoria:")</strong> @Model.Item.Categoria</p>
@@ -57,34 +105,31 @@
             <p><strong>@(english ? "Minimum increment:" : "Incremento mínimo:")</strong> @Model.ValorIncrementoMinimo.ToString("C")</p>
             <p><strong>@(english ? "Owner:" : "Proprietário:")</strong> @ownerName</p>
 
-            <form asp-action="FazerLicitacaoDetails" method="post">
-                <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
-                <input type="number" name="valorLicitacao" step="0.01" placeholder="@(english ? "Place bid" : "Fazer lance")" required />
+            @if (Model.EstadoLeilao != EstadoLeilao.Encerrado && !isOwner)
+            {
+                <form asp-action="FazerLicitacaoDetails" method="post">
+                    <input type="hidden" name="leilaoId" value="@Model.LeilaoId" />
+                    <div class="bid">
+                        <input type="number" class="input-details" name="valorLicitacao" step="0.01" placeholder="@(english ? "Place bid" : "Fazer lance")" required />
 
-                <button type="submit" class="bid-button" @(isOwner ? "disabled" : "")>
-                    @(english ? "Place Bid" : "Fazer Lance")
-                </button>
-
-                @if (TempData["BidError"] != null)
-                {
-                    <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
-                }
-
-                <span class="text-danger d-block mt-2">
-                    @if (isOwner)
+                        <button type="submit" class="bid-button-details" @(isOwner ? "disabled" : "")>
+                            @(english ? "Place Bid" : "Fazer Lance")
+                        </button>
+                    </div>
+                    @if (TempData["BidError"] != null)
                     {
-                        <text>@(english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão.")</text>
+                        <span class="text-danger d-block mt-2">@TempData["BidError"]</span>
                     }
-                </span>
-            </form>
+                </form>
+            }
 
-            <button id="btnShowBids" class="toggle-bids">@(english ? "View Bids" : "Ver Licitações")</button>
+            <button id="btnShowBids" class="button-details-bids">@(english ? "View Bids" : "Ver Licitações")</button>
             <div id="bidsList" class="bids-list" style="display:none;">
-                <h3>@(english ? "Bids" : "Licitações")</h3>
-                <table>
+           
+                <table class="bids">
                     <thead>
                         <tr>
-                            <th>@(english ? "User Id " : "Utilizador Id")</th>
+                            <th>@(english ? "UserId " : "Utilizador Id")</th>
                             <th>@(english ? "Amount " : "Valor")</th>
                             <th>@(english ? "Date" : "Data")</th>
                         </tr>
@@ -97,32 +142,41 @@
                             .OrderByDescending(l => l.ValorLicitacao)
                             .ToList();
                         }
-                        @foreach (var licitacao in licitacoes)
+
+                        @if (licitacoes.Any()) 
+                        {
+                            @foreach (var licitacao in licitacoes)
+                            {
+                                <tr>
+                                    <td>@licitacao.Utilizador.UtilizadorId</td>
+                                    <td>@licitacao.ValorLicitacao.ToString("C")</td>
+                                    <td>@licitacao.DataLicitacao.ToString("dd/MM/yyyy HH:mm")</td>
+                                </tr>
+                            }
+                        }
+                        else
                         {
                             <tr>
-                                <td>@licitacao.Utilizador.UtilizadorId</td>
-                                <td>@licitacao.ValorLicitacao.ToString("C")</td>
-                                <td>@licitacao.DataLicitacao.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td colspan="3" class="text-center">
+                                    @(english ? "No bids" : "Não há licitações")
+                                </td>
                             </tr>
                         }
+
+                        
                     </tbody>
                 </table>
             </div>
             <script>
-                document.getElementById("btnShowBids").onclick = function() {
+
+                document.getElementById("btnShowBids").onclick = function () {
                     var bidsList = document.getElementById("bidsList");
                     bidsList.style.display = (bidsList.style.display === "none") ? "block" : "none";
                 };
             </script>
-
         </div>
     </div>
 </div>
-
-@if (isOwner)
-{
-    <p class="text-danger">@english ? "You cannot place bids on your own auction." : "Não pode fazer lances no seu próprio leilão."</p>
-}
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
