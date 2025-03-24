@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http;
 using projeto;
 
-namespace growTests
+namespace growTests.NotificationsTests
 {
     public class ForgotPasswordNotificationsTests
     {

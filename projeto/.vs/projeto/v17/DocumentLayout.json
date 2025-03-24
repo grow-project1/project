@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "C:\\GitHub\\PV\\project\\projeto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\auctionsnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\auctionsnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\accessmanagementtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\accessmanagementtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\notificationstests\\auctionsnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\notificationstests\\auctionsnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\notificationstests\\forgotpasswordnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\notificationstests\\forgotpasswordnotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\notificationstests\\registernotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\notificationstests\\registernotificationstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\github\\pv\\project\\projeto\\growtests\\rewardstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\rewardstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\github\\pv\\project\\projeto\\projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -18,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,7 +50,80 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccessManagementTests.cs",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\AccessManagementTests.cs",
+              "RelativeDocumentMoniker": "growTests\\AccessManagementTests.cs",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\AccessManagementTests.cs",
+              "RelativeToolTip": "growTests\\AccessManagementTests.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T01:35:31.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ViewState": "AgIAAK4DAAAAAAAAAAAuwMoDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T01:23:01.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RegisterNotificationsTests.cs",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\NotificationsTests\\RegisterNotificationsTests.cs",
+              "RelativeDocumentMoniker": "growTests\\NotificationsTests\\RegisterNotificationsTests.cs",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\NotificationsTests\\RegisterNotificationsTests.cs",
+              "RelativeToolTip": "growTests\\NotificationsTests\\RegisterNotificationsTests.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAYwMQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T00:39:09.135Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ForgotPasswordNotificationsTests.cs",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\NotificationsTests\\ForgotPasswordNotificationsTests.cs",
+              "RelativeDocumentMoniker": "growTests\\NotificationsTests\\ForgotPasswordNotificationsTests.cs",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\NotificationsTests\\ForgotPasswordNotificationsTests.cs",
+              "RelativeToolTip": "growTests\\NotificationsTests\\ForgotPasswordNotificationsTests.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAkwHcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T00:32:07.802Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AuctionsNotificationsTests.cs",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\NotificationsTests\\AuctionsNotificationsTests.cs",
+              "RelativeDocumentMoniker": "growTests\\NotificationsTests\\AuctionsNotificationsTests.cs",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\NotificationsTests\\AuctionsNotificationsTests.cs",
+              "RelativeToolTip": "growTests\\NotificationsTests\\AuctionsNotificationsTests.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAcwFgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T00:21:26.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RewardsTests.cs",
+              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\RewardsTests.cs",
+              "RelativeDocumentMoniker": "growTests\\RewardsTests.cs",
+              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\RewardsTests.cs",
+              "RelativeToolTip": "growTests\\RewardsTests.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAwwJQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T01:04:11.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Leilao.cs",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\projeto\\Models\\Leilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Leilao.cs",
@@ -38,21 +131,7 @@
               "RelativeToolTip": "projeto\\Models\\Leilao.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T00:23:06.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuctionsNotificationsTests.cs",
-              "DocumentMoniker": "C:\\GitHub\\PV\\project\\projeto\\growTests\\AuctionsNotificationsTests.cs",
-              "RelativeDocumentMoniker": "growTests\\AuctionsNotificationsTests.cs",
-              "ToolTip": "C:\\GitHub\\PV\\project\\projeto\\growTests\\AuctionsNotificationsTests.cs",
-              "RelativeToolTip": "growTests\\AuctionsNotificationsTests.cs",
-              "ViewState": "AgIAAKsAAAAAAAAAAAAWwLkAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T00:21:26.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T00:23:06.941Z"
             }
           ]
         }

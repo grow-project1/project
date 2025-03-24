@@ -10,12 +10,11 @@ using projeto.Controllers;
 using projeto.Data;
 using projeto.Models;
 using Microsoft.AspNetCore.Http;
-using growTests; // Para a MockSession, FakeEmailSender, etc.
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 
-namespace growTests
+namespace growTests.NotificationsTests
 {
     public class RegisterNotificationsTests
     {

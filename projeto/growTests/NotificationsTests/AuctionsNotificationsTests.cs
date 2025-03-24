@@ -10,7 +10,7 @@ using projeto.Data;
 using projeto.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace growTests
+namespace growTests.NotificationsTests
 {
     public class AuctionsNotificationsTests
     {
@@ -133,7 +133,7 @@ namespace growTests
                 UtilizadorId = 3,
                 Nome = "Comprador",
                 Email = "winner@teste.com",
-                Password= "passwordWinner"
+                Password = "passwordWinner"
 
             };
             _dbContext.Utilizador.Add(winner);
