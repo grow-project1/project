@@ -6,6 +6,7 @@ using projeto.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Stripe;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace projeto.Controllers
 {
@@ -768,12 +769,13 @@ namespace projeto.Controllers
                 return RedirectToAction("Login", "Utilizadors");
             }
 
-            // Alterado para incluir o Utilizador (Vencedor) relacionado ao VencedorId
             var meusLeiloesGanhos = await _context.Leiloes
-                .Where(l => l.VencedorId == user.UtilizadorId)
-                .Include(l => l.Vencedor)  // Inclui o Utilizador associado ao VencedorId
-                .Include(l => l.Item)      // Inclui o Item relacionado ao Leilão
-                .ToListAsync();
+            .Where(l => l.VencedorId == user.UtilizadorId)
+            .Include(l => l.Vencedor) 
+            .Include(l => l.Item)      
+            .OrderBy(l => l.Pago) 
+            .ToListAsync();
+
 
             var viewModel = new PagamentosViewModel
             {
@@ -826,7 +828,7 @@ namespace projeto.Controllers
         {
             var stripeOptions = new RequestOptions
             {
-                ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" // Sua chave secreta do Stripe
+                ApiKey = "sk_test_51R3dfgFTcoPiNF4z1IEVgmdqMmjYVS9RRjLuBFybWNHH8nmBmgQDOia2BAWMBMbJZXjkMxlzdDiUCTou1B0BIJO600KNSfV6pO" 
             };
 
             try
@@ -840,8 +842,8 @@ namespace projeto.Controllers
                     Confirm = true,
                     AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
                     {
-                        Enabled = true, // Habilita métodos automáticos de pagamento
-                        AllowRedirects = "never" // Desabilita métodos de pagamento que envolvem redirecionamento
+                        Enabled = true, 
+                        AllowRedirects = "never" 
                     }
                 }, stripeOptions);
 
@@ -854,6 +856,86 @@ namespace projeto.Controllers
                     return Json(new { success = false, message = "Desconto não encontrado ou já utilizado." });
                 }
 
+                var fullName = request.FullName;
+                var address = request.Address;
+                var city = request.City;
+                var postalCode = request.PostalCode;
+                var country = request.Country;
+                var phone = request.Phone;
+
+
+                var userEmail = HttpContext.Session.GetString("UserEmail");
+
+
+                string subject = "O pagamento foi bem sucedido";
+
+                string message = @"
+                    <html>
+                    <body style='font-family: Arial, sans-serif; color: #333;'>
+                        <h3 style='color: #28a745;'>Pagamento Realizado com Sucesso</h3>
+                        <p><strong>Detalhes da Compra:</strong></p>
+                        <table style='width: 100%; border: 1px solid #ddd; border-collapse: collapse;'>
+                            <tr>
+                                <td style='padding: 10px; font-weight: bold;'>Valor Total:</td>
+                                <td style='padding: 10px;'>" + request.Valor.ToString("C") + @"</td>
+                            </tr>
+                            <tr>
+                                <td style='padding: 10px; font-weight: bold;'>Nome:</td>
+                                <td style='padding: 10px;'>" + fullName + @"</td>
+                            </tr>
+                            <tr>
+                                <td style='padding: 10px; font-weight: bold;'>Endereço:</td>
+                                <td style='padding: 10px;'>" + address + @", " + city + @", " + postalCode + @", " + country + @"</td>
+                            </tr>
+                            <tr>
+                                <td style='padding: 10px; font-weight: bold;'>Telefone:</td>
+                                <td style='padding: 10px;'>" + phone + @"</td>
+                            </tr>
+                        </table>
+                         </body>
+                    </html>
+                    ";
+
+                // Enviar o e-mail
+                await _emailSender.SendEmailAsync(userEmail, subject, message);
+
+                var vendedor = await _context.Utilizador.FindAsync(leilao.VencedorId);
+
+                if (vendedor != null && !string.IsNullOrEmpty(vendedor.Email))
+                {
+                    // Mensagem para o vendedor
+                    string vendedorMessage = @"
+                <html>
+                <body style='font-family: Arial, sans-serif; color: #333;'>
+                    <h3 style='color: #28a745;'>Pagamento Recebido para o Seu Leilão</h3>
+                    <p><strong>Detalhes do Pagamento:</strong></p>
+                    <table style='width: 100%; border: 1px solid #ddd; border-collapse: collapse;'>
+                        <tr>
+                            <td style='padding: 10px; font-weight: bold;'>Valor Total:</td>
+                            <td style='padding: 10px;'>" + request.Valor.ToString("C") + @"</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 10px; font-weight: bold;'>Nome do Comprador:</td>
+                            <td style='padding: 10px;'>" + fullName + @"</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 10px; font-weight: bold;'>Endereço de Entrega:</td>
+                            <td style='padding: 10px;'>" + address + @", " + city + @", " + postalCode + @", " + country + @"</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 10px; font-weight: bold;'>Telefone:</td>
+                            <td style='padding: 10px;'>" + phone + @"</td>
+                        </tr>
+                    </table>
+                </body>
+                </html>
+            ";
+
+                    // Enviar o e-mail para o vendedor
+                    await _emailSender.SendEmailAsync(vendedor.Email, "Pagamento Recebido para o Seu Leilão", vendedorMessage);
+                }
+
+
                 desconto.Usado = true;
                 _context.DescontoResgatado.Update(desconto);
 
@@ -861,7 +943,6 @@ namespace projeto.Controllers
 
                 TempData["PaymentSuccess"] = "Payment successfully completed!";
 
-                // Retorna um JSON indicando sucesso
                 return Json(new { success = true, message = "Payment successfully completed!" });
 
             }
@@ -880,6 +961,12 @@ namespace projeto.Controllers
             public int LeilaoId { get; set; }
             public decimal Valor { get; set; }
             public int? DescontoUsadoId { get; set; }
+            public string FullName { get; set; }
+            public string Address { get; set; }
+            public string City { get; set; }
+            public string PostalCode { get; set; }
+            public string Country { get; set; }
+            public string Phone { get; set; }
         }
 
         [HttpPost]
