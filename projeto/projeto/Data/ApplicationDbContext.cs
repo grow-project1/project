@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using growTests.Models;
+using projeto.Models;
 
-namespace growTests.Data
+namespace projeto.Data
 {
     public class ApplicationDbContext : DbContext
     {

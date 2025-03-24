@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace growTests.Migrations
+namespace projeto.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

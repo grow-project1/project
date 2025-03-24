@@ -163,7 +163,7 @@ input:focus {
     border-top-right-radius: 15px;
 }
 
-/* Botï¿½es do perfil */
+/* Botões do perfil */
 .btn {
     font-size: 16px;
     font-weight: bold;
@@ -203,7 +203,7 @@ input:focus {
     color: white;
 }
 
-/* Espaï¿½amento entre os botï¿½es */
+/* Espaçamento entre os botões */
 .btn-group .btn {
     margin-bottom: 10px;
 }
@@ -226,14 +226,14 @@ input:focus {
     margin-top: 30px;
 }
 
-/* Alinhar o tï¿½tulo e o botï¿½o Edit no topo */
+/* Alinhar o título e o botão Edit no topo */
 .d-flex {
     justify-content: space-between;
     align-items: center;
 }
 
 .btn-profile {
-    background-color: #4caf50; /* Verde escuro mais sï¿½brio */
+    background-color: #4caf50; /* Verde escuro mais sóbrio */
     color: white;
     border-radius: 8px;
     font-size: 16px;
@@ -241,10 +241,10 @@ input:focus {
     font-weight: bold;
     text-transform: uppercase;
     transition: background-color 0.3s ease, transform 0.2s ease;
-   /* Faz o botï¿½o ocupar a largura disponï¿½vel */
-    margin-bottom: 10px; /* Adiciona espaï¿½amento entre os botï¿½es */
+   /* Faz o botão ocupar a largura disponível */
+    margin-bottom: 10px; /* Adiciona espaçamento entre os botões */
     transition: 0.4s;
-    /* Centraliza o texto dentro do botï¿½o */
+    /* Centraliza o texto dentro do botão */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -253,7 +253,7 @@ input:focus {
     text-decoration: none;
 }
 
-    /* Efeito de hover (quando o mouse passa sobre o botï¿½o) */
+    /* Efeito de hover (quando o mouse passa sobre o botão) */
     .btn-profile:hover {
         background-color: #2c6e49; /* Verde mais escuro para o hover */
         transform: scale(1.03); /* Efeito de zoom no hover */
@@ -340,19 +340,19 @@ h2 {
 
 .checkbox-container {
     display: flex;
-    justify-content: flex-end; /* Alinha a checkbox ï¿½ direita */
+    justify-content: flex-end; /* Alinha a checkbox à direita */
     align-items: center; /* Alinha o texto e a checkbox verticalmente */
     width: 100%; /* Garante que a largura ocupe toda a linha */
-    margin-bottom: 4px; /* Espaï¿½amento entre as linhas de checkboxes */
+    margin-bottom: 4px; /* Espaçamento entre as linhas de checkboxes */
 }
 
     .checkbox-container span {
-        margin-right: 10px; /* Espaï¿½o entre o texto e a checkbox */
-        text-align: left; /* Garante que o texto esteja ï¿½ esquerda */
+        margin-right: 10px; /* Espaço entre o texto e a checkbox */
+        text-align: left; /* Garante que o texto esteja à esquerda */
     }
 
     .checkbox-container input[type="checkbox"] {
-        margin-left: 60px; /* Espaï¿½o entre a checkbox e o texto */
+        margin-left: 60px; /* Espaço entre a checkbox e o texto */
     }
 
 
@@ -376,22 +376,22 @@ h2 {
 
 
 .sidebar h3 {
-    font-size: 1.3em; /* Aumentei o tamanho do tï¿½tulo para maior destaque */
+    font-size: 1.3em; /* Aumentei o tamanho do título para maior destaque */
     color: #333;
     font-weight:bold;
     margin-bottom: 10px;
-    text-align: left; /* Garantir que o tï¿½tulo da sidebar esteja alinhado ï¿½ esquerda */
+    text-align: left; /* Garantir que o título da sidebar esteja alinhado à esquerda */
 }
 
 .filters, .price-range {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinha os itens da sidebar ï¿½ esquerda */
+    align-items: flex-start; /* Alinha os itens da sidebar à esquerda */
 }
 
 .price-range input {
-    width: 100%; /* Garante que o input ocupe toda a largura disponï¿½vel */
+    width: 100%; /* Garante que o input ocupe toda a largura disponível */
     padding: 8px;
     margin-bottom: 8px;
     border-radius: 7px;
@@ -431,9 +431,9 @@ h2 {
     width: 100%;
 }
 
-/* Leilï¿½es Grid */
+/* Leilões Grid */
 .grid-leiloes {
-    margin-left: 180px; /* Garante que o grid de leilï¿½es tenha espaï¿½o para a sidebar */
+    margin-left: 180px; /* Garante que o grid de leilões tenha espaço para a sidebar */
     margin-top: 95px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -510,7 +510,7 @@ h2 {
         top: 0;
         left: 0;
         width: 100%;
-        height: auto; /* Torna a sidebar com altura automï¿½tica */
+        height: auto; /* Torna a sidebar com altura automática */
         padding: 10px;
         border-right: none;
     }
@@ -539,12 +539,12 @@ h2 {
     bottom: 30px;
     right: 30px;
     width: 60px; /* Definir uma largura fixa */
-    height: 60px; /* Definir uma altura fixa para mantï¿½-lo redondo */
-    border-radius: 100%; /* Deixa o botï¿½o completamente redondo */
+    height: 60px; /* Definir uma altura fixa para mantê-lo redondo */
+    border-radius: 100%; /* Deixa o botão completamente redondo */
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #2c6e49; /* Cor azul padrï¿½o */
+    background-color: #2c6e49; /* Cor azul padrão */
     color: white;
     font-size: 24px;
     font-weight: bold;
@@ -755,7 +755,7 @@ h2 {
 }
 
 .btn-submit {
-    background-color: #28a745; /* Botï¿½o verde */
+    background-color: #28a745; /* Botão verde */
     color: white;
     border: none;
     padding: 10px 30px;
@@ -1052,7 +1052,7 @@ th {
                 width: 100%;
                 text-align: center;
             }
-    /* Ajusta o botï¿½o de criaï¿½ï¿½o para mobile */
+    /* Ajusta o botão de criação para mobile */
     .btn-create {
         width: 50px;
         height: 50px;
@@ -1060,14 +1060,14 @@ th {
     }
 
     .auction-container {
-        width: 90%; /* Amplia o container para ocupar mais espaï¿½o */
+        width: 90%; /* Amplia o container para ocupar mais espaço */
         margin: 20px auto; /* Reduz a margem superior/inferior para caber melhor na tela */
-        padding: 20px 10px; /* Ajusta o padding para diminuir espaï¿½os internos */
+        padding: 20px 10px; /* Ajusta o padding para diminuir espaços internos */
     }
 }
 
     /* ----------------------------- PAYMENT DETAILS PAGE ------------------------------- */
-    /* Pï¿½gina de Pagamento */
+    /* Página de Pagamento */
     .payment-title {
         font-size: 2rem;
         color: #333;
@@ -1076,7 +1076,7 @@ th {
         font-weight: bold;
     }
 
-    /* Container dos detalhes do leilï¿½o */
+    /* Container dos detalhes do leilão */
     .payment-details-container {
         width: 30%;
         margin: 100px auto;
@@ -1125,7 +1125,7 @@ th {
         margin-top: 10px;
     }
 
-    /* Botï¿½o de pagamento */
+    /* Botão de pagamento */
     .btn-pay-now {
         display: inline-block;
         width: 100%;
@@ -1176,15 +1176,15 @@ th {
 
 @media (max-width: 576px) {
     .sidebar {
-        position: relative; /* Torna-a parte do fluxo, nï¿½o fixa */
+        position: relative; /* Torna-a parte do fluxo, não fixa */
         top: 0;
         left: 0;
         width: 100%; /* Ocupa toda a largura */
-        height: auto; /* Ajusta a altura conforme o conteï¿½do */
+        height: auto; /* Ajusta a altura conforme o conteúdo */
         padding: 10px;
         border-right: none;
-        margin-bottom: 20px; /* Espaï¿½o abaixo para separar do conteï¿½do principal */
-        overflow-y: auto; /* Se o conteï¿½do for grande, permite rolagem vertical */
+        margin-bottom: 20px; /* Espaço abaixo para separar do conteúdo principal */
+        overflow-y: auto; /* Se o conteúdo for grande, permite rolagem vertical */
         margin-top: 100px;
     }
 
@@ -1193,14 +1193,14 @@ th {
         margin-left: 0;
     }
     .btn-group {
-        flex-wrap: wrap; /* Permite que os botï¿½es ï¿½quebremï¿½ de linha */
-        justify-content: center; /* Centraliza os botï¿½es no ecrï¿½ */
-        gap: 10px; /* Espaï¿½o entre os botï¿½es */
+        flex-wrap: wrap; /* Permite que os botões “quebrem” de linha */
+        justify-content: center; /* Centraliza os botões no ecrã */
+        gap: 10px; /* Espaço entre os botões */
     }
 
     .btn-profile {
-        width: 100%; /* Cada botï¿½o ocupa 100% da largura */
-        margin-bottom: 5px; /* Espaï¿½o extra entre eles */
+        width: 100%; /* Cada botão ocupa 100% da largura */
+        margin-bottom: 5px; /* Espaço extra entre eles */
     }
 }
 
@@ -1210,12 +1210,12 @@ th {
         width: 100% !important; /* Usa 100% da tela no mobile */
         margin: 0 auto !important;
         overflow-x: auto; /* Se a tabela for maior que a tela, cria scroll */
-        padding: 0 10px; /* Espaï¿½o lateral para nï¿½o colar na borda */
+        padding: 0 10px; /* Espaço lateral para não colar na borda */
     }
 
-        /* Garante que a tabela tenha uma largura mï¿½nima, forï¿½ando scroll se exceder a tela */
+        /* Garante que a tabela tenha uma largura mínima, forçando scroll se exceder a tela */
         .descontos-container table {
-            min-width: 350px; /* Ajuste conforme o nï¿½mero de colunas */
+            min-width: 350px; /* Ajuste conforme o número de colunas */
         }
 
     .meus-descontos-container {
@@ -1232,33 +1232,33 @@ th {
 
 /* ===================== MOBILE RESPONSIVE ADJUSTMENTS ===================== */
 @media (max-width: 576px) {
-    /* Sidebar (filtros) passa a ocupar a largura total e ficar acima do conteï¿½do */
+    /* Sidebar (filtros) passa a ocupar a largura total e ficar acima do conteúdo */
     .sidebar {
-        position: relative; /* Remove a posiï¿½ï¿½o fixa */
+        position: relative; /* Remove a posição fixa */
         top: 0;
         left: 0;
         width: 100%;
         height: auto;
         padding: 10px;
         border-right: none;
-        margin-bottom: 20px; /* Espaï¿½o abaixo para separar dos leilï¿½es */
+        margin-bottom: 20px; /* Espaço abaixo para separar dos leilões */
         overflow-y: auto;
     }
 
-    /* Remove a margem da grid para que o conteï¿½do ocupe toda a largura */
+    /* Remove a margem da grid para que o conteúdo ocupe toda a largura */
     .grid-leiloes {
         margin-left: 0;
-        grid-template-columns: 1fr; /* Uma coluna para facilitar a visualizaï¿½ï¿½o */
+        grid-template-columns: 1fr; /* Uma coluna para facilitar a visualização */
     }
 
-    /* Ajustes para o container de criar leilï¿½es */
+    /* Ajustes para o container de criar leilões */
     .auction-container {
         width: 90%;
         margin: 20px auto;
         padding: 20px 10px;
     }
 
-    /* Para as tabelas de descontos (ou similares), envolver em um contï¿½iner scrollï¿½vel */
+    /* Para as tabelas de descontos (ou similares), envolver em um contêiner scrollável */
     .descontos-container,
     .meus-descontos-container {
         width: 100% !important;
@@ -1269,10 +1269,10 @@ th {
 
         .descontos-container table,
         .meus-descontos-container table {
-            min-width: 350px; /* Ajuste conforme o nï¿½mero de colunas */
+            min-width: 350px; /* Ajuste conforme o número de colunas */
         }
 
-    /* Ajuste nos botï¿½es do perfil (caso estejam em grupo) */
+    /* Ajuste nos botões do perfil (caso estejam em grupo) */
     .btn-group {
         flex-wrap: wrap;
         justify-content: center;
@@ -1284,7 +1284,7 @@ th {
         margin-bottom: 5px;
     }
 
-    /* Na pï¿½gina de detalhes do leilï¿½o, ajusta o layout dos detalhes para coluna */
+    /* Na página de detalhes do leilão, ajusta o layout dos detalhes para coluna */
     .auction--details-content {
         flex-direction: column;
         gap: 15px;

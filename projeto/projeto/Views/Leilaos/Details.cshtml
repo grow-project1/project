@@ -1,5 +1,5 @@
-﻿@inject growTests.Data.ApplicationDbContext _context
-@model growTests.Models.Leilao
+﻿@inject projeto.Data.ApplicationDbContext _context
+@model projeto.Models.Leilao
 @using Microsoft.EntityFrameworkCore
 
 @{
@@ -7,6 +7,21 @@
     ViewData["Title"] = english ? "Auction Details" : "Detalhes do Leilão";
     var loggedUserId = ViewData["UserId"] as int?;
 }
+
+@{
+    var userEmail = Context.Session.GetString("UserEmail");
+    var isOwner = Model.UtilizadorId == ViewData["UserId"] as int?;
+    var ownerName = _context.Utilizador
+        .Where(u => u.UtilizadorId == Model.UtilizadorId)
+        .Select(u => u.Nome)
+        .FirstOrDefault();
+
+    var vencedorNome = _context.Utilizador
+        .Where(u => u.UtilizadorId == Model.VencedorId)
+        .Select(u => u.Nome)
+        .FirstOrDefault();
+}
+
 
 @if (TempData["Error"] != null)
 {
@@ -46,22 +61,6 @@
 }
 
 
-
-@{
-    var userEmail = Context.Session.GetString("UserEmail");
-    var isOwner = Model.UtilizadorId == ViewData["UserId"] as int?;
-    var ownerName = _context.Utilizador
-        .Where(u => u.UtilizadorId == Model.UtilizadorId)
-        .Select(u => u.Nome)
-        .FirstOrDefault();
-
-    var vencedorNome = _context.Utilizador
-        .Where(u => u.Nome == Model.Vencedor)
-        .Select(u => u.Nome)
-        .FirstOrDefault();
-}
-
-
 <div class="auction-details-container">
     <a href="@Url.Action("Index", "Leilaos")" class="back-button">@(english ? "⬅ Back" : "⬅ Voltar")</a>
 
@@ -80,9 +79,9 @@
                 @if (Model.EstadoLeilao == EstadoLeilao.Encerrado)
                 {
                     <p class="winner-info-details">
-                        @if (!string.IsNullOrEmpty(Model.Vencedor))
+                        @if (Model.VencedorId != null && Model.VencedorId > 0)
                         {
-                            <strong>@(english ? "Congrats to the winner!!" : "Parabéns ao vencedor!!")</strong> 
+                            <strong>@(english ? $"Congrats to {vencedorNome}!!" : $"Parabéns {vencedorNome}!!")</strong>
                         }
                         else
                         {
@@ -90,6 +89,7 @@
                         }
                     </p>
                 }
+
             </div>
         </div>
 

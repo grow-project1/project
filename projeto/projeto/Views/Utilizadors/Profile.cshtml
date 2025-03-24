@@ -88,11 +88,25 @@
                         <a href="@Url.Action("ConfirmPassword", "Utilizadors", new { id = Model.UtilizadorId })" class="btn-profile flex-grow-1 text-center">
                             @(english ? "Change Password" : "Alterar Senha")
                         </a>
-                        <button id="cancel-account-btn" class="btn-profile flex-grow-1 text-center cancel-btn">
+                        <button class="btn-profile flex-grow-1 text-center cancel-btn" onclick="document.getElementById('cancelModal').style.display='block'">
                             @(english ? "Cancel Account" : "Cancelar Conta")
                         </button>
                     </div>
 
+                    <div id="cancelModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+                        <div class="modal-content" style="background:white; margin:10% auto; padding:20px; width:90%; max-width:500px; border-radius:10px;">
+                            <h4>@(english ? "Confirm Cancellation" : "Confirmar Cancelamento")</h4>
+                            <p>@(english ? "To confirm account cancellation, please type" : "Para confirmar o cancelamento da conta, escreva") <b>“Cancel”</b>.</p>
+                            <form asp-action="DeleteConfirmed" method="post">
+                                <input type="text" name="confirmCancel" class="form-control" placeholder="Cancel" required />
+                                <br />
+                                <button type="submit" class="btn btn-danger">@("Confirm")</button>
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('cancelModal').style.display='none'">
+                                    @("Cancel")
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

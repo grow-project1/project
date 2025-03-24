@@ -1,10 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using growTests.Data;
-using growTests.Models;
+using projeto.Data;
+using projeto.Models;
 
-namespace growTests.Controllers
+namespace projeto.Controllers
 {
     public class HomeController : Controller
     {
@@ -49,6 +49,11 @@ namespace growTests.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Terms()
+        {
+            return View();
         }
     }
 }

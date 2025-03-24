@@ -1,40 +1,39 @@
-using growTests.Data;
+using projeto.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicionar o DbContext ï¿½ coleï¿½ï¿½o de serviï¿½os
+// Adicionar o DbContext à coleção de serviços
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")
     ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
-builder.Services.AddDistributedMemoryCache(); // Necessï¿½rio para armazenar sessï¿½es na memï¿½ria
+builder.Services.AddDistributedMemoryCache(); // Necessário para armazenar sessões na memória
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Defina o tempo de inatividade conforme necessï¿½rio
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Defina o tempo de inatividade conforme necessário
     options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true; // Necessï¿½rio para GDPR em alguns cenï¿½rios
+    options.Cookie.IsEssential = true; // Necessário para GDPR em alguns cenários
 });
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
 
-// Adicionar os outros serviï¿½os
+// Adicionar os outros serviços
 builder.Services.AddControllersWithViews();
 
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 var app = builder.Build();
 
-// Configurar o pipeline de requisiï¿½ï¿½es HTTP
+// Configurar o pipeline de requisições HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // O valor padrï¿½o de HSTS ï¿½ 30 dias. Vocï¿½ pode querer mudar isso para cenï¿½rios de produï¿½ï¿½o.
+    // O valor padrão de HSTS é 30 dias. Você pode querer mudar isso para cenários de produção.
     app.UseHsts();
 }
 
@@ -53,7 +52,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseSession(); // Adiciona o middleware de sessï¿½o
+app.UseSession(); // Adiciona o middleware de sessão
 
 app.UseAuthorization();
 

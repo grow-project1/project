@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 using Moq;
-using growTests.Controllers;
-using growTests.Data;
-using growTests.Models;
+using projeto.Controllers;
+using projeto.Data;
+using projeto.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace growTests
@@ -187,7 +187,7 @@ namespace growTests
             Assert.Equal(EstadoLeilao.Encerrado, updatedAuction.EstadoLeilao);
 
             // Verifica se tem vencedor
-            Assert.Equal("Comprador", updatedAuction.Vencedor);
+            Assert.Equal("Comprador", updatedAuction.Vencedor.Nome);
 
             // Verifica se um e-mail foi enviado ao DONO do leilão
             Assert.Contains(_fakeEmailSender.SentEmails, mail =>
@@ -262,7 +262,7 @@ namespace growTests
             // Assert
             var updatedAuction = await _dbContext.Leiloes.FindAsync(leilao.LeilaoId);
             Assert.Equal(EstadoLeilao.Encerrado, updatedAuction.EstadoLeilao);
-            Assert.Equal("Winner2", updatedAuction.Vencedor);
+            Assert.Equal("Winner2", updatedAuction.Vencedor.Nome);
 
             // Confirma se o e-mail chegou ao vencedor
             Assert.Contains(_fakeEmailSender.SentEmails, mail =>

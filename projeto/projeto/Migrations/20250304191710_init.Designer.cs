@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using growTests.Data;
+using projeto.Data;
 
 #nullable disable
 
-namespace growTests.Migrations
+namespace projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250304191710_init")]

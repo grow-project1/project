@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using Xunit;
-using growTests.Controllers;
-using growTests.Data;
-using growTests.Models;
+using projeto.Controllers;
+using projeto.Data;
+using projeto.Models;
 using Microsoft.AspNetCore.Http;
 using growTests; // Para a MockSession, FakeEmailSender, etc.
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -77,7 +77,7 @@ namespace growTests
             };
 
             // Act
-            var result = await _controller.Register(novoUtilizador);
+            var result = await _controller.Register(novoUtilizador, true);
 
             // Assert
             // Verifica se redirecionou para ConfirmRegistration
@@ -124,7 +124,7 @@ namespace growTests
             };
 
             // Act
-            var result = await _controller.Register(novoUtilizador);
+            var result = await _controller.Register(novoUtilizador, true);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
@@ -146,7 +146,7 @@ namespace growTests
             };
 
             // Primeiro, chama o Register (POST) e valida se deu redirect para ConfirmRegistration
-            var registerResult = await _controller.Register(utilizador);
+            var registerResult = await _controller.Register(utilizador, true);
             var redirectToConfirm = Assert.IsType<RedirectToActionResult>(registerResult);
             Assert.Equal("ConfirmRegistration", redirectToConfirm.ActionName);
 
@@ -187,7 +187,7 @@ namespace growTests
                 Email = "user3@example.com",
                 Password = "Abc123!"
             };
-            await _controller.Register(utilizador);
+            await _controller.Register(utilizador, true);
             // Mas enviaremos um código diferente
             var invalidCode = 111111; // certamente diferente do gerado
 

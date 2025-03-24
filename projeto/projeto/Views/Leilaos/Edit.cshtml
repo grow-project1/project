@@ -1,4 +1,4 @@
-﻿@model growTests.Models.Leilao
+﻿@model projeto.Models.Leilao
 
 @{
 
@@ -40,11 +40,7 @@
                 <span asp-validation-for="ValorIncrementoMinimo" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Vencedor" class="control-label">@(english ? "Winner" : "Vencedor")</label>
-                <input asp-for="Vencedor" class="form-control" />
-                <span asp-validation-for="Vencedor" class="text-danger"></span>
-            </div>
+            
 
             <div class="form-group">
                 <input type="submit" value="@(english ? "Save" : "Salvar")" class="btn btn-primary" />

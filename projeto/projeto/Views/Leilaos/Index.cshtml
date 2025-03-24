@@ -1,5 +1,5 @@
-﻿@model IEnumerable<growTests.Models.Leilao>
-@using growTests.Models
+﻿@model IEnumerable<projeto.Models.Leilao>
+@using projeto.Models
 @{
     ViewData["Title"] = "Leilões";
     var loggedUserId = ViewData["UserId"] as int?;
@@ -79,12 +79,7 @@
         </div>
     }
 
-    @if (TempData["Success"] != null)
-    {
-        <div class="alertt alert-success">
-            @TempData["Success"]
-        </div>
-    }
+   
 
     <div class="grid-leiloes">
         @foreach (var leilao in Model
