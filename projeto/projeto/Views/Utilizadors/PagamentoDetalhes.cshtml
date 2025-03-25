@@ -176,6 +176,79 @@
         form.addEventListener('submit', function (event) {
             event.preventDefault();
 
+            var fullName = document.getElementById("full-name").value.trim();
+    var address = document.getElementById("address").value.trim();
+    var city = document.getElementById("city").value.trim();
+    var postalCode = document.getElementById("postal-code").value.trim();
+    var country = document.getElementById("country").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var paymentMethodId = document.getElementById("card-number");
+
+            var isValid = true;
+
+    // Função para adicionar erro aos campos
+    function addError(fieldId, message) {
+        var field = document.getElementById(fieldId);
+        var errorMessage = document.createElement('small');
+        errorMessage.classList.add('error-message');
+        errorMessage.textContent = message;
+
+        // Adiciona a classe de erro ao campo
+        field.classList.add('error');
+
+        // Adiciona a mensagem de erro abaixo do campo
+        if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('error-message')) {
+            field.parentNode.appendChild(errorMessage);
+        }
+
+        isValid = false;
+    }
+
+    // Limpa os erros anteriores
+    function clearErrors() {
+        var errorMessages = document.querySelectorAll('.error-message');
+        var errorFields = document.querySelectorAll('.error');
+
+        errorMessages.forEach(function (message) {
+            message.remove();
+        });
+
+        errorFields.forEach(function (field) {
+            field.classList.remove('error');
+        });
+    }
+
+    // Limpar erros antes de validar novamente
+    clearErrors();
+
+    // Valida se algum campo está vazio
+    if (!fullName) {
+        addError("full-name", "Este campo é obrigatório.");
+    }
+    if (!address) {
+        addError("address", "Este campo é obrigatório.");
+    }
+    if (!city) {
+        addError("city", "Este campo é obrigatório.");
+    }
+    if (!postalCode) {
+        addError("postal-code", "Este campo é obrigatório.");
+    }
+    if (!country) {
+        addError("country", "Este campo é obrigatório.");
+    }
+    if (!phone) {
+        addError("phone", "Este campo é obrigatório.");
+    }
+    if (!paymentMethodId) {
+        addError("card-number", "Por favor, preencha os dados do cartão.");
+    }
+
+    // Se algum campo estiver vazio, não prossegue com o pagamento
+    if (!isValid) {
+        return;
+    }
+
             // Calcula o valor final com o desconto
             var valorFinal = calcularValorComDesconto();
             var descontoUsadoId = document.getElementById("desconto").value;
@@ -199,7 +272,13 @@
                             paymentMethodId: paymentMethod,
                             leilaoId: leilaoId,
                             valor: valorFinal,
-                            DescontoUsadoId: descontoUsadoId
+                            DescontoUsadoId: descontoUsadoId,
+                            fullName: fullName,
+                            address: address,
+                            city: city,
+                            postalCode: postalCode,
+                            country: country,
+                            phone: phone
                         })
                     }).then(response => response.json()).then(data => {
                         if (data.success) {

@@ -40,7 +40,7 @@
 
 @if (!Model.LeiloesGanhos.Any())
 {
-    <p class="m-xl-auto">@(english ? "You haven't won any auctions yet." : "Você ainda não ganhou nenhum leilão.")</p>
+    <p class="no-payments">@(english ? "You haven't won any auctions yet." : "Você ainda não ganhou nenhum leilão.")</p>
 }
 else
 {
@@ -91,17 +91,5 @@ else
     </div>
 }
 
-@if (TempData["PaymentSuccess"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["PaymentSuccess"]
-    </div>
-}
 
-@if (TempData["PaymentError"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["PaymentError"]
-    </div>
-}
 
