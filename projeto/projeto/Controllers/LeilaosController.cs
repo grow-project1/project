@@ -257,6 +257,9 @@ namespace projeto.Controllers
             _context.Add(leilao);
             await _context.SaveChangesAsync();
 
+
+            TempData["Success"] = "Auction created";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -427,7 +430,7 @@ namespace projeto.Controllers
 
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Sucessfull bid!";
+            //TempData["Success"] = "Sucessfull bid!";
             return RedirectToAction("Index", "Leilaos");
         }
 
@@ -729,6 +732,7 @@ namespace projeto.Controllers
 
             return View(topLeiloes);
         }
+
 
     }
 }
