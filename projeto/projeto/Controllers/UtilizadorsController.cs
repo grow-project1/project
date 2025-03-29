@@ -934,7 +934,9 @@ namespace projeto.Controllers
                     // Enviar o e-mail para o vendedor
                     await _emailSender.SendEmailAsync(vendedor.Email, "Pagamento Recebido para o Seu Leilão", vendedorMessage);
                 }
-
+                   
+                await GerarFatura(leilao.LeilaoId, userEmail, request.NIF);
+                
 
                 desconto.Usado = true;
                 _context.DescontoResgatado.Update(desconto);
@@ -952,6 +954,46 @@ namespace projeto.Controllers
             }
         }
 
+        public async Task<IActionResult> GerarFatura(int leilaoId, string email, string nif)
+        {
+            var leilao = _context.Leiloes
+                .Include(l => l.Item)
+                .Include(l => l.Vencedor)
+                .FirstOrDefault(l => l.LeilaoId == leilaoId);
+
+            if (leilao == null || !leilao.Pago || leilao.Vencedor == null)
+            {
+                return Content("Erro: Leilão não encontrado ou pagamento não confirmado.");
+            }
+
+            // Criar fatura
+            var fatura = new Fatura
+            {
+                Id = leilao.LeilaoId,
+                Numero = "FT" + leilao.LeilaoId.ToString("D5"),
+                Data = DateTime.Now,
+                NomeComprador = leilao.Vencedor.Nome,
+                NIF = nif,
+                ItemLeiloado = leilao.Item.Titulo,
+                ValorFinal = leilao.ValorAtualLance
+            };
+
+            // Gerar PDF
+            var pdfService = new PdfService();
+            byte[] pdfFatura = pdfService.GerarFaturaPDF(fatura);
+
+            // Enviar Email com anexo
+            var emailSender = new EmailSender(_configuration);
+            await emailSender.SendEmailWithAttachmentAsync(
+                email,
+                "Fatura #" + fatura.Numero,
+                "<p>Segue em anexo a sua fatura do leilão.</p>",
+                pdfFatura,
+                "Fatura_" + fatura.Numero + ".pdf"
+            );
+
+            return Content("Fatura enviada com sucesso!");
+        }
 
 
 
@@ -967,6 +1009,7 @@ namespace projeto.Controllers
             public string PostalCode { get; set; }
             public string Country { get; set; }
             public string Phone { get; set; }
+            public string NIF { get; set; }
         }
 
         [HttpPost]
