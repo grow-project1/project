@@ -277,7 +277,9 @@
 
             // Calcula o valor final com o desconto
             var valorFinal = calcularValorComDesconto();
-            var descontoUsadoId = document.getElementById("desconto").value;
+            var descontoUsadoId = document.getElementById("desconto").value ? document.getElementById("desconto").value : -1;
+
+            console.log(descontoUsadoId);
 
             // Cria o método de pagamento
             stripe.createPaymentMethod({
@@ -298,7 +300,7 @@
                             paymentMethodId: paymentMethod,
                             leilaoId: leilaoId,
                             valor: valorFinal,
-                            DescontoUsadoId: descontoUsadoId,
+                            DescontoUsadoId:descontoUsadoId ,
                             fullName: fullName,
                             address: address,
                             city: city,

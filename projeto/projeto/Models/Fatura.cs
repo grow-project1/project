@@ -8,6 +8,9 @@
         public string NomeComprador { get; set; }
         public string NIF { get; set; }
         public string ItemLeiloado { get; set; }
-        public double ValorFinal { get; set; }
+        public decimal ValorBase { get; set; }
+        public decimal IVA { get; set; }
+        public decimal TotalComIVA { get; set; }
+        public decimal Desconto { get; set; }
     }
 }
