@@ -220,6 +220,7 @@ namespace projeto.Controllers
 
             leilao.UtilizadorId = user.UtilizadorId;
 
+
             if (leilao.Item.fotoo != null && leilao.Item.fotoo.Length > 0)
             {
                 string folder = "leilao/fotos/";
@@ -427,6 +428,13 @@ namespace projeto.Controllers
             _context.Licitacoes.Add(licitacao);
             user.Pontos += 1;
             _context.Update(user);
+
+            // Calcula o novo valor atual do lance
+            leilao.ValorAtualLance = leilao.Licitacoes.Count > 0
+                ? leilao.Licitacoes.Max(x => x.ValorLicitacao)
+                : leilao.Item.PrecoInicial;
+
+            _context.Update(leilao);
 
             await _context.SaveChangesAsync();
 
