@@ -1325,6 +1325,14 @@ th {
     margin:30px auto;
 }
 
+.sales-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 430px;
+    margin: 30px auto;
+}
+
 input {
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 }

@@ -771,15 +771,21 @@ namespace projeto.Controllers
 
             var meusLeiloesGanhos = await _context.Leiloes
             .Where(l => l.VencedorId == user.UtilizadorId)
-            .Include(l => l.Vencedor) 
-            .Include(l => l.Item)      
-            .OrderBy(l => l.Pago) 
+            .Include(l => l.Item)
+            .OrderBy(l => l.Pago)
             .ToListAsync();
-
+     
+            var meusLeiloes = await _context.Leiloes
+                .Where(l => l.UtilizadorId == user.UtilizadorId) 
+                .Include(l => l.Item)  
+                .Include(l => l.Vencedor)  
+                .OrderBy(l => l.Pago)  
+                .ToListAsync();
 
             var viewModel = new PagamentosViewModel
             {
-                LeiloesGanhos = meusLeiloesGanhos
+                LeiloesGanhos = meusLeiloesGanhos,
+                MeusLeiloes = meusLeiloes
             };
 
             return View(viewModel);
