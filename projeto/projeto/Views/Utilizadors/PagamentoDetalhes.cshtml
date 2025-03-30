@@ -52,9 +52,10 @@
                 <input type="text" id="country" name="country" class="form-control" placeholder="Enter your country" value="@Model.Utilizador?.Pais" required />
             </div>
 
-            <div class="form-group">
-                <label for="nif">NIF (opcional)</label>
-                <input type="text" id="nif" class="form-control" placeholder="Digite seu NIF" />
+            <div id="nif-field" class="form-group">
+                <label for="nif">NIF</label>
+                <input type="text" id="nif" name="nif" class="form-control" placeholder="Digite o seu NIF" />
+                <small id="nif-error" class="error-message" style="display: none; color: red;">NIF inválido. Verifique o número e tente novamente.</small>
             </div>
 
 
@@ -85,6 +86,81 @@
         <p><strong id="valorTotal">@Model.Leilao.ValorAtualLance.ToString("C")</strong></p>
     </form>
 
+
+    <script>
+        // Função de validação do NIF
+            function validarNIF(nif) {
+            //Verifica se o NIF contém apenas números
+            if(!/^\d+$/.test(nif)){
+                return false;
+            }
+
+
+            // Verifica se o NIF contem 9 dígitos
+            if (nif.length !== 9) {
+                return false;
+            }
+
+            // Verifica se o primeiro dígito está na lista válida
+            const primeiroDigito = parseInt(nif.charAt(0), 10);
+            if (![1, 2, 3, 5, 6, 9].includes(primeiroDigito)) {
+                return false;
+            }
+
+            let soma = 0;
+            // Calcula a soma dos primeiros 8 dígitos, multiplicando pela posição reversa
+            for (let i = 0; i < 8; i++) {
+                soma += parseInt(nif.charAt(i), 10) * (9 - i);
+            }
+
+            // Calcula o dígito de controlo
+            const digitoControlo = 11 - (soma % 11);
+            const digitoVerificador = parseInt(nif.charAt(8), 10);
+            const digitoCorreto = digitoControlo === 10 || digitoControlo === 11 ? 0 : digitoControlo;
+
+            // Retorna true se o dígito verificador for válido, caso contrário false
+            return digitoVerificador === digitoCorreto;
+        }
+
+
+        // Adiciona o evento 'blur' para validar o NIF quando o campo perder o foco
+        document.getElementById("nif").addEventListener("blur", function() {
+            const nif = this.value.trim(); // Remove espaços extras
+            const nifErrorMessage = document.getElementById("nif-error");
+
+            if (nif === "") {
+                // Se o campo estiver vazio, não valida, apenas esconde a mensagem de erro
+                nifErrorMessage.style.display = "none";
+            } else if (validarNIF(nif)) {
+                // Se o NIF for válido, esconde a mensagem de erro
+                nifErrorMessage.style.display = "none";
+            } else {
+                // Se o NIF for inválido, mostra a mensagem de erro
+                nifErrorMessage.style.display = "block";
+            }
+        });
+    </script>
+
+    <div id="loading-overlay" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+">
+        <div style="text-align: center; background: white; padding: 20px; border-radius: 10px;">
+            <img src="~/images/loading.gif" alt="A processar pagamento..." width="80">
+            <p style="font-size: 18px; font-weight: bold; color: #333;">A processar pagamento...</p>
+        </div>
+    </div>
+
+
     <form id="payment-form" class="payment-form">
         <div class="payment-container">
             <div id="card-number" class="stripe-input"></div>
@@ -102,30 +178,6 @@
     </form>
 </div>
 
-
-<div id="nif-field" class="form-group">
-    <label for="nif">@("NIF")</label>
-    <input type="text" id="nif" name="nif" class="form-control" placeholder="Digite o seu NIF" />
-</div>
-
-<div id="loading-overlay" style="
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-">
-    <div style="text-align: center; background: white; padding: 20px; border-radius: 10px;">
-        <img src="~/images/loading.gif" alt="A processar pagamento..." width="80">
-        <p style="font-size: 18px; font-weight: bold; color: #333;">A processar pagamento...</p>
-    </div>
-</div>
 
 
 <!-- Inclui o Stripe.js -->

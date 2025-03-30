@@ -151,7 +151,7 @@
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
               "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAgwHYAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAuwGEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-22T20:24:54.176Z",
               "EditorCaption": ""
@@ -166,8 +166,7 @@
               "RelativeToolTip": "projeto\\Models\\PagamentosViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T17:57:23.947Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T17:57:23.947Z"
             },
             {
               "$type": "Document",
@@ -179,8 +178,7 @@
               "RelativeToolTip": "projeto\\Models\\PagamentoDetalhesViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:33:36.592Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-23T10:33:36.592Z"
             },
             {
               "$type": "Document",
@@ -192,8 +190,7 @@
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-29T18:27:44.237Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T18:27:44.237Z"
             },
             {
               "$type": "Document",
@@ -241,8 +238,7 @@
               "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
               "ViewState": "AgIAAE8FAAAAAAAAAAAmwCYFAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-03-22T17:42:03.044Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-22T17:42:03.044Z"
             },
             {
               "$type": "Document",
@@ -254,8 +250,7 @@
               "RelativeToolTip": "projeto\\Services\\PdfFatura.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T17:31:47.652Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T17:31:47.652Z"
             },
             {
               "$type": "Document",
