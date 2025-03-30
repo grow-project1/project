@@ -1303,6 +1303,20 @@ th {
 
 
 /* --------------------- PAYMENT PAGE ------------------------ */
+#loading-overlay {
+    display: none;
+    position: fixed; /* Fixar o overlay na tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Garante que o overlay ficará acima de outros elementos */
+}
+
 .payment-container {
     display: flex;
     flex-direction: column;
@@ -1385,3 +1399,4 @@ input {
     margin-left: auto;
     margin-right: auto; /* Centraliza horizontalmente */
 }
+

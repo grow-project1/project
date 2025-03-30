@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\pagamentodetalhesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\pagamentodetalhesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\pagamentosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\pagamentosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\services\\pdffatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\services\\pdffatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,16 +31,8 @@
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\desconto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,16 +43,8 @@
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\fatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\pagamentosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\pagamentosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\pagamentodetalhesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\pagamentodetalhesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\verificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -86,10 +90,6 @@
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\leilaos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -129,7 +129,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -145,20 +145,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UtilizadorsController.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
-              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
-              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ViewState": "AgIAAMwCAAAAAAAAAAAswOwCAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T20:29:29.932Z",
+              "DocumentIndex": 0,
+              "Title": "PagamentoDetalhes.cshtml",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
+              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
+              "RelativeToolTip": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAgwHYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-22T20:24:54.176Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "PagamentosViewModel.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentosViewModel.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\PagamentosViewModel.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentosViewModel.cs",
+              "RelativeToolTip": "projeto\\Models\\PagamentosViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T17:57:23.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PagamentoDetalhesViewModel.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentoDetalhesViewModel.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\PagamentoDetalhesViewModel.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentoDetalhesViewModel.cs",
+              "RelativeToolTip": "projeto\\Models\\PagamentoDetalhesViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:33:36.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Pagamentos.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
@@ -171,7 +197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "DescontoResgatado.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\DescontoResgatado.cs",
@@ -179,25 +205,48 @@
               "RelativeToolTip": "projeto\\Models\\DescontoResgatado.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:28:13.277Z",
+              "WhenOpened": "2025-03-23T10:28:13.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ViewState": "AgIAAMwCAAAAAAAAAAAswOwCAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-22T20:29:29.932Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Desconto.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\Desconto.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
+              "RelativeToolTip": "projeto\\Models\\Desconto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:28:03.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAE8FAAAAAAAAAAAmwCYFAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-22T17:42:03.044Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PagamentoDetalhes.cshtml",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
-              "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
-              "RelativeToolTip": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
-              "ViewState": "AgIAAAUBAAAAAAAAAAAAAC8BAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-22T20:24:54.176Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "PdfFatura.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Services\\PdfFatura.cs",
               "RelativeDocumentMoniker": "projeto\\Services\\PdfFatura.cs",
@@ -210,19 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Desconto.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\Desconto.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
-              "RelativeToolTip": "projeto\\Models\\Desconto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:28:03.807Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Fatura.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Fatura.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Fatura.cs",
@@ -234,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Utilizador.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Utilizador.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Utilizador.cs",
@@ -246,31 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PagamentosViewModel.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentosViewModel.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\PagamentosViewModel.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentosViewModel.cs",
-              "RelativeToolTip": "projeto\\Models\\PagamentosViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T17:57:23.947Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PagamentoDetalhesViewModel.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentoDetalhesViewModel.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\PagamentoDetalhesViewModel.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentoDetalhesViewModel.cs",
-              "RelativeToolTip": "projeto\\Models\\PagamentoDetalhesViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:33:36.592Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "VerificationModel.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\VerificationModel.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\VerificationModel.cs",
@@ -282,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "EmailSender.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Services\\EmailSender.cs",
               "RelativeDocumentMoniker": "projeto\\Services\\EmailSender.cs",
@@ -294,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Leilao.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Leilao.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\Leilao.cs",
@@ -306,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "TopAuctions.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Leilaos\\TopAuctions.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\TopAuctions.cshtml",
@@ -318,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "RecolocarLeilao.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Leilaos\\RecolocarLeilao.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\RecolocarLeilao.cshtml",
@@ -330,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "LeilaosController.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\LeilaosController.cs",
@@ -342,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\HomeController.cs",
@@ -366,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Shared\\_Layout.cshtml",
@@ -378,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Descontos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Descontos\\Index.cshtml",
@@ -390,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "projeto-grow-2025.yml",
               "DocumentMoniker": "C:\\GitHub\\PV\\project\\.github\\workflows\\projeto-grow-2025.yml",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\GitHub\\PV\\project\\.github\\workflows\\projeto-grow-2025.yml",
@@ -438,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Leilaos\\Index.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Leilaos\\Index.cshtml",
@@ -495,18 +508,6 @@
               "ViewState": "AgIAAHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-03-22T18:02:28.833Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "projeto\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "projeto\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAFUFAAAAAAAAAAAmwF8FAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-03-22T17:42:03.044Z"
             }
           ]
         }
