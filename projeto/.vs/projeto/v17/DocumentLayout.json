@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\services\\pdffatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\services\\pdffatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\desconto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\desconto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\services\\pdffatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\services\\pdffatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\descontoresgatado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\views\\utilizadors\\pagamentodetalhes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\desconto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\desconto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\fatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -129,7 +129,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -145,13 +145,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UtilizadorsController.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
               "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
               "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ViewState": "AgIAAJYDAAAAAAAAAAD4v7gDAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAMwCAAAAAAAAAAAswOwCAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-22T20:29:29.932Z",
               "EditorCaption": ""
@@ -159,19 +159,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Desconto.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
-              "RelativeDocumentMoniker": "projeto\\Models\\Desconto.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
-              "RelativeToolTip": "projeto\\Models\\Desconto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:28:03.807Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "Pagamentos.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\Pagamentos.cshtml",
@@ -184,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "DescontoResgatado.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\DescontoResgatado.cs",
               "RelativeDocumentMoniker": "projeto\\Models\\DescontoResgatado.cs",
@@ -197,29 +184,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PagamentoDetalhes.cshtml",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
               "RelativeDocumentMoniker": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
               "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
               "RelativeToolTip": "projeto\\Views\\Utilizadors\\PagamentoDetalhes.cshtml",
-              "ViewState": "AgIAAA4BAAAAAAAAAAAAAC8BAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAAAC8BAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-22T20:24:54.176Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "PdfFatura.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Services\\PdfFatura.cs",
               "RelativeDocumentMoniker": "projeto\\Services\\PdfFatura.cs",
               "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Services\\PdfFatura.cs",
               "RelativeToolTip": "projeto\\Services\\PdfFatura.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-29T17:31:47.652Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Desconto.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\Desconto.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Desconto.cs",
+              "RelativeToolTip": "projeto\\Models\\Desconto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:28:03.807Z"
             },
             {
               "$type": "Document",
@@ -231,8 +230,7 @@
               "RelativeToolTip": "projeto\\Models\\Fatura.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T17:35:34.373Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T17:35:34.373Z"
             },
             {
               "$type": "Document",
@@ -244,8 +242,7 @@
               "RelativeToolTip": "projeto\\Models\\Utilizador.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwCUAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:21:15.884Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-23T10:21:15.884Z"
             },
             {
               "$type": "Document",
@@ -257,8 +254,7 @@
               "RelativeToolTip": "projeto\\Models\\PagamentosViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T17:57:23.947Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T17:57:23.947Z"
             },
             {
               "$type": "Document",
@@ -270,8 +266,7 @@
               "RelativeToolTip": "projeto\\Models\\PagamentoDetalhesViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:33:36.592Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-23T10:33:36.592Z"
             },
             {
               "$type": "Document",
