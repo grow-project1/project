@@ -793,12 +793,25 @@ h2 {
 /* --------------------- DESCONTOS PAGE ------------------------- */
 
 
+.btn-redeem-discount {
+    padding: 5px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    
+    transition: 0.3s ease-in-out;
+}
 
 
+    .btn-redeem-discount:hover {
+        transform: scale(1.10);
+        color: white;
+        background-color: #218838;
+    } 
 
 /* -------------------- PROFILE PAGE --------------------------- */
 .profile {
-   
     margin-top: 140px;
 }
 
@@ -828,7 +841,7 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 280px; /* Ajustando a largura das cartas */
+    width: 300px; /* Ajustando a largura das cartas */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -857,11 +870,12 @@ h2 {
 }
 
 .auction-text {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #555;
 }
 
 .auction-actions {
+    font-size: 0.8rem;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -870,7 +884,7 @@ h2 {
 
 .btn-my-auctions {
     color: black;
-    padding: 10px 20px;
+    padding: 10px 2px;
     border-bottom: 2px solid black;
     border-radius: 5px;
     text-decoration: none;
@@ -882,6 +896,10 @@ h2 {
     padding: 10px 20px;
     border-radius: 5px;
     color: black;
+}
+
+.but-relist{
+
 }
 
 .btn-my-auctions:hover {

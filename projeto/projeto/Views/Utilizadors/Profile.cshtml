@@ -100,8 +100,8 @@
                             <form asp-action="DeleteConfirmed" method="post">
                                 <input type="text" name="confirmCancel" class="form-control" placeholder="Cancel" required />
                                 <br />
-                                <button type="submit" class="btn btn-danger">@("Confirm")</button>
-                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('cancelModal').style.display='none'">
+                                <button type="submit" class="btn btn-success">@("Confirm")</button>
+                                <button type="button" class="btn-danger" style="width:100%; padding:10px 50px; margin-top: 5px; border-radius: 6px;" onclick="document.getElementById('cancelModal').style.display='none'">
                                     @("Cancel")
                                 </button>
                             </form>

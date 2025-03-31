@@ -68,7 +68,7 @@
                     <td>@item.Valor%</td>
                     <td>@item.PontosNecessarios</td>
                     <td>
-                        <a href="#" class="btn" style="background-color: #28a745; color: white; border: 1px solid #28a745;" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })', '@item.Descricao', '@item.Valor')">@(english ? "Redeem" : "Resgatar")</a>
+                        <a href="#" class="btn-redeem-discount" onclick="abrirModal('@Url.Action("RedeemDesconto", new { id = item.DescontoId })', '@item.Descricao', '@item.Valor')">@(english ? "Redeem" : "Resgatar")</a>
                     </td>
                 </tr>
             }

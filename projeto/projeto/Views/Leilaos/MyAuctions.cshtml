@@ -39,24 +39,26 @@
                         <p class="auction-text">@(english ? "Ends on:" : "Termina em:") @auction.DataFim.ToString("dd/MM/yyyy HH:mm")</p>
                     </div>
                     <div class="auction-actions">
-                        <a href="@Url.Action("Details", "Leilaos", new { id = auction.LeilaoId })" class="btn-my-auctions">
-                            <i class="fas fa-eye"></i> @(english ? "View" : "Ver")
-                        </a>
-                        @* <a href="@Url.Action("Edit", "Leilaos", new { id = auction.LeilaoId })" class="btn btn-edit">
-                            <i class="fas fa-edit"></i> @(english ? "Edit" : "Editar")
-                        </a> *@
-                        <a href="@Url.Action("Delete", "Leilaos", new { id = auction.LeilaoId })" class="btn-my-auctions butt-del" onclick="return confirm('@(english ? "Are you sure?" : "Tem a certeza?")');">
-                            <i class="fas fa-trash"></i> @(english ? "Delete" : "Eliminar")
-                        </a>
-                        @if (auction.EstadoLeilao == EstadoLeilao.Encerrado && auction.VencedorId == null)
-                        {
-                            <a asp-controller="Leiloes" asp-action="RecolocarLeilao" asp-route-id="@auction.LeilaoId" class="btn btn-primary">
-                                Recolocar Leilão
-                            </a>
-                        }
+    <a href="@Url.Action("Details", "Leilaos", new { id = auction.LeilaoId })" class="btn-my-auctions">
+        <i class="fas fa-eye"></i> @(english ? "View" : "Ver")
+    </a>
 
+    @* <a href="@Url.Action("Edit", "Leilaos", new { id = auction.LeilaoId })" class="btn btn-edit">
+        <i class="fas fa-edit"></i> @(english ? "Edit" : "Editar")
+    </a> *@
 
-                    </div>
+    <a href="@Url.Action("Delete", "Leilaos", new { id = auction.LeilaoId })" class="btn-my-auctions butt-del" onclick="return confirm('@(english ? "Are you sure?" : "Tem a certeza?")');">
+        <i class="fas fa-trash"></i> @(english ? "Delete" : "Eliminar")
+    </a>
+
+    @if (auction.EstadoLeilao == EstadoLeilao.Encerrado && auction.VencedorId == null)
+    {
+        <a asp-controller="Leiloes" asp-action="RecolocarLeilao" asp-route-id="@auction.LeilaoId" class="btn-my-auctions but-relist">
+            <i class="fas fa-redo"></i> @(english ? "Relist Auction" : "Recolocar Leilão")
+        </a>
+    }
+</div>
+
                 </div>
             }
         </div>
