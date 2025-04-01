@@ -7,6 +7,18 @@
       "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\paymentstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\leilao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\models\\pagamentosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\models\\pagamentosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\growtests\\auctionmanagementtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\auctionmanagementtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\growtests\\testshelpers\\mocksession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|solutionrelative:growtests\\testshelpers\\mocksession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B1C4E2D-C45F-4B40-9BF8-3832F7C7064A}|projeto\\projeto.csproj|solutionrelative:projeto\\controllers\\utilizadorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}|growTests\\growTests.csproj|c:\\3\u00BAano\\pv\\projeto\\project\\projeto\\growtests\\profilemanagementtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,85 +46,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "AuctionManagementTests.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\AuctionManagementTests.cs",
               "RelativeDocumentMoniker": "growTests\\AuctionManagementTests.cs",
               "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\AuctionManagementTests.cs",
               "RelativeToolTip": "growTests\\AuctionManagementTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAgwEkAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-29T15:13:11.134Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MockSession.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
-              "RelativeDocumentMoniker": "growTests\\TestsHelpers\\MockSession.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
-              "RelativeToolTip": "growTests\\TestsHelpers\\MockSession.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T18:14:48.772Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProfileManagementTests.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\ProfileManagementTests.cs",
-              "RelativeDocumentMoniker": "growTests\\ProfileManagementTests.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\ProfileManagementTests.cs",
-              "RelativeToolTip": "growTests\\ProfileManagementTests.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAAA8AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T18:07:49.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AccessManagementTests.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\AccessManagementTests.cs",
-              "RelativeDocumentMoniker": "growTests\\AccessManagementTests.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\AccessManagementTests.cs",
-              "RelativeToolTip": "growTests\\AccessManagementTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T18:07:25.829Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UtilizadorsController.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
-              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
-              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
-              "ViewState": "AgIAAAAEAAAAAAAAAAAAAPYCAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T18:04:29.245Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PaymentsTests.cs",
-              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\PaymentsTests.cs",
-              "RelativeDocumentMoniker": "growTests\\PaymentsTests.cs",
-              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\PaymentsTests.cs*",
-              "RelativeToolTip": "growTests\\PaymentsTests.cs*",
-              "ViewState": "AgIAABAAAAAAAAAAAADwvzAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T18:02:53.5Z",
               "EditorCaption": ""
             },
             {
@@ -133,7 +76,95 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PaymentsTests.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\PaymentsTests.cs",
+              "RelativeDocumentMoniker": "growTests\\PaymentsTests.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\PaymentsTests.cs",
+              "RelativeToolTip": "growTests\\PaymentsTests.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAwGUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T18:02:53.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UtilizadorsController.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeDocumentMoniker": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\UtilizadorsController.cs",
+              "RelativeToolTip": "projeto\\Controllers\\UtilizadorsController.cs",
+              "ViewState": "AgIAAOsCAAAAAAAAAAAgwBEDAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T18:04:29.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Leilao.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Leilao.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\Leilao.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\Leilao.cs",
+              "RelativeToolTip": "projeto\\Models\\Leilao.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T18:34:34.828Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PagamentosViewModel.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentosViewModel.cs",
+              "RelativeDocumentMoniker": "projeto\\Models\\PagamentosViewModel.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Models\\PagamentosViewModel.cs",
+              "RelativeToolTip": "projeto\\Models\\PagamentosViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T18:37:03.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "MockSession.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
+              "RelativeDocumentMoniker": "growTests\\TestsHelpers\\MockSession.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\TestsHelpers\\MockSession.cs",
+              "RelativeToolTip": "growTests\\TestsHelpers\\MockSession.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T18:14:48.772Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ProfileManagementTests.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\ProfileManagementTests.cs",
+              "RelativeDocumentMoniker": "growTests\\ProfileManagementTests.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\ProfileManagementTests.cs",
+              "RelativeToolTip": "growTests\\ProfileManagementTests.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAA8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T18:07:49.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccessManagementTests.cs",
+              "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\AccessManagementTests.cs",
+              "RelativeDocumentMoniker": "growTests\\AccessManagementTests.cs",
+              "ToolTip": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\growTests\\AccessManagementTests.cs",
+              "RelativeToolTip": "growTests\\AccessManagementTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T18:07:25.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "LeilaosController.cs",
               "DocumentMoniker": "C:\\3\u00BAano\\PV\\projeto\\project\\projeto\\projeto\\Controllers\\LeilaosController.cs",
               "RelativeDocumentMoniker": "projeto\\Controllers\\LeilaosController.cs",
@@ -141,8 +172,7 @@
               "RelativeToolTip": "projeto\\Controllers\\LeilaosController.cs",
               "ViewState": "AgIAALABAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:02:16.952Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-23T10:02:16.952Z"
             }
           ]
         }

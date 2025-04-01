@@ -61,5 +61,45 @@ namespace growTests
             Assert.Equal("Login", redirectResult.ActionName);
         }
 
+        [Fact]
+        public async Task Pagamentos_ReturnsViewWithLeiloesGanhos_WhenUserIsLoggedIn()
+        {
+            // Arrange
+            var user = new Utilizador
+            {
+                UtilizadorId = 1,
+                Nome = "Test User",
+                Email = "test@example.com",
+                Pontos = 100,
+                Password = "hashedpassword" // Adiciona um valor qualquer
+            };
+
+            _dbContext.Utilizador.Add(user);
+            await _dbContext.SaveChangesAsync();
+
+            // Adiciona um leilão ganho, associado ao utilizador
+            var leilao = new Leilao { LeilaoId = 1, VencedorId = user.UtilizadorId, Pago = false, Item = new Item() };
+            _dbContext.Leiloes.Add(leilao);
+            await _dbContext.SaveChangesAsync();
+
+            // Verifica se o leilão foi salvo corretamente no banco de dados
+            var leilaoNoDb = await _dbContext.Leiloes.FirstOrDefaultAsync(l => l.LeilaoId == 1);
+            Assert.NotNull(leilaoNoDb);  // Verifica se o leilão foi adicionado
+            Assert.Equal(user.UtilizadorId, leilaoNoDb.VencedorId);  // Verifica o VencedorId
+
+            // Simula o login do utilizador
+            _httpContext.Session.SetString("UserEmail", user.Email);
+
+            // Act
+            var result = await _controller.Pagamentos();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsType<PagamentosViewModel>(viewResult.Model);
+            Assert.NotEmpty(model.LeiloesGanhos);  // Verifica que a coleção de leilões ganhos não está vazia
+            Assert.Single(model.LeiloesGanhos);    // Verifica que há apenas um leilão ganho
+        }
+
+
     }
 }
