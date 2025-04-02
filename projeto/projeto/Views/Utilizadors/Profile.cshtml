@@ -6,13 +6,35 @@
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success" role="alert" style="position: fixed; ...">
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
         @TempData["SuccessMessage"]
     </div>
+
     <script>
-        setTimeout(...); /* Lógica de fade-out */
+        document.addEventListener("DOMContentLoaded", function () {
+            let message = document.getElementById("successMessage");
+            if (message) {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    setTimeout(() => message.remove(), 500);
+                }, 2300);
+            }
+        });
     </script>
+
+    <style>
+        #successMessage {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
 }
+
+
 
 @if (TempData["Error"] != null)
 {
@@ -100,8 +122,8 @@
                             <form asp-action="DeleteConfirmed" method="post">
                                 <input type="text" name="confirmCancel" class="form-control" placeholder="Cancel" required />
                                 <br />
-                                <button type="submit" class="btn btn-danger">@("Confirm")</button>
-                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('cancelModal').style.display='none'">
+                                <button type="submit" class="btn btn-success">@("Confirm")</button>
+                                <button type="button" class="btn-danger" style="width:100%; padding:10px 50px; margin-top: 5px; border-radius: 6px;" onclick="document.getElementById('cancelModal').style.display='none'">
                                     @("Cancel")
                                 </button>
                             </form>

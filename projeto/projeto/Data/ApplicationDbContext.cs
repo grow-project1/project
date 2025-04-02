@@ -38,18 +38,45 @@ namespace projeto.Data
                 new Desconto
                 {
                     DescontoId = 1,
-                    Descricao = "10% discount",
-                    Valor = 10.0,
-                    PontosNecessarios = 10,
+                    Descricao = "2% discount",
+                    Valor = 2.0,
+                    PontosNecessarios = 50,
                     UtilizadorId = null, 
                     IsLoja = true
                 },
                 new Desconto
                 {
                     DescontoId = 2,
-                    Descricao = "25% discount",
-                    Valor = 25.0,
-                    PontosNecessarios = 20,
+                    Descricao = "3% discount",
+                    Valor = 3.0,
+                    PontosNecessarios = 100,
+                    UtilizadorId = null,
+                    IsLoja = true
+                },
+                new Desconto
+                {
+                    DescontoId = 3,
+                    Descricao = "5% discount",
+                    Valor = 5.0,
+                    PontosNecessarios = 150,
+                    UtilizadorId = null,
+                    IsLoja = true
+                },
+                new Desconto
+                {
+                    DescontoId = 4,
+                    Descricao = "6% discount",
+                    Valor = 6.0,
+                    PontosNecessarios = 200,
+                    UtilizadorId = null,
+                    IsLoja = true
+                },
+                new Desconto
+                {
+                    DescontoId = 5,
+                    Descricao = "7% discount",
+                    Valor = 7.0,
+                    PontosNecessarios = 300,
                     UtilizadorId = null,
                     IsLoja = true
                 }

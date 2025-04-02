@@ -36,4 +36,34 @@ public class EmailSender : IEmailSender
 
         await smtpClient.SendMailAsync(mailMessage);
     }
+
+    public async Task SendEmailWithAttachmentAsync(string email, string subject, string htmlMessage, byte[] attachment, string attachmentName)
+    {
+        var smtpClient = new SmtpClient
+        {
+            Host = _configuration["EmailSettings:SmtpServer"],
+            Port = int.Parse(_configuration["EmailSettings:SmtpPort"]),
+            EnableSsl = bool.Parse(_configuration["EmailSettings:EnableSSL"]),
+            Credentials = new NetworkCredential(
+                _configuration["EmailSettings:SenderEmail"],
+                _configuration["EmailSettings:SenderPassword"])
+        };
+
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress(_configuration["EmailSettings:SenderEmail"]),
+            Subject = subject,
+            Body = htmlMessage,
+            IsBodyHtml = true
+        };
+        mailMessage.To.Add(email);
+
+        // Adicionar anexo apenas se existir
+        if (attachment != null && !string.IsNullOrEmpty(attachmentName))
+        {
+            mailMessage.Attachments.Add(new Attachment(new MemoryStream(attachment), attachmentName));
+        }
+
+        await smtpClient.SendMailAsync(mailMessage);
+    }
 }

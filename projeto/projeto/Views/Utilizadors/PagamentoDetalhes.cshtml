@@ -52,6 +52,13 @@
                 <input type="text" id="country" name="country" class="form-control" placeholder="Enter your country" value="@Model.Utilizador?.Pais" required />
             </div>
 
+            <div id="nif-field" class="form-group">
+                <label for="nif">NIF</label>
+                <input type="text" id="nif" name="nif" class="form-control" placeholder="Digite o seu NIF" />
+                <small id="nif-error" class="error-message" style="display: none; color: red;">NIF inválido. Verifique o número e tente novamente.</small>
+            </div>
+
+
             @if (Model.Utilizador == null)
             {
                 <div class="alert alert-warning">
@@ -79,6 +86,81 @@
         <p><strong id="valorTotal">@Model.Leilao.ValorAtualLance.ToString("C")</strong></p>
     </form>
 
+
+    <script>
+        // Função de validação do NIF
+            function validarNIF(nif) {
+            //Verifica se o NIF contém apenas números
+            if(!/^\d+$/.test(nif)){
+                return false;
+            }
+
+
+            // Verifica se o NIF contem 9 dígitos
+            if (nif.length !== 9) {
+                return false;
+            }
+
+            // Verifica se o primeiro dígito está na lista válida
+            const primeiroDigito = parseInt(nif.charAt(0), 10);
+            if (![1, 2, 3, 5, 6, 9].includes(primeiroDigito)) {
+                return false;
+            }
+
+            let soma = 0;
+            // Calcula a soma dos primeiros 8 dígitos, multiplicando pela posição reversa
+            for (let i = 0; i < 8; i++) {
+                soma += parseInt(nif.charAt(i), 10) * (9 - i);
+            }
+
+            // Calcula o dígito de controlo
+            const digitoControlo = 11 - (soma % 11);
+            const digitoVerificador = parseInt(nif.charAt(8), 10);
+            const digitoCorreto = digitoControlo === 10 || digitoControlo === 11 ? 0 : digitoControlo;
+
+            // Retorna true se o dígito verificador for válido, caso contrário false
+            return digitoVerificador === digitoCorreto;
+        }
+
+
+        // Adiciona o evento 'blur' para validar o NIF quando o campo perder o foco
+        document.getElementById("nif").addEventListener("blur", function() {
+            const nif = this.value.trim(); // Remove espaços extras
+            const nifErrorMessage = document.getElementById("nif-error");
+
+            if (nif === "") {
+                // Se o campo estiver vazio, não valida, apenas esconde a mensagem de erro
+                nifErrorMessage.style.display = "none";
+            } else if (validarNIF(nif)) {
+                // Se o NIF for válido, esconde a mensagem de erro
+                nifErrorMessage.style.display = "none";
+            } else {
+                // Se o NIF for inválido, mostra a mensagem de erro
+                nifErrorMessage.style.display = "block";
+            }
+        });
+    </script>
+
+    <div id="loading-overlay" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+">
+        <div style="text-align: center; background: white; padding: 20px; border-radius: 10px;">
+            <img src="~/images/loading.gif" alt="A processar pagamento..." width="80">
+            <p style="font-size: 18px; font-weight: bold; color: #333;">A processar pagamento...</p>
+        </div>
+    </div>
+
+
     <form id="payment-form" class="payment-form">
         <div class="payment-container">
             <div id="card-number" class="stripe-input"></div>
@@ -96,9 +178,13 @@
     </form>
 </div>
 
+
+
 <!-- Inclui o Stripe.js -->
 <script src="https://js.stripe.com/v3/"></script>
 <script>
+    var loadingOverlay = document.getElementById('loading-overlay');
+    loadingOverlay.style.display="none";
     document.addEventListener("DOMContentLoaded", function () {
         var stripe = Stripe('pk_test_51R3dfgFTcoPiNF4zCzoyI7fSXrs0RCLWkAay2TWT2r3o3rt4bxFQwZS6JYD9LfjyA2Y6OjTqYfWDyjcL85j649ni00um8zUZx5');
         var elements = stripe.elements();
@@ -120,6 +206,9 @@
         cardNumber.mount('#card-number');
         cardExpiry.mount('#card-expiry');
         cardCvc.mount('#card-cvc');
+
+        
+
 
         // Função para calcular o valor com desconto
             // Armazene o valor original
@@ -169,40 +258,42 @@
         atualizarValorTotal();
     });
 
-
+    
 
 
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function (event) {
             event.preventDefault();
+            
 
+             
             var fullName = document.getElementById("full-name").value.trim();
-    var address = document.getElementById("address").value.trim();
-    var city = document.getElementById("city").value.trim();
-    var postalCode = document.getElementById("postal-code").value.trim();
-    var country = document.getElementById("country").value.trim();
-    var phone = document.getElementById("phone").value.trim();
-    var paymentMethodId = document.getElementById("card-number");
+            var address = document.getElementById("address").value.trim();
+            var city = document.getElementById("city").value.trim();
+            var postalCode = document.getElementById("postal-code").value.trim();
+            var country = document.getElementById("country").value.trim();
+            var phone = document.getElementById("phone").value.trim();
+            var paymentMethodId = document.getElementById("card-number");
 
             var isValid = true;
 
-    // Função para adicionar erro aos campos
-    function addError(fieldId, message) {
-        var field = document.getElementById(fieldId);
-        var errorMessage = document.createElement('small');
-        errorMessage.classList.add('error-message');
-        errorMessage.textContent = message;
+            // Função para adicionar erro aos campos
+            function addError(fieldId, message) {
+                var field = document.getElementById(fieldId);
+                var errorMessage = document.createElement('small');
+                errorMessage.classList.add('error-message');
+                errorMessage.textContent = message;
 
-        // Adiciona a classe de erro ao campo
-        field.classList.add('error');
+                // Adiciona a classe de erro ao campo
+                field.classList.add('error');
 
-        // Adiciona a mensagem de erro abaixo do campo
-        if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('error-message')) {
-            field.parentNode.appendChild(errorMessage);
-        }
+                // Adiciona a mensagem de erro abaixo do campo
+                if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('error-message')) {
+                    field.parentNode.appendChild(errorMessage);
+                }
 
-        isValid = false;
-    }
+                isValid = false;
+            }
 
     // Limpa os erros anteriores
     function clearErrors() {
@@ -248,10 +339,12 @@
     if (!isValid) {
         return;
     }
-
+        
             // Calcula o valor final com o desconto
             var valorFinal = calcularValorComDesconto();
-            var descontoUsadoId = document.getElementById("desconto").value;
+            var descontoUsadoId = document.getElementById("desconto").value ? document.getElementById("desconto").value : -1;
+
+            console.log(descontoUsadoId);
 
             // Cria o método de pagamento
             stripe.createPaymentMethod({
@@ -260,10 +353,11 @@
             }).then(function (result) {
                 if (result.error) {
                     document.getElementById('card-errors').textContent = result.error.message;
+                    loadingOverlay.style.display = "none";
                 } else {
                     var paymentMethod = result.paymentMethod.id;
                     var leilaoId = @Model.Leilao.LeilaoId;
-
+                    loadingOverlay.style.display = "flex";
                     // Envia os dados para o backend
                     fetch('/Utilizadors/ProcessarPagamento', {
                         method: 'POST',
@@ -272,13 +366,14 @@
                             paymentMethodId: paymentMethod,
                             leilaoId: leilaoId,
                             valor: valorFinal,
-                            DescontoUsadoId: descontoUsadoId,
+                            DescontoUsadoId:descontoUsadoId ,
                             fullName: fullName,
                             address: address,
                             city: city,
                             postalCode: postalCode,
                             country: country,
-                            phone: phone
+                            phone: phone,
+                            nif: document.getElementById("nif").value.trim()
                         })
                     }).then(response => response.json()).then(data => {
                         if (data.success) {
@@ -286,7 +381,10 @@
                         } else {
                             document.getElementById('card-errors').textContent = data.message || "Erro ao processar o pagamento.";
                         }
-                    }).catch(error => console.error('Erro:', error));
+                    }).catch(error => console.error('Erro:', error)).
+                    finally(() => {
+                        loadingOverlay.style.display = "none";// Esconder o spinner após o processo
+                    });
                 }
             });
         });

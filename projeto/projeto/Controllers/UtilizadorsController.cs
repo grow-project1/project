@@ -771,15 +771,21 @@ namespace projeto.Controllers
 
             var meusLeiloesGanhos = await _context.Leiloes
             .Where(l => l.VencedorId == user.UtilizadorId)
-            .Include(l => l.Vencedor) 
-            .Include(l => l.Item)      
-            .OrderBy(l => l.Pago) 
+            .Include(l => l.Item)
+            .OrderBy(l => l.Pago)
             .ToListAsync();
-
+     
+            var meusLeiloes = await _context.Leiloes
+                .Where(l => l.UtilizadorId == user.UtilizadorId) 
+                .Include(l => l.Item)  
+                .Include(l => l.Vencedor)  
+                .OrderBy(l => l.Pago)  
+                .ToListAsync();
 
             var viewModel = new PagamentosViewModel
             {
-                LeiloesGanhos = meusLeiloesGanhos
+                LeiloesGanhos = meusLeiloesGanhos,
+                MeusLeiloes = meusLeiloes
             };
 
             return View(viewModel);
@@ -851,10 +857,7 @@ namespace projeto.Controllers
                 leilao.Pago = true;
 
                 var desconto = await _context.DescontoResgatado.FirstOrDefaultAsync(d => d.DescontoResgatadoId == request.DescontoUsadoId);
-                if (desconto == null)
-                {
-                    return Json(new { success = false, message = "Desconto não encontrado ou já utilizado." });
-                }
+
 
                 var fullName = request.FullName;
                 var address = request.Address;
@@ -935,9 +938,25 @@ namespace projeto.Controllers
                     await _emailSender.SendEmailAsync(vendedor.Email, "Pagamento Recebido para o Seu Leilão", vendedorMessage);
                 }
 
+                
+                
+                if (desconto != null)
+                {
+                    var descontoValor = _context.Desconto
+                        .Where(d => d.DescontoId == desconto.DescontoId)
+                        .Select(d => d.Valor)
+                        .FirstOrDefault();
+                    await GerarFatura(leilao.LeilaoId, userEmail, request.NIF, true, descontoValor);
+                    desconto.Usado = true;
+                    _context.DescontoResgatado.Update(desconto);
+                    
+                }
+                else
+                {
+                    await GerarFatura(leilao.LeilaoId, userEmail, request.NIF, false,0.0);
+                }
 
-                desconto.Usado = true;
-                _context.DescontoResgatado.Update(desconto);
+
 
                 await _context.SaveChangesAsync();
 
@@ -952,6 +971,62 @@ namespace projeto.Controllers
             }
         }
 
+        public async Task<IActionResult> GerarFatura(int leilaoId, string email, string nif, bool desconto, double valor)
+        {
+            var leilao = _context.Leiloes
+                .Include(l => l.Item)
+                .Include(l => l.Vencedor)
+                .FirstOrDefault(l => l.LeilaoId == leilaoId);
+
+            if (leilao == null || !leilao.Pago || leilao.Vencedor == null)
+            {
+                return Content("Erro: Leilão não encontrado ou pagamento não confirmado.");
+            }
+
+            decimal taxaIva = 0.23m;
+            decimal valorFinal = Convert.ToDecimal(leilao.ValorAtualLance);
+            decimal valorBaseSemIva = valorFinal / (1 + taxaIva);
+            decimal iva = valorFinal - valorBaseSemIva;
+            decimal valorComDesconto = valorBaseSemIva;
+            if (desconto)
+            {
+                decimal descontoDecimal = Convert.ToDecimal(valor) / 100;
+                valorComDesconto -= valorComDesconto * descontoDecimal; 
+            }
+            decimal totalComIva = valorComDesconto * (1 + taxaIva);
+
+     
+            // Criar fatura
+            var fatura = new Fatura
+            {
+                Id = leilao.LeilaoId,
+                Numero = "FT" + leilao.LeilaoId.ToString("D5"),
+                Data = DateTime.Now,
+                NomeComprador = leilao.Vencedor.Nome,
+                NIF = nif,
+                ItemLeiloado = leilao.Item.Titulo,
+                ValorBase = valorComDesconto,
+                IVA = iva,
+                TotalComIVA = totalComIva,
+                Desconto = desconto ? valorBaseSemIva - valorComDesconto : 0,
+            };
+
+            // Gerar PDF
+            var pdfService = new PdfService();
+            byte[] pdfFatura = pdfService.GerarFaturaPDF(fatura);
+
+            // Enviar Email com anexo
+            var emailSender = new EmailSender(_configuration);
+            await emailSender.SendEmailWithAttachmentAsync(
+                email,
+                "Fatura #" + fatura.Numero,
+                "<p>Segue em anexo a sua fatura do leilão.</p>",
+                pdfFatura,
+                "Fatura_" + fatura.Numero + ".pdf"
+            );
+
+            return Content("Fatura enviada com sucesso!");
+        }
 
 
 
@@ -967,6 +1042,7 @@ namespace projeto.Controllers
             public string PostalCode { get; set; }
             public string Country { get; set; }
             public string Phone { get; set; }
+            public string NIF { get; set; }
         }
 
         [HttpPost]
