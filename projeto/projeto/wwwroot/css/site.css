@@ -1165,9 +1165,16 @@ th {
 
 
     /* ----------------------- PAYMENTS PAGE ----------------------------- */
-    .payments-container {
+    .payments-container,.sales-container {
         margin: 100px auto;
-        width: 50%;
+        width: 46%;
+    }
+
+    .all-payments-container h3{
+        color: darkslategrey;
+        margin: 20px;
+        text-underline-offset:10px;
+        text-decoration: underline;
     }
 
     .btn-payment {
@@ -1339,16 +1346,17 @@ th {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-width: 430px;
+    max-width: 400px;
     margin:30px auto;
 }
 
-.sales-container {
+.all-payments-container{
     display: flex;
-    flex-direction: column;
     gap: 10px;
-    max-width: 430px;
-    margin: 30px auto;
+    width:90%;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
 }
 
 input {

@@ -6,13 +6,35 @@
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success" role="alert" style="position: fixed; ...">
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
         @TempData["SuccessMessage"]
     </div>
+
     <script>
-        setTimeout(...); /* Lógica de fade-out */
+        document.addEventListener("DOMContentLoaded", function () {
+            let message = document.getElementById("successMessage");
+            if (message) {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    setTimeout(() => message.remove(), 500);
+                }, 2300);
+            }
+        });
     </script>
+
+    <style>
+        #successMessage {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
 }
+
+
 
 @if (TempData["Error"] != null)
 {

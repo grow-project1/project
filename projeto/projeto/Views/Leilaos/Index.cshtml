@@ -140,7 +140,7 @@
 
                     @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
                     {
-                        <form asp-action="Delete" asp-route-id="@leilao.LeilaoId" method="post" class="delete-form">
+                        <form asp-action="Delete" asp-route-id="@leilao.LeilaoId" method="post" class="delete-form" onsubmit="return confirmDelete(event)">
                             <button type="submit" class="btn-delete" title="Delete">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
@@ -208,6 +208,17 @@
 </script>
 
 
+<script>
+    function confirmDelete(event) {
+        event.preventDefault(); // Impede o envio imediato do formulário
+        const confirmAction = confirm("@(english ? "Are you sure you want to delete this auction?" : "Tem certeza que deseja excluir este leilão?")");
+
+        if (confirmAction) {
+            event.target.submit(); // Submete o formulário se confirmado
+        }
+    }
+
+</script>
 <style>
     .sustentavel-container {
         position: absolute;

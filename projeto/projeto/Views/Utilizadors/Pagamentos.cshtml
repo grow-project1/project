@@ -39,96 +39,92 @@
 }
 
 
-@if (!Model.LeiloesGanhos.Any())
-{
-    <p class="no-payments">@(english ? "You haven't won any auctions yet." : "Você ainda não ganhou nenhum leilão.")</p>
-}
-else
-{
-    <div class="payments-container">
-        <h3> @(english ? "Payments" : "Pagamentos") </h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@(english ? "Item" : "Item")</th>
-                    <th>@(english ? "Price" : "Preço")</th>
-                    <th>@(english ? "Payment Status" : "Status do Pagamento")</th>
+<div class="all-payments-container">
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var leilao in Model.LeiloesGanhos)
-                {
+    @if (!Model.LeiloesGanhos.Any())
+    {
+        <p class="no-payments">@(english ? "You haven't won any auctions yet." : "Você ainda não ganhou nenhum leilão.")</p>
+    }
+    else
+    {
+        <div class="payments-container">
+            <h3> @(english ? "Payments" : "Pagamentos") </h3>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@leilao.Item.Titulo</td>
-                        <td>@leilao.ValorAtualLance.ToString("C")</td>
-                        <td>
-                            @if (!leilao.Pago)
-                            {
-                                <a href="@Url.Action("PagamentoDetalhes", "Utilizadors", new { leilaoId = leilao.LeilaoId })" class="btn-payment">
-                                    @(english ? "Pay Now" : "Pagar Agora")
-                                </a>
-                            }
-                            else
-                            {
-                                <span class="text-success">@("Paid")</span>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
-<!-- Mostrar as Vendas Realizadas -->
-@if (Model.MeusLeiloes.Any())
-{
-    <div class="sales-container">
-        <h3> @(english ? "Sales" : "Vendas Realizadas") </h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@(english ? "Item" : "Item")</th>
-                    <th>@(english ? "Price" : "Preço")</th>
-                    <th>@(english ? "Buyer" : "Comprador")</th>
-                    <th>@(english ? "Sale Status" : "Status da Venda")</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var leilao in Model.MeusLeiloes)
-                {
-                    <tr>
-                        <td>@leilao.Item.Titulo</td>
-                        <td>@leilao.ValorAtualLance.ToString("C")</td>
-                        <td>
-                            @if (leilao.Vencedor != null && leilao.Vencedor.Nome != null)
-                            {
-                                <span>@leilao.Vencedor.Nome</span> 
-                            }
-                            else
-                            {
-                                <span class="text-muted">@("No Buyer")</span> 
-                            }
-                        </td>
-                        <td>
-                            @if (leilao.Pago)
-                            {
-                                <span class="text-success">@("Paid")</span>
-                            }
-                            else
-                            {
-                                <span class="text-warning">@("Pending")</span>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
-else
-{
-    <p class="no-sales">@(english ? "You haven't made any sales yet." : "Você ainda não fez nenhuma venda.")</p>
-}
+                        <th>@(english ? "Item" : "Item")</th>
+                        <th>@(english ? "Price" : "Preço")</th>
+                        <th>@(english ? "Payment Status" : "Status do Pagamento")</th>
 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var leilao in Model.LeiloesGanhos)
+                    {
+                        <tr>
+                            <td>@leilao.Item.Titulo</td>
+                            <td>@leilao.ValorAtualLance.ToString("C")</td>
+                            <td>
+                                @if (!leilao.Pago)
+                                {
+                                    <a href="@Url.Action("PagamentoDetalhes", "Utilizadors", new { leilaoId = leilao.LeilaoId })" class="btn-payment">
+                                        @(english ? "Pay Now" : "Pagar Agora")
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-success">@("Paid")</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @if (Model.MeusLeiloes.Any())
+    {
+        <div class="sales-container">
+            <h3> @(english ? "Sales" : "Vendas Realizadas") </h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@(english ? "Item" : "Item")</th>
+                        <th>@(english ? "Price" : "Preço")</th>
+                        <th>@(english ? "Buyer" : "Comprador")</th>
+                        <th>@(english ? "Sale Status" : "Status da Venda")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var leilao in Model.MeusLeiloes)
+                    {
+                        @if (leilao.Vencedor != null && leilao.Vencedor.Nome != null)
+                        {
+                        <tr>
+                            <td>@leilao.Item.Titulo</td>
+                            <td>@leilao.ValorAtualLance.ToString("C")</td>
+                            <td> <span>@leilao.Vencedor.Nome</span</td>
+                            <td>
+                                @if (leilao.Pago)
+                                {
+                                    <span class="text-success">@("Paid")</span>
+                                }
+                                else
+                                {
+                                    <span class="text-warning">@("Pending")</span>
+                                }
+                            </td>
+                        </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="no-sales">@(english ? "You haven't made any sales yet." : "Você ainda não fez nenhuma venda.")</p>
+    }
+</div>
 
