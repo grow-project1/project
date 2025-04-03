@@ -62,7 +62,7 @@ namespace growTests
         }
 
         [Fact]
-        public async Task Pagamentos_ReturnsViewWithLeiloesGanhos_WhenUserIsLoggedIn()
+        public async Task Pagamentos_ReturnsViewWithLeiloesGanhosAndMeusLeiloes_WhenUserIsLoggedIn()
         {
             // Arrange
             var user = new Utilizador
@@ -78,14 +78,24 @@ namespace growTests
             await _dbContext.SaveChangesAsync();
 
             // Adiciona um leilão ganho, associado ao utilizador
-            var leilao = new Leilao { LeilaoId = 1, VencedorId = user.UtilizadorId, Pago = false, Item = new Item() };
-            _dbContext.Leiloes.Add(leilao);
+            var leilaoGanho = new Leilao { LeilaoId = 1, VencedorId = user.UtilizadorId, Pago = false, Item = new Item() };
+            _dbContext.Leiloes.Add(leilaoGanho);
+
+            // Adiciona um leilão "meu" (leilão em que o utilizador participa mas não é o vencedor)
+            var meuLeilao = new Leilao { LeilaoId = 2, UtilizadorId = user.UtilizadorId, Pago = false, Item = new Item() };
+            _dbContext.Leiloes.Add(meuLeilao);
+
             await _dbContext.SaveChangesAsync();
 
-            // Verifica se o leilão foi salvo corretamente no banco de dados
-            var leilaoNoDb = await _dbContext.Leiloes.FirstOrDefaultAsync(l => l.LeilaoId == 1);
-            Assert.NotNull(leilaoNoDb);  // Verifica se o leilão foi adicionado
-            Assert.Equal(user.UtilizadorId, leilaoNoDb.VencedorId);  // Verifica o VencedorId
+            // Verifica se os leilões foram salvos corretamente no banco de dados
+            var leilaoGanhoNoDb = await _dbContext.Leiloes.FirstOrDefaultAsync(l => l.LeilaoId == 1);
+            var meuLeilaoNoDb = await _dbContext.Leiloes.FirstOrDefaultAsync(l => l.LeilaoId == 2);
+
+            Assert.NotNull(leilaoGanhoNoDb);  // Verifica se o leilão ganho foi adicionado
+            Assert.Equal(user.UtilizadorId, leilaoGanhoNoDb.VencedorId);  // Verifica o VencedorId
+
+            Assert.NotNull(meuLeilaoNoDb);  // Verifica se o "meu leilão" foi adicionado
+            Assert.Equal(user.UtilizadorId, meuLeilaoNoDb.UtilizadorId);  // Verifica o UtilizadorId
 
             // Simula o login do utilizador
             _httpContext.Session.SetString("UserEmail", user.Email);
@@ -96,9 +106,16 @@ namespace growTests
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsType<PagamentosViewModel>(viewResult.Model);
-            Assert.NotEmpty(model.LeiloesGanhos);  // Verifica que a coleção de leilões ganhos não está vazia
-            Assert.Single(model.LeiloesGanhos);    // Verifica que há apenas um leilão ganho
+
+            // Verifica se a coleção de leilões ganhos não está vazia
+            Assert.NotEmpty(model.LeiloesGanhos);
+            Assert.Single(model.LeiloesGanhos);  // Verifica que há apenas um leilão ganho
+
+            // Verifica se a coleção de "meus leilões" não está vazia
+            Assert.NotEmpty(model.MeusLeiloes);
+            Assert.Single(model.MeusLeiloes);  // Verifica que há apenas um leilão do utilizador (caso tenhas apenas um leilão "meu" no teste)
         }
+
 
 
     }

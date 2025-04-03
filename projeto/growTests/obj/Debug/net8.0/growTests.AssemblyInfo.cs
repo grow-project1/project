@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("growTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0a7f90d770cff7020ae61ba1a4136e599364395")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5a9bd5d7f023733dc81a3546e24022a9c61a2b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("growTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("growTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

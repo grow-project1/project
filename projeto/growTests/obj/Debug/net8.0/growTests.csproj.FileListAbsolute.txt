@@ -1053,3 +1053,5 @@ C:\3ºano\PV\projeto\project\projeto\growTests\obj\Debug\net8.0\refint\growTests
 C:\3ºano\PV\projeto\project\projeto\growTests\obj\Debug\net8.0\growTests.pdb
 C:\3ºano\PV\projeto\project\projeto\growTests\obj\Debug\net8.0\growTests.genruntimeconfig.cache
 C:\3ºano\PV\projeto\project\projeto\growTests\obj\Debug\net8.0\ref\growTests.dll
+C:\3ºano\PV\projeto\project\projeto\growTests\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\3ºano\PV\projeto\project\projeto\growTests\bin\Debug\net8.0\itextsharp.dll
