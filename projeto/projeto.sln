@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "projeto", "projeto\projeto.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "growTests", "growTests\growTests.csproj", "{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "growIntegrationTests", "growIntegrationTests\growIntegrationTests.csproj", "{E0CD5A74-1094-4C69-AC64-80336513D1F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F35AE74-CE38-43FF-A1FF-C8C49E47F381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0CD5A74-1094-4C69-AC64-80336513D1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0CD5A74-1094-4C69-AC64-80336513D1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0CD5A74-1094-4C69-AC64-80336513D1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0CD5A74-1094-4C69-AC64-80336513D1F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

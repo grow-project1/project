@@ -10,6 +10,8 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 
 namespace projeto.Controllers
 {
+    [Route("api/utilizadores")]
+    [ApiController]
     public class UtilizadorsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -828,7 +830,7 @@ namespace projeto.Controllers
 
 
 
-
+        [HttpPost("processarpagamento")]
         [HttpPost]
         public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
         {

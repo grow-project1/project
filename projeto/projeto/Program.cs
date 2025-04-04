@@ -3,61 +3,53 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Stripe;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Adicionar o DbContext à coleção de serviços
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")
-    ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
-
-builder.Services.AddDistributedMemoryCache(); // Necessário para armazenar sessões na memória
-builder.Services.AddSession(options =>
+public class Program  // <-- Torna a classe pública e explícita
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Defina o tempo de inatividade conforme necessário
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true; // Necessário para GDPR em alguns cenários
-});
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
-builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")
+            ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
-// Adicionar os outros serviços
-builder.Services.AddControllersWithViews();
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromMinutes(30);
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+        });
 
-StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+        builder.Logging.ClearProviders();
+        builder.Logging.AddConsole();
+        builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
+        builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+        StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
-// Configurar o pipeline de requisições HTTP
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // O valor padrão de HSTS é 30 dias. Você pode querer mudar isso para cenários de produção.
-    app.UseHsts();
+        var app = builder.Build();
+
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
+        }
+        else
+        {
+            app.UseDeveloperExceptionPage();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseSession();
+        app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Leilaos}/{action=Index}/{id?}");
+
+        app.Run();
+    }
 }
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage(); // Para ambientes de desenvolvimento
-}
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
-
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-app.UseSession(); // Adiciona o middleware de sessão
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Leilaos}/{action=Index}/{id?}");
-
-app.Run();
