@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Stripe;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.Globalization;
 
 namespace projeto.Controllers
 {
+    
     public class UtilizadorsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -828,7 +830,7 @@ namespace projeto.Controllers
 
 
 
-
+        
         [HttpPost]
         public async Task<IActionResult> ProcessarPagamento([FromBody] PagamentoRequest request)
         {
@@ -946,14 +948,14 @@ namespace projeto.Controllers
                         .Where(d => d.DescontoId == desconto.DescontoId)
                         .Select(d => d.Valor)
                         .FirstOrDefault();
-                    await GerarFatura(leilao.LeilaoId, userEmail, request.NIF, true, descontoValor);
+                    await GerarFatura(leilao.LeilaoId, userEmail, request.NIF, true, descontoValor, request.Address, request.PostalCode,request.Country);
                     desconto.Usado = true;
                     _context.DescontoResgatado.Update(desconto);
                     
                 }
                 else
                 {
-                    await GerarFatura(leilao.LeilaoId, userEmail, request.NIF, false,0.0);
+                    await GerarFatura(leilao.LeilaoId, userEmail, request.NIF, false,0.0, request.Address, request.PostalCode, request.Country);
                 }
 
 
@@ -971,7 +973,7 @@ namespace projeto.Controllers
             }
         }
 
-        public async Task<IActionResult> GerarFatura(int leilaoId, string email, string nif, bool desconto, double valor)
+        public async Task<IActionResult> GerarFatura(int leilaoId, string email, string nif, bool desconto, double valor, string rua, string codigoPostal, string pais)
         {
             var leilao = _context.Leiloes
                 .Include(l => l.Item)
@@ -1009,6 +1011,9 @@ namespace projeto.Controllers
                 IVA = iva,
                 TotalComIVA = totalComIva,
                 Desconto = desconto ? valorBaseSemIva - valorComDesconto : 0,
+                Rua = rua,
+                CodigoPostal = codigoPostal,
+                Pais = pais
             };
 
             // Gerar PDF

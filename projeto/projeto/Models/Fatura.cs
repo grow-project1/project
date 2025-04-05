@@ -12,5 +12,9 @@
         public decimal IVA { get; set; }
         public decimal TotalComIVA { get; set; }
         public decimal Desconto { get; set; }
+        public string Rua { get; set; }
+        public string CodigoPostal { get; set; }
+
+        public string Pais { get; set; }
     }
 }
