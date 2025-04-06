@@ -4,7 +4,7 @@
     ViewData["Title"] = "Leilões";
     var loggedUserId = ViewData["UserId"] as int?;
     var categorias = ViewData["Categorias"] as List<Categoria>;
-    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null
+    var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
 }
 
 
