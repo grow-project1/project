@@ -33,7 +33,6 @@
                             </div>
                         </li>
 
-                        <!-- Dropdown de Idioma -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 🌍 @(english ? "English" : "Português")
@@ -67,7 +66,7 @@
                         </li>
                     </ul>
 
-                    <!-- Itens de Login e Register alinhados à direita -->
+                    
                     <ul class="navbar-nav ms-auto">
                         @if (Context.Session.GetString("UserEmail") == null)
                         {

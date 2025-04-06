@@ -85,8 +85,8 @@
             var fileName = input.files && input.files[0] ? input.files[0].name : '';
             var label = document.querySelector('.custom-file-label');
             var fileNameDisplay = document.getElementById('fileName');
-            fileNameDisplay.textContent = fileName ? `(${fileName})` : ''; // Atualiza o nome do arquivo ao lado
-            label.textContent = fileName ? fileName : '@((english ? "Choose file" : "Escolher arquivo"))'; // Atualiza o texto do label
+            fileNameDisplay.textContent = fileName ? `(${fileName})` : '';
+            label.textContent = fileName ? fileName : '@((english ? "Choose file" : "Escolher arquivo"))'; 
         }
 
             document.addEventListener("DOMContentLoaded", function () {

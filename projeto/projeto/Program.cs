@@ -5,41 +5,38 @@ using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicionar o DbContext à coleção de serviços
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")
     ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
-builder.Services.AddDistributedMemoryCache(); // Necessário para armazenar sessões na memória
+builder.Services.AddDistributedMemoryCache(); 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Defina o tempo de inatividade conforme necessário
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true; // Necessário para GDPR em alguns cenários
+    options.Cookie.IsEssential = true;
 });
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
 
-// Adicionar os outros serviços
 builder.Services.AddControllersWithViews();
 
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 var app = builder.Build();
 
-// Configurar o pipeline de requisições HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // O valor padrão de HSTS é 30 dias. Você pode querer mudar isso para cenários de produção.
+
     app.UseHsts();
 }
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage(); // Para ambientes de desenvolvimento
+    app.UseDeveloperExceptionPage(); 
 }
 else
 {
@@ -52,7 +49,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseSession(); // Adiciona o middleware de sessão
+app.UseSession(); 
 
 app.UseAuthorization();
 
