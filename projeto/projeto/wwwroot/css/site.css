@@ -1337,3 +1337,103 @@ input {
     margin-right: auto; 
 }
 
+
+
+.container.edit-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Caixa do formulário */
+.edit-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Logotipo */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+}
+
+/* Título */
+.edit-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #111827;
+}
+
+/* Inputs */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+    .form-control:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    }
+
+/* Botão de submeter */
+.edit-btn {
+    background-color: #4caf50;
+    color: white;
+    font-weight: 600;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .edit-btn:hover {
+        background-color: #339b47;
+    }
+
+/* Link de voltar */
+.forgot-password-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: 500;
+    margin:auto;
+    justify-content: center;
+}
+
+.edit-container .mt-3 {
+    text-align: center;
+}
+
+    .forgot-password-link:hover {
+        color: #4caf50;
+        text-decoration: underline;
+    }
+
+/* Mensagens de erro */
+.text-danger {
+    font-size: 0.875rem;
+    color: #dc2626;
+}
