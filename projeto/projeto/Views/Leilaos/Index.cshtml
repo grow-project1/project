@@ -5,22 +5,37 @@
     var loggedUserId = ViewData["UserId"] as int?;
     var categorias = ViewData["Categorias"] as List<Categoria>;
     var english = Context.Request.Cookies["language"] == "en" || Context.Request.Cookies["language"] == null;
+}
 
-    string MaskName(string nome)
-    {
-        if (string.IsNullOrEmpty(nome) || nome.Length < 2)
-            return nome;
 
-        var partesNome = nome.Split(' ');
-        for (int i = 0; i < partesNome.Length; i++)
-        {
-            if (partesNome[i].Length > 2)
-            {
-                partesNome[i] = partesNome[i][0] + new string('*', partesNome[i].Length - 2) + partesNome[i][^1];
+@if (TempData["Success"] != null)
+{
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
+        @TempData["Success"]
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let message = document.getElementById("successMessage");
+            if (message) {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    setTimeout(() => message.remove(), 500);
+                }, 2300);
             }
+        });
+    </script>
+
+    <style>
+        #successMessage {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            transition: opacity 0.5s ease-in-out;
         }
-        return string.Join(" ", partesNome);
-    }
+    </style>
 }
 
 <head>
@@ -70,8 +85,9 @@
         <button class="btn-clear">@(english ? "Clear" : "Limpar")</button>
     </aside>
 
-    <a asp-action="Create" class="btn-create">+</a>
-
+    <a asp-action="Create" class="btn-create">
+        <i class="fas fa-plus" style="margin-right: 8px;"></i>Criar Leilão
+    </a>
     @if (TempData["Error"] != null)
     {
         <div class="alertt alert-danger">
@@ -79,12 +95,7 @@
         </div>
     }
 
-    @if (TempData["Success"] != null)
-    {
-        <div class="alertt alert-success">
-            @TempData["Success"]
-        </div>
-    }
+   
 
     <div class="grid-leiloes">
         @foreach (var leilao in Model
@@ -114,7 +125,7 @@
 
                     @if (loggedUserId != null && loggedUserId == leilao.UtilizadorId)
                     {
-                        <form asp-action="Delete" asp-route-id="@leilao.LeilaoId" method="post" class="delete-form">
+                        <form asp-action="Delete" asp-route-id="@leilao.LeilaoId" method="post" class="delete-form" onsubmit="return confirmDelete(event)">
                             <button type="submit" class="btn-delete" title="Delete">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
@@ -182,6 +193,17 @@
 </script>
 
 
+<script>
+    function confirmDelete(event) {
+        event.preventDefault(); 
+        const confirmAction = confirm("@(english ? "Are you sure you want to delete this auction?" : "Tem certeza que deseja excluir este leilão?")");
+
+        if (confirmAction) {
+            event.target.submit(); 
+        }
+    }
+
+</script>
 <style>
     .sustentavel-container {
         position: absolute;

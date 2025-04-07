@@ -62,18 +62,42 @@ namespace projeto.Migrations
                         new
                         {
                             DescontoId = 1,
-                            Descricao = "10% discount",
+                            Descricao = "2% discount",
                             IsLoja = true,
-                            PontosNecessarios = 10,
-                            Valor = 10.0
+                            PontosNecessarios = 50,
+                            Valor = 2.0
                         },
                         new
                         {
                             DescontoId = 2,
-                            Descricao = "25% discount",
+                            Descricao = "3% discount",
                             IsLoja = true,
-                            PontosNecessarios = 20,
-                            Valor = 25.0
+                            PontosNecessarios = 100,
+                            Valor = 3.0
+                        },
+                        new
+                        {
+                            DescontoId = 3,
+                            Descricao = "5% discount",
+                            IsLoja = true,
+                            PontosNecessarios = 150,
+                            Valor = 5.0
+                        },
+                        new
+                        {
+                            DescontoId = 4,
+                            Descricao = "6% discount",
+                            IsLoja = true,
+                            PontosNecessarios = 200,
+                            Valor = 6.0
+                        },
+                        new
+                        {
+                            DescontoId = 5,
+                            Descricao = "7% discount",
+                            IsLoja = true,
+                            PontosNecessarios = 300,
+                            Valor = 7.0
                         });
                 });
 
@@ -93,6 +117,9 @@ namespace projeto.Migrations
 
                     b.Property<int>("DescontoId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Usado")
+                        .HasColumnType("bit");
 
                     b.Property<int>("UtilizadorId")
                         .HasColumnType("int");
@@ -159,6 +186,9 @@ namespace projeto.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Pago")
+                        .HasColumnType("bit");
+
                     b.Property<int>("UtilizadorId")
                         .HasColumnType("int");
 
@@ -168,13 +198,15 @@ namespace projeto.Migrations
                     b.Property<double>("ValorIncrementoMinimo")
                         .HasColumnType("float");
 
-                    b.Property<string>("Vencedor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("VencedorId")
+                        .HasColumnType("int");
 
                     b.HasKey("LeilaoId");
 
                     b.HasIndex("ItemId")
                         .IsUnique();
+
+                    b.HasIndex("VencedorId");
 
                     b.ToTable("Leiloes");
                 });
@@ -268,6 +300,9 @@ namespace projeto.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UtilizadorId"));
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CodigoPostal")
                         .HasMaxLength(20)
@@ -373,7 +408,13 @@ namespace projeto.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("projeto.Models.Utilizador", "Vencedor")
+                        .WithMany()
+                        .HasForeignKey("VencedorId");
+
                     b.Navigation("Item");
+
+                    b.Navigation("Vencedor");
                 });
 
             modelBuilder.Entity("projeto.Models.Licitacao", b =>

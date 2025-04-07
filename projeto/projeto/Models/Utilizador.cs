@@ -17,18 +17,20 @@ namespace projeto.Models
         public string Password { get; set; }
 
         [StringLength(255)]
-        public string? Morada { get; set; } = "Não definido";
+        public string? Morada { get; set; }
 
         [StringLength(20)]
         [RegularExpression(@"^\d{4}-\d{3}$", ErrorMessage = "Invalid postal code format (e.g., 1234-567)")]
-        public string? CodigoPostal { get; set; } = "0000-000";
+        public string? CodigoPostal { get; set; }
 
         [StringLength(15)]
         [RegularExpression(@"^\+?[0-9]{9,15}$", ErrorMessage = "Invalid phone number format")]
-        public string? Telemovel { get; set; } = "000000000";
+        public string? Telemovel { get; set; }
 
         [StringLength(100)]
-        public string? Pais { get; set; } = "Não definido";
+        public string? Pais { get; set; }
+
+        public string? Cidade { get; set; }
 
         [StringLength(255)]
         public string ImagePath { get; set; } = "~/images/avatar_default.png";
@@ -37,7 +39,7 @@ namespace projeto.Models
 
         public EstadoConta EstadoConta { get; set; } = EstadoConta.Ativa;
 
-        public int Pontos { get; set; } = 20;
+        public int Pontos { get; set; } = 0;
     }
 
     public enum EstadoConta

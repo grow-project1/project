@@ -16,10 +16,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-6">
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-6 position-fixed">
             <img src="~/css/images/logo.png" alt="Logo" />
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" top-0 end-0 m-3 type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,7 +33,6 @@
                             </div>
                         </li>
 
-                        <!-- Dropdown de Idioma -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 🌍 @(english ? "English" : "Português")
@@ -67,7 +66,7 @@
                         </li>
                     </ul>
 
-                    <!-- Itens de Login e Register alinhados à direita -->
+                    
                     <ul class="navbar-nav ms-auto">
                         @if (Context.Session.GetString("UserEmail") == null)
                         {
