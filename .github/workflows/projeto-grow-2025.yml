@@ -2,7 +2,7 @@ name: Compilar e implantar o aplicativo .NET Core no aplicativo Web projeto-grow
 on:
   push:
     branches:
-    - main
+    - development
 env:
   AZURE_WEBAPP_NAME: projeto-grow-2025
   AZURE_WEBAPP_PACKAGE_PATH: projeto\published
@@ -27,7 +27,7 @@ jobs:
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
     - name: Publish Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
@@ -36,7 +36,7 @@ jobs:
     needs: build
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
@@ -44,5 +44,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.projeto_grow_2025_9298 }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

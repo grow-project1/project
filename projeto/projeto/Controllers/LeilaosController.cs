@@ -11,7 +11,6 @@ using projeto.Data;
 using projeto.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
-
 namespace projeto.Controllers
 {
     public class LeilaosController : Controller
@@ -21,6 +20,10 @@ namespace projeto.Controllers
         private readonly IConfiguration _config;
         private readonly IEmailSender _emailSender;
 
+        // ========================================================
+        // Autor: Rodrigo Baião
+        // Descrição: Construtor que inicializa o controlador de leilões
+        // ========================================================
         public LeilaosController(ApplicationDbContext context, IWebHostEnvironment env, IConfiguration config, IEmailSender emailSender)
         {
             _context = context;
@@ -29,7 +32,10 @@ namespace projeto.Controllers
             _emailSender = emailSender;
         }
 
-        // GET: Leilaos
+        // ========================================================
+        // Autor: Samuel Alves
+        // Descrição: Método para mostrar os leilões disponíveis com filtros
+        // ========================================================
         public async Task<IActionResult> Index(string categorias, string tempo, double? min, double? max)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
@@ -58,12 +64,10 @@ namespace projeto.Controllers
                 query = query.Where(l => filtrosTempo.Any(t => l.DataFim <= agora.AddDays(t)));
             }
 
-
             if (min.HasValue)
                 query = query.Where(l => l.ValorAtualLance >= min.Value);
             if (max.HasValue)
                 query = query.Where(l => l.ValorAtualLance <= max.Value);
-
 
             var leiloes = await query.ToListAsync();
 
@@ -134,13 +138,16 @@ namespace projeto.Controllers
                 }
                 leilao.EstadoLeilao = EstadoLeilao.Encerrado;
                 _context.Update(leilao);
-
             }
 
             await _context.SaveChangesAsync();
             return View(leiloes);
         }
 
+        // ========================================================
+        // Autor: Isidoro Ornelas
+        // Descrição: Método para visualizar detalhes de um leilão
+        // ========================================================
         // GET: Leilaos/Details/5
         public async Task<IActionResult> Details(int id)
         {
@@ -173,6 +180,10 @@ namespace projeto.Controllers
             return View(leilao);
         }
 
+        // ========================================================
+        // Autor: Samuel Alves
+        // Descrição: Método para criar um novo leilão
+        // ========================================================
         // GET: Leilaos/Create
         public async Task<IActionResult> Create()
         {
@@ -193,227 +204,265 @@ namespace projeto.Controllers
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
-
             }
 
             return View();
         }
 
-        // POST: Leilaos/Create
+
+        // ========================================================
+        // Autor: Samuel Alves
+        // Método para criar um leilão (POST)
+        // ========================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Leilao leilao)
         {
+            // Obtém o e-mail do utilizador logado a partir da sessão
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            // Verifica se o utilizador está autenticado
             if (user == null)
             {
-                return RedirectToAction("Login", "Utilizadors");
+                return RedirectToAction("Login", "Utilizadors"); // Se não estiver autenticado, redireciona para login
             }
 
+            // Verifica se a foto do item foi fornecida
             if (leilao.Item.fotoo == null || leilao.Item.fotoo.Length == 0)
             {
                 ModelState.AddModelError("Item.fotoo", "A foto é obrigatória.");
-                return View(leilao);
+                return View(leilao); // Se não houver foto, retorna a view com o erro
             }
 
-            leilao.UtilizadorId = user.UtilizadorId;
+            leilao.UtilizadorId = user.UtilizadorId; // Atribui o ID do utilizador ao leilão
 
+            // Processa a foto do item, se fornecida
             if (leilao.Item.fotoo != null && leilao.Item.fotoo.Length > 0)
             {
+                // Define o diretório onde a foto será salva
                 string folder = "leilao/fotos/";
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName);
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(leilao.Item.fotoo.FileName); // Gera um nome único para a foto
                 string serverFolder = Path.Combine(_env.WebRootPath, folder);
 
+                // Verifica se o diretório de destino existe, se não, cria-o
                 if (!Directory.Exists(serverFolder))
                 {
                     Directory.CreateDirectory(serverFolder);
                 }
 
+                // Define o caminho completo do arquivo
                 string filePath = Path.Combine(serverFolder, fileName);
 
+                // Verifica se o tamanho do arquivo excede o limite de 5MB
                 if (leilao.Item.fotoo.Length > 5 * 1024 * 1024)
                 {
-                    ModelState.AddModelError("Item.fotoo", "Size is to big");
-                    return View(leilao);
+                    ModelState.AddModelError("Item.fotoo", "Size is too big");
+                    return View(leilao); // Se a foto for muito grande, retorna à view com o erro
                 }
 
+                // Verifica se a extensão do arquivo é permitida
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
                 if (!allowedExtensions.Contains(Path.GetExtension(leilao.Item.fotoo.FileName).ToLower()))
                 {
                     ModelState.AddModelError("Item.fotoo", "Only extensions (.jpg, .jpeg, .png, .gif) allowed.");
-                    return View(leilao);
+                    return View(leilao); // Se a extensão não for permitida, retorna à view com o erro
                 }
 
+                // Salva a foto no servidor
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await leilao.Item.fotoo.CopyToAsync(stream);
+                    await leilao.Item.fotoo.CopyToAsync(stream); // Copia a foto para o servidor
                 }
 
+                // Atribui a URL da foto ao item
                 leilao.Item.FotoUrl = "/" + folder + fileName;
             }
 
-            _context.Add(leilao);
-            await _context.SaveChangesAsync();
+            _context.Add(leilao); // Adiciona o leilão ao contexto do banco de dados
+            await _context.SaveChangesAsync(); // Salva as alterações no banco de dados
 
+            TempData["Success"] = "Auction created"; // Mensagem de sucesso
 
-            TempData["Success"] = "Auction created";
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index)); // Redireciona para a página de índice (listar leilões)
         }
 
-        // GET: Leilaos/Edit/5
+
+        // ========================================================
+        // Autor: Rodrigo Baião
+        // Método para editar um leilão (GET)
+        // ========================================================
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound(); // Se o ID não for fornecido, retorna erro
             }
 
-            var leilao = await _context.Leiloes.FindAsync(id);
+            var leilao = await _context.Leiloes.FindAsync(id); // Encontra o leilão pelo ID
             if (leilao == null)
             {
-                return NotFound();
+                return NotFound(); // Se o leilão não for encontrado, retorna erro
             }
-            ViewData["ItemId"] = new SelectList(_context.Itens, "ItemId", "ItemId", leilao.ItemId);
-            return View(leilao);
+            ViewData["ItemId"] = new SelectList(_context.Itens, "ItemId", "ItemId", leilao.ItemId); // Preenche a lista de itens disponíveis
+            return View(leilao); // Retorna a view com o leilão encontrado
         }
 
-        // POST: Leilaos/Edit/5
+        // ========================================================
+        // Autor: Rodrigo Baião
+        // Método para editar um leilão (POST)
+        // ========================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LeilaoId,ItemId,DataInicio,DataFim,ValorIncrementoMinimo,Vencedor")] Leilao leilao)
         {
             if (id != leilao.LeilaoId)
             {
-                return NotFound();
+                return NotFound(); // Se o ID não corresponder ao leilão, retorna erro
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(leilao);
-                    await _context.SaveChangesAsync();
+                    _context.Update(leilao); // Atualiza o leilão no banco de dados
+                    await _context.SaveChangesAsync(); // Salva as alterações
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!LeilaoExists(leilao.LeilaoId))
                     {
-                        return NotFound();
+                        return NotFound(); // Se o leilão não existir, retorna erro
                     }
                     else
                     {
-                        throw;
+                        throw; // Lança erro em caso de falha na atualização
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)); // Redireciona para a página de índice
             }
-            ViewData["ItemId"] = new SelectList(_context.Itens, "ItemId", "ItemId", leilao.ItemId);
-            return View(leilao);
+            ViewData["ItemId"] = new SelectList(_context.Itens, "ItemId", "ItemId", leilao.ItemId); // Preenche a lista de itens
+            return View(leilao); // Retorna à view com o leilão atualizado
         }
 
-        // GET: Leilaos/Delete/5
+
+        // ========================================================
+        // Autor: Rodrigo Baião
+        // Método para excluir um leilão (GET)
+        // ========================================================
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound(); // Se o ID não for fornecido, retorna erro
             }
 
             var leilao = await _context.Leiloes
-                .Include(l => l.Item)
-                .FirstOrDefaultAsync(m => m.LeilaoId == id);
+                .Include(l => l.Item) // Inclui informações do item
+                .FirstOrDefaultAsync(m => m.LeilaoId == id); // Encontra o leilão pelo ID
             if (leilao == null)
             {
-                return NotFound();
+                return NotFound(); // Se o leilão não for encontrado, retorna erro
             }
 
-            return View(leilao);
+            return View(leilao); // Retorna a view com o leilão encontrado
         }
 
-        // POST: Leilaos/Delete/5
+        // ========================================================
+        // Autor: Rodrigo Baião
+        // Método para excluir um leilão (POST)
+        // ========================================================
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
-                .Include(l => l.Licitacoes)
-                .FirstOrDefaultAsync(l => l.LeilaoId == id);
+                .Include(l => l.Licitacoes) // Inclui as licitações relacionadas
+                .FirstOrDefaultAsync(l => l.LeilaoId == id); // Encontra o leilão pelo ID
 
             if (leilao == null)
             {
-                TempData["Error"] = "Leilão não encontrado.";
-                return RedirectToAction("MyAuctions");
+                TempData["Error"] = "Leilão não encontrado."; // Mensagem de erro
+                return RedirectToAction("MyAuctions"); // Redireciona para a página de leilões do utilizador
             }
 
-            // Verifica se existem licitações
+            // Verifica se existem licitações ativas
             bool temLicitacoes = leilao.Licitacoes != null && leilao.Licitacoes.Any();
 
+            // Se houver licitações ativas e o leilão ainda não foi pago, não pode ser excluído
             if (temLicitacoes && !leilao.Pago)
             {
                 TempData["Error"] = "Não pode eliminar um leilão com licitações ativas que ainda não foi pago.";
-                return RedirectToAction("MyAuctions");
+                return RedirectToAction("MyAuctions"); // Redireciona para a página de leilões do utilizador
             }
 
-            // Se estiver tudo ok, elimina
+            // Se o leilão não tiver licitações ou já foi pago, procede à exclusão
             if (leilao.Item != null)
             {
-                _context.Itens.Remove(leilao.Item);
+                _context.Itens.Remove(leilao.Item); // Remove o item associado ao leilão
             }
 
-            _context.Leiloes.Remove(leilao);
-            await _context.SaveChangesAsync();
+            _context.Leiloes.Remove(leilao); // Remove o leilão
+            await _context.SaveChangesAsync(); // Salva as alterações no banco de dados
 
-            TempData["Success"] = "Leilão eliminado com sucesso.";
-            return RedirectToAction("MyAuctions");
+            TempData["Success"] = "Leilão eliminado com sucesso."; // Mensagem de sucesso
+            return RedirectToAction("MyAuctions"); // Redireciona para a página de leilões do utilizador
         }
 
+        // ========================================================
+        // Autor: Samuel Alves
+        // Verifica se o leilão existe no banco de dados
+        // ========================================================
         private bool LeilaoExists(int id)
         {
-            return _context.Leiloes.Any(e => e.LeilaoId == id);
+            return _context.Leiloes.Any(e => e.LeilaoId == id); // Verifica se o leilão existe
         }
 
+        // ========================================================
+        // Autor: Samuel Alves
+        // Método para fazer uma licitação em um leilão (POST)
+        // ========================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> FazerLicitacao(int leilaoId, double valorLicitacao)
         {
-            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var userEmail = HttpContext.Session.GetString("UserEmail"); // Obtém o e-mail do utilizador logado
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
             if (user == null)
             {
-                return RedirectToAction("Login", "Utilizadors");
+                return RedirectToAction("Login", "Utilizadors"); // Se o utilizador não estiver autenticado, redireciona para login
             }
 
             var leilao = await _context.Leiloes
-                .Include(l => l.Licitacoes)
-                .Include(l => l.Item)
-                .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
+                .Include(l => l.Licitacoes) // Inclui as licitações do leilão
+                .Include(l => l.Item) // Inclui o item do leilão
+                .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId); // Encontra o leilão pelo ID
 
             if (leilao == null)
             {
-                return NotFound();
+                return NotFound(); // Se o leilão não for encontrado, retorna erro
             }
 
+            // Verifica se o leilão está encerrado ou se a data de fim já passou
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
             {
-                TempData["Error"] = "This auction has already ended and no longer accepts bids..";
-                return RedirectToAction("Index", "Leilaos");
+                TempData["Error"] = "Este leilão já terminou e não aceita mais lances.";
+                return RedirectToAction("Index", "Leilaos"); // Redireciona para a página de leilões
             }
 
+            // Calcula o lance mínimo necessário
             double lanceMinimo = leilao.Licitacoes.Any()
                 ? leilao.Licitacoes.Max(l => l.ValorLicitacao)
                 : leilao.Item.PrecoInicial;
 
-            double valorNecessario = lanceMinimo + leilao.ValorIncrementoMinimo;
+            double valorNecessario = lanceMinimo + leilao.ValorIncrementoMinimo; // Incremento mínimo
 
             if (valorLicitacao < valorNecessario)
             {
-                TempData["Error"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
-                return RedirectToAction("Index", "Leilaos");
+                TempData["Error"] = $"O lance deve ser igual ou superior a {valorNecessario:C2}.";
+                return RedirectToAction("Index", "Leilaos"); // Redireciona com erro se o valor for muito baixo
             }
 
             var licitacao = new Licitacao
@@ -421,65 +470,84 @@ namespace projeto.Controllers
                 LeilaoId = leilaoId,
                 UtilizadorId = user.UtilizadorId,
                 ValorLicitacao = valorLicitacao,
-                DataLicitacao = DateTime.Now
+                DataLicitacao = DateTime.Now // Define a data e hora da licitação
             };
 
-            _context.Licitacoes.Add(licitacao);
-            user.Pontos += 1;
-            _context.Update(user);
+            _context.Licitacoes.Add(licitacao); // Adiciona a licitação ao banco de dados
+            user.Pontos += 1; // Adiciona pontos ao utilizador
+            _context.Update(user); // Atualiza os pontos do utilizador no banco de dados
 
-            await _context.SaveChangesAsync();
+            // Atualiza o valor atual do lance
+            leilao.ValorAtualLance = leilao.Licitacoes.Count > 0
+                ? leilao.Licitacoes.Max(x => x.ValorLicitacao)
+                : leilao.Item.PrecoInicial;
 
-            //TempData["Success"] = "Sucessfull bid!";
-            return RedirectToAction("Index", "Leilaos");
+            _context.Update(leilao); // Atualiza o leilão com o novo valor do lance
+
+            await _context.SaveChangesAsync(); // Salva as alterações no banco de dados
+
+            return RedirectToAction("Index", "Leilaos"); // Redireciona para a página de leilões
         }
 
+        // ========================================================
+        // Autor: Samuel Alves
+        // Fazer licitacao detalhes
+        // ========================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> FazerLicitacaoDetails(int leilaoId, double valorLicitacao)
         {
+            // Obtém o e-mail do usuário atual da sessão
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            // Se o usuário não estiver autenticado, redireciona para a página de login
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
             }
 
+            // Obtém os detalhes do leilão
             var leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
                 .Include(l => l.Item)
                 .FirstOrDefaultAsync(l => l.LeilaoId == leilaoId);
 
+            // Se o leilão não for encontrado, retorna erro 404
             if (leilao == null)
             {
                 return NotFound();
             }
 
+            // Verifica se o usuário está tentando licitar no seu próprio leilão
             if (leilao.UtilizadorId == user.UtilizadorId)
             {
                 TempData["BidError"] = "You cannot place bids on your own auction.";
                 return RedirectToAction("Details", new { id = leilaoId });
             }
 
+            // Verifica se o leilão está encerrado ou a data final já passou
             if (leilao.EstadoLeilao == EstadoLeilao.Encerrado || DateTime.Now > leilao.DataFim)
             {
                 TempData["BidError"] = "This auction has already ended and no longer accepts bids.";
                 return RedirectToAction("Details", new { id = leilaoId });
             }
 
+            // Calcula o valor mínimo necessário para a nova licitação
             double lanceMinimo = leilao.Licitacoes.Any()
                 ? leilao.Licitacoes.Max(l => l.ValorLicitacao)
                 : leilao.Item.PrecoInicial;
 
             double valorNecessario = lanceMinimo + leilao.ValorIncrementoMinimo;
 
+            // Verifica se o valor da licitação é inferior ao valor necessário
             if (valorLicitacao < valorNecessario)
             {
                 TempData["BidError"] = $"The bid must be equal or higher than {valorNecessario:C2}.";
                 return RedirectToAction("Details", new { id = leilaoId });
             }
 
+            // Cria uma nova licitação
             var licitacao = new Licitacao
             {
                 LeilaoId = leilaoId,
@@ -490,12 +558,13 @@ namespace projeto.Controllers
 
             TempData["BidSuccess"] = "Bid placed successfully!";
 
-
+            // Adiciona a nova licitação ao banco de dados e atualiza os pontos do usuário
             _context.Licitacoes.Add(licitacao);
             user.Pontos += 1;
             _context.Update(user);
             await _context.SaveChangesAsync();
 
+            // Atualiza o valor atual do leilão com a maior licitação
             leilao = await _context.Leiloes
                 .Include(l => l.Licitacoes)
                 .Include(l => l.Item)
@@ -512,23 +581,30 @@ namespace projeto.Controllers
             return RedirectToAction("Details", new { id = leilaoId });
         }
 
+        // ========================================================
+        // Autor: Samuel Alves
+        // Atualiza estado dos leilões
+        // ========================================================
         public async Task<IActionResult> AtualizarEstadoLeiloes()
         {
+            // Obtém todos os leilões
             var leiloes = await _context.Leiloes.ToListAsync();
 
             foreach (var leilao in leiloes)
             {
+                // Verifica se o leilão terminou
                 if (DateTime.Now > leilao.DataFim)
                 {
                     if (leilao.EstadoLeilao == EstadoLeilao.Disponivel)
                     {
                         leilao.EstadoLeilao = EstadoLeilao.Encerrado;
 
+                        // Obtém o vencedor do leilão (a maior licitação)
                         var vencedor = leilao.Licitacoes.OrderByDescending(l => l.ValorLicitacao).FirstOrDefault();
                         if (vencedor != null)
                         {
-                            // Aqui você pode, por exemplo, atualizar o campo VencedorId ou fazer outra lógica
-                            // Para o momento, vamos manter a informação apenas no leilão.
+                            // Lógica para atualizar o vencedor, se necessário
+                            // (exemplo: leilao.VencedorId = vencedor.UtilizadorId)
                         }
                     }
                 }
@@ -540,19 +616,25 @@ namespace projeto.Controllers
             return RedirectToAction("Index");
         }
 
+        // ========================================================
+        // Autor: Samuel Alves
+        // Éxibe os meus leilões
+        // ========================================================
         public async Task<IActionResult> MyAuctions(int page = 1)
         {
             int pageSize = 3;
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
-       
+
             ViewData["UserPoints"] = user?.Pontos;
 
+            // Verifica se o usuário está autenticado
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
             }
 
+            // Obtém o total de leilões do usuário e paginando os resultados
             var totalLeiloes = await _context.Leiloes.CountAsync(l => l.UtilizadorId == user.UtilizadorId);
             var leiloes = await _context.Leiloes
                 .Where(l => l.UtilizadorId == user.UtilizadorId)
@@ -568,18 +650,24 @@ namespace projeto.Controllers
             return View(leiloes);
         }
 
+        // ========================================================
+        // Autor: Isidoro Ornelas
+        // Exibe as minhas licitações
+        // ========================================================
         public async Task<IActionResult> MyBids()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
-       
+
             ViewData["UserPoints"] = user?.Pontos;
 
+            // Verifica se o usuário está autenticado
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
             }
 
+            // Obtém as licitações feitas pelo usuário, ordenadas pela data
             var meusLances = await _context.Licitacoes
                 .Where(l => l.UtilizadorId == user.UtilizadorId)
                 .Include(l => l.Leilao)
@@ -590,6 +678,10 @@ namespace projeto.Controllers
             return View(meusLances);
         }
 
+        // ========================================================
+        // Autor: Isidoro Ornelas
+        // Recoloca o leilão
+        // ========================================================
         [HttpGet]
         [Route("Leiloes/RecolocarLeilao/{id}")]
         public async Task<IActionResult> RecolocarLeilao(int id)
@@ -597,11 +689,13 @@ namespace projeto.Controllers
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            // Verifica se o usuário está autenticado
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
             }
 
+            // Obtém os detalhes do leilão para recolocar
             var leilao = await _context.Leiloes
                 .Include(l => l.Item)
                 .FirstOrDefaultAsync(l => l.LeilaoId == id);
@@ -630,8 +724,10 @@ namespace projeto.Controllers
             ViewBag.Categorias = new SelectList(Enum.GetValues(typeof(Categoria)));
         }
 
-
-
+        // ========================================================
+        // Autor: Isidoro Ornelas
+        // Recoloca o leilão
+        // ========================================================
         [HttpPost]
         [Route("Leiloes/RecolocarLeilao/{id}")]
         [ValidateAntiForgeryToken]
@@ -640,6 +736,7 @@ namespace projeto.Controllers
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
+            // Verifica se o usuário está autenticado
             if (user == null)
             {
                 return RedirectToAction("Login", "Utilizadors");
@@ -654,12 +751,14 @@ namespace projeto.Controllers
                 return NotFound();
             }
 
+            // Verifica se a data de término do leilão é válida
             if (leilaoAtualizado.DataFim <= DateTime.Now)
             {
                 ModelState.AddModelError("DataFim", "Data Invalida.");
                 return View(leilao);
             }
 
+            // Atualiza os dados do leilão
             leilao.DataFim = leilaoAtualizado.DataFim;
             leilao.ValorIncrementoMinimo = leilaoAtualizado.ValorIncrementoMinimo;
             leilao.EstadoLeilao = EstadoLeilao.Disponivel;
@@ -669,6 +768,7 @@ namespace projeto.Controllers
             leilao.Item.PrecoInicial = leilaoAtualizado.Item.PrecoInicial;
             leilao.Item.Categoria = leilaoAtualizado.Item.Categoria;
 
+            // Lógica para processar a foto enviada
             if (novaFoto != null && novaFoto.Length > 0)
             {
                 string folder = "leilao/fotos/";
@@ -682,12 +782,14 @@ namespace projeto.Controllers
 
                 string filePath = Path.Combine(serverFolder, fileName);
 
+                // Verifica se o arquivo tem um tamanho maior que 5MB
                 if (novaFoto.Length > 5 * 1024 * 1024)
                 {
                     ModelState.AddModelError("Item.fotoo", "O tamanho do ficheiro é demasiado grande.");
                     return View(leilao);
                 }
 
+                // Verifica se a extensão do arquivo é permitida
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
                 if (!allowedExtensions.Contains(Path.GetExtension(novaFoto.FileName).ToLower()))
                 {
@@ -695,6 +797,7 @@ namespace projeto.Controllers
                     return View(leilao);
                 }
 
+                // Salva a nova foto
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await novaFoto.CopyToAsync(stream);
@@ -706,22 +809,27 @@ namespace projeto.Controllers
 
             CarregarCategorias();
 
+            // Salva as alterações no banco de dados
             _context.Update(leilao);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("MyAuctions");
         }
 
+        // ========================================================
+        // Autor: Miguel Pinto
+        // Exibe o top 3 leilões
+        // ========================================================
         [HttpGet]
         [Route("[controller]/TopAuctions")]
         public async Task<IActionResult> TopAuctions()
-
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var user = await _context.Utilizador.FirstOrDefaultAsync(u => u.Email == userEmail);
 
             ViewData["UserPoints"] = user?.Pontos;
 
+            // Obtém os 3 leilões mais populares (com mais licitações)
             var topLeiloes = await _context.Leiloes
                 .Include(l => l.Item)
                 .Include(l => l.Licitacoes)
@@ -732,7 +840,6 @@ namespace projeto.Controllers
 
             return View(topLeiloes);
         }
-
 
     }
 }

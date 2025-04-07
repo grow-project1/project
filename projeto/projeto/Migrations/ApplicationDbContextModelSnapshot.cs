@@ -62,18 +62,42 @@ namespace projeto.Migrations
                         new
                         {
                             DescontoId = 1,
-                            Descricao = "10% discount",
+                            Descricao = "2% discount",
                             IsLoja = true,
-                            PontosNecessarios = 10,
-                            Valor = 10.0
+                            PontosNecessarios = 50,
+                            Valor = 2.0
                         },
                         new
                         {
                             DescontoId = 2,
-                            Descricao = "25% discount",
+                            Descricao = "3% discount",
                             IsLoja = true,
-                            PontosNecessarios = 20,
-                            Valor = 25.0
+                            PontosNecessarios = 100,
+                            Valor = 3.0
+                        },
+                        new
+                        {
+                            DescontoId = 3,
+                            Descricao = "5% discount",
+                            IsLoja = true,
+                            PontosNecessarios = 150,
+                            Valor = 5.0
+                        },
+                        new
+                        {
+                            DescontoId = 4,
+                            Descricao = "6% discount",
+                            IsLoja = true,
+                            PontosNecessarios = 200,
+                            Valor = 6.0
+                        },
+                        new
+                        {
+                            DescontoId = 5,
+                            Descricao = "7% discount",
+                            IsLoja = true,
+                            PontosNecessarios = 300,
+                            Valor = 7.0
                         });
                 });
 
@@ -94,7 +118,7 @@ namespace projeto.Migrations
                     b.Property<int>("DescontoId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Used")
+                    b.Property<bool>("Usado")
                         .HasColumnType("bit");
 
                     b.Property<int>("UtilizadorId")
