@@ -59,13 +59,13 @@ body, html {
     align-items: center;
     height: 100vh;
     padding: 0 20px;
-    margin-top: -20px;
+    margin-top: 20px;
 }
 
 .login-container, .register-container {
     background-color: #fff;
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px;
     width: 100%;
     max-width: 400px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -346,6 +346,7 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
 }
 
 .sidebar h3 {
@@ -357,7 +358,7 @@ h2 {
 }
 
 .filters, .price-range {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -365,8 +366,8 @@ h2 {
 
 .price-range input {
     width: 100%; 
-    padding: 8px;
-    margin-bottom: 8px;
+    padding: 4px;
+    margin-bottom: 4px;
     border-radius: 7px;
     border: 1px solid black;
 }
@@ -374,10 +375,10 @@ h2 {
 .btn-apply, .btn-clear, .btn-create {
     background-color: #2c6e49;
     color: white;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     border: none;
-    margin-top: 20px;
+    margin-top:7px;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.5s ease;
