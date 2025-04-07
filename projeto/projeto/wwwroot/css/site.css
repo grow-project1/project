@@ -506,37 +506,34 @@ h2 {
     transform: scale(1.1);
     background: none;
 }
-
 .btn-create {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 60px; 
-    height: 60px; 
-    border-radius: 100%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #2c6e49; 
+    /* Ajuste intermediário */
+    padding: 16px 24px;
+    border-radius: 50px;
+    background-color: #2c6e49;
     color: white;
-    font-size: 24px;
+    font-size: 20px; /* Tamanho de fonte intermediário */
     font-weight: bold;
     text-decoration: none;
     border: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* espaço entre ícone e texto */
+
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.btn-create:hover {
-    background-color: #1c6e49; 
-    transform: scale(1.1); 
-    color:white;
-}
 
-.btn-create:active {
-    transform: scale(0.9); 
-}
-
+    .btn-create:hover {
+        background-color: white; /* Levemente mais escuro no hover */
+        transform: scale(1.02); /* Pequeno zoom ao passar o mouse */
+        color:green; /* Levemente mais escuro no hover */
+    }
 
 .alertt{
     width: 500px;

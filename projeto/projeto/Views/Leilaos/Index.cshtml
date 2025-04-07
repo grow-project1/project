@@ -85,8 +85,9 @@
         <button class="btn-clear">@(english ? "Clear" : "Limpar")</button>
     </aside>
 
-    <a asp-action="Create" class="btn-create">+</a>
-
+    <a asp-action="Create" class="btn-create">
+        <i class="fas fa-plus" style="margin-right: 8px;"></i>Criar Leilão
+    </a>
     @if (TempData["Error"] != null)
     {
         <div class="alertt alert-danger">
